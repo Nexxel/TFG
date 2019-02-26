@@ -575,7 +575,7 @@ void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v){
 
     if(prev_distance_c < robot_state.distance_c){
         seeing_table = true;
-    }else if(seeing_table and prev_distance_c > robot_state.distance_c){
+    }else if(seeing_table and robot_state.distance_c < 3){
         seeing_table = false; // We are going back and we see the complete object
     }
 
@@ -596,9 +596,12 @@ void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v){
     Object is centered in x, near and up
 -----------------------------------*/
 void isObjectReachable(){
-    object_reachable = robot_state.angle_d == ceil(discr_level/2)
-                    and seeing_table
-                    and robot_state.height_d <= round(discr_level/3);
+    object_reachable = robot_state.angle_d == (discr_level/2)+1
+                        and seeing_table 
+                        and robot_state.height_d <= discr_level/3;
+    ROS_INFO("Seeing table?? %d", seeing_table);
+    ROS_INFO("robot_state.angle_d: %d", robot_state.angle_d == (discr_level/2)+1);
+    ROS_INFO("robot_state.height_d: %d", robot_state.height_d <= discr_level/3);
     ROS_INFO("Object reachable?? %d", object_reachable);
 }
 
