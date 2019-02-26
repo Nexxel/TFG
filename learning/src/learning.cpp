@@ -41,11 +41,9 @@
  void callbackCameraInfo(const CameraInfoConstPtr& camera_info_msg){
     if(!inside_learning){
         int counter = 0;
-        ROS_INFO("\n\n P: \n\n");
         for (int i  = 0; i < 3; i++){
             for (int j = 0; j < 4; j++){
                 P[i][j] = camera_info_msg->P.at(counter);
-                ROS_INFO("%.2f ", P[i][j]);
                 counter++;
             }
         }
@@ -559,27 +557,22 @@ void isObjectPicked(){
 void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v){
     // SIN TERMINAR
     // Get the distance of the object
-/*
-    double pixel_pos[3][1]; // 3 x 1
-    pixel_pos[0][0] = top_u; 
-    pixel_pos[1][0] = top_v;
-    pixel_pos[2][0] = 1;
-    double real_pos_top[4][1]; // 4 x 1
-    multiplyP_Inv(real_pos_top, P_inv, pixel_pos);
+    double f = P[0][0];
+    double cx = P[0][2];
+    double cy = P[1][2]; 
+    double real_pos_top[2][1]; // 4 x 1
+    real_pos_top[0][0] = (top_u - cx) / f;
+    real_pos_top[1][0] = (top_v - cy) / f;
 
-
-    pixel_pos[0][0] = bottom_u; 
-    pixel_pos[1][0] = bottom_v;
-    pixel_pos[2][0] = 1;
-    double real_pos_bottom[4][1]; // 4 x 1
-    multiplyP_Inv(real_pos_bottom, P_inv, pixel_pos);
+    double real_pos_bottom[2][1]; // 4 x 1
+    real_pos_bottom[0][0] = (bottom_u - cx) / f;
+    real_pos_bottom[1][0] = (bottom_v - cy) / f;
 
     ROS_INFO("Real pos top y = %.2f", real_pos_top[1][0]);
     ROS_INFO("Real pos bottom y = %.2f", real_pos_bottom[1][0]);
     double height = real_pos_top[1][0] - real_pos_bottom[1][0];
-    double fy = P[1][1];
-    robot_state.distance_c = (fy * OBJECT_HEIGHT) / height;
-*/
+    robot_state.distance_c = (f * OBJECT_HEIGHT) / height / 1000;
+
     // Get the pixel position in x,y
     double pixel_pos[3][1]; // 3 x 1
     double result[4][1];    // 4 x 1
@@ -587,8 +580,8 @@ void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v){
     pixel_pos[1][0] = object_center[1];
     pixel_pos[2][0] = 1;
     multiplyP_Inv(result, P_inv, pixel_pos);
-    robot_state.angle_c = result[0][0] * robot_state.distance_c; // X = k*Z
-    robot_state.height_c = result[1][0] * robot_state.distance_c; // Y = k*Z
+    robot_state.angle_c = result[0][0] * robot_state.distance_c / 1000; // X = k*Z
+    robot_state.height_c = result[1][0] * robot_state.distance_c / 1000; // Y = k*Z
     ROS_INFO("(%.2f, %.2f, %.2f)", robot_state.angle_c, robot_state.height_c, robot_state.distance_c);
 }
 
