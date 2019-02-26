@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/nexel/catkin_ws/devel/include",
+                "/opt/ros/indigo/include",
+                "/home/nexel/catkin_ws/src/kobuki_testing/include",
+                "/home/nexel/catkin_ws/src/ROS-master/roboticsgroup_gazebo_plugins/include",
+                "/home/nexel/catkin_ws/src/test_opencv/include",
+                "/home/nexel/catkin_ws/src/v_repExtRosInterface/include",
+                "/home/nexel/catkin_ws/src/widowx_arm_testing/include",
+                "/usr/include"
+            ],
+            "name": "Linux",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,11 @@
+
+
+<?xml version="1.0"?>
+<launch>
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find widowx_arm_description)/urdf/widowx.xacro'"/>
+  <node name="widowx_arm_arbotix" pkg="arbotix_python" type="arbotix_driver" output="screen">
+    <rosparam file="$(find widowx_arm_controller)/config/arbotix.yaml" command="load" />  
+  </node>
+</launch>
+
+http://www.pirobot.org/blog/0016/

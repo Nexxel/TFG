@@ -1,0 +1,32 @@
+#include "ros/ros.h"
+#include "std_msgs/Float64.h"
+
+#include <sstream>
+
+/**
+ * This tutorial demonstrates simple sending of messages over the ROS system.
+ */
+int main(int argc, char **argv)
+{
+  ros::init(argc, argv, "widowx_home");
+  ros::NodeHandle n;
+  ros::Publisher joint1 = n.advertise<std_msgs::Float64>("/arm_1_joint/command", 1000);
+  ros::Rate loop_rate(10);
+
+  /**
+   * A count of how many messages we have sent. This is used to create
+   * a unique string for each message.
+   */
+  std_msgs::Float64 degrees;
+  degrees.data = -1.57;
+  while (ros::ok() && degrees.data > 1.57)
+  {
+    chatter_pub.publish(degrees.data);
+    ROS_INFO("Degrees: %f\n",degrees.data);
+    degrees.data += 0.01;
+ 
+    ros::spinOnce();
+    loop_rate.sleep();
+  }
+  return 0;
+}
