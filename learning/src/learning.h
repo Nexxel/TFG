@@ -33,10 +33,10 @@
 #define ROS_RATE 10
 
 //??
-#define MAX_DISTANCE 1000   //Max distance to perceive the object
+#define MAX_DISTANCE 6.5   //Max distance to perceive the object
 
-#define OBJECT_HEIGHT 100  //Medir
-#define OBJECT_WEIGHT 50 //Medir
+#define OBJECT_HEIGHT 0.250  //Medir
+#define OBJECT_WEIGHT 0.100 //Medir
 #define OBJECT_AREA (OBJECT_HEIGHT * OBJECT_WEIGHT)
 
 /*------------------------------------
@@ -74,6 +74,7 @@ bool gripper_opened;    // Is the gripper opened?
 double gripper_position[3];
 double gripper_effort;
 
+bool seeing_table = false;
 bool object_reachable = false;
 double object_center[2];    // Object center in pixels
 

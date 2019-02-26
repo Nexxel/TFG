@@ -268,9 +268,9 @@ void getLocation(){
 void calculateRealPos(){
     int top_u; int top_v;
     int bottom_u; int bottom_v;
-    int min_y = 0;
-    int max_y = 0;
-    ROS_INFO("Pixel_locations.total(): %lu", pixel_locations.total());
+    int min_y = INFINITY;
+    int max_y = -INFINITY;
+
     for(int i = 0; i < pixel_locations.total(); i++){
         Point pixel = pixel_locations.at<Point>(i);
         if(pixel.y < min_y){
@@ -568,10 +568,16 @@ void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v){
     real_pos_bottom[0][0] = (bottom_u - cx) / f;
     real_pos_bottom[1][0] = (bottom_v - cy) / f;
 
-    ROS_INFO("Real pos top y = %.2f", real_pos_top[1][0]);
-    ROS_INFO("Real pos bottom y = %.2f", real_pos_bottom[1][0]);
     double height = real_pos_top[1][0] - real_pos_bottom[1][0];
-    robot_state.distance_c = (f * OBJECT_HEIGHT) / height / 1000;
+    
+    double prev_distance_c = robot_state.distance_c;
+    robot_state.distance_c = (f/1000 * OBJECT_HEIGHT) / height;
+
+    if(prev_distance_c < robot_state.distance_c){
+        seeing_table = true;
+    }else if(seeing_table and prev_distance_c > robot_state.distance_c){
+        seeing_table = false; // We are going back and we see the complete object
+    }
 
     // Get the pixel position in x,y
     double pixel_pos[3][1]; // 3 x 1
@@ -580,8 +586,8 @@ void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v){
     pixel_pos[1][0] = object_center[1];
     pixel_pos[2][0] = 1;
     multiplyP_Inv(result, P_inv, pixel_pos);
-    robot_state.angle_c = result[0][0] * robot_state.distance_c / 1000; // X = k*Z
-    robot_state.height_c = result[1][0] * robot_state.distance_c / 1000; // Y = k*Z
+    robot_state.angle_c = -result[0][0] * robot_state.distance_c; // X = k*Z
+    robot_state.height_c = -result[1][0] * robot_state.distance_c; // Y = k*Z
     ROS_INFO("(%.2f, %.2f, %.2f)", robot_state.angle_c, robot_state.height_c, robot_state.distance_c);
 }
 
@@ -591,8 +597,9 @@ void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v){
 -----------------------------------*/
 void isObjectReachable(){
     object_reachable = robot_state.angle_d == ceil(discr_level/2)
-                    and robot_state.distance_d <= round(discr_level/3)
+                    and seeing_table
                     and robot_state.height_d <= round(discr_level/3);
+    ROS_INFO("Object reachable?? %d", object_reachable);
 }
 
 /*------------------------------------
