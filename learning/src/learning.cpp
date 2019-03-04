@@ -521,7 +521,7 @@ void mci(double next_position[3]){
  Open gripper:
  -----------------------------------*/
 void openGripper(){
-    Float64 gripper_value; gripper_value.data = 0;
+    Float64 gripper_value; gripper_value.data = 0.0;
     gripper.publish(gripper_value);
     gripper_opened = true;
     processMessages();
@@ -531,7 +531,7 @@ void openGripper(){
  Close gripper:
  -----------------------------------*/
  void closeGripper(){
-    Float64 gripper_value; gripper_value.data = 2.5;
+    Float64 gripper_value; gripper_value.data = 2.0;
     gripper.publish(gripper_value);
     gripper_opened = false;
     processMessages();
@@ -639,7 +639,6 @@ void foldArm(){
                      0.3125,
                      0, 
                      0.1450);
-    ROS_INFO("Next_position[2]: %.4f", next_position[2]);
     mci(next_position);
 
     robot_state.folded = true;

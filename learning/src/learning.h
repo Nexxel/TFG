@@ -28,7 +28,7 @@
 #define L45 0.07585+0.04625
 #define beta 1.2496
 
-#define MIN_EFFORT -0.01   //Min effort of the idle gripper
+#define MIN_EFFORT -0.05   //Min effort of the idle gripper
 
 #define ROS_RATE 2
 
