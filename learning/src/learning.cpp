@@ -162,6 +162,7 @@ void learning(Handlers handlers){
 
         // If it's the first time, set the arm to the initial position
         if (counter == 0){
+            ROS_INFO("\n\nHOLA\n\n");
             openGripper();
             foldArm();
             counter++;
@@ -178,8 +179,7 @@ void learning(Handlers handlers){
         //printDebug("learning 2", 152);
         // 3.1 Move arm if reachable
         ROS_INFO("Angle of the object: %d", robot_state.angle_d);
-        if(object_reachable){
-            ROS_INFO("Object reachable");
+        if(object_reachable and !robot_state.object_picked){
             double next_position[3];
             setNextPosition(next_position,
                         gripper_position[0],
@@ -196,6 +196,7 @@ void learning(Handlers handlers){
                         robot_state.angle_c, 
                         robot_state.height_c);
             mci(next_position);
+            closeGripper();
         }
         // 3.2 Move base if not reachable
         else{
@@ -214,7 +215,11 @@ void learning(Handlers handlers){
         //printDebug("learning 3", 184);
 
         // 4. Fold arm
-        foldArm();
+        updateState();
+        if(robot_state.object_picked){
+            foldArm();          
+        }
+
         //printDebug("learning 4", 188);
         // 5. Check reward
         if(giveReward()){
@@ -625,21 +630,21 @@ void foldArm(){
     setNextPosition(next_position,
                      gripper_position[0],
                      gripper_position[1], 
-                     0);
+                     -2.5);
     mci(next_position);
 
     // Move the arm to the platform
     setNextPosition(next_position,
                      0,
                      gripper_position[1], 
-                     0);
+                     -2.5);
     mci(next_position);
 
     // Turn the arm to the position (0,0,0)
     setNextPosition(next_position,
                      0,
                      0, 
-                     0);
+                     -2.5);
     mci(next_position);
 
     robot_state.folded = true;
