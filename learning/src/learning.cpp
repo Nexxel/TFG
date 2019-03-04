@@ -503,13 +503,13 @@ void mci(double next_position[3]){
     angle.data = q1;
     joints[0].publish(angle);
     angle.data = q2;
-    joints[0].publish(angle);
+    joints[1].publish(angle);
     angle.data = q3;
-    joints[0].publish(angle);
+    joints[2].publish(angle);
     angle.data = q4;
-    joints[0].publish(angle);
+    joints[3].publish(angle);
     angle.data = q5;
-    joints[0].publish(angle);
+    joints[4].publish(angle);
 
     robot_state.folded = (next_position[0] == 0
                         and next_position[1] == 0
@@ -556,7 +556,6 @@ void isObjectPicked(){
         bottom_v: Y coordinate of the bottom center of the object (Pixels)
 -----------------------------------*/
 void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v){
-    // SIN TERMINAR
     // Get the distance of the object
     double f = P[0][0];
     double cx = P[0][2];
