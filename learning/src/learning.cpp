@@ -162,7 +162,6 @@ void learning(Handlers handlers){
 
         // If it's the first time, set the arm to the initial position
         if (counter == 0){
-            ROS_INFO("\n\nHOLA\n\n");
             openGripper();
             foldArm();
             counter++;
@@ -482,7 +481,7 @@ void getGripperPosition(){
  -----------------------------------*/
 void mci(double next_position[3]){
     int a[3] = {1, 0, 0};
-	int n[3] = {0, 0, 1};
+	int n[3] = {0, 0, -1};
 	double px = next_position[0] - L45*a[0];
 	double py = next_position[1] - L45*a[1];
 	double pz = next_position[2] - L45*a[2];
@@ -591,8 +590,8 @@ void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v){
     pixel_pos[1][0] = object_center[1];
     pixel_pos[2][0] = 1;
     multiplyP_Inv(result, P_inv, pixel_pos);
-    robot_state.angle_c = -result[0][0] * robot_state.distance_c; // X = k*Z
-    robot_state.height_c = -result[1][0] * robot_state.distance_c; // Y = k*Z
+    robot_state.angle_c = result[0][0] * robot_state.distance_c; // X = k*Z
+    robot_state.height_c = result[1][0] * robot_state.distance_c; // Y = k*Z
     ROS_INFO("(%.2f, %.2f, %.2f)", robot_state.angle_c, robot_state.height_c, robot_state.distance_c);
 }
 
@@ -630,21 +629,21 @@ void foldArm(){
     setNextPosition(next_position,
                      gripper_position[0],
                      gripper_position[1], 
-                     -2.5);
+                     0.1450);
     mci(next_position);
 
     // Move the arm to the platform
     setNextPosition(next_position,
-                     0,
+                     0.3125,
                      gripper_position[1], 
-                     -2.5);
+                     0.1450);
     mci(next_position);
 
     // Turn the arm to the position (0,0,0)
     setNextPosition(next_position,
-                     0,
+                     0.3125,
                      0, 
-                     -2.5);
+                     0.1450);
     mci(next_position);
 
     robot_state.folded = true;
