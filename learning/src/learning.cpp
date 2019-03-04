@@ -179,6 +179,7 @@ void learning(Handlers handlers){
         // 3.1 Move arm if reachable
         ROS_INFO("Angle of the object: %d", robot_state.angle_d);
         if(object_reachable){
+            ROS_INFO("Object reachable");
             double next_position[3];
             setNextPosition(next_position,
                         gripper_position[0],
