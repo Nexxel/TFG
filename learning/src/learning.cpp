@@ -153,11 +153,6 @@ void learning(Handlers handlers){
         processMessages();
 
         // While the learning process, we just want to re-read the joints
-        /*
-        color_image_sub.shutdown();
-        camera_info_sub.shutdown();
-        discr_level_sub.shutdown();
-        */
        inside_learning = true;
 
         // If it's the first time, set the arm to the initial position
@@ -177,7 +172,7 @@ void learning(Handlers handlers){
         isObjectReachable();
         //printDebug("learning 2", 152);
         // 3.1 Move arm if reachable
-        ROS_INFO("Angle of the object: %d", robot_state.angle_d);
+        //ROS_INFO("Angle of the object: %d", robot_state.angle_d);
         if(object_reachable and !robot_state.object_picked){
             double next_position[3];
             setNextPosition(next_position,
@@ -264,7 +259,7 @@ void getLocation(){
         object_center[1] = 0;
     }
     
-    ROS_INFO("Object center at (%.2f,%.2f)", object_center[0], object_center[1]);
+    //ROS_INFO("Object center at (%.2f,%.2f)", object_center[0], object_center[1]);
 }
 
 /*------------------------------------
@@ -592,7 +587,7 @@ void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v){
     multiplyP_Inv(result, P_inv, pixel_pos);
     robot_state.angle_c = result[0][0] * robot_state.distance_c; // X = k*Z
     robot_state.height_c = result[1][0] * robot_state.distance_c; // Y = k*Z
-    ROS_INFO("(%.2f, %.2f, %.2f)", robot_state.angle_c, robot_state.height_c, robot_state.distance_c);
+    //ROS_INFO("(%.2f, %.2f, %.2f)", robot_state.angle_c, robot_state.height_c, robot_state.distance_c);
 }
 
 /*------------------------------------
@@ -603,10 +598,10 @@ void isObjectReachable(){
     object_reachable = robot_state.angle_d == (discr_level/2)+1
                         and seeing_table 
                         and robot_state.height_d <= discr_level/3;
-    ROS_INFO("Seeing table?? %d", seeing_table);
+    /*ROS_INFO("Seeing table?? %d", seeing_table);
     ROS_INFO("robot_state.angle_d: %d", robot_state.angle_d == (discr_level/2)+1);
     ROS_INFO("robot_state.height_d: %d", robot_state.height_d <= discr_level/3);
-    ROS_INFO("Object reachable?? %d", object_reachable);
+    ROS_INFO("Object reachable?? %d", object_reachable);*/
 }
 
 /*------------------------------------
@@ -639,11 +634,12 @@ void foldArm(){
                      0.1450);
     mci(next_position);
 
-    // Turn the arm to the position (0,0,0)
+    // Turn the arm to the position (0.3125,0,0.1450)
     setNextPosition(next_position,
                      0.3125,
                      0, 
                      0.1450);
+    ROS_INFO("Next_position[2]: %.4f", next_position[2]);
     mci(next_position);
 
     robot_state.folded = true;
