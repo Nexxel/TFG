@@ -30,7 +30,7 @@
 
 #define MIN_EFFORT -0.01   //Min effort of the idle gripper
 
-#define ROS_RATE 10
+#define ROS_RATE 2
 
 //??
 #define MAX_DISTANCE 6.5   //Max distance to perceive the object
