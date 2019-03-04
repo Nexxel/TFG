@@ -74,7 +74,7 @@ bool gripper_opened;    // Is the gripper opened?
 double gripper_position[3];
 double gripper_effort;
 
-bool seing_table = false;
+bool seeing_table = false;
 bool object_reachable = false;
 double object_center[2];    // Object center in pixels
 
