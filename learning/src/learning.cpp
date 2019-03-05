@@ -47,6 +47,7 @@
                 counter++;
             }
         }
+        P[1][3] = 106; // There are 106 mm until the arm
         Mat auxP = Mat(3,4, DataType<double>::type, P);
         Mat auxP_inv = Mat(4,3, DataType<double>::type, P_inv);
         invert(auxP,auxP_inv, DECOMP_SVD);
@@ -146,6 +147,8 @@ int main(int argc, char** argv){
  -----------------------------------*/
 void learning(Handlers handlers){
     namedWindow("Red objects image",CV_WINDOW_AUTOSIZE);
+    double a[3] = {0,0,-1};
+    double n[3] = {1,0,0};
     int counter = 0;
     while(ros::ok()){
         inside_learning = false;
@@ -178,18 +181,18 @@ void learning(Handlers handlers){
             setNextPosition(next_position,
                         gripper_position[0],
                         gripper_position[1], 
-                        robot_state.height_c);
-            mci(next_position);
+                        0.6);
+            mci(next_position,a,n);
             setNextPosition(next_position,
                         gripper_position[0],
                         robot_state.angle_c, 
                         robot_state.height_c);
-            mci(next_position);
+            mci(next_position,a,n);
             setNextPosition(next_position,
-                        robot_state.distance_c,
+                        1, //robot_state.distance_c,
                         robot_state.angle_c, 
                         robot_state.height_c);
-            mci(next_position);
+            mci(next_position,a,n);
             closeGripper();
         }
         // 3.2 Move base if not reachable
@@ -472,18 +475,18 @@ void getGripperPosition(){
  Get the angle of each joint in order to reach the desired position
  by means of the inverse kinematic model:
     Inputs:
-        - Desired position 
+        - next_position: Desired position
+        - a: Desired angle orientation of the wrisp
+        - n: Desired orientation of the wrisp 
  -----------------------------------*/
-void mci(double next_position[3]){
-    int a[3] = {1, 0, 0};
-	int n[3] = {0, 0, -1};
+void mci(double next_position[3], double a[3], double n[3]){
 	double px = next_position[0] - L45*a[0];
 	double py = next_position[1] - L45*a[1];
 	double pz = next_position[2] - L45*a[2];
 
 	double q1 = atan2(py, px);
             
-	double k = pow(L3, 2) + pow(px, 2) + pow(d2, 2) + pow((px * cos(q1) + py * sin(q1)), 2);
+	double k = pow(pz, 2) + pow(d2, 2) + pow((px * cos(q1) + py * sin(q1)), 2) - pow(L3, 2);
 	double k1 = 2 * d2 * px * cos(q1) + 2 * py * d2 * sin(q1);
 	double k2 = 2 * pz * d2;
 
@@ -587,7 +590,7 @@ void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v){
     multiplyP_Inv(result, P_inv, pixel_pos);
     robot_state.angle_c = result[0][0] * robot_state.distance_c; // X = k*Z
     robot_state.height_c = result[1][0] * robot_state.distance_c; // Y = k*Z
-    //ROS_INFO("(%.2f, %.2f, %.2f)", robot_state.angle_c, robot_state.height_c, robot_state.distance_c);
+    ROS_INFO("(%.2f, %.2f, %.2f)", robot_state.angle_c, robot_state.height_c, robot_state.distance_c);
 }
 
 /*------------------------------------
@@ -619,27 +622,29 @@ void setNextPosition(double next_position[3], double x, double y, double z){
  Fold arm:
 -----------------------------------*/
 void foldArm(){
+    double a[3] = {1,0,0};
+    double n[3] = {0,0,1}; 
     double next_position[3];
     // Move the arm up
     setNextPosition(next_position,
                      gripper_position[0],
                      gripper_position[1], 
-                     0.1450);
-    mci(next_position);
+                     0.6);
+    mci(next_position,a,n);
 
     // Move the arm to the platform
     setNextPosition(next_position,
-                     0.3125,
+                     0,
                      gripper_position[1], 
                      0.1450);
-    mci(next_position);
+    mci(next_position,a,n);
 
     // Turn the arm to the position (0.3125,0,0.1450)
     setNextPosition(next_position,
                      0.3125,
                      0, 
                      0.1450);
-    mci(next_position);
+    mci(next_position,a,n);
 
     robot_state.folded = true;
 }

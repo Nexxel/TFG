@@ -200,9 +200,11 @@ void getGripperPosition();
  Get the angle of each joint in order to reach the desired position
  by means of the inverse kinematic model:
     Inputs:
-        - Desired position 
+        - next_position: Desired position
+        - a: Desired angle orientation of the wrisp
+        - n: Desired orientation of the wrisp 
  -----------------------------------*/
-void mci(double next_position[3]);
+void mci(double next_position[3], double a[3], double n[3]);
 /*------------------------------------
  Open gripper:
  -----------------------------------*/
