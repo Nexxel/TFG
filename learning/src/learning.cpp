@@ -47,6 +47,7 @@
                 counter++;
             }
         }
+        P[0][3] = -500; // The arm begin in the -0'5
         P[1][3] = 106; // There are 106 mm until the arm
         Mat auxP = Mat(3,4, DataType<double>::type, P);
         Mat auxP_inv = Mat(4,3, DataType<double>::type, P_inv);
@@ -629,21 +630,21 @@ void foldArm(){
     setNextPosition(next_position,
                      gripper_position[0],
                      gripper_position[1], 
-                     0.6);
+                     0);
     mci(next_position,a,n);
 
     // Move the arm to the platform
     setNextPosition(next_position,
-                     0,
+                     0.5,
                      gripper_position[1], 
-                     0.1450);
+                     0);
     mci(next_position,a,n);
 
     // Turn the arm to the position (0.3125,0,0.1450)
     setNextPosition(next_position,
-                     0.3125,
+                     0.5,
                      0, 
-                     0.1450);
+                     0);
     mci(next_position,a,n);
 
     robot_state.folded = true;
