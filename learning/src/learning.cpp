@@ -270,8 +270,8 @@ void getLocation(){
  Calculate the real position of the object with respect to the robot:
 -----------------------------------*/
 void calculateRealPos(){
-    int top_u; int top_v;
-    int bottom_u; int bottom_v;
+    int max_u; int max_v;
+    int min_u; int min_v;
     int min_x = INFINITY; int min_y = INFINITY;
     int max_x = -INFINITY; int max_y = -INFINITY;
 
@@ -288,12 +288,12 @@ void calculateRealPos(){
         }
     }
 
-    top_u = max_x;
-    bottom_u = min_x;
-    top_v = max_y;
-    bottom_v = min_y;
+    max_u = max_x;
+    min_u = min_x;
+    max_v = max_y;
+    min_v = min_y;
     
-    getObjectPosition(top_u,top_v,bottom_u, bottom_v);
+    getObjectPosition(max_u,max_v,min_u, min_v);
 }
 
 /*------------------------------------
@@ -557,26 +557,26 @@ void isObjectPicked(){
  Get object real position with respect to the robot:
     [X Y Z 1] = P^(-1) * [u v 1]
     Inputs:
-        top_u: X coordinate of the top center of the object (Pixels)
-        top_v: Y coordinate of the top center of the object (Pixels)
-        bottom_u: X coordinate of the bottom center of the object (Pixels)
-        bottom_v: Y coordinate of the bottom center of the object (Pixels)
+        max_u: Max X coordinate of the center of the object (Pixels)
+        max_v: Max Y coordinate of the center of the object (Pixels)
+        min_u: Min X coordinate of the center of the object (Pixels)
+        min_v: Min Y coordinate of the center of the object (Pixels)
 -----------------------------------*/
-void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v){
+void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     // Get the distance of the object
     double f = P[0][0];
     double cx = P[0][2];
     double cy = P[1][2]; 
     double real_pos_top[2][1]; // 4 x 1
-    real_pos_top[0][0] = (top_u - cx) / f;
-    real_pos_top[1][0] = (top_v - cy) / f;
+    real_pos_top[0][0] = (max_u - cx) / f;
+    real_pos_top[1][0] = (max_v - cy) / f;
 
     double real_pos_bottom[2][1]; // 4 x 1
-    real_pos_bottom[0][0] = (bottom_u - cx) / f;
-    real_pos_bottom[1][0] = (bottom_v - cy) / f;
+    real_pos_bottom[0][0] = (min_u - cx) / f;
+    real_pos_bottom[1][0] = (min_v - cy) / f;
 
     double width = real_pos_top[0][0] - real_pos_bottom[0][0];
-    ROS_INFO("\n\ntop_u: %d \tbottom_u: %d \twidth: %.2f\n\n", top_u, bottom_u, width);
+    ROS_INFO("\n\nmax_u: %d \tmin_u: %d \twidth: %.2f\n\n", max_u, min_u, width);
     
     double prev_distance_c = robot_state.distance_c;
     robot_state.distance_c = (f/1000 * OBJECT_WIDTH) / width;
