@@ -581,12 +581,6 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     double prev_distance_c = robot_state.distance_c;
     robot_state.distance_c = (f/1000 * OBJECT_WIDTH) / width;
 
-    if(prev_distance_c < robot_state.distance_c){
-        seeing_table = true;
-    }else if(seeing_table and robot_state.distance_c < 3){
-        seeing_table = false; // We are going back and we see the complete object
-    }
-
     // Get the pixel position in x,y
     double pixel_pos[3][1]; // 3 x 1
     double result[4][1];    // 4 x 1
@@ -605,7 +599,7 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
 -----------------------------------*/
 void isObjectReachable(){
     object_reachable = robot_state.angle_d == (discr_level/2)+1
-                        and seeing_table 
+                        and robot_state.distance_d == 1
                         and robot_state.height_d <= discr_level/3;
     /*ROS_INFO("Seeing table?? %d", seeing_table);
     ROS_INFO("robot_state.angle_d: %d", robot_state.angle_d == (discr_level/2)+1);
