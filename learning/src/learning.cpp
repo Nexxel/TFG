@@ -623,21 +623,21 @@ void foldArm(){
     setNextPosition(next_position,
                      gripper_position[0],
                      gripper_position[1], 
-                     0);
+                     -0.25);
     mci(next_position,a,n);
 
     // Move the arm to the platform
     setNextPosition(next_position,
                      0.5,
                      gripper_position[1], 
-                     0);
+                     -0.25);
     mci(next_position,a,n);
 
     // Turn the arm to the position (0.3125,0,0.1450)
     setNextPosition(next_position,
                      0.5,
                      0, 
-                     0);
+                     -0.25);
     mci(next_position,a,n);
 
     robot_state.folded = true;
