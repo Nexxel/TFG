@@ -578,9 +578,8 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     real_pos_bottom[1][0] = (min_v - cy) / f;
 
     double width = real_pos_top[0][0] - real_pos_bottom[0][0];
-    ROS_INFO("\n\nmax_u: %d \tmin_u: %d \twidth: %.2f\n\n", max_u, min_u, width);
+    ROS_INFO("\n\nmax_u: %d \tmin_u: %d \twidth: %.2f\n", max_u, min_u, width);
     
-    double prev_distance_c = robot_state.distance_c;
     robot_state.distance_c = (f/1000 * OBJECT_WIDTH) / width;
 
     // Get the pixel position in x,y
