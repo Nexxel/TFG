@@ -176,7 +176,6 @@ void learning(Handlers handlers){
         isObjectReachable();
         //printDebug("learning 2", 152);
         // 3.1 Move arm if reachable
-        //ROS_INFO("Angle of the object: %d", robot_state.angle_d);
         if(object_reachable and !robot_state.object_picked){
             double next_position[3];
             setNextPosition(next_position,
@@ -261,9 +260,7 @@ void getLocation(){
     }else{
         object_center[0] = 0;
         object_center[1] = 0;
-    }
-    
-    //ROS_INFO("Object center at (%.2f,%.2f)", object_center[0], object_center[1]);
+    }   
 }
 
 /*------------------------------------
@@ -602,10 +599,6 @@ void isObjectReachable(){
     object_reachable = robot_state.angle_d == (discr_level/2)+1
                         and robot_state.distance_d == 1
                         and robot_state.height_d <= discr_level/3;
-    /*ROS_INFO("Seeing table?? %d", seeing_table);
-    ROS_INFO("robot_state.angle_d: %d", robot_state.angle_d == (discr_level/2)+1);
-    ROS_INFO("robot_state.height_d: %d", robot_state.height_d <= discr_level/3);
-    ROS_INFO("Object reachable?? %d", object_reachable);*/
 }
 
 /*------------------------------------
