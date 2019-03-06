@@ -523,6 +523,8 @@ void mci(double next_position[3], double a[3], double n[3]){
                         and next_position[2] == 0);
 
     processMessages();
+    mcd();
+    getGripperPosition();
 }
 
 /*------------------------------------
