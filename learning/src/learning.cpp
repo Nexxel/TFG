@@ -182,7 +182,7 @@ void learning(Handlers handlers){
             setNextPosition(next_position,
                         gripper_position[0],
                         gripper_position[1], 
-                        0.6);
+                        robot_state.height_c);
             mci(next_position,a,n);
             setNextPosition(next_position,
                         gripper_position[0],
@@ -201,11 +201,11 @@ void learning(Handlers handlers){
             Twist base_movement; 
             int middle_quadrant = ceil(discr_level/2.0);
            if (robot_state.angle_d == middle_quadrant){
-               base_movement.linear.x = 0.1;
+               base_movement.linear.x = 0.2;
            }else if(robot_state.angle_d < middle_quadrant){
-                base_movement.angular.z = 0.1;
+                base_movement.angular.z = 0.2;
             }else{
-                base_movement.angular.z = -0.1;
+                base_movement.angular.z = -0.2;
             }
             base.publish(base_movement);
             processMessages();
