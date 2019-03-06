@@ -190,7 +190,7 @@ void learning(Handlers handlers){
                         robot_state.height_c);
             mci(next_position,a,n);
             setNextPosition(next_position,
-                        1, //robot_state.distance_c,
+                        robot_state.distance_c,
                         robot_state.angle_c, 
                         robot_state.height_c);
             mci(next_position,a,n);
@@ -272,20 +272,24 @@ void getLocation(){
 void calculateRealPos(){
     int top_u; int top_v;
     int bottom_u; int bottom_v;
-    int min_y = INFINITY;
-    int max_y = -INFINITY;
+    int min_x = INFINITY; int min_y = INFINITY;
+    int max_x = -INFINITY; int max_y = -INFINITY;
 
     for(int i = 0; i < pixel_locations.total(); i++){
         Point pixel = pixel_locations.at<Point>(i);
-        if(pixel.y < min_y){
+        if(pixel.x == object_center[0] and pixel.y < min_y){
             min_y = pixel.y;
-        }if(pixel.y > max_y){
+        }if(pixel.x == object_center[0] and pixel.y > max_y){
             max_y = pixel.y;
+        }if(pixel.y == object_center[1] and pixel.x < min_x){
+            min_x = pixel.x;
+        }if(pixel.y == object_center[1] and pixel.x > max_x){
+            max_x = pixel.x;
         }
     }
 
-    top_u = object_center[0];
-    bottom_u = object_center[0];
+    top_u = max_x;
+    bottom_u = min_x;
     top_v = max_y;
     bottom_v = min_y;
     
