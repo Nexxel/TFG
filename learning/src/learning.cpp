@@ -571,10 +571,11 @@ void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v){
     real_pos_bottom[0][0] = (bottom_u - cx) / f;
     real_pos_bottom[1][0] = (bottom_v - cy) / f;
 
-    double height = real_pos_top[1][0] - real_pos_bottom[1][0];
+    double width = real_pos_top[0][0] - real_pos_bottom[0][0];
+    ROS_INFO("\n\ntop_u: %d \tbottom_u: %d \twidth: %.2f\n\n", top_u, bottom_u, width);
     
     double prev_distance_c = robot_state.distance_c;
-    robot_state.distance_c = (f/1000 * OBJECT_HEIGHT) / height;
+    robot_state.distance_c = (f/1000 * OBJECT_WIDTH) / width;
 
     if(prev_distance_c < robot_state.distance_c){
         seeing_table = true;

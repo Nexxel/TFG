@@ -36,7 +36,7 @@
 #define MAX_DISTANCE 6.5   //Max distance to perceive the object
 
 #define OBJECT_HEIGHT 0.250  //Medir
-#define OBJECT_WEIGHT 0.100 //Medir
+#define OBJECT_WIDTH 0.100 //Medir
 #define OBJECT_AREA (OBJECT_HEIGHT * OBJECT_WEIGHT)
 
 /*------------------------------------
