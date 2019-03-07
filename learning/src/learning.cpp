@@ -148,7 +148,7 @@ int main(int argc, char** argv){
  -----------------------------------*/
 void learning(Handlers handlers){
     namedWindow("Red objects image",CV_WINDOW_AUTOSIZE);
-    double a[3] = {0,0,-1};
+    double a[3] = {0,0,1};
     double n[3] = {1,0,0};
     int counter = 0;
     while(ros::ok()){
@@ -491,17 +491,19 @@ void mci(double next_position[3], double a[3], double n[3]){
 	double k = pow(pz, 2) + pow(d2, 2) + pow((px * cos(q1) + py * sin(q1)), 2) - pow(L3, 2);
 	double k1 = 2 * d2 * px * cos(q1) + 2 * py * d2 * sin(q1);
 	double k2 = 2 * pz * d2;
+	double theta2b = atan2(k1, k2) - atan2(k, -sqrt(pow(k1,2)+pow(k2,2)+pow(k,2)));
+	double q2 = theta2b + beta;
 
-	double theta2b = atan2(k1, k2) - atan2(k, -sqrt(pow(k1,2)+pow(k2,2)-pow(k,2)));
-	double q2 = theta2b + 781/625;
-
-	double theta23 = asin((-pz - d2*sin(theta2b))/L3);
+	double theta23 = asin((-pz - d2*sin(beta))/L3);
+    ROS_INFO("\n\n(-pz - d2*sin(beta))/L3: %.10f\n", (-pz - d2*sin(beta))/L3);
 	double q3 = q2 - theta23;
 
 	double L = a[2]*cos(q2-q3) + a[0]*sin(q2-q3)*cos(q1) + a[1]*sin(q2-q3)*sin(q1);
 	double q4 = acos(-L) - (M_PI/2);
 
 	double q5 = asin(n[0]*sin(q1) - n[1]*cos(q1));
+
+    ROS_INFO("\n\nq1: %.2f\nq2: %.2f\nq3: %.2f\nq4: %.2f\nq5: %.2f\n", q1,q2,q3,q4,q5);
 
 	Float64 angle;
     angle.data = q1;
@@ -575,7 +577,6 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     real_pos_bottom[1][0] = (min_v - cy) / f;
 
     double width = real_pos_top[0][0] - real_pos_bottom[0][0];
-    ROS_INFO("\n\nmax_u: %d \tmin_u: %d \twidth: %.2f\n", max_u, min_u, width);
     
     robot_state.distance_c = (f/1000 * OBJECT_WIDTH) / width;
 
@@ -623,21 +624,21 @@ void foldArm(){
     setNextPosition(next_position,
                      gripper_position[0],
                      gripper_position[1], 
-                     -0.25);
+                     -0.2);
     mci(next_position,a,n);
 
     // Move the arm to the platform
     setNextPosition(next_position,
                      0.5,
                      gripper_position[1], 
-                     -0.25);
+                     -0.2);
     mci(next_position,a,n);
 
     // Turn the arm to the position (0.3125,0,0.1450)
     setNextPosition(next_position,
                      0.5,
                      0, 
-                     -0.25);
+                     -0.2);
     mci(next_position,a,n);
 
     robot_state.folded = true;
