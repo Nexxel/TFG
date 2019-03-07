@@ -588,7 +588,8 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     pixel_pos[2][0] = 1;
     multiplyP_Inv(result, P_inv, pixel_pos);
     robot_state.angle_c = result[0][0] * robot_state.distance_c; // X = k*Z
-    robot_state.height_c = -result[1][0] * robot_state.distance_c - 0.106 * robot_state.distance_c; // Y = k*Z    ROS_INFO("\n\n(%.2f, %.2f, %.2f)\n", robot_state.angle_c, robot_state.height_c, robot_state.distance_c);
+    robot_state.height_c = result[1][0] * robot_state.distance_c;   // Y = k*Z
+    ROS_INFO("\n\n(%.2f, %.2f, %.2f)\n", robot_state.angle_c, robot_state.height_c, robot_state.distance_c);
 }
 
 /*------------------------------------
