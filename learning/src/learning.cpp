@@ -47,8 +47,8 @@
                 counter++;
             }
         }
-        P[0][3] = -500; // The arm begin in the -0'5
-        P[1][3] = 106; // There are 106 mm until the arm
+        P[0][3] = 85; // The arm is 85 mm to the front of the kinect
+        P[1][3] = 106; // The arm is 106 mm up the kinect
         Mat auxP = Mat(3,4, DataType<double>::type, P);
         Mat auxP_inv = Mat(4,3, DataType<double>::type, P_inv);
         invert(auxP,auxP_inv, DECOMP_SVD);
