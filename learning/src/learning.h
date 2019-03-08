@@ -28,14 +28,14 @@
 #define L45 0.07585+0.04625
 #define beta 1.2496
 
-#define MIN_EFFORT -0.05   //Min effort of the idle gripper
+#define MIN_EFFORT -0.05   //Min effort of the idle gripper ( totally opened or closed)
 
 #define ROS_RATE 2
 
 //??
 #define MAX_DISTANCE 6.5   //Max distance to perceive the object
 
-#define OBJECT_HEIGHT 0.250  //Medir
+#define OBJECT_HEIGHT 0.500  //Medir
 #define OBJECT_WIDTH 0.100 //Medir
 #define OBJECT_AREA (OBJECT_HEIGHT * OBJECT_WEIGHT)
 
@@ -51,14 +51,14 @@ using namespace geometry_msgs;
  Variables
  -----------------------------------*/
  struct state{
-   int height_d;   // Discretized height (Pixels)
+   int height_d;   // Discretized height
    double height_c;    // Continuos height
-   int distance_d;  // Discretized distance ¿¿¿(Pixels)???
+   int distance_d;  // Discretized distance
    double distance_c;  // Continuous distance
-   int angle_d;     // Discretized angle in horizontal (Pixels)
+   int angle_d;     // Discretized angle in horizontal
    double angle_c;     // Continuous angle in horizontal
-   bool folded;        // Is arm folded?
-   bool object_picked; // Is object picked?
+   bool folded;        // Is the arm folded?
+   bool object_picked; // Is the object picked?
  } robot_state;
 
 bool inside_learning = false; // Boolean to control the callbacks

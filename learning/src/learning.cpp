@@ -568,15 +568,15 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     double f = P[0][0];
     double cx = P[0][2];
     double cy = P[1][2]; 
-    double real_pos_top[2][1]; // 4 x 1
-    real_pos_top[0][0] = (max_u - cx) / f;
-    real_pos_top[1][0] = (max_v - cy) / f;
+    double real_pos_max[2][1]; // 4 x 1
+    real_pos_max[0][0] = (max_u - cx) / f;
+    real_pos_max[1][0] = (max_v - cy) / f;
 
-    double real_pos_bottom[2][1]; // 4 x 1
-    real_pos_bottom[0][0] = (min_u - cx) / f;
-    real_pos_bottom[1][0] = (min_v - cy) / f;
+    double real_pos_min[2][1]; // 4 x 1
+    real_pos_min[0][0] = (min_u - cx) / f;
+    real_pos_min[1][0] = (min_v - cy) / f;
 
-    double width = real_pos_top[0][0] - real_pos_bottom[0][0];
+    double width = real_pos_max[0][0] - real_pos_min[0][0];
     
     robot_state.distance_c = (f/1000 * OBJECT_WIDTH) / width;
 
@@ -624,14 +624,14 @@ void foldArm(){
     setNextPosition(next_position,
                      gripper_position[0],
                      gripper_position[1], 
-                     -0.2);
+                     0);
     mci(next_position,a,n);
 
     // Move the arm to the platform
     setNextPosition(next_position,
-                     0.5,
+                     0.25,
                      gripper_position[1], 
-                     -0.2);
+                     0);
     mci(next_position,a,n);
 
     // Turn the arm to the position (0.3125,0,0.1450)
