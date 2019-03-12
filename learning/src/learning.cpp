@@ -399,6 +399,17 @@ void multiplyTransformations(double result[4][4], double first[4][4], double sec
 }
 
 /*------------------------------------
+ Update the matrix T05 of the direct kinematic model copying aux into T05
+-----------------------------------*/
+void updateT05(double T05[4][4], double aux[4][4]){
+	for(int i  = 0; i<4; i++){
+		for(int j  = 0; j<4; j++){
+			T05[i][j] = aux[i][j];
+		}
+	}
+}
+
+/*------------------------------------
  Get the direct kinematic model of the widowX-arm
 -----------------------------------*/
 void mcd(){
@@ -451,10 +462,23 @@ void mcd(){
 		{0, 0, 0, 1}
 	};
 
-	multiplyTransformations(T05, T01, T12);
-	multiplyTransformations(T05, T05, T23);
-	multiplyTransformations(T05, T05, T34);
-	multiplyTransformations(T05, T05, T45);
+	double aux[4][4];
+
+	multiplyTransformations(aux, T01, T12);
+	
+	updateT05(T05, aux);
+
+	multiplyTransformations(aux, T05, T23);
+
+	updateT05(T05, aux);
+
+	multiplyTransformations(aux, T05, T34);
+
+	updateT05(T05, aux);
+
+	multiplyTransformations(aux, T05, T45);
+
+	updateT05(T05, aux);
 }
 
 /*------------------------------------
@@ -491,10 +515,10 @@ void mci(double next_position[3], double a[3], double n[3]){
 	double k = pow(pz, 2) + pow(d2, 2) + pow((px * cos(q1) + py * sin(q1)), 2) - pow(L3, 2);
 	double k1 = 2 * d2 * px * cos(q1) + 2 * py * d2 * sin(q1);
 	double k2 = 2 * pz * d2;
-	double theta2b = atan2(k1, k2) - atan2(k, -sqrt(pow(k1,2)+pow(k2,2)+pow(k,2)));
+	double theta2b = atan2(k1, k2) - atan2(k, -sqrt(pow(k1,2)+pow(k2,2)-pow(k,2)));
 	double q2 = theta2b + beta;
 
-	double theta23 = asin((-pz - d2*sin(beta))/L3);
+	double theta23 = asin((-pz - d2*sin(theta2b))/L3);
     ROS_INFO("\n\n(-pz - d2*sin(beta))/L3: %.10f\n", (-pz - d2*sin(beta))/L3);
 	double q3 = q2 - theta23;
 

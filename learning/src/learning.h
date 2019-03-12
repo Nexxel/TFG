@@ -189,6 +189,10 @@ void multiplyP_Inv(double result[4][1], double P_inv[4][3], double pixel_pos[3][
 -----------------------------------*/
 void multiplyTransformations(double result[4][4], double first[4][4], double second[4][4]);
 /*------------------------------------
+ Update the matrix T05 of the direct kinematic model copying aux into T05
+-----------------------------------*/
+void updateT05(double T05[4][4], double aux[4][4]);
+/*------------------------------------
  Get the direct kinematic model of the widowX-arm
 -----------------------------------*/
 void mcd();

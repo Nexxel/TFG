@@ -1,5 +1,20 @@
 {
     "files.associations": {
-        "cmath": "cpp"
-    }
+        "cmath": "cpp",
+        "cctype": "cpp",
+        "cstdarg": "cpp",
+        "cstddef": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "strstream": "cpp",
+        "initializer_list": "cpp",
+        "iosfwd": "cpp",
+        "cinttypes": "cpp",
+        "cstdint": "cpp",
+        "typeindex": "cpp"
+    },
+    "ros.distro": "indigo"
 }
