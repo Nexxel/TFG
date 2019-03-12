@@ -148,7 +148,6 @@ int main(int argc, char** argv){
  -----------------------------------*/
 void learning(Handlers handlers){
     namedWindow("Red objects image",CV_WINDOW_AUTOSIZE);
-    double a[3] = {0,0,1};
     double n[3] = {1,0,0};
     int counter = 0;
     while(ros::ok()){
@@ -182,17 +181,17 @@ void learning(Handlers handlers){
                         gripper_position[0],
                         gripper_position[1], 
                         robot_state.height_c);
-            mci(next_position,a,n);
+            mci(next_position,n);
             setNextPosition(next_position,
                         gripper_position[0],
                         robot_state.angle_c, 
                         robot_state.height_c);
-            mci(next_position,a,n);
+            mci(next_position,n);
             setNextPosition(next_position,
                         robot_state.distance_c,
                         robot_state.angle_c, 
                         robot_state.height_c);
-            mci(next_position,a,n);
+            mci(next_position,n);
             closeGripper();
         }
         // 3.2 Move base if not reachable
@@ -495,6 +494,10 @@ void getGripperPosition(){
 	gripper_position[0] = px + L45*ax;
 	gripper_position[1] = py + L45*ay;
 	gripper_position[2] = pz + L45*az;
+
+    a[0] = ax;
+    a[1] = ay;
+    a[2] = az;
 }
 
 /*------------------------------------
@@ -505,7 +508,7 @@ void getGripperPosition(){
         - a: Desired angle orientation of the wrisp
         - n: Desired orientation of the wrisp 
  -----------------------------------*/
-void mci(double next_position[3], double a[3], double n[3]){
+void mci(double next_position[3], double n[3]){
 	double px = next_position[0] - L45*a[0];
 	double py = next_position[1] - L45*a[1];
 	double pz = next_position[2] - L45*a[2];
@@ -644,29 +647,14 @@ void setNextPosition(double next_position[3], double x, double y, double z){
  Fold arm:
 -----------------------------------*/
 void foldArm(){
-    double a[3] = {1,0,0};
     double n[3] = {0,0,1}; 
     double next_position[3];
-    // Move the arm up
-    setNextPosition(next_position,
-                     gripper_position[0],
-                     gripper_position[1], 
-                     0);
-    mci(next_position,a,n);
-
-    // Move the arm to the platform
-    setNextPosition(next_position,
-                     0.25,
-                     gripper_position[1], 
-                     0);
-    mci(next_position,a,n);
-
     // Turn the arm to the position (0.3125,0,0.1450)
     setNextPosition(next_position,
-                     0.5,
+                     0.3125,
                      0, 
-                     -0.2);
-    mci(next_position,a,n);
+                     0.1450);
+    mci(next_position,n);
 
     robot_state.folded = true;
 }

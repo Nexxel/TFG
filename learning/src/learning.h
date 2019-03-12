@@ -63,6 +63,7 @@ using namespace geometry_msgs;
 
 bool inside_learning = false; // Boolean to control the callbacks
 
+double a[3];            // Orientation of gripper
 int discr_level = 5;    // Discretization level
 
 double T05[4][4];       // Direct kinematic model
@@ -208,7 +209,7 @@ void getGripperPosition();
         - a: Desired angle orientation of the wrisp
         - n: Desired orientation of the wrisp 
  -----------------------------------*/
-void mci(double next_position[3], double a[3], double n[3]);
+void mci(double next_position[3], double n[3]);
 /*------------------------------------
  Open gripper:
  -----------------------------------*/
