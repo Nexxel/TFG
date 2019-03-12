@@ -62,20 +62,6 @@
     }
  }
 
-  /*------------------------------------
- Get the joint states and process it:
- -----------------------------------*/
- void callbackJointStates(const JointStateConstPtr& joint_states_msg){
-    if(joint_states_msg->header.frame_id.empty()){
-        vector<double> joint_angles_aux = joint_states_msg->position;
-        joint_angles[0] = joint_angles_aux[0];
-        joint_angles[1] = joint_angles_aux[1];
-        joint_angles[2] = joint_angles_aux[2];
-        joint_angles[3] = joint_angles_aux[3];
-        joint_angles[4] = joint_angles_aux[4];
-        gripper_effort = joint_states_msg->effort[5];
-    }
- }
 /*------------------------------------
  Change discretization level:
  -----------------------------------*/
@@ -98,7 +84,6 @@ int main(int argc, char** argv){
 
     color_image_sub = handlers.getIT().subscribe("/camera/rgb/image_color", 1, &callbackImage);
     camera_info_sub = handlers.getNH().subscribe("/camera/rgb/camera_info", 1, &callbackCameraInfo);
-    joint_states_sub = handlers.getNH().subscribe("/joint_states", 1, &callbackJointStates);
     discr_level_sub = handlers.getNH().subscribe("/learning/set_discr_level", 1, setDiscretizationLevel);
 
     joints[0] = handlers.getNH().advertise<Float64>("/arm_1_joint/command", 1);
@@ -127,8 +112,7 @@ int main(int argc, char** argv){
      // The counter if for ashuring that at least it is executed 1 time
      int counter = 0;
      while(ros::ok() 
-            and (joint_angles == NULL 
-            or cv_ptr == NULL or P_inv == NULL or counter == 0))
+            and (cv_ptr == NULL or P_inv == NULL or counter == 0))
     {
         ros::Rate rate(ROS_RATE);
         ros::spinOnce();
@@ -547,6 +531,12 @@ void mci(double next_position[3], double n[3]){
     robot_state.folded = (next_position[0] == 0
                         and next_position[1] == 0
                         and next_position[2] == 0);
+
+    joint_angles[0] = q1;
+    joint_angles[1] = q2;
+    joint_angles[2] = q3;
+    joint_angles[3] = q4;
+    joint_angles[4] = q5;
 
     processMessages();
     mcd();

@@ -124,11 +124,6 @@ ros::Publisher base;
  Get the rgb camera info and get the projection matrix:
  -----------------------------------*/
  void callbackCameraInfo(const CameraInfoConstPtr& camera_info_msg);
- 
- /*------------------------------------
- Get the joint states and process it:
- -----------------------------------*/
- void callbackJointStates(const JointStateConstPtr& joint_states_msg);
 /*------------------------------------
  Change discretization level:
  -----------------------------------*/
