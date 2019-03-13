@@ -585,12 +585,12 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     double cx = P[0][2];
     double cy = P[1][2]; 
     double real_pos_max[2][1];
-    real_pos_max[0][0] = ((max_u - cx) / f) * HEIGHT_PX_2_M;
-    real_pos_max[1][0] = ((max_v - cy) / f) * WIDTH_PX_2_M;
+    real_pos_max[0][0] = ((max_u - cx)) * HEIGHT_PX_2_M;
+    real_pos_max[1][0] = ((max_v - cy)) * WIDTH_PX_2_M;
 
     double real_pos_min[2][1];
-    real_pos_min[0][0] = ((min_u - cx) / f) * HEIGHT_PX_2_M;
-    real_pos_min[1][0] = ((min_v - cy) / f) * WIDTH_PX_2_M;
+    real_pos_min[0][0] = ((min_u - cx)) * HEIGHT_PX_2_M;
+    real_pos_min[1][0] = ((min_v - cy)) * WIDTH_PX_2_M;
 
     double width = real_pos_max[0][0] - real_pos_min[0][0];
     
@@ -605,8 +605,8 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     pixel_pos[1][0] = object_center[1];
     pixel_pos[2][0] = 1;
     multiplyP_Inv(result, P_inv, pixel_pos);
-    robot_state.angle_c = (result[0][0]/result[3][0]) * WIDTH_PX_2_M * robot_state.distance_c; // X = k*Z
-    robot_state.height_c = (result[1][0]/result[3][0]) * HEIGHT_PX_2_M * robot_state.distance_c;   // Y = k*Z
+    robot_state.angle_c = (result[0][0]) * WIDTH_PX_2_M * robot_state.distance_c; // X = k*Z
+    robot_state.height_c = (result[1][0]) * HEIGHT_PX_2_M * robot_state.distance_c;   // Y = k*Z
     ROS_INFO("\n\nDistancia, ángulo, altura: \n\t(%.2f, %.2f, %.2f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
 }
 
