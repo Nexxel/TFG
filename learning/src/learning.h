@@ -39,6 +39,12 @@
 #define OBJECT_WIDTH 0.100 //Medir
 #define OBJECT_AREA (OBJECT_HEIGHT * OBJECT_WEIGHT)
 
+#define SENSOR_HEIGHT 0.00230
+#define SENSOR_WIDTH 0.00173
+
+#define CAMERA_HEIGHT 640 // Height of the image in pixels
+#define CAMERA_WIDTH 480 // Width of the image in pixels
+
 /*------------------------------------
  Some useful namespaces:
 -----------------------------------*/
