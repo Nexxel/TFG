@@ -58,6 +58,8 @@
                 P_inv[i][j] = auxP_inv.at<double>(i,j);
             }
         }
+
+        ROS_INFO("\n\nnK[0]: %.10f\n", camera_info_msg->K.at(0));
 /*
         ROS_INFO("\n\nP_inv\n"
                  "%.2f %.2f %.2f\n"
