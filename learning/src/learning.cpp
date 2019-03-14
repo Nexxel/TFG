@@ -59,7 +59,7 @@
             }
         }
 
-        ROS_INFO("\n\nK[0]: %.10f\n", camera_info_msg->K.at(4));
+        ROS_INFO("\n\nK[0]: %.10f\n", camera_info_msg->K.at(5));
 /*
         ROS_INFO("\n\nP_inv\n"
                  "%.2f %.2f %.2f\n"
