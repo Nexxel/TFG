@@ -58,6 +58,11 @@
                 P_inv[i][j] = auxP_inv.at<double>(i,j);
             }
         }
+
+        ROS_INFO("\n\nP_inv\n");
+        for (int i = 0; i<4; i++){
+            ROS_INFO("\n %.2f .2f .2f", P_inv[i][0], P_inv[i][1], P_inv[i][2]);
+        }
     }
  }
 
@@ -350,9 +355,10 @@ void isSimulation(){
  Multiply P_inv and pixel_pos
 -----------------------------------*/
 void multiplyP_Inv(double result[4][1], double P_inv[4][3], double pixel_pos[3][1]){
-    for (int i = 0; i < 4; i++){
+    for (int i = 0; i < 3; i++){
         result[i][0] = 0;
     }
+    result[3][0] = 1;
     
     for (int i  = 0; i < 4; i++){
         for (int k  = 0; k < 3; k++){
@@ -585,18 +591,18 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     double cx = P[0][2];
     double cy = P[1][2]; 
     double real_pos_max[2][1];
-    real_pos_max[0][0] = ((max_u - cx)) * WIDTH_PX_2_M;
-    real_pos_max[1][0] = ((max_v - cy)) * HEIGHT_PX_2_M;
+    real_pos_max[0][0] = ((max_u - cx));// * WIDTH_PX_2_M;
+    real_pos_max[1][0] = ((max_v - cy));// * HEIGHT_PX_2_M;
 
     double real_pos_min[2][1];
-    real_pos_min[0][0] = ((min_u - cx)) * WIDTH_PX_2_M;
-    real_pos_min[1][0] = ((min_v - cy)) * HEIGHT_PX_2_M;
+    real_pos_min[0][0] = ((min_u - cx));// * WIDTH_PX_2_M;
+    real_pos_min[1][0] = ((min_v - cy));// * HEIGHT_PX_2_M;
 
     double width = real_pos_max[0][0] - real_pos_min[0][0];
     
     ROS_INFO("\n\nwidth: %.10f\n", width);
 
-    robot_state.distance_c = (f * WIDTH_PX_2_M * OBJECT_WIDTH) / width - 0.11;
+    robot_state.distance_c = (f * OBJECT_WIDTH) / width - 0.11;
 
     // Get the pixel position in x,y
     double pixel_pos[3][1]; // 3 x 1
@@ -605,8 +611,8 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     pixel_pos[1][0] = object_center[1];
     pixel_pos[2][0] = 1;
     multiplyP_Inv(result, P_inv, pixel_pos);
-    robot_state.angle_c = (result[0][0]) * WIDTH_PX_2_M * robot_state.distance_c; // X = k*Z
-    robot_state.height_c = (result[1][0]) * HEIGHT_PX_2_M * robot_state.distance_c - 0.215;   // Y = k*Z
+    robot_state.angle_c = (result[0][0]/result[3][0]) * WIDTH_PX_2_M * robot_state.distance_c; // X = k*Z
+    robot_state.height_c = (result[1][0]/result[3][0]) * HEIGHT_PX_2_M * robot_state.distance_c - 0.215;   // Y = k*Z
     ROS_INFO("\n\nDistancia, ángulo, altura: \n\t(%.2f, %.2f, %.2f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
 }
 
