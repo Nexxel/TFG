@@ -620,7 +620,7 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     multiplyP_Inv(result, P_inv, pixel_pos);
     robot_state.angle_c = (result[0][0]/result[3][0]) * WIDTH_PX_2_M * robot_state.distance_c; // X = k*Z
     robot_state.height_c = (result[1][0]/result[3][0]) * HEIGHT_PX_2_M * robot_state.distance_c;   // Y = k*Z
-    ROS_INFO("\n\nDistancia, Angulo, Altura: \n\t(%.2f, %.2f, %.2f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
+    ROS_INFO("\n\nDistance, Angle, height: \n\t(%.2f, %.2f, %.2f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
 }
 
 /*------------------------------------
