@@ -585,12 +585,12 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     double cx = P[0][2];
     double cy = P[1][2]; 
     double real_pos_max[2][1];
-    real_pos_max[0][0] = ((max_u - cx)) * HEIGHT_PX_2_M;
-    real_pos_max[1][0] = ((max_v - cy)) * WIDTH_PX_2_M;
+    real_pos_max[0][0] = ((max_u - cx)) * WIDTH_PX_2_M;
+    real_pos_max[1][0] = ((max_v - cy)) * HEIGHT_PX_2_M;
 
     double real_pos_min[2][1];
-    real_pos_min[0][0] = ((min_u - cx)) * HEIGHT_PX_2_M;
-    real_pos_min[1][0] = ((min_v - cy)) * WIDTH_PX_2_M;
+    real_pos_min[0][0] = ((min_u - cx)) * WIDTH_PX_2_M;
+    real_pos_min[1][0] = ((min_v - cy)) * HEIGHT_PX_2_M;
 
     double width = real_pos_max[0][0] - real_pos_min[0][0];
     
