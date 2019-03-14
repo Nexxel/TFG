@@ -58,7 +58,7 @@
                 P_inv[i][j] = auxP_inv.at<double>(i,j);
             }
         }
-
+/*
         ROS_INFO("\n\nP_inv\n"
                  "%.2f %.2f %.2f\n"
                  "%.2f %.2f %.2f\n"
@@ -69,6 +69,7 @@
                  , P_inv[2][0], P_inv[2][1], P_inv[2][2]
                  , P_inv[3][0], P_inv[3][1], P_inv[3][2]
                  );
+*/
     }
  }
 
