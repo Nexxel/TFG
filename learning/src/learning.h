@@ -33,7 +33,7 @@
 #define ROS_RATE 2
 
 //??
-#define MAX_DISTANCE 6.5   //Max distance to perceive the object
+#define MAX_DISTANCE 1.5   //Max distance to perceive the object
 
 #define OBJECT_HEIGHT 0.080  //Medir
 #define OBJECT_WIDTH 0.028 //Medir

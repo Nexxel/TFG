@@ -297,7 +297,7 @@ void calculateRealPos(){
 void discretizeValues(){
     double angle_step = cv_ptr->image.cols/discr_level;
     double height_step = cv_ptr->image.rows/discr_level;
-    double depth_step = 5.5/discr_level;    // Depth of field = [0,5.5]
+    double depth_step = MAX_DISTANCE/discr_level;
     
     // Discretize values in angle
     discretizeValuesAux(0,angle_step);
