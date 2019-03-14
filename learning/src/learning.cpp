@@ -608,7 +608,7 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
 
     double width = real_pos_max[0][0] - real_pos_min[0][0];
     
-    ROS_INFO("\n\nwidth: %.10f\n", width);
+//    ROS_INFO("\n\nwidth: %.10f\n", width);
 
     robot_state.distance_c = (f * OBJECT_WIDTH) / width - 0.11;
 
