@@ -59,10 +59,14 @@
             }
         }
 
-        ROS_INFO("\n\nP_inv\n");
-        for (int i = 0; i<4; i++){
-            ROS_INFO("\n %.2f %.2f %.2f", P_inv[i][0], P_inv[i][1], P_inv[i][2]);
-        }
+        ROS_INFO("\n\nP_inv\n"
+                 "%.2f %.2f %.2f\n"
+                 "%.2f %.2f %.2f\n"
+                 "%.2f %.2f %.2f\n"
+                 , P_inv[0][0], P_inv[0][1], P_inv[0][2]
+                 , P_inv[1][0], P_inv[1][1], P_inv[1][2]
+                 , P_inv[2][0], P_inv[2][1], P_inv[2][2]
+                 );
     }
  }
 
@@ -511,7 +515,6 @@ void mci(double next_position[3], double n[3]){
 	double q2 = theta2b + beta;
 
 	double theta23 = asin((-pz - d2*sin(theta2b))/L3);
-    ROS_INFO("\n\n(-pz - d2*sin(beta))/L3: %.10f\n", (-pz - d2*sin(beta))/L3);
 	double q3 = q2 - theta23;
 
 	double L = a[2]*cos(q2-q3) + a[0]*sin(q2-q3)*cos(q1) + a[1]*sin(q2-q3)*sin(q1);
@@ -613,7 +616,7 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     multiplyP_Inv(result, P_inv, pixel_pos);
     robot_state.angle_c = (result[0][0]/result[3][0]) * WIDTH_PX_2_M * robot_state.distance_c; // X = k*Z
     robot_state.height_c = (result[1][0]/result[3][0]) * HEIGHT_PX_2_M * robot_state.distance_c - 0.215;   // Y = k*Z
-    ROS_INFO("\n\nDistancia, ángulo, altura: \n\t(%.2f, %.2f, %.2f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
+    ROS_INFO("\n\nDistancia, Angulo, Altura: \n\t(%.2f, %.2f, %.2f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
 }
 
 /*------------------------------------
