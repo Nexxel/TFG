@@ -61,7 +61,7 @@
 
         ROS_INFO("\n\nP_inv\n");
         for (int i = 0; i<4; i++){
-            ROS_INFO("\n %.2f .2f .2f", P_inv[i][0], P_inv[i][1], P_inv[i][2]);
+            ROS_INFO("\n %.2f %.2f %.2f", P_inv[i][0], P_inv[i][1], P_inv[i][2]);
         }
     }
  }
