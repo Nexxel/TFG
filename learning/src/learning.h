@@ -73,7 +73,7 @@ using namespace geometry_msgs;
 bool inside_learning = false; // Boolean to control the callbacks
 
 double a[3];            // Orientation of gripper
-int discr_level = 7;    // Discretization level
+int discr_level = 5;    // Discretization level
 
 double T05[4][4];       // Direct kinematic model
 
