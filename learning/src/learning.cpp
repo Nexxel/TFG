@@ -297,7 +297,7 @@ void calculateRealPos(){
 void discretizeValues(){
     double angle_step = cv_ptr->image.cols/discr_level;
     double height_step = cv_ptr->image.rows/discr_level;
-    double depth_step = 5.5/discr_level;    // Depth of field = [0.5,6]
+    double depth_step = 5.5/discr_level;    // Depth of field = [0,5.5]
     
     // Discretize values in angle
     discretizeValuesAux(0,angle_step);
@@ -334,10 +334,7 @@ void discretizeValuesAux(int selector, double step){
     while (quadrant < discr_level and !inside_quadrant){
         int ranges[2] = {round(step*quadrant),
                          round(step*(quadrant+1))};
-        // Field of view is from 0.5m
-        if(selector > 1){
-            ranges[0] += 0.5; ranges[1] += 0.5;
-        }
+
         if(*state_c >= ranges[0]
             and *state_c < ranges[1])
         {
