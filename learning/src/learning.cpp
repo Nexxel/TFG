@@ -174,6 +174,7 @@ void learning(Handlers handlers){
         // 3.1 Move arm if reachable
         if(object_reachable and !robot_state.object_picked){
             double next_position[3];
+            /*
             setNextPosition(next_position,
                         gripper_position[0],
                         gripper_position[1], 
@@ -184,6 +185,7 @@ void learning(Handlers handlers){
                         robot_state.angle_c, 
                         robot_state.height_c);
             mci(next_position,n);
+            */
             setNextPosition(next_position,
                         robot_state.distance_c,
                         robot_state.angle_c, 
