@@ -633,7 +633,6 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     Object is centered in x, near and up
 -----------------------------------*/
 void isObjectReachable(){
-    ROS_INFO("\n\nrobot_state.distance_d == 1: %d\n", robot_state.distance_d == 1);
     object_reachable = robot_state.angle_d == (discr_level/2)+1
                         and robot_state.distance_d == 1
                         and robot_state.height_d <= discr_level/3;
