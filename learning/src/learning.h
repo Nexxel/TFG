@@ -25,7 +25,7 @@
 -----------------------------------*/
 #define L3 0.1423
 #define d2 0.1528
-#define L45 0.07585+0.04625
+#define L45 0.1221 //(0.07585 + 0.04625)
 #define beta 1.2496
 
 #define MIN_EFFORT -0.05   //Min effort of the idle gripper ( totally opened or closed)
