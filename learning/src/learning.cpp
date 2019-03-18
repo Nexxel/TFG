@@ -81,6 +81,7 @@
  void setDiscretizationLevel(const Int16ConstPtr& new_discr_level){
     if (!inside_learning){
         discr_level = new_discr_level->data;
+        ROS_INFO("\n\nDiscretization level: %d\n", discr_level);
     }
  }
 /*------------------------------------
