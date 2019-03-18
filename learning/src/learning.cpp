@@ -629,7 +629,7 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
 }
 
 /*------------------------------------
- Detect if object is reachble:
+ Detect if object is reachable:
     Object is centered in x, near and up
 -----------------------------------*/
 void isObjectReachable(){
