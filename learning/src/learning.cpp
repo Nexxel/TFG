@@ -517,7 +517,7 @@ void mci(double next_position[3], double n[3]){
 
 	double q1 = atan2(py, px);
             
-	double k = pow(pz, 2) + pow(d2, 2) + pow((px * cos(q1) + py * sin(q1)), 2) - pow(L3, 2);
+	double k = pow(pz, 2) + pow(d2, 2) + pow(((px * cos(q1)) + (py * sin(q1))), 2) - pow(L3, 2);
 	double k1 = 2 * d2 * px * cos(q1) + 2 * py * d2 * sin(q1);
 	double k2 = 2 * pz * d2;
 	double theta2b = atan2(k1, k2) - atan2(k, -sqrt(pow(k1,2)+pow(k2,2)-pow(k,2)));
