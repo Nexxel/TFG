@@ -333,8 +333,8 @@ void discretizeValuesAux(int selector, double step){
     int quadrant = 0;
     bool inside_quadrant = false;
     while (quadrant < discr_level and !inside_quadrant){
-        double ranges[2] = {step*quadrant,
-                         step*(quadrant+1)};
+        double ranges[2] = {step*double(quadrant),
+                         step*double(quadrant+1)};
 
         if(*state_c >= ranges[0]
             and *state_c < ranges[1])
