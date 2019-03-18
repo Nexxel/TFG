@@ -146,7 +146,7 @@ int main(int argc, char** argv){
  -----------------------------------*/
 void learning(Handlers handlers){
     namedWindow("Red objects image",CV_WINDOW_AUTOSIZE);
-    double n[3] = {1,0,0};
+    double n[3] = {0,0,1};
     int counter = 0;
     while(ros::ok()){
         robot_state.angle_d = -1;
