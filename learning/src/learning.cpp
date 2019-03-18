@@ -113,7 +113,7 @@ int main(int argc, char** argv){
     robot_state.folded = false;
     robot_state.angle_d = 1;
     robot_state.height_d = 1;
-    robot_state.distance_d = 1;
+    robot_state.distance_d = -1;
 
     learning(handlers);
     return 0;
@@ -149,6 +149,10 @@ void learning(Handlers handlers){
     double n[3] = {1,0,0};
     int counter = 0;
     while(ros::ok()){
+        robot_state.angle_d = -1;
+        robot_state.height_d = -1;
+        robot_state.distance_d = -1;
+        
         inside_learning = false;
 
         processMessages();
