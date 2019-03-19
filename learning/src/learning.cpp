@@ -133,15 +133,13 @@ int main(int argc, char** argv){
  Process messages:
  -----------------------------------*/
  void processMessages(){
-     // The counter if for ashuring that at least it is executed 1 time
-     int counter = 0;
+     cv_ptr = cv_bridge::CvImagePtr(); P_inv[0][0] = NULL; gripper_effort = 0;
      while(ros::ok() 
-            and (cv_ptr == NULL or P_inv == NULL or counter == 0))
+            and (cv_ptr == NULL or P_inv[0][0] == NULL or gripper_effort == 0))
     {
         ros::Rate rate(ROS_RATE);
         ros::spinOnce();
         rate.sleep();
-        counter++;
     }
  }
 
