@@ -75,6 +75,15 @@
     }
  }
 
+ /*------------------------------------
+ Get gripper effort:
+ -----------------------------------*/
+ void getGripperEffortCallback(const JointStateConstPtr& joint_states_msg){
+    if (joint_states_msg->header.frame_id.empty()){
+        gripper_effort = joint_states_msg->effort[5];
+    }
+ }
+
 /*------------------------------------
  Change discretization level:
  -----------------------------------*/
@@ -98,7 +107,8 @@ int main(int argc, char** argv){
 
     color_image_sub = handlers.getIT().subscribe("/camera/rgb/image_color", 1, &callbackImage);
     camera_info_sub = handlers.getNH().subscribe("/camera/rgb/camera_info", 1, &callbackCameraInfo);
-    discr_level_sub = handlers.getNH().subscribe("/learning/set_discr_level", 1, setDiscretizationLevel);
+    joint_states_sub = handlers.getNH().subscribe("/joint_states", 1, &getGripperEffortCallback);
+    discr_level_sub = handlers.getNH().subscribe("/learning/set_discr_level", 1, &setDiscretizationLevel);
 
     joints[0] = handlers.getNH().advertise<Float64>("/arm_1_joint/command", 1);
     joints[1] = handlers.getNH().advertise<Float64>("/arm_2_joint/command", 1);
@@ -191,11 +201,16 @@ void learning(Handlers handlers){
                         robot_state.height_c);
             mci(next_position,n);
             */
+           setNextPosition(next_position,
+                        robot_state.distance_c-0.06,
+                        robot_state.angle_c, 
+                        robot_state.height_c + 0.05);
+            mci(next_position,n);
+            openGripper();
             setNextPosition(next_position,
                         robot_state.distance_c,
                         robot_state.angle_c, 
                         robot_state.height_c);
-            ROS_INFO("\n\nQué llega al brazo?? (%.10f, %.10f, %.10f)", next_position[0], next_position[1], next_position[2]);
             mci(next_position,n);
             closeGripper();
         }
@@ -218,7 +233,8 @@ void learning(Handlers handlers){
         // 4. Fold arm
         updateState();
         if(robot_state.object_picked){
-            foldArm();          
+            foldArm(); 
+            break;         
         }
 
         //printDebug("learning 4", 188);
@@ -589,6 +605,7 @@ void openGripper(){
 void isObjectPicked(){
     robot_state.object_picked = (!gripper_opened) 
                 and (gripper_effort < MIN_EFFORT);
+    ROS_INFO("gripper_effort: %.4f", gripper_effort);
 }
 
 /*------------------------------------
@@ -617,7 +634,7 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     
 //    ROS_INFO("\n\nwidth: %.10f\n", width);
 
-    robot_state.distance_c = (f * OBJECT_WIDTH) / width - 0.01;
+    robot_state.distance_c = (f * OBJECT_WIDTH) / width - 0.08;
 
     // Get the pixel position in x,y
     double pixel_pos[3][1]; // 3 x 1
@@ -626,8 +643,8 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     pixel_pos[1][0] = object_center[1];
     pixel_pos[2][0] = 1;
     multiplyP_Inv(result, P_inv, pixel_pos);
-    robot_state.angle_c = (result[0][0]/result[3][0]) * WIDTH_PX_2_M * robot_state.distance_c - 0.03; // X = k*Z 
-    robot_state.height_c = (result[1][0]/result[3][0]) * HEIGHT_PX_2_M * robot_state.distance_c - 0.067;   // Y = k*Z
+    robot_state.angle_c = (result[0][0]/result[3][0]) * WIDTH_PX_2_M * robot_state.distance_c - 0.05; // X = k*Z 
+    robot_state.height_c = (result[1][0]/result[3][0]) * HEIGHT_PX_2_M * robot_state.distance_c - 0.07;   // Y = k*Z
     ROS_INFO("\n\nDistance, Angle, height: \n\t(%.10f, %.10f, %.10f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
 }
 

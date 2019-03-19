@@ -134,6 +134,10 @@ ros::Publisher base;
  -----------------------------------*/
  void callbackCameraInfo(const CameraInfoConstPtr& camera_info_msg);
 /*------------------------------------
+ Get gripper effort:
+ -----------------------------------*/
+ void getGripperEffortCallback(const JointStateConstPtr& joint_states_msg);
+/*------------------------------------
  Change discretization level:
  -----------------------------------*/
  void setDiscretizationLevel(const Int16ConstPtr& new_discr_level);
