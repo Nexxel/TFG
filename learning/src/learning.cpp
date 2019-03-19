@@ -533,7 +533,7 @@ void mci(double next_position[3], double n[3]){
 	double q4 = acos(-L) - (M_PI/2);
 
 	double q5 = asin(n[0]*sin(q1) - n[1]*cos(q1));
-
+    ROS_INFO("\n\nk: %.2f, k1: %.2f, k2: %.2f, theta2b: %.2f, theta23: %.2f, L: %.2f\n", k, k1, k2, theta2b, theta23, L);
     ROS_INFO("\n\nq1: %.2f\nq2: %.2f\nq3: %.2f\nq4: %.2f\nq5: %.2f\n", q1,q2,q3,q4,q5);
 
 	Float64 angle;
