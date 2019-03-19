@@ -160,15 +160,15 @@ void learning(Handlers handlers){
         // While the learning process, we just want to re-read the joints
        inside_learning = true;
 
+        mcd();
+        getGripperPosition();
+
         // If it's the first time, set the arm to the initial position
         if (counter == 0){
             openGripper();
             foldArm();
             counter++;
         }
-        
-        mcd();
-        getGripperPosition();
 
         // 1. Get state
         updateState();
