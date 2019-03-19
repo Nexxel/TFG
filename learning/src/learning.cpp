@@ -195,6 +195,7 @@ void learning(Handlers handlers){
                         robot_state.distance_c,
                         robot_state.angle_c, 
                         robot_state.height_c);
+            ROS_INFO("\n\nQué llega al brazo?? (%.10f, %.10f, %.10f)", next_position[0], next_position[1], next_position[2]);
             mci(next_position,n);
             closeGripper();
         }
