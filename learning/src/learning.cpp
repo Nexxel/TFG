@@ -512,11 +512,11 @@ void getGripperPosition(){
         - n: Desired orientation of the wrisp 
  -----------------------------------*/
 void mci(double next_position[3], double n[3]){
-    ROS_INFO("\n\nQué llega al brazo?? (%.10f, %.10f, %.10f)", next_position[0], next_position[1], next_position[2]);
-
 	double px = next_position[0] - L45*a[0];
 	double py = next_position[1] - L45*a[1];
 	double pz = next_position[2] - L45*a[2];
+
+    ROS_INFO("px: %.10f, py: %.10f, pz: %.10f", px, py, pz);
 
 	double q1 = atan2(py, px);
             
