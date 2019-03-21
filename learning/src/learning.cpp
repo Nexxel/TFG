@@ -183,25 +183,13 @@ void learning(Handlers handlers){
 
         // 1. Get state
         updateState();
-        //printDebug("learning 1", 149);
+
         // 2. Detect if object is reachable
         isObjectReachable();
-        //printDebug("learning 2", 152);
+
         // 3.1 Move arm if reachable
         if(object_reachable and !robot_state.object_picked){
             double next_position[3];
-            /*
-            setNextPosition(next_position,
-                        gripper_position[0],
-                        gripper_position[1], 
-                        robot_state.height_c);
-            mci(next_position,n);
-            setNextPosition(next_position,
-                        gripper_position[0],
-                        robot_state.angle_c, 
-                        robot_state.height_c);
-            mci(next_position,n);
-            */
            setNextPosition(next_position,
                         robot_state.distance_c - 0.08,
                         robot_state.angle_c, 
@@ -231,7 +219,6 @@ void learning(Handlers handlers){
             base.publish(base_movement);
             processMessages();
         }
-        //printDebug("learning 3", 184);
 
         // 4. Fold arm
         updateState();
@@ -239,13 +226,11 @@ void learning(Handlers handlers){
             foldArm();        
         }
 
-        //printDebug("learning 4", 188);
         // 5. Check reward
         if(giveReward()){
             ROS_INFO("Giving reward...");
             // Give reward
         }
-        //printDebug("learning 5", 193);
 
         if(robot_state.object_picked){
             ROS_INFO("Object picked\n Disconecting ros node...");
@@ -540,8 +525,6 @@ void mci(double next_position[3], double n[3]){
 	double py = next_position[1] - L45*a[1];
 	double pz = next_position[2] - L45*a[2];
 
-    ROS_INFO("px: %.10f, py: %.10f, pz: %.10f", px, py, pz);
-
 	double q1 = atan2(py, px);
             
 	double k = pow(pz, 2) + pow(d2, 2) + pow(((px * cos(q1)) + (py * sin(q1))), 2) - pow(L3, 2);
@@ -557,7 +540,6 @@ void mci(double next_position[3], double n[3]){
 	double q4 = acos(-L) - (M_PI/2);
 
 	double q5 = asin(n[0]*sin(q1) - n[1]*cos(q1));
-    ROS_INFO("\n\nk: %.2f, k1: %.2f, k2: %.2f, theta2b: %.2f, theta23: %.2f, L: %.2f\n", k, k1, k2, theta2b, theta23, L);
     ROS_INFO("\n\nq1: %.2f\nq2: %.2f\nq3: %.2f\nq4: %.2f\nq5: %.2f\n", q1,q2,q3,q4,q5);
 
 	Float64 angle;
@@ -640,8 +622,6 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
 
     double width = real_pos_max[0][0] - real_pos_min[0][0];
     
-//    ROS_INFO("\n\nwidth: %.10f\n", width);
-
     robot_state.distance_c = (f * OBJECT_WIDTH) / width;
 
     // Get the pixel position in x,y
