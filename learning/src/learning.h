@@ -28,7 +28,7 @@
 #define L45 0.1221 //(0.07585 + 0.04625)
 #define beta 1.2496
 
-#define MIN_EFFORT -0.05   //Min effort of the idle gripper ( totally opened or closed)
+#define MAX_EFFORT 0.01   //Max effort of the idle gripper ( totally opened or closed)
 
 #define ROS_RATE 8
 
