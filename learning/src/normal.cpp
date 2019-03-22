@@ -198,7 +198,7 @@ void learning(Handlers handlers){
             openGripper();
             ros::Duration(3).sleep();
             setNextPosition(next_position,
-                        robot_state.distance_c - 0.02,
+                        robot_state.distance_c - 0.025,
                         robot_state.angle_c, 
                         robot_state.height_c);
             mci(next_position,n);
