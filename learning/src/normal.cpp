@@ -635,6 +635,7 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     //It should be -0.12, but as we don't see the entire object we have to modify it
     robot_state.height_c = (result[1][0]/result[3][0]) * HEIGHT_PX_2_M * robot_state.distance_c - 0.05;   // Y = k*Z 
     robot_state.distance_c -= 0.08;
+    ROS_INFO("\nHeight discrete: %d", robot_state.height_d);
     ROS_INFO("\n\nDistance, Angle, height: \n\t(%.10f, %.10f, %.10f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
 }
 

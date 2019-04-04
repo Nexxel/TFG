@@ -59,19 +59,6 @@
             }
         }
 
-//        ROS_INFO("\n\nK[0]: %.10f\n", camera_info_msg->K.at(0));
-/*
-        ROS_INFO("\n\nP_inv\n"
-                 "%.2f %.2f %.2f\n"
-                 "%.2f %.2f %.2f\n"
-                 "%.2f %.2f %.2f\n"
-                 "%.2f %.2f %.2f\n"
-                 , P_inv[0][0], P_inv[0][1], P_inv[0][2]
-                 , P_inv[1][0], P_inv[1][1], P_inv[1][2]
-                 , P_inv[2][0], P_inv[2][1], P_inv[2][2]
-                 , P_inv[3][0], P_inv[3][1], P_inv[3][2]
-                 );
-*/
     }
  }
 
@@ -156,78 +143,101 @@ int main(int argc, char** argv){
         5. Check reward
  -----------------------------------*/
 void learning(Handlers handlers){
-    namedWindow("Red objects image",CV_WINDOW_AUTOSIZE);
     double n[3] = {1,0,0};
-    int counter = 0;
+
     while(ros::ok()){
-        robot_state.angle_d = -1;
-        robot_state.height_d = -1;
-        robot_state.distance_d = -1;
-        
-        inside_learning = false;
+        startRandomSimulation();
+        sleep(3);
+        namedWindow("Red objects image",CV_WINDOW_AUTOSIZE);
+        int counter = 0;
 
-        processMessages();
+        while(ros::ok() && !robot_state.object_picked){
+            double step = double(cv_ptr->image.rows)/double(discr_level)/2.0;
+            robot_state.angle_d = -1;
+            robot_state.height_d = -1;
+            robot_state.distance_d = -1;
+            
+            inside_learning = false;
 
-        // While the learning process, we just want to re-read the joints
-       inside_learning = true;
+            processMessages();
 
-        mcd();
-        getGripperPosition();
+            // While the learning process, we just want to re-read the joints
+            inside_learning = true;
 
-        // If it's the first time, set the arm to the initial position
-        if (counter == 0){
-            openGripper();
-            foldArm();
-            counter++;
-        }
+            mcd();
+            getGripperPosition();
 
-        // 1. Get state
-        updateState();
+            // If it's the first time, set the arm to the initial position
+            if (counter == 0){
+                openGripper();
+                foldArm();
+                counter++;
+            }
 
-        // 2. Detect if object is reachable
-        isObjectReachable();
+            // 1. Get state
+            updateState();
+            int sa = getIndexFromState();
+            // 2. Select action
+            selectAction(sa);
 
-        // 3.1 Move arm if reachable
-        if(object_reachable and !robot_state.object_picked){
-            double next_position[3];
-           setNextPosition(next_position,
-                        robot_state.distance_c - 0.08,
-                        robot_state.angle_c, 
-                        robot_state.height_c);
-            mci(next_position,n);
-            openGripper();
-            ros::Duration(3).sleep();
+            // 3.1 Move arm if reachable
+            if(action == 4){
+                double next_position[3];
             setNextPosition(next_position,
-                        robot_state.distance_c - 0.025,
-                        robot_state.angle_c, 
-                        robot_state.height_c);
-            mci(next_position,n);
-            closeGripper();
-            ros::Duration(9).sleep();
-        }
-        // 3.2 Move base if not reachable
-        else{
-            // QLearning
-        }
+                            0.27,
+                            0.005, 
+                            robot_state.height_d * step);
+                mci(next_position,n);
+                openGripper();
+                ros::Duration(3).sleep();
+                setNextPosition(next_position,
+                            0.325,
+                            0.005, 
+                            robot_state.height_d * step);
+                mci(next_position,n);
+                closeGripper();
+                ros::Duration(9).sleep();
+            }
+            // 3.2 Move base if not reachable
+            else{
+                Twist base_movement; 
+                // Move front
+            if (action == 0){
+                base_movement.linear.x = 0.1;
+            }
+            // Move back
+            else if(action == 1){
+                base_movement.linear.x = -0.1;
+            }
+            // Turn left
+            else if(action == 2){
+                    base_movement.angular.z = 0.1;
+                }
+                // Turn right
+                else if(action == 3){
+                    base_movement.angular.z = -0.1;
+                }
+                base.publish(base_movement);
+                processMessages();
+            }
 
-        // 4. Fold arm
-        updateState();
-        if(robot_state.object_picked){
-            foldArm();        
-        }
+            // 4. Fold arm
+            updateState();
+            int sp = getIndexFromState();
 
-        // 5. Check reward
-        if(giveReward()){
-            ROS_INFO("Giving reward...");
-            // Give reward
-        }
 
-        if(robot_state.object_picked){
-            ROS_INFO("Object picked\n Disconecting ros node...");
-            ros::shutdown(); 
+            // 5. Check reward
+            double reward = calculateReward();
+            
+            // Update Q-matrix
+            q_matrix[sa][action] = (1 - ALPHA) * q_matrix[sa][action] + ALPHA * (reward + GAMMA * V[sp]);
+
+            // Update V and policy matrices
+            updateVPolicy(sa);
         }
+        destroyWindow("Red objects image");
+        killSimulation();
     }
-    destroyWindow("Red objects image");
 }
 
 /*------------------------------------
@@ -666,10 +676,105 @@ void foldArm(){
 }
 
 /*------------------------------------
- Give reward:
+ Start a new random simulation:
 -----------------------------------*/
-bool giveReward(){
-    return robot_state.folded and robot_state.object_picked;
+void startRandomSimulation(){
+    int status;
+        // Open an empty world in gazebo
+        status = system("xterm -hold -e \"roslaunch gazebo_ros empty_world.launch paused:=true\" &");
+        if (status == 0){
+            sleep(6);
+            int x = MIN_X + ((double)rand()/double(RAND_MAX))* (MAX_X-MIN_X);
+            int y = MIN_Y + ((double)rand()/double(RAND_MAX))* (MAX_Y-MIN_Y);
+            int box = MIN_BOX + ((double)rand()/double(RAND_MAX))* (MAX_BOX-MIN_BOX);
+            float z = 0.05*(float)box;
+            stringstream xterm_box; stringstream xterm_object;
+            xterm_box << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file objects/box_" << box << ".urdf -urdf -x " << x
+                    << " -z " << z << " -y " << y << " -model box\" &";
+            xterm_object << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file objects/object.urdf -urdf -x " 
+                        << (x - 0.45) << " -z " << (z*2+0.05) << " -y " << y << " -model red_object\" &";
+            string str(xterm_box.str());
+            const char* xterm_box_str = str.c_str();
+            str = xterm_object.str();
+            const char* xterm_object_str = str.c_str();
+            system(xterm_box_str);
+            sleep(2);
+            system(xterm_object_str);
+            sleep(3);
+            // Instantiate a turtlebot in that empty world
+            system("xterm -hold -e \"roslaunch crumb_gazebo test.launch\" &");
+            sleep(10);
+            // Unpause simulation
+            system("rosservice call /gazebo/unpause_physics");
+            sleep(5);   
+        }else{
+            system("killall -9 xterm gzserver");
+            ros::shutdown();
+        }
+}
+/*------------------------------------
+ Kill the current simulation:
+-----------------------------------*/
+void killSimulation(){
+    ROS_INFO("Killing actual simulation...");
+    sleep(2);
+    // Pause simulation
+    system("rosservice call /gazebo/pause_physics");
+    sleep(1);
+    // Kill process
+    system("killall -9 xterm gzserver");
+    sleep(3); 
+}
+/*------------------------------------
+ Get the matrix column index from the robot state:
+-----------------------------------*/
+int getIndexFromState(){
+    int num_elems = discr_level + 1;
+    return  (robot_state.distance_d+1) * pow(num_elems,2) * pow(2,2) +
+            (robot_state.angle_d+1) * num_elems * pow(2,2) +
+            (robot_state.height_d+1) * pow(2,2) +
+            robot_state.object_picked * 2 +
+            robot_state.folded;
+}
+/*------------------------------------
+ Modify the state of the robot from the column index:
+-----------------------------------*/
+void getStateFromIndex(int index){
+    int num_elems = discr_level + 1;
+    robot_state.distance_d = ((int)index / (int)(pow(num_elems,2) * pow(2,2)))-1;
+    robot_state.angle_d = ((index % (int)(pow(num_elems,2) * pow(2,2))) / (int)(num_elems * pow(2,2)))-1;
+    robot_state.height_d = ((index % (int)(pow(num_elems,2) * pow(2,2)) % (int)(num_elems * pow(2,2))) / pow(2,2))-1;
+    robot_state.object_picked = (index % (int)(pow(num_elems,2) * pow(2,2)) % (int)(num_elems * pow(2,2)) % (int)pow(2,2)) / 2;
+    robot_state.folded = (index % (int)(pow(num_elems,2) * pow(2,2)) % (int)(num_elems * pow(2,2)) % (int)pow(2,2) % 2);
+}
+/*------------------------------------
+ Select action:
+-----------------------------------*/
+void selectAction(int sa){
+    if (ceil(unifRnd(0, 100)) > 70){
+        action = ceil(unifRnd(0,4));
+    }else{
+        action = policy_matrix[sa];
+    }
+}
+/*------------------------------------
+ Update V and policy matrix:
+-----------------------------------*/
+void updateVPolicy(int s){
+    V[s] = q_matrix[s][0];
+    policy_matrix[s] = 1;
+    for(int i = 1; i < 5; i++){
+        if(q_matrix[s][i] > V[s]){
+            V[s] = q_matrix[s][i];
+            policy_matrix[s] = i;
+        }
+    }
+}
+/*------------------------------------
+ Calculate reward:
+-----------------------------------*/
+double calculateReward(){
+    return 100 * robot_state.object_picked;
 }
 
 /*------------------------------------
@@ -677,4 +782,13 @@ bool giveReward(){
 -----------------------------------*/
 void printDebug(string function, int line){
     ROS_INFO("\033[1;31m\nMethod %s:\n\tLine %u\n", function.c_str(), line);
+}
+/*------------------------------------
+ Get uniform random:
+    Inputs:
+        - min
+        - max
+-----------------------------------*/
+double unifRnd(double min, double max){
+    return min + ((double)rand()/(double)RAND_MAX) * (max - min);
 }

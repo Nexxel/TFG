@@ -48,6 +48,18 @@
 #define HEIGHT_PX_2_M (SENSOR_HEIGHT/CAMERA_HEIGHT)
 #define WIDTH_PX_2_M (SENSOR_WIDTH/CAMERA_WIDTH)
 
+// Min and max positions of the objects
+#define MAX_X 7
+#define MIN_X 2
+#define MAX_Y 6
+#define MIN_Y -6
+// Number of box.urdf to use (box_1 z-size=0.1, box_2 z-size=0.2...)
+#define MIN_BOX 1
+#define MAX_BOX 8
+
+#define ALPHA 0.02
+#define GAMMA 0.9
+
 /*------------------------------------
  Some useful namespaces:
 -----------------------------------*/
@@ -89,6 +101,12 @@ bool object_reachable = false;
 double object_center[2];    // Object center in pixels
 
 double joint_angles[5];
+
+int action;                 // Learning action
+//const size_t num_states = pow(discr_level+1, 3) * pow(2,2); // Really 6³*2² = 864 
+double q_matrix[864][5];        // Q matrix
+double V[864];                  // Value function
+double policy_matrix[864];      // Policy matrix
 
 // Elements useful for object detection
 cv_bridge::CvImagePtr cv_ptr; // Pointer to the cv image
@@ -257,10 +275,47 @@ void setNextPosition(double next_position[3], double x, double y, double z);
 -----------------------------------*/
 void foldArm();
 /*------------------------------------
- Give reward:
+ Start a new random simulation:
+-----------------------------------*/
+void startRandomSimulation();
+/*------------------------------------
+ Kill the current simulation:
+-----------------------------------*/
+void killSimulation();
+/*------------------------------------
+ Get the matrix row index from the robot state:
+-----------------------------------*/
+int getIndexFromState();
+/*------------------------------------
+ Modify the state of the robot from the row index:
+-----------------------------------*/
+void getStateFromIndex(int index);
+/*------------------------------------
+ Calculate reward:
+-----------------------------------*/
+double calculateReward();
+/*------------------------------------
+ Select action (Exploitation/exploration strategy):
+    Inputs:
+        - sa: actual state
+-----------------------------------*/
+void selectAction(int sa);
+/*------------------------------------
+ Update V and policy matrix:
+-----------------------------------*/
+void updateVPolicy(int s);
+/*------------------------------------
+ Give reward?:
 -----------------------------------*/
 bool giveReward();
 /*------------------------------------
  Print debug:
 -----------------------------------*/
 void printDebug(string function, int line);
+/*------------------------------------
+ Get uniform random:
+    Inputs:
+        - min
+        - max
+-----------------------------------*/
+double unifRnd(double min, double max);
