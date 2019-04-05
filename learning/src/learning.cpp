@@ -90,9 +90,6 @@ int main(int argc, char** argv){
     
     Handlers handlers;
 
-    // Set random seed by the time of the cpu
-    srand( (unsigned)time(NULL) );
-
     learning(handlers);
     return 0;
 }
@@ -127,6 +124,8 @@ void learning(Handlers handlers){
     double n[3] = {1,0,0};
 
     while(ros::ok()){
+        // Set random seed by the time of the cpu
+        srand( (unsigned)time(NULL) );
         startRandomSimulation();
         sleep(3);
         namedWindow("Red objects image",CV_WINDOW_AUTOSIZE);
@@ -134,9 +133,7 @@ void learning(Handlers handlers){
 
         robot_state.object_picked = false;
         robot_state.folded = false;
-        robot_state.angle_d = -1;
-        robot_state.height_d = -1;
-        robot_state.distance_d = -1;
+
         // Initialize all publishers and subscribers
         ros::master::getTopics(topic_info);
         isSimulation();
@@ -155,6 +152,8 @@ void learning(Handlers handlers){
         base = handlers.getNH().advertise<Twist>("/mobile_base/commands/velocity", 1);
 
         while(ros::ok() && !robot_state.object_picked){
+            // Set random seed by the time of the cpu
+            srand( (unsigned)time(NULL) );
             robot_state.angle_d = -1;
             robot_state.height_d = -1;
             robot_state.distance_d = -1;
@@ -184,9 +183,10 @@ void learning(Handlers handlers){
 
             // 3.1 Move arm if reachable
             if(action == 4){
+                ROS_INFO("Moving arm...");
                 double step = double(cv_ptr->image.rows)/double(discr_level)/2.0;
                 double next_position[3];
-            setNextPosition(next_position,
+                setNextPosition(next_position,
                             0.27,
                             0.005, 
                             robot_state.height_d * step);
@@ -205,19 +205,23 @@ void learning(Handlers handlers){
             else{
                 Twist base_movement; 
                 // Move front
-            if (action == 0){
-                base_movement.linear.x = 0.1;
-            }
-            // Move back
-            else if(action == 1){
-                base_movement.linear.x = -0.1;
-            }
-            // Turn left
-            else if(action == 2){
+                if (action == 0){
+                    ROS_INFO("Moving front...");
+                    base_movement.linear.x = 0.1;
+                }
+                // Move back
+                else if(action == 1){
+                    ROS_INFO("Moving back...");
+                    base_movement.linear.x = -0.1;
+                }
+                // Turn left
+                else if(action == 2){
+                    ROS_INFO("Turning left...");
                     base_movement.angular.z = 0.1;
                 }
                 // Turn right
                 else if(action == 3){
+                    ROS_INFO("Turning right...");
                     base_movement.angular.z = -0.1;
                 }
                 base.publish(base_movement);
@@ -692,6 +696,7 @@ void foldArm(){
 void startRandomSimulation(){
     int status;
         // Open an empty world in gazebo
+        //status = system("xterm -hold -e \"roslaunch gazebo_ros empty_world.launch paused:=true gui:=false\" &");
         status = system("xterm -hold -e \"roslaunch gazebo_ros empty_world.launch paused:=true\" &");
         if (status == 0){
             sleep(6);
