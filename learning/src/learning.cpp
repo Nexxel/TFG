@@ -87,30 +87,11 @@ int main(int argc, char** argv){
     ros::init(argc, argv, "learning_node");
 
     // We check if it is a gazebo simulation
-    ros::master::getTopics(topic_info);
-    isSimulation();
-
+    
     Handlers handlers;
 
-    color_image_sub = handlers.getIT().subscribe("/camera/rgb/image_color", 1, &callbackImage);
-    camera_info_sub = handlers.getNH().subscribe("/camera/rgb/camera_info", 1, &callbackCameraInfo);
-    joint_states_sub = handlers.getNH().subscribe("/joint_states", 1, &getGripperEffortCallback);
-    discr_level_sub = handlers.getNH().subscribe("/learning/set_discr_level", 1, &setDiscretizationLevel);
-
-    joints[0] = handlers.getNH().advertise<Float64>("/arm_1_joint/command", 1);
-    joints[1] = handlers.getNH().advertise<Float64>("/arm_2_joint/command", 1);
-    joints[2] = handlers.getNH().advertise<Float64>("/arm_3_joint/command", 1);
-    joints[3] = handlers.getNH().advertise<Float64>("/arm_4_joint/command", 1);
-    joints[4] = handlers.getNH().advertise<Float64>("/arm_5_joint/command", 1);
-
-    gripper = handlers.getNH().advertise<Float64>("/gripper_1_joint/command", 1);
-    base = handlers.getNH().advertise<Twist>("/mobile_base/commands/velocity", 1);
-
-    robot_state.object_picked = false;
-    robot_state.folded = false;
-    robot_state.angle_d = 1;
-    robot_state.height_d = 1;
-    robot_state.distance_d = -1;
+    // Set random seed by the time of the cpu
+    srand( (unsigned)time(NULL) );
 
     learning(handlers);
     return 0;
@@ -151,8 +132,29 @@ void learning(Handlers handlers){
         namedWindow("Red objects image",CV_WINDOW_AUTOSIZE);
         int counter = 0;
 
+        robot_state.object_picked = false;
+        robot_state.folded = false;
+        robot_state.angle_d = -1;
+        robot_state.height_d = -1;
+        robot_state.distance_d = -1;
+        // Initialize all publishers and subscribers
+        ros::master::getTopics(topic_info);
+        isSimulation();
+        color_image_sub = handlers.getIT().subscribe("/camera/rgb/image_color", 1, &callbackImage);
+        camera_info_sub = handlers.getNH().subscribe("/camera/rgb/camera_info", 1, &callbackCameraInfo);
+        joint_states_sub = handlers.getNH().subscribe("/joint_states", 1, &getGripperEffortCallback);
+        discr_level_sub = handlers.getNH().subscribe("/learning/set_discr_level", 1, &setDiscretizationLevel);
+
+        joints[0] = handlers.getNH().advertise<Float64>("/arm_1_joint/command", 1);
+        joints[1] = handlers.getNH().advertise<Float64>("/arm_2_joint/command", 1);
+        joints[2] = handlers.getNH().advertise<Float64>("/arm_3_joint/command", 1);
+        joints[3] = handlers.getNH().advertise<Float64>("/arm_4_joint/command", 1);
+        joints[4] = handlers.getNH().advertise<Float64>("/arm_5_joint/command", 1);
+
+        gripper = handlers.getNH().advertise<Float64>("/gripper_1_joint/command", 1);
+        base = handlers.getNH().advertise<Twist>("/mobile_base/commands/velocity", 1);
+
         while(ros::ok() && !robot_state.object_picked){
-            double step = double(cv_ptr->image.rows)/double(discr_level)/2.0;
             robot_state.angle_d = -1;
             robot_state.height_d = -1;
             robot_state.distance_d = -1;
@@ -182,6 +184,7 @@ void learning(Handlers handlers){
 
             // 3.1 Move arm if reachable
             if(action == 4){
+                double step = double(cv_ptr->image.rows)/double(discr_level)/2.0;
                 double next_position[3];
             setNextPosition(next_position,
                             0.27,
@@ -557,11 +560,19 @@ void mci(double next_position[3], double n[3]){
     robot_state.folded = (next_position[0] == 0
                         and next_position[1] == 0
                         and next_position[2] == 0);
-
+    if(!isnan(q1))
     joint_angles[0] = q1;
+
+    if(!isnan(q2))
     joint_angles[1] = q2;
+
+    if(!isnan(q3))
     joint_angles[2] = q3;
+
+    if(!isnan(q4))
     joint_angles[3] = q4;
+
+    if(!isnan(q5))
     joint_angles[4] = q5;
 
     processMessages();
@@ -689,9 +700,9 @@ void startRandomSimulation(){
             int box = MIN_BOX + ((double)rand()/double(RAND_MAX))* (MAX_BOX-MIN_BOX);
             float z = 0.05*(float)box;
             stringstream xterm_box; stringstream xterm_object;
-            xterm_box << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file objects/box_" << box << ".urdf -urdf -x " << x
+            xterm_box << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/box_" << box << ".urdf -urdf -x " << x
                     << " -z " << z << " -y " << y << " -model box\" &";
-            xterm_object << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file objects/object.urdf -urdf -x " 
+            xterm_object << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/object.urdf -urdf -x " 
                         << (x - 0.45) << " -z " << (z*2+0.05) << " -y " << y << " -model red_object\" &";
             string str(xterm_box.str());
             const char* xterm_box_str = str.c_str();
