@@ -128,7 +128,7 @@ void learning(Handlers handlers){
         srand( (unsigned)time(NULL) );
         startRandomSimulation();
         sleep(3);
-        namedWindow("Red objects image",CV_WINDOW_AUTOSIZE);
+        //namedWindow("Red objects image",CV_WINDOW_AUTOSIZE);
         int counter = 0;
 
         robot_state.object_picked = false;
@@ -247,7 +247,7 @@ void learning(Handlers handlers){
             steps++;
             actualizeLog(sa, sp, reward);
         }
-        destroyWindow("Red objects image");
+        //destroyWindow("Red objects image");
         killSimulation();
     }
 }
@@ -267,8 +267,8 @@ void updateState(){
 -----------------------------------*/
 void getLocation(){
     // Show the image
-    imshow("Red objects image", cv_ptr->image);
-    waitKey(3);
+    //imshow("Red objects image", cv_ptr->image);
+    //waitKey(3);
     // Get the coordinates of the object pixels
     findNonZero(cv_ptr->image, pixel_locations);
 
@@ -701,8 +701,8 @@ void foldArm(){
 void startRandomSimulation(){
     int status;
         // Open an empty world in gazebo
-        //status = system("xterm -hold -e \"roslaunch gazebo_ros empty_world.launch paused:=true gui:=false\" &");
-        status = system("xterm -hold -e \"roslaunch gazebo_ros empty_world.launch paused:=true\" &");
+        status = system("xterm -hold -e \"roslaunch gazebo_ros empty_world.launch paused:=true gui:=false\" &");
+        //status = system("xterm -hold -e \"roslaunch gazebo_ros empty_world.launch paused:=true\" &");
         if (status == 0){
             sleep(6);
             int x = MIN_X + ((double)rand()/double(RAND_MAX))* (MAX_X-MIN_X);
