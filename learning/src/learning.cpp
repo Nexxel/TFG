@@ -796,7 +796,11 @@ void updateVPolicy(int s){
  Calculate reward:
 -----------------------------------*/
 double calculateReward(){
-    return 100 * robot_state.object_picked;
+    double angle_reward = discr_level/2 - (abs(robot_state.angle_d - discr_level/2));
+    double height_reward = robot_state.height_d;
+    double distance_reward = discr_level - (robot_state.distance_d+1);
+    return angle_reward + height_reward + distance_reward + 100 * robot_state.object_picked;
+    //return 100 * robot_state.object_picked;
 }
 
 /*------------------------------------
