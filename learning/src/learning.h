@@ -111,6 +111,7 @@ double policy_matrix[864];      // Policy matrix
 
 int steps = 0;
 int simulations = 0;
+bool gui = true;
 ofstream log_file;              // Log file
 
 // Elements useful for object detection
