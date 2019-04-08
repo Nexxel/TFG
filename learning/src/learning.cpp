@@ -157,6 +157,9 @@ void learning(Handlers handlers){
             robot_state.angle_d = -1;
             robot_state.height_d = -1;
             robot_state.distance_d = -1;
+            robot_state.angle_c = -1;
+            robot_state.height_c = -1;
+            robot_state.distance_c = -1;
             
             inside_learning = false;
 
@@ -241,6 +244,8 @@ void learning(Handlers handlers){
 
             // Update V and policy matrices
             updateVPolicy(sa);
+            steps++;
+            actualizeLog(sa, sp, reward);
         }
         destroyWindow("Red objects image");
         killSimulation();
@@ -278,8 +283,8 @@ void getLocation(){
         object_center[0] = round(sum_x/pixel_locations.total());
         object_center[1] = round(sum_y/pixel_locations.total());
     }else{
-        object_center[0] = 0;
-        object_center[1] = 0;
+        object_center[0] = -1;
+        object_center[1] = -1;
     }   
 }
 
@@ -722,7 +727,8 @@ void startRandomSimulation(){
             sleep(10);
             // Unpause simulation
             system("rosservice call /gazebo/unpause_physics");
-            sleep(5);   
+            sleep(5);
+            simulations++;   
         }else{
             system("killall -9 xterm gzserver");
             ros::shutdown();
@@ -778,7 +784,7 @@ void selectAction(int sa){
 -----------------------------------*/
 void updateVPolicy(int s){
     V[s] = q_matrix[s][0];
-    policy_matrix[s] = 1;
+    policy_matrix[s] = 0;
     for(int i = 1; i < 5; i++){
         if(q_matrix[s][i] > V[s]){
             V[s] = q_matrix[s][i];
@@ -791,6 +797,60 @@ void updateVPolicy(int s){
 -----------------------------------*/
 double calculateReward(){
     return 100 * robot_state.object_picked;
+}
+
+/*------------------------------------
+ Actualize log:
+-----------------------------------*/
+void actualizeLog(int sa, int sp, double reward){
+    if (steps == 1 && simulations == 1){
+        log_file.open("/home/nexel/catkin_ws/src/learning/log.txt");
+    }else{
+        log_file.open("/home/nexel/catkin_ws/src/learning/log.txt", ios::app | ios::out);
+    }
+    log_file << "=======================================\n";
+    log_file << "Simulation: " << simulations << "\n";
+    log_file << "Iteration: " << steps << "\n";
+    log_file << "----------\n";
+    log_file << "State: " << sa << "\n";
+    getStateFromIndex(sa);
+    log_file << "\tDistance: " << robot_state.distance_d << "\n";
+    log_file << "\tAngle: " << robot_state.angle_d << "\n";
+    log_file << "\tHeight: " << robot_state.height_d << "\n";
+    log_file << "\tObject picked: " << robot_state.object_picked << "\n";
+    log_file << "\tArm folded: " << robot_state.folded << "\n";
+    getStateFromIndex(sp);
+    log_file << "State': " << sp << "\n";
+    log_file << "\tDistance: " << robot_state.distance_d << "\n";
+    log_file << "\tAngle: " << robot_state.angle_d << "\n";
+    log_file << "\tHeight: " << robot_state.height_d << "\n";
+    log_file << "\tObject picked: " << robot_state.object_picked << "\n";
+    log_file << "\tArm folded: " << robot_state.folded << "\n";
+    log_file << "Action: " << action << "\n";
+    log_file << "\t" << ((action == 0) ? "Move front" :
+                                ((action == 1) ? "Move back" :
+                                (action == 2) ? "Turn left" :
+                                (action == 3) ? "Turn right" : "Move arm")) << "\n";
+    log_file << "Reward: " << reward << "\n";
+    /*log_file << "Q matrix: \n" << "----------------\n";
+    for (int i = 0; i < 864; i++){
+        for (int j = 0; j < 5; j++){
+            log_file << q_matrix[i][j] << " ";
+        }
+        log_file << "\n";
+    }*/
+    log_file << "New value of Q matrix: " << q_matrix[sa][action] << "\n";
+    /*log_file << "\nValue function: \n" <<  "----------------\n";
+    for (int i = 0; i < 864; i++){
+        log_file << V[i] << ", ";
+    }*/
+    /*log_file << "\n\nPolicy matrix: \n" <<  "----------------\n";
+    for (int i = 0; i < 864; i++){
+        log_file << policy_matrix[i] << ", ";
+    }*/
+    log_file << "New value of Value function: " << V[sa] << "\n";
+    log_file << "New value of Policy matrix: " << policy_matrix[sa] << "\n\n";
+    log_file.close();
 }
 
 /*------------------------------------

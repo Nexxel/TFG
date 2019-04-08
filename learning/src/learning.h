@@ -1,6 +1,7 @@
 /*------------------------------------
  Libraries
 -----------------------------------*/
+#include <fstream>
 #include <math.h>
 // Ros library
 #include <ros/ros.h>
@@ -107,6 +108,10 @@ int action;                 // Learning action
 double q_matrix[864][5];        // Q matrix
 double V[864];                  // Value function
 double policy_matrix[864];      // Policy matrix
+
+int steps = 0;
+int simulations = 0;
+ofstream log_file;              // Log file
 
 // Elements useful for object detection
 cv_bridge::CvImagePtr cv_ptr; // Pointer to the cv image
@@ -308,6 +313,10 @@ void updateVPolicy(int s);
  Give reward?:
 -----------------------------------*/
 bool giveReward();
+/*------------------------------------
+ Actualize log:
+-----------------------------------*/
+void actualizeLog(int sa, int sp, double reward);
 /*------------------------------------
  Print debug:
 -----------------------------------*/
