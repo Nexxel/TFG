@@ -244,6 +244,9 @@ void learning(Handlers handlers){
             // Update Q-matrix
             q_matrix[sa][action] = (1 - ALPHA) * q_matrix[sa][action] + ALPHA * (reward + GAMMA * V[sp]);
 
+            // Update visit matrix
+            visit_matrix[sa][action]++;
+
             // Update V and policy matrices
             updateVPolicy(sa);
             steps++;
@@ -835,9 +838,9 @@ double calculateReward(){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log4.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/log5.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log4.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/log5.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -863,24 +866,48 @@ void actualizeLog(int sa, int sp, double reward){
                                 (action == 2) ? "Turn left" :
                                 (action == 3) ? "Turn right" : "Move arm")) << "\n";
     log_file << "Reward: " << reward << "\n";
-    /*log_file << "Q matrix: \n" << "----------------\n";
-    for (int i = 0; i < 864; i++){
-        for (int j = 0; j < 5; j++){
-            log_file << q_matrix[i][j] << " ";
-        }
-        log_file << "\n";
-    }*/
+    log_file << "New value of Visit matrix: " << visit_matrix[sa][action] << "\n";
     log_file << "New value of Q matrix: " << q_matrix[sa][action] << "\n";
-    /*log_file << "\nValue function: \n" <<  "----------------\n";
-    for (int i = 0; i < 864; i++){
-        log_file << V[i] << ", ";
-    }*/
-    /*log_file << "\n\nPolicy matrix: \n" <<  "----------------\n";
-    for (int i = 0; i < 864; i++){
-        log_file << policy_matrix[i] << ", ";
-    }*/
     log_file << "New value of Value function: " << V[sa] << "\n";
     log_file << "New value of Policy matrix: " << policy_matrix[sa] << "\n\n";
+    log_file.close();
+}
+
+/*------------------------------------
+ Actualize simplified log:
+-----------------------------------*/
+void actualizeSimplifiedLog(int sa, int sp, double reward){
+    if (steps == 1 && simulations == 1){
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log5.txt");
+    }else{
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log5.txt", ios::app | ios::out);
+    }
+    log_file << simulations << ",";
+    log_file << steps << ",";
+    log_file << sa << ",";
+    getStateFromIndex(sa);
+    log_file << robot_state.distance_d << ",";
+    log_file << robot_state.angle_d << ",";
+    log_file << robot_state.height_d << ",";
+    log_file << robot_state.object_picked << ",";
+    log_file << robot_state.folded << ",";
+    getStateFromIndex(sp);
+    log_file << sp << ",";
+    log_file << robot_state.distance_d << ",";
+    log_file << robot_state.angle_d << ",";
+    log_file << robot_state.height_d << ",";
+    log_file << robot_state.object_picked << ",";
+    log_file << robot_state.folded << ",";
+    log_file << action << ",";
+    log_file << ((action == 0) ? "\"Move front\"" :
+                                ((action == 1) ? "\"Move back\"" :
+                                (action == 2) ? "\"Turn left\"" :
+                                (action == 3) ? "\"Turn right\"" : "\"Move arm\"")) << ",";
+    log_file << reward << ",";
+    log_file << visit_matrix[sa][action] << ",";
+    log_file << q_matrix[sa][action] << ",";
+    log_file << V[sa] << ",";
+    log_file << policy_matrix[sa] << "\n";
     log_file.close();
 }
 

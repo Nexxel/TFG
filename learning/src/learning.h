@@ -108,6 +108,7 @@ int action;                 // Learning action
 double q_matrix[864][5];        // Q matrix
 double V[864];                  // Value function
 double policy_matrix[864];      // Policy matrix
+double visit_matrix[864][5];    // Matrix of visits
 
 int steps = 0;
 int simulations = 0;
@@ -318,6 +319,10 @@ bool giveReward();
  Actualize log:
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward);
+/*------------------------------------
+ Actualize simplified log:
+-----------------------------------*/
+void actualizeSimplifiedLog(int sa, int sp, double reward);
 /*------------------------------------
  Print debug:
 -----------------------------------*/
