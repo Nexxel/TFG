@@ -253,6 +253,7 @@ void learning(Handlers handlers){
             destroyWindow("Red objects image");
         }
         killSimulation();
+        steps = 0;
     }
 }
 
@@ -819,8 +820,10 @@ double calculateReward(){
         }
     }else{
         double height_reward = discr_level - robot_state.height_d;
-        double distance_reward = discr_level - robot_state.distance_d;
-        double angle_reward = ceil(discr_level/2) - robot_state.angle_d;
+        double distance_reward = 2.5 * (discr_level - robot_state.distance_d);
+        //double distance_reward = discr_level - robot_state.distance_d;
+        double angle_reward = 10 * (ceil(discr_level/2) - robot_state.angle_d);
+        //double angle_reward = ceil(discr_level/2) - robot_state.angle_d;
         return height_reward + distance_reward + angle_reward + 100*robot_state.object_picked;
     }
     //return 100 * robot_state.object_picked;
