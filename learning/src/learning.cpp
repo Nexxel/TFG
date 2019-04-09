@@ -822,7 +822,8 @@ double calculateReward(){
         double height_reward = discr_level - robot_state.height_d;
         double distance_reward = 2.5 * (discr_level - robot_state.distance_d);
         //double distance_reward = discr_level - robot_state.distance_d;
-        double angle_reward = 10 * (ceil(discr_level/2) - robot_state.angle_d);
+        double angle_reward = 10 * -abs(ceil(discr_level/2) - robot_state.angle_d);
+        //double angle_reward = 10 * (ceil(discr_level/2) - robot_state.angle_d);
         //double angle_reward = ceil(discr_level/2) - robot_state.angle_d;
         return height_reward + distance_reward + angle_reward + 100*robot_state.object_picked;
     }
@@ -834,9 +835,9 @@ double calculateReward(){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log3.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/log4.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log3.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/log4.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
