@@ -834,9 +834,9 @@ double calculateReward(){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log2.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/log3.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log2.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/log3.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
