@@ -810,7 +810,15 @@ double calculateReward(){
     double height_reward = robot_state.height_d;
     double distance_reward = discr_level - (robot_state.distance_d+1);
     return angle_reward + height_reward + distance_reward + 100 * robot_state.object_picked;*/
-    return 100 * robot_state.object_picked;
+    if(robot_state.angle_d == -1 || robot_state.distance_d == -1 || robot_state.height_d == -1){
+        return -discr_level * 3 + 100*robot_state.object_picked;
+    }else{
+        double height_reward = discr_level - robot_state.height_d;
+        double distance_reward = discr_level - robot_state.distance_d;
+        double angle_reward = ceil(discr_level/2) - robot_state.angle_d;
+        return height_reward + distance_reward + angle_reward + 100*robot_state.object_picked;
+    }
+    //return 100 * robot_state.object_picked;
 }
 
 /*------------------------------------
