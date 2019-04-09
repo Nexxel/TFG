@@ -239,7 +239,7 @@ void learning(Handlers handlers){
 
 
             // 5. Check reward
-            double reward = calculateReward();
+            double reward = calculateReward(sa, sp);
             
             // Update Q-matrix
             q_matrix[sa][action] = (1 - ALPHA) * q_matrix[sa][action] + ALPHA * (reward + GAMMA * V[sp]);
@@ -809,28 +809,29 @@ void updateVPolicy(int s){
 /*------------------------------------
  Calculate reward:
 -----------------------------------*/
-double calculateReward(){
-    /*double angle_reward = discr_level/2 - (abs(robot_state.angle_d - discr_level/2));
-    double height_reward = robot_state.height_d;
-    double distance_reward = discr_level - (robot_state.distance_d+1);
-    return angle_reward + height_reward + distance_reward + 100 * robot_state.object_picked;*/
-    if(robot_state.angle_d == -1 || robot_state.distance_d == -1 || robot_state.height_d == -1){
-        //return -discr_level * 3 + 100*robot_state.object_picked;
-        if(action == 2 || action == 3){
-            return 100*robot_state.object_picked;
-        }else{
-            return -discr_level * 3 + 100*robot_state.object_picked;
-        }
-    }else{
-        double height_reward = discr_level - robot_state.height_d;
-        double distance_reward = 2.5 * (discr_level - robot_state.distance_d);
-        //double distance_reward = discr_level - robot_state.distance_d;
-        double angle_reward = 10 * -abs(ceil(discr_level/2) - robot_state.angle_d);
-        //double angle_reward = 10 * (ceil(discr_level/2) - robot_state.angle_d);
-        //double angle_reward = ceil(discr_level/2) - robot_state.angle_d;
-        return height_reward + distance_reward + angle_reward + 100*robot_state.object_picked;
-    }
-    //return 100 * robot_state.object_picked;
+double calculateReward(int sa, int sp){
+    int prev_dist; int prev_ang; int prev_height;
+    int act_dist; int act_ang; int act_height;
+    getStateFromIndex(sa);
+    prev_dist = robot_state.distance_d;
+    prev_ang = robot_state.angle_d;
+    prev_height = robot_state.height_d;
+    getStateFromIndex(sp);
+    prev_dist = robot_state.distance_d;
+    prev_ang = robot_state.angle_d;
+    prev_height = robot_state.height_d;
+    // I have found the object
+    if(prev_dist == -1 && prev_ang == -1 && prev_height == -1
+      && act_dist >= 0 && act_ang >= 0 && act_height >= 0){
+          return 10 + 100 * robot_state.object_picked * robot_state.folded;
+      }
+      // I have lost the object
+      else if(act_dist == -1 && act_ang == -1 && act_height == -1
+      && prev_dist >= 0 && prev_ang >= 0 && prev_height >= 0){
+        return -10 + 100 * robot_state.object_picked * robot_state.folded;
+      }else{
+          return 100 * robot_state.object_picked * robot_state.folded;
+      }
 }
 
 /*------------------------------------

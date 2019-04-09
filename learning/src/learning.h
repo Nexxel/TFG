@@ -298,10 +298,6 @@ int getIndexFromState();
 -----------------------------------*/
 void getStateFromIndex(int index);
 /*------------------------------------
- Calculate reward:
------------------------------------*/
-double calculateReward();
-/*------------------------------------
  Select action (Exploitation/exploration strategy):
     Inputs:
         - sa: actual state
@@ -315,6 +311,10 @@ void updateVPolicy(int s);
  Give reward?:
 -----------------------------------*/
 bool giveReward();
+/*------------------------------------
+ Calculate reward:
+-----------------------------------*/
+double calculateReward(int sa, int sp);
 /*------------------------------------
  Actualize log:
 -----------------------------------*/
