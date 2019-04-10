@@ -730,11 +730,46 @@ void startRandomSimulation(){
                         << (x - 0.45) << " -z " << (z*2+0.05) << " -y " << y << " -model red_object\" &";
             string str(xterm_box.str());
             const char* xterm_box_str = str.c_str();
+            system(xterm_box_str);
+            sleep(3);
             str = xterm_object.str();
             const char* xterm_object_str = str.c_str();
-            system(xterm_box_str);
-            sleep(2);
             system(xterm_object_str);
+            sleep(3);
+            stringstream xterm_wall;
+            xterm_wall << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/wall.urdf -urdf -x " 
+                        << (x - 0.5) << " -y " << (y+3) << " -z 1.5 -model wall\" &";
+            str = xterm_wall.str();
+            const char* xterm_wall_str = str.c_str(); 
+            system(xterm_wall_str);
+            sleep(3);
+            stringstream xterm_wall1;
+            xterm_wall1 << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/wall.urdf -urdf -x " 
+                        << (x - 0.5) << " -y " << (y-3) << " -z 1.5 -model wall1\" &";
+            str = xterm_wall1.str();
+            xterm_wall_str = str.c_str(); 
+            system(xterm_wall_str);
+            sleep(3);
+            stringstream xterm_wall2;
+            xterm_wall2 << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/wall2.urdf -urdf -x " 
+                        << (- 0.5) << " -y " << y << " -z 1.5 -model wall2\" &";
+            str = xterm_wall2.str();
+            xterm_wall_str = str.c_str(); 
+            system(xterm_wall_str);
+            sleep(3);
+            stringstream xterm_wall3;
+            xterm_wall3 << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/wall2.urdf -urdf -x " 
+                        << (x/2- 0.5) << " -y " << y+5.55 << " -z 1.5 -Y " << M_PI/2 << " -model wall3\" &";
+            str = xterm_wall3.str();
+            xterm_wall_str = str.c_str(); 
+            system(xterm_wall_str);
+            sleep(3);
+            stringstream xterm_wall4;
+            xterm_wall4 << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/wall2.urdf -urdf -x " 
+                        << (x/2- 0.5) << " -y " << y-5.55 << " -z 1.5 -Y " << M_PI/2 << " -model wall4\" &";
+            str = xterm_wall4.str();
+            xterm_wall_str = str.c_str(); 
+            system(xterm_wall_str);
             sleep(3);
             // Instantiate a turtlebot in that empty world
             system("xterm -hold -e \"roslaunch crumb_gazebo test.launch\" &");
@@ -787,7 +822,13 @@ void getStateFromIndex(int index){
  Select action:
 -----------------------------------*/
 void selectAction(int sa){
-    if (ceil(unifRnd(0, 100)) > 70){
+    int not_visited = 0;
+    for (int i = 0; i<5; i++){
+        not_visited += (visit_matrix[sa][i] == 0);
+    }
+    if ((float)not_visited/5 > 0.5){
+        action = action = ceil(unifRnd(0,4));
+    }else if (ceil(unifRnd(0, 100)) > 70){
         action = ceil(unifRnd(0,4));
     }else{
         action = policy_matrix[sa];

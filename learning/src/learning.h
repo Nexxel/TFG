@@ -55,8 +55,8 @@
 #define MAX_Y 6
 #define MIN_Y -6
 // Number of box.urdf to use (box_1 z-size=0.1, box_2 z-size=0.2...)
-#define MIN_BOX 1
-#define MAX_BOX 8
+#define MIN_BOX 4
+#define MAX_BOX 6
 
 #define ALPHA 0.02
 #define GAMMA 0.9
