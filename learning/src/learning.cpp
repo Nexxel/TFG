@@ -153,7 +153,7 @@ void learning(Handlers handlers){
         gripper = handlers.getNH().advertise<Float64>("/gripper_1_joint/command", 1);
         base = handlers.getNH().advertise<Twist>("/mobile_base/commands/velocity", 1);
 
-        while(ros::ok() && !robot_state.object_picked){
+        while(ros::ok() && (!robot_state.object_picked || !robot_state.folded)){
             // Set random seed by the time of the cpu
             srand( (unsigned)time(NULL) );
             robot_state.angle_d = -1;
@@ -251,6 +251,7 @@ void learning(Handlers handlers){
             updateVPolicy(sa);
             steps++;
             actualizeLog(sa, sp, reward);
+            actualizeSimplifiedLog(sa, sp, reward);
         }
         if (gui){
             destroyWindow("Red objects image");
@@ -822,11 +823,11 @@ void getStateFromIndex(int index){
  Select action:
 -----------------------------------*/
 void selectAction(int sa){
-    int not_visited = 0;
+    float not_visited = 0;
     for (int i = 0; i<5; i++){
         not_visited += (visit_matrix[sa][i] == 0);
     }
-    if ((float)not_visited/5 > 0.5){
+    if (not_visited/5.0 > 0.5){
         action = action = ceil(unifRnd(0,4));
     }else if (ceil(unifRnd(0, 100)) > 70){
         action = ceil(unifRnd(0,4));
@@ -858,17 +859,17 @@ double calculateReward(int sa, int sp){
     prev_ang = robot_state.angle_d;
     prev_height = robot_state.height_d;
     getStateFromIndex(sp);
-    prev_dist = robot_state.distance_d;
-    prev_ang = robot_state.angle_d;
-    prev_height = robot_state.height_d;
+    act_dist = robot_state.distance_d;
+    act_ang = robot_state.angle_d;
+    act_height = robot_state.height_d;
     // I have found the object
-    if(prev_dist == -1 && prev_ang == -1 && prev_height == -1
-      && act_dist >= 0 && act_ang >= 0 && act_height >= 0){
+    if(prev_dist == -1 && prev_ang == -1 && prev_height == -1 &&
+     act_dist >= 0 && act_ang >= 0 && act_height >= 0){
           return 10 + 100 * robot_state.object_picked * robot_state.folded;
       }
       // I have lost the object
-      else if(act_dist == -1 && act_ang == -1 && act_height == -1
-      && prev_dist >= 0 && prev_ang >= 0 && prev_height >= 0){
+      else if(act_dist == -1 && act_ang == -1 && act_height == -1 &&
+       prev_dist >= 0 && prev_ang >= 0 && prev_height >= 0){
         return -10 + 100 * robot_state.object_picked * robot_state.folded;
       }else{
           return 100 * robot_state.object_picked * robot_state.folded;
@@ -880,9 +881,9 @@ double calculateReward(int sa, int sp){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log5.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log5.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -920,9 +921,9 @@ void actualizeLog(int sa, int sp, double reward){
 -----------------------------------*/
 void actualizeSimplifiedLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log5.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log5.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test.txt", ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";
