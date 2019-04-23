@@ -61,6 +61,8 @@
 #define ALPHA 0.02
 #define GAMMA 0.9
 
+#define N_ACTIONS 5 // Number of actions
+
 /*------------------------------------
  Some useful namespaces:
 -----------------------------------*/

@@ -152,7 +152,7 @@ void learning(Handlers handlers){
 
         gripper = handlers.getNH().advertise<Float64>("/gripper_1_joint/command", 1);
         base = handlers.getNH().advertise<Twist>("/mobile_base/commands/velocity", 1);
-
+        int sa; int sp;
         while(ros::ok() && (!robot_state.object_picked || !robot_state.folded)){
             // Set random seed by the time of the cpu
             srand( (unsigned)time(NULL) );
@@ -177,12 +177,13 @@ void learning(Handlers handlers){
             if (counter == 0){
                 openGripper();
                 foldArm();
+                // 1. Get state
+                updateState();
+                sa = getIndexFromState();
                 counter++;
             }
-
-            // 1. Get state
-            updateState();
-            int sa = getIndexFromState();
+            
+            ROS_INFO("\n\n\nNew sa: %d\n\n", sa);
             // 2. Select action
             selectAction(sa);
 
@@ -235,7 +236,7 @@ void learning(Handlers handlers){
 
             // 4. Fold arm
             updateState();
-            int sp = getIndexFromState();
+            sp = getIndexFromState();
 
 
             // 5. Check reward
@@ -252,6 +253,7 @@ void learning(Handlers handlers){
             steps++;
             actualizeLog(sa, sp, reward);
             actualizeSimplifiedLog(sa, sp, reward);
+            sa = sp;
         }
         if (gui){
             destroyWindow("Red objects image");
@@ -824,13 +826,24 @@ void getStateFromIndex(int index){
 -----------------------------------*/
 void selectAction(int sa){
     float not_visited = 0;
-    for (int i = 0; i<5; i++){
+    for (int i = 0; i<N_ACTIONS; i++){
         not_visited += (visit_matrix[sa][i] == 0);
+        if (visit_matrix[sa][i] == 0){
+            action = i;
+        }
     }
-    if (not_visited/5.0 > 0.5){
-        action = action = ceil(unifRnd(0,4));
-    }else if (ceil(unifRnd(0, 100)) > 70){
-        action = ceil(unifRnd(0,4));
+    if ((float)not_visited/(float)N_ACTIONS >= 0.75) { }
+    else if (ceil(unifRnd(0, 100)) > 70){
+        if (ceil(unifRnd(0,100)) < 60){
+            action = 0;
+            for (int i = 0; i<N_ACTIONS; i++){
+                if (visit_matrix[sa][i] < visit_matrix[sa][action]){
+                    action = i;
+                }
+            }
+        }else{
+            action = ceil(unifRnd(0,4));
+        }
     }else{
         action = policy_matrix[sa];
     }
@@ -841,7 +854,7 @@ void selectAction(int sa){
 void updateVPolicy(int s){
     V[s] = q_matrix[s][0];
     policy_matrix[s] = 0;
-    for(int i = 1; i < 5; i++){
+    for(int i = 1; i < N_ACTIONS; i++){
         if(q_matrix[s][i] > V[s]){
             V[s] = q_matrix[s][i];
             policy_matrix[s] = i;
@@ -863,13 +876,13 @@ double calculateReward(int sa, int sp){
     act_ang = robot_state.angle_d;
     act_height = robot_state.height_d;
     // I have found the object
-    if(prev_dist == -1 && prev_ang == -1 && prev_height == -1 &&
-     act_dist >= 0 && act_ang >= 0 && act_height >= 0){
+    if((prev_dist == -1 || prev_ang == -1 || prev_height == -1) &&
+     (act_dist >= 0 || act_ang >= 0 || act_height >= 0)){
           return 10 + 100 * robot_state.object_picked * robot_state.folded;
       }
       // I have lost the object
-      else if(act_dist == -1 && act_ang == -1 && act_height == -1 &&
-       prev_dist >= 0 && prev_ang >= 0 && prev_height >= 0){
+      else if((act_dist == -1 || act_ang == -1 || act_height == -1) &&
+       (prev_dist >= 0 || prev_ang >= 0 || prev_height >= 0)){
         return -10 + 100 * robot_state.object_picked * robot_state.folded;
       }else{
           return 100 * robot_state.object_picked * robot_state.folded;
@@ -881,9 +894,9 @@ double calculateReward(int sa, int sp){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test3.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test3.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -914,6 +927,8 @@ void actualizeLog(int sa, int sp, double reward){
     log_file << "New value of Value function: " << V[sa] << "\n";
     log_file << "New value of Policy matrix: " << policy_matrix[sa] << "\n\n";
     log_file.close();
+    if (robot_state.angle_d == -1)
+        ROS_INFO("\n\n\nAngle_d: %d\tAngle_c: %.2f\n\n", robot_state.angle_d, robot_state.angle_c);
 }
 
 /*------------------------------------
@@ -921,9 +936,9 @@ void actualizeLog(int sa, int sp, double reward){
 -----------------------------------*/
 void actualizeSimplifiedLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test3.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test3.txt", ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";
