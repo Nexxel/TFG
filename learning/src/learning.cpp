@@ -156,12 +156,12 @@ void learning(Handlers handlers){
         while(ros::ok() && (!robot_state.object_picked || !robot_state.folded)){
             // Set random seed by the time of the cpu
             srand( (unsigned)time(NULL) );
-            robot_state.angle_d = -1;
-            robot_state.height_d = -1;
-            robot_state.distance_d = -1;
-            robot_state.angle_c = -1;
-            robot_state.height_c = -1;
-            robot_state.distance_c = -1;
+            robot_state.angle_d = 0;
+            robot_state.height_d = 0;
+            robot_state.distance_d = 0;
+            robot_state.angle_c = 0;
+            robot_state.height_c = 0;
+            robot_state.distance_c = 0;
             
             inside_learning = false;
 
@@ -212,24 +212,24 @@ void learning(Handlers handlers){
             else{
                 Twist base_movement; 
                 // Move front
-                if (action == 0){
+                if (action == 2){
                     ROS_INFO("Moving front...");
                     base_movement.linear.x = 0.1;
                 }
                 // Move back
-                else if(action == 1){
+                else if(action == 3){
                     ROS_INFO("Moving back...");
                     base_movement.linear.x = -0.1;
                 }
                 // Turn left
-                else if(action == 2){
+                else if(action == 0){
                     ROS_INFO("Turning left...");
-                    base_movement.angular.z = 0.1;
+                    base_movement.angular.z = 0.2;
                 }
                 // Turn right
-                else if(action == 3){
+                else if(action == 1){
                     ROS_INFO("Turning right...");
-                    base_movement.angular.z = -0.1;
+                    base_movement.angular.z = -0.2;
                 }
                 base.publish(base_movement);
                 processMessages();
@@ -742,35 +742,35 @@ void startRandomSimulation(){
             sleep(3);
             stringstream xterm_wall;
             xterm_wall << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/wall.urdf -urdf -x " 
-                        << (x - 0.5) << " -y " << (y+3) << " -z 1.5 -model wall\" &";
+                        << (x - 0.5) << " -y " << (y+3) << " -model wall\" &";
             str = xterm_wall.str();
             const char* xterm_wall_str = str.c_str(); 
             system(xterm_wall_str);
             sleep(3);
             stringstream xterm_wall1;
             xterm_wall1 << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/wall.urdf -urdf -x " 
-                        << (x - 0.5) << " -y " << (y-3) << " -z 1.5 -model wall1\" &";
+                        << (x - 0.5) << " -y " << (y-3) << " -model wall1\" &";
             str = xterm_wall1.str();
             xterm_wall_str = str.c_str(); 
             system(xterm_wall_str);
             sleep(3);
             stringstream xterm_wall2;
             xterm_wall2 << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/wall2.urdf -urdf -x " 
-                        << (- 0.5) << " -y " << y << " -z 1.5 -model wall2\" &";
+                        << (- 0.5) << " -y " << y << " -model wall2\" &";
             str = xterm_wall2.str();
             xterm_wall_str = str.c_str(); 
             system(xterm_wall_str);
             sleep(3);
             stringstream xterm_wall3;
             xterm_wall3 << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/wall2.urdf -urdf -x " 
-                        << (x/2- 0.5) << " -y " << y+5.55 << " -z 1.5 -Y " << M_PI/2 << " -model wall3\" &";
+                        << (x/2- 0.5) << " -y " << y+5.55 << " -Y " << M_PI/2 << " -model wall3\" &";
             str = xterm_wall3.str();
             xterm_wall_str = str.c_str(); 
             system(xterm_wall_str);
             sleep(3);
             stringstream xterm_wall4;
             xterm_wall4 << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/wall2.urdf -urdf -x " 
-                        << (x/2- 0.5) << " -y " << y-5.55 << " -z 1.5 -Y " << M_PI/2 << " -model wall4\" &";
+                        << (x/2- 0.5) << " -y " << y-5.55 << " -Y " << M_PI/2 << " -model wall4\" &";
             str = xterm_wall4.str();
             xterm_wall_str = str.c_str(); 
             system(xterm_wall_str);
@@ -816,9 +816,9 @@ int getIndexFromState(){
 -----------------------------------*/
 void getStateFromIndex(int index){
     int num_elems = discr_level + 1;
-    robot_state.distance_d = ((int)index / (int)(pow(num_elems,2) * pow(2,2)))-1;
-    robot_state.angle_d = ((index % (int)(pow(num_elems,2) * pow(2,2))) / (int)(num_elems * pow(2,2)))-1;
-    robot_state.height_d = ((index % (int)(pow(num_elems,2) * pow(2,2)) % (int)(num_elems * pow(2,2))) / (int)pow(2,2))-1;
+    robot_state.distance_d = ((int)index / (int)(pow(num_elems,2) * pow(2,2)));
+    robot_state.angle_d = ((index % (int)(pow(num_elems,2) * pow(2,2))) / (int)(num_elems * pow(2,2)));
+    robot_state.height_d = ((index % (int)(pow(num_elems,2) * pow(2,2)) % (int)(num_elems * pow(2,2))) / (int)pow(2,2));
     robot_state.object_picked = (index % (int)(pow(num_elems,2) * pow(2,2)) % (int)(num_elems * pow(2,2)) % (int)pow(2,2)) / 2;
     robot_state.folded = (index % (int)(pow(num_elems,2) * pow(2,2)) % (int)(num_elems * pow(2,2)) % (int)pow(2,2) % 2);
 }
@@ -877,15 +877,15 @@ double calculateReward(int sa, int sp){
     act_ang = robot_state.angle_d;
     act_height = robot_state.height_d;
     // I have found the object
-    if((prev_dist == -1 && act_dist >= 0) 
-        || (prev_ang == -1 && act_ang >= 0) 
-        || (prev_height == -1 && act_height >= 0)){
+    if((prev_dist == 0 && act_dist > 0) 
+        || (prev_ang == 0 && act_ang > 0) 
+        || (prev_height == 0 && act_height > 0)){
           return 10 + 100 * robot_state.object_picked * robot_state.folded;
       }
       // I have lost the object
-      else if((act_dist == -1 && prev_dist >= 0) 
-            || (act_ang == -1 && prev_ang >= 0) 
-            || (act_height == -1 && prev_height >= 0)){
+      else if((act_dist == 0 && prev_dist > 0) 
+            || (act_ang == 0 && prev_ang > 0) 
+            || (act_height == 0 && prev_height > 0)){
         return -10 + 100 * robot_state.object_picked * robot_state.folded;
       }else{
           return 100 * robot_state.object_picked * robot_state.folded;
@@ -920,17 +920,17 @@ void actualizeLog(int sa, int sp, double reward){
     log_file << "\tObject picked: " << robot_state.object_picked << "\n";
     log_file << "\tArm folded: " << robot_state.folded << "\n";
     log_file << "Action: " << action << "\n";
-    log_file << "\t" << ((action == 0) ? "Move front" :
-                                ((action == 1) ? "Move back" :
-                                (action == 2) ? "Turn left" :
-                                (action == 3) ? "Turn right" : "Move arm")) << "\n";
+    log_file << "\t" << ((action == 2) ? "Move front" :
+                                ((action == 3) ? "Move back" :
+                                (action == 0) ? "Turn left" :
+                                (action == 1) ? "Turn right" : "Move arm")) << "\n";
     log_file << "Reward: " << reward << "\n";
     log_file << "New value of Visit matrix: " << visit_matrix[sa][action] << "\n";
     log_file << "New value of Q matrix: " << q_matrix[sa][action] << "\n";
     log_file << "New value of Value function: " << V[sa] << "\n";
     log_file << "New value of Policy matrix: " << policy_matrix[sa] << "\n\n";
     log_file.close();
-    if (robot_state.angle_d == -1)
+    if (robot_state.angle_d == 0)
         ROS_INFO("\n\n\nAngle_d: %d\tAngle_c: %.2f\n\n", robot_state.angle_d, robot_state.angle_c);
 }
 
@@ -960,10 +960,10 @@ void actualizeSimplifiedLog(int sa, int sp, double reward){
     log_file << robot_state.object_picked << ",";
     log_file << robot_state.folded << ",";
     log_file << action << ",";
-    log_file << ((action == 0) ? "\"Move front\"" :
-                                ((action == 1) ? "\"Move back\"" :
-                                (action == 2) ? "\"Turn left\"" :
-                                (action == 3) ? "\"Turn right\"" : "\"Move arm\"")) << ",";
+    log_file << ((action == 2) ? "\"Move front\"" :
+                                ((action == 3) ? "\"Move back\"" :
+                                (action == 0) ? "\"Turn left\"" :
+                                (action == 1) ? "\"Turn right\"" : "\"Move arm\"")) << ",";
     log_file << reward << ",";
     log_file << visit_matrix[sa][action] << ",";
     log_file << q_matrix[sa][action] << ",";
