@@ -206,6 +206,7 @@ void learning(Handlers handlers){
                 mci(next_position,n);
                 closeGripper();
                 ros::Duration(9).sleep();
+                foldArm();
             }
             // 3.2 Move base if not reachable
             else{
@@ -234,7 +235,7 @@ void learning(Handlers handlers){
                 processMessages();
             }
 
-            // 4. Fold arm
+            // Update state
             updateState();
             sp = getIndexFromState();
 
@@ -876,13 +877,15 @@ double calculateReward(int sa, int sp){
     act_ang = robot_state.angle_d;
     act_height = robot_state.height_d;
     // I have found the object
-    if((prev_dist == -1 || prev_ang == -1 || prev_height == -1) &&
-     (act_dist >= 0 || act_ang >= 0 || act_height >= 0)){
+    if((prev_dist == -1 && act_dist >= 0) 
+        || (prev_ang == -1 && act_ang >= 0) 
+        || (prev_height == -1 && act_height >= 0)){
           return 10 + 100 * robot_state.object_picked * robot_state.folded;
       }
       // I have lost the object
-      else if((act_dist == -1 || act_ang == -1 || act_height == -1) &&
-       (prev_dist >= 0 || prev_ang >= 0 || prev_height >= 0)){
+      else if((act_dist == -1 && prev_dist >= 0) 
+            || (act_ang == -1 && prev_ang >= 0) 
+            || (act_height == -1 && prev_height >= 0)){
         return -10 + 100 * robot_state.object_picked * robot_state.folded;
       }else{
           return 100 * robot_state.object_picked * robot_state.folded;
@@ -894,9 +897,9 @@ double calculateReward(int sa, int sp){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test3.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test4.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test3.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test4.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -936,9 +939,9 @@ void actualizeLog(int sa, int sp, double reward){
 -----------------------------------*/
 void actualizeSimplifiedLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test3.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test4.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test3.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test4.txt", ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";
