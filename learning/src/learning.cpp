@@ -183,7 +183,6 @@ void learning(Handlers handlers){
                 counter++;
             }
             
-            ROS_INFO("\n\n\nNew sa: %d\n\n", sa);
             // 2. Select action
             selectAction(sa);
 
@@ -805,9 +804,9 @@ void killSimulation(){
 -----------------------------------*/
 int getIndexFromState(){
     int num_elems = discr_level + 1;
-    return  (robot_state.distance_d+1) * pow(num_elems,2) * pow(2,2) +
-            (robot_state.angle_d+1) * num_elems * pow(2,2) +
-            (robot_state.height_d+1) * pow(2,2) +
+    return  (robot_state.distance_d) * pow(num_elems,2) * pow(2,2) +
+            (robot_state.angle_d) * num_elems * pow(2,2) +
+            (robot_state.height_d) * pow(2,2) +
             robot_state.object_picked * 2 +
             robot_state.folded;
 }
@@ -833,8 +832,8 @@ void selectAction(int sa){
             action = i;
         }
     }
-    if ((float)not_visited/(float)N_ACTIONS >= 0.75) { }
-    else if (ceil(unifRnd(0, 100)) > 70){
+    if (((float)not_visited/(float)N_ACTIONS) >= 0.25) {;
+    }else if (ceil(unifRnd(0, 100)) > 70){
         if (ceil(unifRnd(0,100)) < 60){
             action = 0;
             for (int i = 0; i<N_ACTIONS; i++){
@@ -843,7 +842,7 @@ void selectAction(int sa){
                 }
             }
         }else{
-            action = ceil(unifRnd(0,4));
+            action = ceil(unifRnd(0,N_ACTIONS-1));
         }
     }else{
         action = policy_matrix[sa];
@@ -930,8 +929,6 @@ void actualizeLog(int sa, int sp, double reward){
     log_file << "New value of Value function: " << V[sa] << "\n";
     log_file << "New value of Policy matrix: " << policy_matrix[sa] << "\n\n";
     log_file.close();
-    if (robot_state.angle_d == 0)
-        ROS_INFO("\n\n\nAngle_d: %d\tAngle_c: %.2f\n\n", robot_state.angle_d, robot_state.angle_c);
 }
 
 /*------------------------------------

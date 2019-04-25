@@ -33,7 +33,6 @@
 
 #define ROS_RATE 8
 
-//??
 #define MAX_DISTANCE 2   //Max distance to perceive the object
 
 #define OBJECT_HEIGHT 0.080  //Medir
@@ -62,6 +61,10 @@
 #define GAMMA 0.9
 
 #define N_ACTIONS 5 // Number of actions
+
+#define MAX_EXPLORATION 100
+#define MIN_EXPLORATION 30
+#define DECAY 0.01
 
 /*------------------------------------
  Some useful namespaces:
@@ -109,8 +112,8 @@ int action;                 // Learning action
 //const size_t num_states = pow(discr_level+1, 3) * pow(2,2); // Really 6³*2² = 864 
 double q_matrix[864][5];        // Q matrix
 double V[864];                  // Value function
-double policy_matrix[864];      // Policy matrix
-double visit_matrix[864][5];    // Matrix of visits
+int policy_matrix[864];      // Policy matrix
+int visit_matrix[864][5];    // Matrix of visits
 
 int steps = 0;
 int simulations = 0;
