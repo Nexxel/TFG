@@ -61,11 +61,11 @@
 #define GAMMA 0.9
 
 #define N_ACTIONS 5 // Number of actions
-
+/*
 #define MAX_EXPLORATION 100
 #define MIN_EXPLORATION 30
 #define DECAY 0.01
-
+*/
 /*------------------------------------
  Some useful namespaces:
 -----------------------------------*/

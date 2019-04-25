@@ -729,7 +729,7 @@ void startRandomSimulation(){
             stringstream xterm_box; stringstream xterm_object;
             xterm_box << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/box_" << box << ".urdf -urdf -x " << x
                     << " -z " << z << " -y " << y << " -model box\" &";
-            xterm_object << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/object.urdf -urdf -x " 
+            xterm_object << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/cylinder.urdf -urdf -x " 
                         << (x - 0.45) << " -z " << (z*2+0.05) << " -y " << y << " -model red_object\" &";
             string str(xterm_box.str());
             const char* xterm_box_str = str.c_str();
@@ -875,19 +875,26 @@ double calculateReward(int sa, int sp){
     act_dist = robot_state.distance_d;
     act_ang = robot_state.angle_d;
     act_height = robot_state.height_d;
+    int reward = 0;
+    if (act_dist != 0 && prev_dist != 0){
+        reward += (act_dist - prev_dist) * 5;
+    }
     // I have found the object
     if((prev_dist == 0 && act_dist > 0) 
         || (prev_ang == 0 && act_ang > 0) 
         || (prev_height == 0 && act_height > 0)){
-          return 10 + 100 * robot_state.object_picked * robot_state.folded;
+        reward += 10 + 100 * robot_state.object_picked * robot_state.folded;
+        return reward;
       }
       // I have lost the object
       else if((act_dist == 0 && prev_dist > 0) 
             || (act_ang == 0 && prev_ang > 0) 
             || (act_height == 0 && prev_height > 0)){
-        return -10 + 100 * robot_state.object_picked * robot_state.folded;
+        reward -= 10 + 100 * robot_state.object_picked * robot_state.folded;
+        return reward;
       }else{
-          return 100 * robot_state.object_picked * robot_state.folded;
+          reward += 100 * robot_state.object_picked * robot_state.folded;
+          return reward;
       }
 }
 
@@ -896,9 +903,9 @@ double calculateReward(int sa, int sp){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test4.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_cylinder2.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test4.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_cylinder2.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -936,9 +943,9 @@ void actualizeLog(int sa, int sp, double reward){
 -----------------------------------*/
 void actualizeSimplifiedLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test4.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_cylinder2.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test4.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_cylinder2.txt", ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";
