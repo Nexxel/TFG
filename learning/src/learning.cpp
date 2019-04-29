@@ -37,26 +37,23 @@ void callbackImage(const ImageConstPtr& image_msg){
  Get the rgb camera info and get the projection matrix:
  -----------------------------------*/
  void callbackCameraInfo(const CameraInfoConstPtr& camera_info_msg){
-    if(!inside_learning){
-        int counter = 0;
-        for (int i  = 0; i < 3; i++){
-            for (int j = 0; j < 4; j++){
-                P[i][j] = camera_info_msg->P.at(counter);
-                counter++;
-            }
+    int counter = 0;
+    for (int i  = 0; i < 3; i++){
+        for (int j = 0; j < 4; j++){
+            P[i][j] = camera_info_msg->P.at(counter);
+            counter++;
         }
-        
-        Mat auxP = Mat(3,4, DataType<double>::type, P);
-        Mat auxP_inv = Mat(4,3, DataType<double>::type, P_inv);
-        invert(auxP,auxP_inv, DECOMP_SVD);
+    }
+    
+    Mat auxP = Mat(3,4, DataType<double>::type, P);
+    Mat auxP_inv = Mat(4,3, DataType<double>::type, P_inv);
+    invert(auxP,auxP_inv, DECOMP_SVD);
 
-        // Copy the aux Mat
-        for(int i  = 0; i<4; i++){
-            for(int j = 0; j<3; j++){
-                P_inv[i][j] = auxP_inv.at<double>(i,j);
-            }
+    // Copy the aux Mat
+    for(int i  = 0; i<4; i++){
+        for(int j = 0; j<3; j++){
+            P_inv[i][j] = auxP_inv.at<double>(i,j);
         }
-
     }
  }
 
@@ -234,6 +231,7 @@ void learning(Handlers handlers){
             sleep(3);
 
             // Update state
+            processMessages();
             updateState();
             sp = getIndexFromState();
 
@@ -827,22 +825,12 @@ void selectAction(int sa){
     float not_visited = 0;
     for (int i = 0; i<N_ACTIONS; i++){
         not_visited += (visit_matrix[sa][i] == 0);
-        if (visit_matrix[sa][i] == 0){
-            action = i;
-        }
     }
-    if (((float)not_visited/(float)N_ACTIONS) >= 0.25) {;
-    }else if (ceil(unifRnd(0, 100)) < exploration_rate){
-        if (ceil(unifRnd(0,100)) < 60){
-            action = 0;
-            for (int i = 0; i<N_ACTIONS; i++){
-                if (visit_matrix[sa][i] < visit_matrix[sa][action]){
-                    action = i;
-                }
-            }
-        }else{
-            action = ceil(unifRnd(0,N_ACTIONS-1));
-        }
+    if (((float)not_visited/(float)N_ACTIONS) >= 0.25) { 
+        exploration_rate = 100;
+    }
+    if (ceil(unifRnd(0, 100)) <= exploration_rate){
+        action = ceil(unifRnd(0,N_ACTIONS-1));
     }else{
         action = policy_matrix[sa];
     }
@@ -877,8 +865,8 @@ double calculateReward(int sa, int sp){
     act_ang = robot_state.angle_d;
     act_height = robot_state.height_d;
     int reward = 0;
-    if (act_dist != 0 && prev_dist != 0){
-        reward += (act_dist - prev_dist) * 5;
+    if (act_dist < prev_dist && prev_dist > 0 && act_dist > 0){
+        reward += (prev_dist - act_dist) * 5;
     }
     // I have found the object
     if((prev_dist == 0 && act_dist > 0) 
