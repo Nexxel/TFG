@@ -832,8 +832,8 @@ void selectAction(int sa){
         exploration_rate = 100;
     }
     ROS_INFO("\n\n\nexploration_rate: %.2f\n\n\n", exploration_rate);
-    if (round(unifRnd(0, 100)) <= exploration_rate){
-        action = round(unifRnd(0,N_ACTIONS-1));
+    if (ceil(unifRnd(0, 100)) <= exploration_rate){
+        action = ceil(unifRnd(0,N_ACTIONS-1));
     }else{
         action = policy_matrix[sa];
     }
@@ -983,5 +983,5 @@ void printDebug(string function, int line){
 -----------------------------------*/
 double unifRnd(double min, double max){
     ROS_INFO("\n\n\nRand: %.2f\n\n\n", rand);
-    return min + ((double)rand()/(double)RAND_MAX) * (max - min);
+    return min + ((double)rand()/(double)RAND_MAX) * ((max+1) - min);
 }
