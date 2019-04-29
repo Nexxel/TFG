@@ -61,11 +61,11 @@
 #define GAMMA 0.9
 
 #define N_ACTIONS 5 // Number of actions
-/*
+
 #define MAX_EXPLORATION 100
 #define MIN_EXPLORATION 30
 #define DECAY 0.01
-*/
+
 /*------------------------------------
  Some useful namespaces:
 -----------------------------------*/
@@ -114,7 +114,9 @@ double q_matrix[864][5];        // Q matrix
 double V[864];                  // Value function
 int policy_matrix[864];      // Policy matrix
 int visit_matrix[864][5];    // Matrix of visits
+int counter = 0;            // Total number of steps
 
+double exploration_rate = MAX_EXPLORATION;
 int steps = 0;
 int simulations = 0;
 bool gui = true;

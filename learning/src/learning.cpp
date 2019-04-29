@@ -6,34 +6,32 @@
  /*------------------------------------
  Get the rgb image and process it:
  -----------------------------------*/
- void callbackImage(const ImageConstPtr& image_msg){
-    if (!inside_learning){
-         try
-        {
-        cv_ptr = cv_bridge::toCvCopy(image_msg, image_encodings::BGR8);
-        }
-        catch (cv_bridge::Exception& e)
-        {
-        ROS_ERROR("cv_bridge exception: %s", e.what());
-        return;
-        }
-
-        // Convert image from color to B&W being white the red object
-            
-        cv_ptr->image = ~(cv_ptr->image);
-            
-        Mat3b imageHSV;
-        // If it is not a simulation, apply filter for avoiding reflections
-        if(!is_simulation){
-            GaussianBlur(cv_ptr->image, cv_ptr->image, Size(15,15), 7, 7); // Size(9,9), 4, 4
-        }
-        // Get the red object
-        cvtColor(cv_ptr->image, imageHSV, COLOR_BGR2HSV);
-        inRange(imageHSV, Scalar(90 - 10, 100, 100), Scalar(90 + 10, 255, 255), cv_ptr->image);
-        // Apply filter for avoiding false positives
-        GaussianBlur(cv_ptr->image, cv_ptr->image, Size(7,7), 5, 5);
+void callbackImage(const ImageConstPtr& image_msg){
+        try
+    {
+    cv_ptr = cv_bridge::toCvCopy(image_msg, image_encodings::BGR8);
     }
- }
+    catch (cv_bridge::Exception& e)
+    {
+    ROS_ERROR("cv_bridge exception: %s", e.what());
+    return;
+    }
+
+    // Convert image from color to B&W being white the red object
+        
+    cv_ptr->image = ~(cv_ptr->image);
+        
+    Mat3b imageHSV;
+    // If it is not a simulation, apply filter for avoiding reflections
+    if(!is_simulation){
+        GaussianBlur(cv_ptr->image, cv_ptr->image, Size(15,15), 7, 7); // Size(9,9), 4, 4
+    }
+    // Get the red object
+    cvtColor(cv_ptr->image, imageHSV, COLOR_BGR2HSV);
+    inRange(imageHSV, Scalar(90 - 10, 100, 100), Scalar(90 + 10, 255, 255), cv_ptr->image);
+    // Apply filter for avoiding false positives
+    GaussianBlur(cv_ptr->image, cv_ptr->image, Size(7,7), 5, 5);
+}
 
  /*------------------------------------
  Get the rgb camera info and get the projection matrix:
@@ -233,6 +231,7 @@ void learning(Handlers handlers){
                 base.publish(base_movement);
                 processMessages();
             }
+            sleep(3);
 
             // Update state
             updateState();
@@ -833,7 +832,7 @@ void selectAction(int sa){
         }
     }
     if (((float)not_visited/(float)N_ACTIONS) >= 0.25) {;
-    }else if (ceil(unifRnd(0, 100)) > 70){
+    }else if (ceil(unifRnd(0, 100)) < exploration_rate){
         if (ceil(unifRnd(0,100)) < 60){
             action = 0;
             for (int i = 0; i<N_ACTIONS; i++){
@@ -847,6 +846,8 @@ void selectAction(int sa){
     }else{
         action = policy_matrix[sa];
     }
+    counter++;
+    exploration_rate = MIN_EXPLORATION + (MAX_EXPLORATION - MIN_EXPLORATION) * exp(-DECAY * counter);
 }
 /*------------------------------------
  Update V and policy matrix:
@@ -903,9 +904,9 @@ double calculateReward(int sa, int sp){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_cylinder2.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_cylinder_image_fixed.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_cylinder2.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_cylinder_image_fixed.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -943,9 +944,9 @@ void actualizeLog(int sa, int sp, double reward){
 -----------------------------------*/
 void actualizeSimplifiedLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_cylinder2.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_cylinder_image_fixed.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_cylinder2.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_cylinder_image_fixed.txt", ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";
