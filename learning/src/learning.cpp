@@ -811,6 +811,7 @@ int getIndexFromState(){
  Modify the state of the robot from the column index:
 -----------------------------------*/
 void getStateFromIndex(int index){
+    ROS_INFO("\n\n\nDistance: %.2f\n\n\n", robot_state.distance_c);
     int num_elems = discr_level + 1;
     robot_state.distance_d = ((int)index / (int)(pow(num_elems,2) * pow(2,2)));
     robot_state.angle_d = ((index % (int)(pow(num_elems,2) * pow(2,2))) / (int)(num_elems * pow(2,2)));
@@ -830,8 +831,9 @@ void selectAction(int sa){
     if (((float)not_visited/(float)N_ACTIONS) >= 0.25) { 
         exploration_rate = 100;
     }
-    if (ceil(unifRnd(0, 100)) <= exploration_rate){
-        action = ceil(unifRnd(0,N_ACTIONS-1));
+    ROS_INFO("\n\n\nexploration_rate: %.2f\n\n\n", exploration_rate);
+    if (round(unifRnd(0, 100)) <= exploration_rate){
+        action = round(unifRnd(0,N_ACTIONS-1));
     }else{
         action = policy_matrix[sa];
     }
@@ -894,9 +896,9 @@ double calculateReward(int sa, int sp){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_exploration.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_exploration3.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_exploration.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_exploration3.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -934,9 +936,9 @@ void actualizeLog(int sa, int sp, double reward){
 -----------------------------------*/
 void actualizeSimplifiedLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_exploration.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_exploration3.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_exploration.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_exploration3.txt", ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";
@@ -980,5 +982,6 @@ void printDebug(string function, int line){
         - max
 -----------------------------------*/
 double unifRnd(double min, double max){
+    ROS_INFO("\n\n\nRand: %.2f\n\n\n", rand);
     return min + ((double)rand()/(double)RAND_MAX) * (max - min);
 }
