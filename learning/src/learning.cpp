@@ -832,8 +832,8 @@ void selectAction(int sa){
         exploration_rate = 100;
     }
     ROS_INFO("\n\n\nexploration_rate: %.2f\n\n\n", exploration_rate);
-    if (ceil(unifRnd(0, 100)) <= exploration_rate){
-        action = ceil(unifRnd(0,N_ACTIONS-1));
+    if (floor(unifRnd(0, 100)) <= exploration_rate){
+        action = floor(unifRnd(0,N_ACTIONS-1));
     }else{
         action = policy_matrix[sa];
     }
