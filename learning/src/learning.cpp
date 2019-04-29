@@ -823,6 +823,7 @@ void getStateFromIndex(int index){
 -----------------------------------*/
 void selectAction(int sa){
     float not_visited = 0;
+    double prev_expl_rate = exploration_rate;
     for (int i = 0; i<N_ACTIONS; i++){
         not_visited += (visit_matrix[sa][i] == 0);
     }
@@ -835,6 +836,7 @@ void selectAction(int sa){
         action = policy_matrix[sa];
     }
     counter++;
+    exploration_rate = prev_expl_rate;
     exploration_rate = MIN_EXPLORATION + (MAX_EXPLORATION - MIN_EXPLORATION) * exp(-DECAY * counter);
 }
 /*------------------------------------
@@ -892,9 +894,9 @@ double calculateReward(int sa, int sp){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_cylinder_image_fixed.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_exploration.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_cylinder_image_fixed.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_exploration.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -932,9 +934,9 @@ void actualizeLog(int sa, int sp, double reward){
 -----------------------------------*/
 void actualizeSimplifiedLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_cylinder_image_fixed.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_exploration.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_cylinder_image_fixed.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_exploration.txt", ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";
