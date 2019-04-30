@@ -64,7 +64,7 @@
 
 #define MAX_EXPLORATION 100
 #define MIN_EXPLORATION 30
-#define DECAY 0.01
+#define DECAY 1e-3
 
 /*------------------------------------
  Some useful namespaces:

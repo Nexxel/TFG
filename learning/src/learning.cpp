@@ -811,7 +811,6 @@ int getIndexFromState(){
  Modify the state of the robot from the column index:
 -----------------------------------*/
 void getStateFromIndex(int index){
-    ROS_INFO("\n\n\nDistance: %.2f\n\n\n", robot_state.distance_c);
     int num_elems = discr_level + 1;
     robot_state.distance_d = ((int)index / (int)(pow(num_elems,2) * pow(2,2)));
     robot_state.angle_d = ((index % (int)(pow(num_elems,2) * pow(2,2))) / (int)(num_elems * pow(2,2)));
@@ -831,7 +830,6 @@ void selectAction(int sa){
     if (((float)not_visited/(float)N_ACTIONS) >= 0.25) { 
         exploration_rate = 100;
     }
-    ROS_INFO("\n\n\nexploration_rate: %.2f\n\n\n", exploration_rate);
     if (floor(unifRnd(0, 100)) <= exploration_rate){
         action = floor(unifRnd(0,N_ACTIONS-1));
     }else{
@@ -840,6 +838,7 @@ void selectAction(int sa){
     counter++;
     exploration_rate = prev_expl_rate;
     exploration_rate = MIN_EXPLORATION + (MAX_EXPLORATION - MIN_EXPLORATION) * exp(-DECAY * counter);
+    ROS_INFO("\n\n\nStep %d exploration_rate: %.2f\n\n\n", counter, exploration_rate);
 }
 /*------------------------------------
  Update V and policy matrix:
@@ -870,23 +869,23 @@ double calculateReward(int sa, int sp){
     act_height = robot_state.height_d;
     int reward = 0;
     if (act_dist < prev_dist && prev_dist > 0 && act_dist > 0){
-        reward += (prev_dist - act_dist) * 5;
+        reward += (prev_dist - act_dist);
     }
     // I have found the object
     if((prev_dist == 0 && act_dist > 0) 
         || (prev_ang == 0 && act_ang > 0) 
         || (prev_height == 0 && act_height > 0)){
-        reward += 10 + 100 * robot_state.object_picked * robot_state.folded;
+        reward += 2 + 20 * robot_state.object_picked * robot_state.folded;
         return reward;
       }
       // I have lost the object
       else if((act_dist == 0 && prev_dist > 0) 
             || (act_ang == 0 && prev_ang > 0) 
             || (act_height == 0 && prev_height > 0)){
-        reward -= 10 + 100 * robot_state.object_picked * robot_state.folded;
+        reward -= 2 + 20 * robot_state.object_picked * robot_state.folded;
         return reward;
       }else{
-          reward += 100 * robot_state.object_picked * robot_state.folded;
+          reward += 20 * robot_state.object_picked * robot_state.folded;
           return reward;
       }
 }
@@ -982,6 +981,5 @@ void printDebug(string function, int line){
         - max
 -----------------------------------*/
 double unifRnd(double min, double max){
-    ROS_INFO("\n\n\nRand: %.2f\n\n\n", rand);
     return min + ((double)rand()/(double)RAND_MAX) * ((max+1) - min);
 }
