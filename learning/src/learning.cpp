@@ -30,7 +30,11 @@ void callbackImage(const ImageConstPtr& image_msg){
     cvtColor(cv_ptr->image, imageHSV, COLOR_BGR2HSV);
     inRange(imageHSV, Scalar(90 - 10, 100, 100), Scalar(90 + 10, 255, 255), cv_ptr->image);
     // Apply filter for avoiding false positives
-    GaussianBlur(cv_ptr->image, cv_ptr->image, Size(7,7), 5, 5);
+    if(!is_simulation){
+        GaussianBlur(cv_ptr->image, cv_ptr->image, Size(7,7), 5, 5);
+    }else{
+        GaussianBlur(cv_ptr->image, cv_ptr->image, Size(3,3), 1, 1);
+    }
 }
 
  /*------------------------------------
@@ -337,12 +341,12 @@ void discretizeValues(){
     double height_step = double(cv_ptr->image.rows)/double(discr_level);
     double depth_step = double(MAX_DISTANCE)/double(discr_level);
     
+    // Discretize values in distance
+    discretizeValuesAux(2, depth_step);
     // Discretize values in angle
     discretizeValuesAux(0,angle_step);
     // Discretize values in height
     discretizeValuesAux(1, height_step);
-    // Discretize values in distance
-    discretizeValuesAux(2, depth_step);
 }
 
 /*------------------------------------
@@ -869,25 +873,23 @@ double calculateReward(int sa, int sp){
     act_height = robot_state.height_d;
     int reward = 0;
     if (act_dist < prev_dist && prev_dist > 0 && act_dist > 0){
-        reward += (prev_dist - act_dist);
+        reward += 5*(prev_dist - act_dist);
     }
     // I have found the object
     if((prev_dist == 0 && act_dist > 0) 
         || (prev_ang == 0 && act_ang > 0) 
         || (prev_height == 0 && act_height > 0)){
-        reward += 2 + 20 * robot_state.object_picked * robot_state.folded;
-        return reward;
+        reward += 2 + 100 * robot_state.object_picked * robot_state.folded;
       }
       // I have lost the object
       else if((act_dist == 0 && prev_dist > 0) 
             || (act_ang == 0 && prev_ang > 0) 
             || (act_height == 0 && prev_height > 0)){
-        reward -= 2 + 20 * robot_state.object_picked * robot_state.folded;
-        return reward;
+        reward -= 2 + 100 * robot_state.object_picked * robot_state.folded;
       }else{
-          reward += 20 * robot_state.object_picked * robot_state.folded;
-          return reward;
+          reward += 100 * robot_state.object_picked * robot_state.folded;
       }
+      return reward;
 }
 
 /*------------------------------------
@@ -895,9 +897,9 @@ double calculateReward(int sa, int sp){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_exploration3.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_reward.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_exploration3.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_reward.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -935,9 +937,9 @@ void actualizeLog(int sa, int sp, double reward){
 -----------------------------------*/
 void actualizeSimplifiedLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_exploration3.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_reward.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_exploration3.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_reward.txt", ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";
