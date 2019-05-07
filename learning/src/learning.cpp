@@ -723,10 +723,10 @@ void startRandomSimulation(){
         }
         if (status == 0){
             sleep(6);
-            int x = MIN_X + ((double)rand()/double(RAND_MAX))* (MAX_X-MIN_X);
-            int y = MIN_Y + ((double)rand()/double(RAND_MAX))* (MAX_Y-MIN_Y);
+            double x = MIN_X + ((double)rand()/double(RAND_MAX))* (MAX_X-MIN_X);
+            double y = MIN_Y + ((double)rand()/double(RAND_MAX))* (MAX_Y-MIN_Y);
             int box = MIN_BOX + ((double)rand()/double(RAND_MAX))* (MAX_BOX-MIN_BOX);
-            float z = 0.05*(float)box;
+            double z = 0.05*(double)box;
             stringstream xterm_box; stringstream xterm_object;
             xterm_box << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/box_" << box << ".urdf -urdf -x " << x
                     << " -z " << z << " -y " << y << " -model box\" &";
@@ -873,7 +873,7 @@ double calculateReward(int sa, int sp){
     act_height = robot_state.height_d;
     int reward = 0;
     if (act_dist < prev_dist && prev_dist > 0 && act_dist > 0){
-        reward += 5*(prev_dist - act_dist);
+        reward += (prev_dist - act_dist);
     }
     // I have found the object
     if((prev_dist == 0 && act_dist > 0) 
@@ -897,9 +897,9 @@ double calculateReward(int sa, int sp){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_reward.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_test_x2.5.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_reward.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_test_x2.5.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -937,9 +937,9 @@ void actualizeLog(int sa, int sp, double reward){
 -----------------------------------*/
 void actualizeSimplifiedLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_reward.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_x2.5.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_reward.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_x2.5.txt", ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";

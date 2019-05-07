@@ -33,7 +33,7 @@
 
 #define ROS_RATE 8
 
-#define MAX_DISTANCE 2   //Max distance to perceive the object
+#define MAX_DISTANCE 2.0   //Max distance to perceive the object
 
 #define OBJECT_HEIGHT 0.080  //Medir
 #define OBJECT_WIDTH 0.028 //Medir
@@ -49,10 +49,10 @@
 #define WIDTH_PX_2_M (SENSOR_WIDTH/CAMERA_WIDTH)
 
 // Min and max positions of the objects
-#define MAX_X 7
-#define MIN_X 2
-#define MAX_Y 6
-#define MIN_Y -6
+#define MAX_X 2.5
+#define MIN_X 2.0
+#define MAX_Y 2.0
+#define MIN_Y -2.0
 // Number of box.urdf to use (box_1 z-size=0.1, box_2 z-size=0.2...)
 #define MIN_BOX 4
 #define MAX_BOX 6
