@@ -873,7 +873,7 @@ double calculateReward(int sa, int sp){
     act_height = robot_state.height_d;
     int reward = 0;
     if (act_dist < prev_dist && prev_dist > 0 && act_dist > 0){
-        reward += (prev_dist - act_dist);
+        reward += 3 * (prev_dist - act_dist);
     }
     // I have found the object
     if((prev_dist == 0 && act_dist > 0) 
@@ -897,9 +897,9 @@ double calculateReward(int sa, int sp){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_test_x2.5.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_test_reward2.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_test_x2.5.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_test_reward2.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -937,9 +937,9 @@ void actualizeLog(int sa, int sp, double reward){
 -----------------------------------*/
 void actualizeSimplifiedLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_x2.5.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_reward2.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_x2.5.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_reward2.txt", ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";
