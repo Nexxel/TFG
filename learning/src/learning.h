@@ -119,7 +119,7 @@ int counter = 0;            // Total number of steps
 double exploration_rate = MAX_EXPLORATION;
 int steps = 0;
 int simulations = 0;
-bool gui = true;
+bool gui = false;
 ofstream log_file;              // Log file
 
 // Elements useful for object detection
