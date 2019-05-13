@@ -873,11 +873,11 @@ double calculateReward(int sa, int sp){
     act_height = robot_state.height_d;
     int reward = 0;
     // I have found the object
-    if((act_dist == 0 || act_dist > 3) && act_ang > 1 && act_ang < 5 && act_height > 0 &&
-     (prev_ang == 0 || prev_ang == 5)){
-         reward += 2;
-    }else if((prev_dist == 0 || prev_dist > 3) && act_ang == 3 && act_height > 0 && act_dist > 3){
-        reward += 4;
+    if((prev_dist == 0 || prev_ang == 0 || prev_height == 0) &&
+        (act_dist > 0 && act_ang > 0 && act_height >0)){
+            reward += 2;
+    }else if(act_dist > 0 && act_dist < prev_dist){
+        reward += 3;
     }
     reward += 100 * robot_state.object_picked * robot_state.folded;
     return reward;
@@ -888,9 +888,9 @@ double calculateReward(int sa, int sp){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_reward3.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_tableH.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_reward3.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_tableH.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -928,9 +928,9 @@ void actualizeLog(int sa, int sp, double reward){
 -----------------------------------*/
 void actualizeSimplifiedLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_reward3.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_tableH.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_reward3.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_tableH.txt", ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";

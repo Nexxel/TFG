@@ -54,8 +54,8 @@
 #define MAX_Y 2.0
 #define MIN_Y -2.0
 // Number of box.urdf to use (box_1 z-size=0.1, box_2 z-size=0.2...)
-#define MIN_BOX 4
-#define MAX_BOX 6
+#define MIN_BOX 3
+#define MAX_BOX 5
 
 #define ALPHA 0.02
 #define GAMMA 0.9
@@ -119,7 +119,7 @@ int counter = 0;            // Total number of steps
 double exploration_rate = MAX_EXPLORATION;
 int steps = 0;
 int simulations = 0;
-bool gui = false;
+bool gui = true;
 ofstream log_file;              // Log file
 
 // Elements useful for object detection
