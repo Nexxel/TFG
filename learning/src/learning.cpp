@@ -875,10 +875,7 @@ double calculateReward(int sa, int sp){
     if((prev_dist == 0 || prev_ang == 0 || prev_height == 0) &&
         (act_dist > 0 && act_ang > 0 && act_height >0)){
             reward += 2;
-    }else if((prev_ang == 0 && act_ang > 0 || prev_height == 0 && act_height > 0) &&
-        (act_dist > 0 || act_ang > 0 && act_height >0)){
-            reward += 1;
-        }
+    }
     else if(act_dist > 0 && act_dist < prev_dist){
         reward += 3;
     }
