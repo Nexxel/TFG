@@ -1,4 +1,4 @@
-#include "learning.h"
+#include "learning2.h"
 
 /*------------------------------------
  Callbacks
@@ -888,9 +888,9 @@ double calculateReward(int sa, int sp){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_reward5.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_discr3.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_reward5.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_discr3.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -928,9 +928,9 @@ void actualizeLog(int sa, int sp, double reward){
 -----------------------------------*/
 void actualizeSimplifiedLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_reward5.txt");
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_discr3.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_reward5.txt", ios::app | ios::out);
+        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_discr3.txt", ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";
