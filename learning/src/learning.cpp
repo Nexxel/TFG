@@ -69,16 +69,6 @@ void callbackImage(const ImageConstPtr& image_msg){
         gripper_effort = joint_states_msg->effort[5];
     }
  }
-
-/*------------------------------------
- Change discretization level:
- -----------------------------------*/
- void setDiscretizationLevel(const Int16ConstPtr& new_discr_level){
-    if (!inside_learning){
-        discr_level = new_discr_level->data;
-        ROS_INFO("\n\nDiscretization level: %d\n", discr_level);
-    }
- }
 /*------------------------------------
  Methods
  -----------------------------------*/
@@ -141,7 +131,6 @@ void learning(Handlers handlers){
         color_image_sub = handlers.getIT().subscribe("/camera/rgb/image_color", 1, &callbackImage);
         camera_info_sub = handlers.getNH().subscribe("/camera/rgb/camera_info", 1, &callbackCameraInfo);
         joint_states_sub = handlers.getNH().subscribe("/joint_states", 1, &getGripperEffortCallback);
-        discr_level_sub = handlers.getNH().subscribe("/learning/set_discr_level", 1, &setDiscretizationLevel);
 
         joints[0] = handlers.getNH().advertise<Float64>("/arm_1_joint/command", 1);
         joints[1] = handlers.getNH().advertise<Float64>("/arm_2_joint/command", 1);
@@ -222,12 +211,12 @@ void learning(Handlers handlers){
                 // Turn left
                 else if(action == 0){
                     ROS_INFO("Turning left...");
-                    base_movement.angular.z = 0.2;
+                    base_movement.angular.z = 0.1;
                 }
                 // Turn right
                 else if(action == 1){
                     ROS_INFO("Turning right...");
-                    base_movement.angular.z = -0.2;
+                    base_movement.angular.z = -0.1;
                 }
                 base.publish(base_movement);
                 processMessages();
@@ -888,9 +877,9 @@ double calculateReward(int sa, int sp){
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_discr3.txt");
+        log_file.open("$(rospack find learning)/logs/log_test_turning.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/log_test_discr3.txt", ios::app | ios::out);
+        log_file.open("$(rospack find learning)/logs/log_test_turning.txt", ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -928,9 +917,9 @@ void actualizeLog(int sa, int sp, double reward){
 -----------------------------------*/
 void actualizeSimplifiedLog(int sa, int sp, double reward){
     if (steps == 1 && simulations == 1){
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_discr3.txt");
+        log_file.open("$(rospack find learning)/simplified_logs/simplified_log_test_turning.txt");
     }else{
-        log_file.open("/home/nexel/catkin_ws/src/learning/simplified_log_test_discr3.txt", ios::app | ios::out);
+        log_file.open("$(rospack find learning)/simplified_logs/simplified_log_test_turning.txt", ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";

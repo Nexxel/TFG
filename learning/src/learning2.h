@@ -91,7 +91,7 @@ using namespace geometry_msgs;
 bool inside_learning = false; // Boolean to control the callbacks
 
 double a[3];            // Orientation of gripper
-int discr_level = 13;    // Discretization level
+int discr_level = 11;    // Discretization level
 
 double T05[4][4];       // Direct kinematic model
 
@@ -110,16 +110,16 @@ double joint_angles[5];
 
 int action;                 // Learning action
 //const size_t num_states = pow(discr_level+1, 3) * pow(2,2); // Really 6³*2² = 864 
-double q_matrix[10976][5];        // Q matrix
-double V[10976];                  // Value function
-int policy_matrix[10976];      // Policy matrix
-int visit_matrix[10976][5];    // Matrix of visits
+double q_matrix[6912][5];        // Q matrix
+double V[6912];                  // Value function
+int policy_matrix[6912];      // Policy matrix
+int visit_matrix[6912][5];    // Matrix of visits
 int counter = 0;            // Total number of steps
 
 double exploration_rate = MAX_EXPLORATION;
 int steps = 0;
 int simulations = 0;
-bool gui = true;
+bool gui = false;
 ofstream log_file;              // Log file
 
 // Elements useful for object detection
@@ -169,10 +169,6 @@ ros::Publisher base;
  Get gripper effort:
  -----------------------------------*/
  void getGripperEffortCallback(const JointStateConstPtr& joint_states_msg);
-/*------------------------------------
- Change discretization level:
- -----------------------------------*/
- void setDiscretizationLevel(const Int16ConstPtr& new_discr_level);
 /*------------------------------------
  Methods
  -----------------------------------*/
