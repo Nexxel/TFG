@@ -219,9 +219,8 @@ void learning(Handlers handlers){
                     base_movement.angular.z = -0.1;
                 }
                 base.publish(base_movement);
-                processMessages();
             }
-            sleep(3);
+            ros::Duration(5).sleep();
 
             // Update state
             processMessages();
