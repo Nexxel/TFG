@@ -30,11 +30,7 @@ void callbackImage(const ImageConstPtr& image_msg){
     cvtColor(cv_ptr->image, imageHSV, COLOR_BGR2HSV);
     inRange(imageHSV, Scalar(90 - 10, 100, 100), Scalar(90 + 10, 255, 255), cv_ptr->image);
     // Apply filter for avoiding false positives
-    if(!is_simulation){
-        GaussianBlur(cv_ptr->image, cv_ptr->image, Size(7,7), 5, 5);
-    }else{
-        GaussianBlur(cv_ptr->image, cv_ptr->image, Size(3,3), 1, 1);
-    }
+    GaussianBlur(cv_ptr->image, cv_ptr->image, Size(7,7), 5, 5);
 }
 
  /*------------------------------------
