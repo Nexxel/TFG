@@ -220,7 +220,7 @@ void learning(Handlers handlers){
                 }
                 base.publish(base_movement);
             }
-            ros::Duration(5).sleep();
+            ros::Duration(6).sleep();
 
             // Update state
             processMessages();
