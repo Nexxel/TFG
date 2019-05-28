@@ -189,10 +189,13 @@ void learning(Handlers handlers){
                 mci(next_position,n);
                 closeGripper();
                 ros::Duration(9).sleep();
-                foldArm();
             }
             // 3.2 Move base if not reachable
             else{
+                if(robot_state.folded == 0){
+                    foldArm();
+                    ros::Duration(3).sleep();
+                }
                 Twist base_movement; 
                 // Move front
                 if (action == 2){
