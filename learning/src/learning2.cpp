@@ -298,7 +298,7 @@ void getLocation(){
 void calculateRealPos(){
     int max_u = INFINITY; int max_v = INFINITY;
     int min_u = -INFINITY; int min_v = -INFINITY;
-    if(x_values.size != 0 && y_values.size != 0){
+    if(x_values.size() != 0 && y_values.size() != 0){
         int x_avg = round(sum_x/x_values.size()); int y_avg = round(sum_y/y_values.size());
         min_u = object_center[0] - x_avg/2;  max_u = object_center[0] + x_avg/2;
         min_v = object_center[1] - y_avg/2;  max_v = object_center[1] + y_avg/2;

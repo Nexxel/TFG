@@ -188,29 +188,13 @@ void getLocation(){
  Calculate the real position of the object with respect to the robot:
 -----------------------------------*/
 void calculateRealPos(){
-    int max_u; int max_v;
-    int min_u; int min_v;
-    int min_x = INFINITY; int min_y = INFINITY;
-    int max_x = -INFINITY; int max_y = -INFINITY;
-
-    for(int i = 0; i < pixel_locations.total(); i++){
-        Point pixel = pixel_locations.at<Point>(i);
-        if(pixel.x == object_center[0] and pixel.y < min_y){
-            min_y = pixel.y;
-        }if(pixel.x == object_center[0] and pixel.y > max_y){
-            max_y = pixel.y;
-        }if(pixel.y == object_center[1] and pixel.x < min_x){
-            min_x = pixel.x;
-        }if(pixel.y == object_center[1] and pixel.x > max_x){
-            max_x = pixel.x;
-        }
+    int max_u = INFINITY; int max_v = INFINITY;
+    int min_u = -INFINITY; int min_v = -INFINITY;
+    if(x_values.size() != 0 && y_values.size() != 0){
+        int x_avg = round(sum_x/x_values.size()); int y_avg = round(sum_y/y_values.size());
+        min_u = object_center[0] - x_avg/2;  max_u = object_center[0] + x_avg/2;
+        min_v = object_center[1] - y_avg/2;  max_v = object_center[1] + y_avg/2;
     }
-
-    max_u = max_x;
-    min_u = min_x;
-    max_v = max_y;
-    min_v = min_y;
-    
     getObjectPosition(max_u,max_v,min_u, min_v);
 }
 
