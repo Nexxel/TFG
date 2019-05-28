@@ -110,10 +110,10 @@ double joint_angles[5];
 
 int action;                 // Learning action
 //const size_t num_states = pow(discr_level+1, 3) * pow(2,2); // Really 6³*2² = 864 
-double q_matrix[6912][5];        // Q matrix
-double V[6912];                  // Value function
-int policy_matrix[6912];      // Policy matrix
-int visit_matrix[6912][5];    // Matrix of visits
+double q_matrix[7488][5];        // Q matrix
+double V[7488];                  // Value function
+int policy_matrix[7488];      // Policy matrix
+int visit_matrix[7488][5];    // Matrix of visits
 int counter = 0;            // Total number of steps
 
 double exploration_rate = MAX_EXPLORATION;
@@ -127,6 +127,12 @@ cv_bridge::CvImagePtr cv_ptr; // Pointer to the cv image
 Mat pixel_locations;          // Location of the pixels of the object
 double P[3][4];               // Projection/camera matrix of 3 x 4
 double P_inv[4][3]; // Pseudo-inverse Projection matrix of 4 x 3
+
+// To get object position
+int sum_x = 0; 
+int sum_y = 0; 
+set<int> x_values = set<int>();
+set<int> y_values = set<int>();
 
 // Node handlers
 class Handlers{

@@ -1,7 +1,4 @@
 <robot name="red_object">
-  <gazebo>
-  	<static>1</static>
-  </gazebo>
 	<pose>1 0 0.5 0 -0 0</pose>
   <link name="my_object">
     <inertial>
@@ -10,12 +7,18 @@
     </inertial>
     <visual>
       <geometry>
-        <cylinder radius="0.0120855" length="0.100067"/>
+        <cylinder>
+        	<radius>0.0120855</radius>
+        	<length>0.100067</length>
+       	</cylinder>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <cylinder radius="0.0120855" length="0.100067"/>
+        <cylinder>
+        	<radius>0.0120855</radius>
+        	<length>0.100067</length>
+       	</cylinder>
       </geometry>
     </collision>
   </link>

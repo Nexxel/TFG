@@ -30,7 +30,11 @@ void callbackImage(const ImageConstPtr& image_msg){
     cvtColor(cv_ptr->image, imageHSV, COLOR_BGR2HSV);
     inRange(imageHSV, Scalar(90 - 10, 100, 100), Scalar(90 + 10, 255, 255), cv_ptr->image);
     // Apply filter for avoiding false positives
-    GaussianBlur(cv_ptr->image, cv_ptr->image, Size(7,7), 5, 5);
+    if(!is_simulation){
+        GaussianBlur(cv_ptr->image, cv_ptr->image, Size(7,7), 5, 5);
+    }else{
+        GaussianBlur(cv_ptr->image, cv_ptr->image, Size(3,3), 1, 1);
+    }
 }
 
  /*------------------------------------
@@ -65,6 +69,62 @@ void callbackImage(const ImageConstPtr& image_msg){
         gripper_effort = joint_states_msg->effort[5];
     }
  }
+/*------------------------------------
+ Methods
+ -----------------------------------*/
+int main(int argc, char** argv){
+    ros::init(argc, argv, "move_arm_to_object");
+    double n[3] = {1,0,0};
+
+    // We check if it is a gazebo simulation
+    
+    Handlers handlers;
+
+    // Initialize all publishers and subscribers
+    ros::master::getTopics(topic_info);
+    isSimulation();
+    color_image_sub = handlers.getIT().subscribe("/camera/rgb/image_color", 1, &callbackImage);
+    camera_info_sub = handlers.getNH().subscribe("/camera/rgb/camera_info", 1, &callbackCameraInfo);
+    joint_states_sub = handlers.getNH().subscribe("/joint_states", 1, &getGripperEffortCallback);
+
+    joints[0] = handlers.getNH().advertise<Float64>("/arm_1_joint/command", 1);
+    joints[1] = handlers.getNH().advertise<Float64>("/arm_2_joint/command", 1);
+    joints[2] = handlers.getNH().advertise<Float64>("/arm_3_joint/command", 1);
+    joints[3] = handlers.getNH().advertise<Float64>("/arm_4_joint/command", 1);
+    joints[4] = handlers.getNH().advertise<Float64>("/arm_5_joint/command", 1);
+
+    gripper = handlers.getNH().advertise<Float64>("/gripper_1_joint/command", 1);
+
+    processMessages();
+    updateState();
+    double step = double(cv_ptr->image.rows)/double(discr_level);
+    double next_position[3];
+    ROS_INFO("Image_rows: %d", cv_ptr->image.rows);
+    ROS_INFO("Step: %.10f", step);
+    ROS_INFO("Height: %.10f", robot_state.height_d * step * HEIGHT_PX_2_M);
+    setNextPosition(next_position,
+                0.27,
+                0.005, 
+                (double)robot_state.height_d * step * HEIGHT_PX_2_M);
+    mci(next_position,n);
+    openGripper();
+    ros::Duration(3).sleep();
+    /*
+    setNextPosition(next_position,
+                0.325,
+                0.005, 
+                (double)robot_state.height_d * step * HEIGHT_PX_2_M);
+    mci(next_position,n);
+    */
+    closeGripper();
+    ros::Duration(9).sleep();
+    //foldArm();
+    processMessages();
+    updateState();
+    ROS_INFO("Effort: %.10f", gripper_effort);
+    ros::shutdown();
+    return 0;
+}
 
 /*------------------------------------
  Process messages:
@@ -83,31 +143,7 @@ void callbackImage(const ImageConstPtr& image_msg){
     }
  }
 
-/*------------------------------------
- Methods
- -----------------------------------*/
-int main(int argc, char** argv){
-    ros::init(argc, argv, "get_state");
-
-    // We check if it is a gazebo simulation
-    
-    Handlers handlers;
-    // Initialize all publishers and subscribers
-    ros::master::getTopics(topic_info);
-    isSimulation();
-    color_image_sub = handlers.getIT().subscribe("/camera/rgb/image_color", 1, &callbackImage);
-    camera_info_sub = handlers.getNH().subscribe("/camera/rgb/camera_info", 1, &callbackCameraInfo);
-    joint_states_sub = handlers.getNH().subscribe("/joint_states", 1, &getGripperEffortCallback);
-
-    processMessages();
-    updateState();
-    ROS_INFO("\n============STATE===========\n\tDistance: %d\n\tAngle:%d\n\tHeight:%d\n\tPicked:%d\n\tFolded:%d\n\n",
-    robot_state.distance_d, robot_state.angle_d, robot_state.height_d, robot_state.object_picked, robot_state.folded);
-    ros::shutdown();
-    return 0;
-}
-
-/*------------------------------------
+ /*------------------------------------
  Update state:
 -----------------------------------*/
 void updateState(){
@@ -167,8 +203,6 @@ void calculateRealPos(){
             max_x = pixel.x;
         }
     }
-
-    ROS_INFO("Width object(px): %d", min_x - max_x);
 
     max_u = max_x;
     min_u = min_x;
@@ -230,11 +264,6 @@ void discretizeValuesAux(int selector, double step){
         }
         quadrant++;
     }
-    if (selector != 0 && selector != 1){
-        if (*state_c >= step*double(quadrant)){
-            *state_d = quadrant + 1;
-        }
-    }
 }
 
 /*------------------------------------
@@ -274,7 +303,6 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     //It should be -0.12, but as we don't see the entire object we have to modify it
     robot_state.height_c = (result[1][0]/result[3][0]) * HEIGHT_PX_2_M * robot_state.distance_c - 0.05;   // Y = k*Z 
     robot_state.distance_c -= 0.08;
-    ROS_INFO("\n\nDistance, Angle, height: \n\t(%.10f, %.10f, %.10f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
 }
 
 /*------------------------------------
@@ -308,10 +336,245 @@ void isSimulation(){
 }
 
 /*------------------------------------
+ Multiply 2 transformation matrices
+-----------------------------------*/
+void multiplyTransformations(double result[4][4], double first[4][4], double second[4][4]){
+    for (int i = 0; i < 4; i++){
+        for (int j = 0; j < 4; j++){
+            result[i][j] = 0;
+        }
+    }
+    
+    for (int i  = 0; i < 4; i++){
+		for (int j = 0;j < 4; j++){
+            for (int k = 0; k < 3; k++){
+                result[i][j] += first[i][k] * second[k][j];
+            }
+		}
+	}
+}
+
+/*------------------------------------
+ Update the matrix T05 of the direct kinematic model copying aux into T05
+-----------------------------------*/
+void updateT05(double T05[4][4], double aux[4][4]){
+	for(int i  = 0; i<4; i++){
+		for(int j  = 0; j<4; j++){
+			T05[i][j] = aux[i][j];
+		}
+	}
+}
+
+/*------------------------------------
+ Get the direct kinematic model of the widowX-arm
+-----------------------------------*/
+void mcd(){
+    double alpha[] = {0, -M_PI/2, M_PI, 0, M_PI/2};
+	double a[] = {0,0,d2,L3,0};
+	double d[] = {0,0,0,0,0};
+	double q[] = {joint_angles[0],
+                    joint_angles[1]-beta,
+                    joint_angles[2]-beta,
+                    joint_angles[3]+(M_PI/2),
+                    joint_angles[4]};
+
+	int i  = 0;
+	double T01[][4] = {
+		{cos(q[i]), -sin(q[i]), 0, a[i]},
+		{sin(q[i])*cos(alpha[i]), cos(q[i])*cos(alpha[i]), -0, -0*d[i]},
+		{sin(q[i])*0, cos(q[i])*0, cos(alpha[i]), cos(alpha[i])*d[i]},
+		{0, 0, 0, 1}
+	};
+
+	i  = 1;
+	double T12[][4] = {
+		{cos(q[i]), -sin(q[i]), 0, a[i]},
+		{sin(q[i])*0, cos(q[i])*0, -sin(alpha[i]), -sin(alpha[i])*d[i]},
+		{sin(q[i])*sin(alpha[i]), cos(q[i])*sin(alpha[i]), 0, 0*d[i]},
+		{0, 0, 0, 1}
+	};
+
+	i  = 2;
+	double T23[][4] = {
+		{cos(q[i]), -sin(q[i]), 0, a[i]},
+		{sin(q[i])*cos(alpha[i]), cos(q[i])*cos(alpha[i]), -0, -0*d[i]},
+		{sin(q[i])*0, cos(q[i])*0, cos(alpha[i]), cos(alpha[i])*d[i]},
+		{0, 0, 0, 1}
+	};
+
+	i  = 3;
+	double T34[][4] = {
+		{cos(q[i]), -sin(q[i]), 0, a[i]},
+		{sin(q[i])*cos(alpha[i]), cos(q[i])*cos(alpha[i]), -0, -0*d[i]},
+		{sin(q[i])*0, cos(q[i])*0, cos(alpha[i]), cos(alpha[i])*d[i]},
+		{0, 0, 0, 1}
+	};
+
+	i  = 4;
+	double T45[][4] = {
+		{cos(q[i]), -sin(q[i]), 0, a[i]},
+		{sin(q[i])*0, cos(q[i])*0, -sin(alpha[i]), -sin(alpha[i])*d[i]},
+		{sin(q[i])*sin(alpha[i]), cos(q[i])*sin(alpha[i]), 0, 0*d[i]},
+		{0, 0, 0, 1}
+	};
+
+	double aux[4][4];
+
+	multiplyTransformations(aux, T01, T12);
+	
+	updateT05(T05, aux);
+
+	multiplyTransformations(aux, T05, T23);
+
+	updateT05(T05, aux);
+
+	multiplyTransformations(aux, T05, T34);
+
+	updateT05(T05, aux);
+
+	multiplyTransformations(aux, T05, T45);
+
+	updateT05(T05, aux);
+}
+
+/*------------------------------------
+ Get the position of the gripper by means of the Direct kinematic model:
+ -----------------------------------*/
+void getGripperPosition(){
+    double ax = T05[0][2];
+	double ay = T05[1][2];
+	double az = T05[2][2];
+	double px = T05[0][3];
+	double py = T05[1][3];
+	double pz = T05[2][3];
+
+	gripper_position[0] = px + L45*ax;
+	gripper_position[1] = py + L45*ay;
+	gripper_position[2] = pz + L45*az;
+
+    a[0] = ax;
+    a[1] = ay;
+    a[2] = az;
+}
+
+/*------------------------------------
+ Get the angle of each joint in order to reach the desired position
+ by means of the inverse kinematic model:
+    Inputs:
+        - next_position: Desired position
+        - a: Desired angle orientation of the wrisp
+        - n: Desired orientation of the wrisp 
+ -----------------------------------*/
+void mci(double next_position[3], double n[3]){
+	double px = next_position[0] - L45*a[0];
+	double py = next_position[1] - L45*a[1];
+	double pz = next_position[2] - L45*a[2];
+
+	double q1 = atan2(py, px);
+            
+	double k = pow(pz, 2) + pow(d2, 2) + pow(((px * cos(q1)) + (py * sin(q1))), 2) - pow(L3, 2);
+	double k1 = 2 * d2 * px * cos(q1) + 2 * py * d2 * sin(q1);
+	double k2 = 2 * pz * d2;
+	double theta2b = atan2(k1, k2) - atan2(k, -sqrt(pow(k1,2)+pow(k2,2)-pow(k,2)));
+	double q2 = theta2b + beta;
+
+	double theta23 = asin((-pz - d2*sin(theta2b))/L3);
+	double q3 = q2 - theta23;
+
+	double L = a[2]*cos(q2-q3) + a[0]*sin(q2-q3)*cos(q1) + a[1]*sin(q2-q3)*sin(q1);
+	double q4 = acos(-L) - (M_PI/2);
+
+	double q5 = asin(n[0]*sin(q1) - n[1]*cos(q1));
+    ROS_INFO("\n\nq1: %.2f\nq2: %.2f\nq3: %.2f\nq4: %.2f\nq5: %.2f\n", q1,q2,q3,q4,q5);
+
+	Float64 angle;
+    angle.data = q5;
+    joints[4].publish(angle);
+    angle.data = q4;
+    joints[3].publish(angle);
+    angle.data = q3;
+    joints[2].publish(angle);
+    angle.data = q2;
+    joints[1].publish(angle);
+    angle.data = q1;
+    joints[0].publish(angle);
+
+    robot_state.folded = (next_position[0] == 0
+                        and next_position[1] == 0
+                        and next_position[2] == 0);
+    if(!isnan(q1))
+    joint_angles[0] = q1;
+
+    if(!isnan(q2))
+    joint_angles[1] = q2;
+
+    if(!isnan(q3))
+    joint_angles[2] = q3;
+
+    if(!isnan(q4))
+    joint_angles[3] = q4;
+
+    if(!isnan(q5))
+    joint_angles[4] = q5;
+
+    processMessages();
+    mcd();
+    getGripperPosition();
+}
+
+/*------------------------------------
+ Open gripper:
+ -----------------------------------*/
+void openGripper(){
+    Float64 gripper_value; gripper_value.data = 2.5;
+    gripper.publish(gripper_value);
+    gripper_opened = true;
+    processMessages();
+}
+
+/*------------------------------------
+ Close gripper:
+ -----------------------------------*/
+ void closeGripper(){
+    Float64 gripper_value; gripper_value.data = 0;
+    gripper.publish(gripper_value);
+    gripper_opened = false;
+    processMessages();
+}
+
+/*------------------------------------
  Detect picked object:
 -----------------------------------*/
 void isObjectPicked(){
     robot_state.object_picked = (!gripper_opened) 
                 and (abs(gripper_effort) > MAX_EFFORT);
     ROS_INFO("gripper_effort: %.4f", gripper_effort);
+}
+
+/*------------------------------------
+ Set next position:
+   Inputs:
+      next_position: The next position to initialize
+      x, y, z: The coordinates of the next position
+-----------------------------------*/
+void setNextPosition(double next_position[3], double x, double y, double z){
+    next_position[0] = x;
+    next_position[1] = y;
+    next_position[2] = z;
+}
+
+/*------------------------------------
+ Fold arm:
+-----------------------------------*/
+void foldArm(){
+    double n[3] = {0,0,1}; 
+    double next_position[3];
+    // Turn the arm to the position (0.3125,0,0.1450)
+    setNextPosition(next_position,
+                     0.3125,
+                     0, 
+                     0.1450);
+    mci(next_position,n);
+
+    robot_state.folded = true;
 }

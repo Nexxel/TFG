@@ -207,3 +207,9 @@ target_link_libraries(normal ${catkin_LIBRARIES})
 
 add_executable(learning src/learning.cpp)
 target_link_libraries(learning ${catkin_LIBRARIES})
+
+add_executable(get_state src/getState.cpp)
+target_link_libraries(get_state ${catkin_LIBRARIES})
+
+add_executable(move_arm_to_object src/moveArmToObject.cpp)
+target_link_libraries(move_arm_to_object ${catkin_LIBRARIES})
