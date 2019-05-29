@@ -154,12 +154,29 @@ void getLocation(){
 void calculateRealPos(){
     int max_u = INFINITY; int max_v = INFINITY;
     int min_u = -INFINITY; int min_v = -INFINITY;
-    if(x_values.size() != 0 && y_values.size() != 0){
-        int x_avg = round(sum_x/x_values.size()); int y_avg = round(sum_y/y_values.size());
-        min_u = object_center[0] - x_avg/2;  max_u = object_center[0] + x_avg/2;
-        min_v = object_center[1] - y_avg/2;  max_v = object_center[1] + y_avg/2;
+    if(!x_values.empty() && !y_values.empty()){
+        /*
+        int x_avg = round(sum_x/y_values.size()); int y_avg = round(sum_y/x_values.size());
+        x_avg = round(x_avg/x_values.size()); y_avg = round(y_avg/y_values.size());
+        int x_diff = x_avg - *(x_values.begin()); int y_diff = y_avg - *(y_values.begin());
+        ROS_INFO("y_values.size: %lu", y_values.size());
+        ROS_INFO("x_avg: %d", x_avg);
+        ROS_INFO("y_avg: %d", y_avg);
+
+        min_u = object_center[0] - x_diff;  max_u = object_center[0] + x_diff;
+        min_v = object_center[1] - y_diff;  max_v = object_center[1] + y_diff;
+        */
+       min_u = *(x_values.begin()); max_u = *(--x_values.end());
+       min_v = *(y_values.begin()); max_v = *(--y_values.end());
+    }
+    ROS_INFO("===========X_VALUES============");
+    std::set<int>::iterator it = x_values.begin();
+    while(it != x_values.end()){
+        ROS_INFO("%d",*it);
+        it++;
     }
     ROS_INFO("min_u: %d, max_u: %d", min_u, max_u);
+    ROS_INFO("min_v: %d, max_v: %d", min_v, max_v);
     getObjectPosition(max_u,max_v,min_u, min_v);
 }
 
@@ -206,7 +223,6 @@ void discretizeValuesAux(int selector, double step){
     while (quadrant < discr_level and !inside_quadrant){
         double ranges[2] = {step*double(quadrant),
                          step*double(quadrant+1)};
-
         if(*state_c >= ranges[0]
             and *state_c < ranges[1])
         {
@@ -236,6 +252,10 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
         robot_state.angle_c = -INFINITY;
         robot_state.distance_c = -INFINITY;
         robot_state.height_c = -INFINITY;
+        object_center[0] = -INFINITY; 
+        object_center[1] = -INFINITY; 
+        ROS_INFO("angle, distance, height: %.10f, %.10f, %.10f",
+         robot_state.angle_c, robot_state.distance_c, robot_state.height_c);
     }else{
         // Get the distance of the object
         double f = P[0][0];
@@ -250,7 +270,9 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
         real_pos_min[1][0] = ((min_v - cy));// * HEIGHT_PX_2_M;
 
         double width = real_pos_max[0][0] - real_pos_min[0][0];
-        
+        ROS_INFO("Width: %.10f", width);
+        ROS_INFO("f: %.10f", f);
+        ROS_INFO("(f * OBJECT_WIDTH): %.10f", (f * OBJECT_WIDTH));
         robot_state.distance_c = (f * OBJECT_WIDTH) / width;
 
         // Get the pixel position in x,y
@@ -260,9 +282,9 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
         pixel_pos[1][0] = object_center[1];
         pixel_pos[2][0] = 1;
         multiplyP_Inv(result, P_inv, pixel_pos);
-        robot_state.angle_c = (result[0][0]/result[3][0]) * WIDTH_PX_2_M * robot_state.distance_c + 0.005; // X = k*Z 
+        robot_state.angle_c = (result[0][0]/result[3][0]) /** WIDTH_PX_2_M*/ * robot_state.distance_c + 0.005; // X = k*Z 
         //It should be -0.12, but as we don't see the entire object we have to modify it
-        robot_state.height_c = (result[1][0]/result[3][0]) * HEIGHT_PX_2_M * robot_state.distance_c - 0.05;   // Y = k*Z 
+        robot_state.height_c = (result[1][0]/result[3][0]) /** HEIGHT_PX_2_M*/ * robot_state.distance_c - 0.05;   // Y = k*Z 
         robot_state.distance_c -= 0.08;
         ROS_INFO("\n\nDistance, Angle, height: \n\t(%.10f, %.10f, %.10f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
     }

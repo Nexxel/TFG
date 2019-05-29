@@ -191,7 +191,7 @@ void calculateRealPos(){
     int max_u = INFINITY; int max_v = INFINITY;
     int min_u = -INFINITY; int min_v = -INFINITY;
     if(x_values.size() != 0 && y_values.size() != 0){
-        int x_avg = round(sum_x/x_values.size()); int y_avg = round(sum_y/y_values.size());
+        int x_avg = round(sum_x/y_values.size()); int y_avg = round(sum_y/x_values.size());
         min_u = object_center[0] - x_avg/2;  max_u = object_center[0] + x_avg/2;
         min_v = object_center[1] - y_avg/2;  max_v = object_center[1] + y_avg/2;
     }
@@ -227,10 +227,10 @@ void discretizeValuesAux(int selector, double step){
     // Continuos and discretized value
     double *state_c; int *state_d;
     if (selector == 0){
-        state_c = &object_center[0];
+        state_c = &robot_state.angle_c;
         state_d = &robot_state.angle_d;
     }else if(selector == 1){
-        state_c = &object_center[1];
+        state_c = &robot_state.height_c;
         state_d = &robot_state.height_d;
     }else{
         state_c = &robot_state.distance_c;
@@ -241,7 +241,13 @@ void discretizeValuesAux(int selector, double step){
     while (quadrant < discr_level and !inside_quadrant){
         double ranges[2] = {step*double(quadrant),
                          step*double(quadrant+1)};
-
+        if(selector == 0){
+            ranges[0] *= WIDTH_PX_2_M;
+            ranges[1] *= WIDTH_PX_2_M;
+        }else if(selector == 1){
+            ranges[0] *= HEIGHT_PX_2_M;
+            ranges[1] *= HEIGHT_PX_2_M;
+        }
         if(*state_c >= ranges[0]
             and *state_c < ranges[1])
         {

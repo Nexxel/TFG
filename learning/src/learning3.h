@@ -40,7 +40,7 @@
 #define OBJECT_AREA (OBJECT_HEIGHT * OBJECT_WEIGHT)
 
 #define SENSOR_WIDTH 0.00230 // Width of the sensor in meters
-#define SENSOR_HEIGHT 0.00173 // Height of the sensor in pixels
+#define SENSOR_HEIGHT 0.00173 // Height of the sensor in meters
 
 #define CAMERA_WIDTH 640 // Width of the image in pixels
 #define CAMERA_HEIGHT 480 // Height of the image in pixels

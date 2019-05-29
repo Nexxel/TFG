@@ -335,10 +335,10 @@ void discretizeValuesAux(int selector, double step){
     // Continuos and discretized value
     double *state_c; int *state_d;
     if (selector == 0){
-        state_c = &object_center[0];
+        state_c = &robot_state.angle_c;
         state_d = &robot_state.angle_d;
     }else if(selector == 1){
-        state_c = &object_center[1];
+        state_c = &robot_state.height_c;
         state_d = &robot_state.height_d;
     }else{
         state_c = &robot_state.distance_c;
@@ -349,7 +349,13 @@ void discretizeValuesAux(int selector, double step){
     while (quadrant < discr_level and !inside_quadrant){
         double ranges[2] = {step*double(quadrant),
                          step*double(quadrant+1)};
-
+        if(selector == 0){
+            ranges[0] *= WIDTH_PX_2_M;
+            ranges[1] *= WIDTH_PX_2_M;
+        }else if(selector == 1){
+            ranges[0] *= HEIGHT_PX_2_M;
+            ranges[1] *= HEIGHT_PX_2_M;
+        }
         if(*state_c >= ranges[0]
             and *state_c < ranges[1])
         {
