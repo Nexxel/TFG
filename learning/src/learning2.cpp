@@ -655,10 +655,8 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
         pixel_pos[1][0] = object_center[1];
         pixel_pos[2][0] = 1;
         multiplyP_Inv(result, P_inv, pixel_pos);
-        robot_state.angle_c = (result[0][0]/result[3][0]) * WIDTH_PX_2_M * robot_state.distance_c + 0.005; // X = k*Z 
-        //It should be -0.12, but as we don't see the entire object we have to modify it
-        robot_state.height_c = (result[1][0]/result[3][0]) * HEIGHT_PX_2_M * robot_state.distance_c - 0.05;   // Y = k*Z 
-        robot_state.distance_c -= 0.08;
+        robot_state.angle_c = (result[0][0]/result[3][0]); 
+        robot_state.height_c = (result[1][0]/result[3][0]); 
         ROS_INFO("\n\nDistance, Angle, height: \n\t(%.10f, %.10f, %.10f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
     }
 }
