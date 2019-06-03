@@ -80,6 +80,21 @@ int main(int argc, char** argv){
 }
 
 /*------------------------------------
+ Initialize transformation matrix from Sensor frame to Widow-X arm frame:
+ -----------------------------------*/
+ void initializeTSB(){
+     for(int i = 0; i < 4; i++){
+         for(int j = 0; j < 4; j++){
+             TSB[i][j] = 0;
+         }
+     }
+    TSB[0][0] = -1; TSB[0][3] = 0.03;
+    TSB[1][2] = 1; TSB[1][3] = 0.14;
+    TSB[2][1] = 1; TSB[2][3] = 0.11;
+    TSB[3][3] = 1;
+ }
+
+/*------------------------------------
  Process messages:
  -----------------------------------*/
  void processMessages(){
@@ -107,6 +122,7 @@ int main(int argc, char** argv){
  -----------------------------------*/
 void learning(Handlers handlers){
     double n[3] = {1,0,0};
+    initializeTSB();
 
     while(ros::ok()){
         // Set random seed by the time of the cpu
@@ -175,18 +191,17 @@ void learning(Handlers handlers){
                 ROS_INFO("Moving arm...");
                 double step = double(cv_ptr->image.rows)/double(discr_level)/2.0 * HEIGHT_PX_2_M;
                 double next_position[3];
+                // Hallarle el módulo, normalizarlo y multiplicarlo por la distancia
+                double homogeneous_state_sensor[4][1] = {robot_state.angle_c, robot_state.height_c, robot_state.distance_c, 1};
+                double homogeneous_obj_pos[4][1];
+                sensor2Gripper(homogeneous_obj_pos, homogeneous_state_sensor);
                 setNextPosition(next_position,
-                            0.27,
-                            0.005, 
+                            homogeneous_obj_pos[2][0]/homogeneous_obj_pos[3][0],
+                            homogeneous_obj_pos[0][0]/homogeneous_obj_pos[3][0], 
                             robot_state.height_d * step);
                 mci(next_position,n);
                 openGripper();
                 ros::Duration(3).sleep();
-                setNextPosition(next_position,
-                            0.325,
-                            0.005, 
-                            robot_state.height_d * step);
-                mci(next_position,n);
                 closeGripper();
                 ros::Duration(9).sleep();
             }
@@ -388,7 +403,7 @@ void isSimulation(){
 /*------------------------------------
  Multiply P_inv and pixel_pos
 -----------------------------------*/
-void multiplyP_Inv(double result[4][1], double P_inv[4][3], double pixel_pos[3][1]){
+void multiplyP_Inv(double result[4][1], double pixel_pos[3][1]){
     for (int i = 0; i < 3; i++){
         result[i][0] = 0;
     }
@@ -397,6 +412,24 @@ void multiplyP_Inv(double result[4][1], double P_inv[4][3], double pixel_pos[3][
     for (int i  = 0; i < 4; i++){
         for (int k  = 0; k < 3; k++){
             result[i][0] += P_inv[i][k] * pixel_pos[k][0];
+        }
+    }
+}
+
+/*------------------------------------
+ Get the position of the object in the gripper frame
+-----------------------------------*/
+void sensor2Gripper(double result[4][1], double obj_pos[4][1]){
+    double T[4][4];
+    multiplyTransformations(T, T05, TSB);
+    for (int i = 0; i < 3; i++){
+        result[i][0] = 0;
+    }
+    result[3][0] = 1;
+    
+    for (int i  = 0; i < 4; i++){
+        for (int k  = 0; k < 4; k++){
+            result[i][0] += T[i][k] * obj_pos[k][0];
         }
     }
 }
@@ -654,7 +687,7 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
         pixel_pos[0][0] = object_center[0]; 
         pixel_pos[1][0] = object_center[1];
         pixel_pos[2][0] = 1;
-        multiplyP_Inv(result, P_inv, pixel_pos);
+        multiplyP_Inv(result, pixel_pos);
         robot_state.angle_c = (result[0][0]/result[3][0]); 
         robot_state.height_c = (result[1][0]/result[3][0]); 
         ROS_INFO("\n\nDistance, Angle, height: \n\t(%.10f, %.10f, %.10f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
