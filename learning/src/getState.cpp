@@ -99,6 +99,7 @@ int main(int argc, char** argv){
     camera_info_sub = handlers.getNH().subscribe("/camera/rgb/camera_info", 1, &callbackCameraInfo);
     joint_states_sub = handlers.getNH().subscribe("/joint_states", 1, &getGripperEffortCallback);
 
+    initializeTSB();
     processMessages();
     updateState();
     ROS_INFO("\n============STATE===========\n\tDistance: %d\n\tAngle:%d\n\tHeight:%d\n\tPicked:%d\n\tFolded:%d\n\n",
@@ -106,6 +107,21 @@ int main(int argc, char** argv){
     ros::shutdown();
     return 0;
 }
+
+/*------------------------------------
+ Initialize transformation matrix from Sensor frame to Widow-X arm frame:
+ -----------------------------------*/
+ void initializeTSB(){
+     for(int i = 0; i < 4; i++){
+         for(int j = 0; j < 4; j++){
+             TSB[i][j] = 0;
+         }
+     }
+    TSB[0][0] = -1; TSB[0][3] = 0.03;
+    TSB[1][2] = 1; TSB[1][3] = 0.14;
+    TSB[2][1] = 1; TSB[2][3] = 0.11;
+    TSB[3][3] = 1;
+ }
 
 /*------------------------------------
  Update state:
@@ -281,11 +297,10 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
         pixel_pos[0][0] = object_center[0]; 
         pixel_pos[1][0] = object_center[1];
         pixel_pos[2][0] = 1;
-        multiplyP_Inv(result, P_inv, pixel_pos);
-        robot_state.angle_c = (result[0][0]/result[3][0]) /** WIDTH_PX_2_M*/ * robot_state.distance_c + 0.005; // X = k*Z 
+        multiplyP_Inv(result, pixel_pos);
+        robot_state.angle_c = (result[0][0]/result[3][0]); 
         //It should be -0.12, but as we don't see the entire object we have to modify it
-        robot_state.height_c = (result[1][0]/result[3][0]) /** HEIGHT_PX_2_M*/ * robot_state.distance_c - 0.05;   // Y = k*Z 
-        robot_state.distance_c -= 0.08;
+        robot_state.height_c = (result[1][0]/result[3][0]);
         ROS_INFO("\n\nDistance, Angle, height: \n\t(%.10f, %.10f, %.10f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
     }
 }
@@ -293,7 +308,7 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
 /*------------------------------------
  Multiply P_inv and pixel_pos
 -----------------------------------*/
-void multiplyP_Inv(double result[4][1], double P_inv[4][3], double pixel_pos[3][1]){
+void multiplyP_Inv(double result[4][1], double pixel_pos[3][1]){
     for (int i = 0; i < 3; i++){
         result[i][0] = 0;
     }
@@ -302,6 +317,43 @@ void multiplyP_Inv(double result[4][1], double P_inv[4][3], double pixel_pos[3][
     for (int i  = 0; i < 4; i++){
         for (int k  = 0; k < 3; k++){
             result[i][0] += P_inv[i][k] * pixel_pos[k][0];
+        }
+    }
+}
+
+/*------------------------------------
+ Multiply 2 transformation matrices
+-----------------------------------*/
+void multiplyTransformations(double result[4][4], double first[4][4], double second[4][4]){
+    for (int i = 0; i < 4; i++){
+        for (int j = 0; j < 4; j++){
+            result[i][j] = 0;
+        }
+    }
+    
+    for (int i  = 0; i < 4; i++){
+		for (int j = 0;j < 4; j++){
+            for (int k = 0; k < 3; k++){
+                result[i][j] += first[i][k] * second[k][j];
+            }
+		}
+	}
+}
+
+/*------------------------------------
+ Get the position of the object in the gripper frame
+-----------------------------------*/
+void sensor2Gripper(double result[4][1], double obj_pos[4][1]){
+    double T[4][4];
+    multiplyTransformations(T, T05, TSB);
+    for (int i = 0; i < 3; i++){
+        result[i][0] = 0;
+    }
+    result[3][0] = 1;
+    
+    for (int i  = 0; i < 4; i++){
+        for (int k  = 0; k < 4; k++){
+            result[i][0] += T[i][k] * obj_pos[k][0];
         }
     }
 }
