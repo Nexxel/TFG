@@ -100,6 +100,7 @@ int main(int argc, char** argv){
     joint_states_sub = handlers.getNH().subscribe("/joint_states", 1, &getGripperEffortCallback);
 
     initializeTSB();
+    initializeI2P();
     processMessages();
     updateState();
     ROS_INFO("\n============STATE===========\n\tDistance: %d\n\tAngle:%d\n\tHeight:%d\n\tPicked:%d\n\tFolded:%d\n\n",
@@ -121,6 +122,20 @@ int main(int argc, char** argv){
     TSB[1][2] = 1; TSB[1][3] = 0.14;
     TSB[2][1] = 1; TSB[2][3] = 0.11;
     TSB[3][3] = 1;
+ }
+
+  /*------------------------------------
+ Initialize transformation matrix from image frame to P2:
+ -----------------------------------*/
+ void initializeI2P(){
+    for(int i = 0; i < 4; i++){
+         for(int j = 0; j < 4; j++){
+             I2P[i][j] = 0;
+         }
+    }
+    I2P[0][0] = 1; I2P[1][1] = -1;
+    I2P[0][2] = -320.5; I2P[1][2] = 240.5;
+    I2P[2][2] = 1; 
  }
 
 /*------------------------------------
@@ -184,12 +199,6 @@ void calculateRealPos(){
         */
        min_u = *(x_values.begin()); max_u = *(--x_values.end());
        min_v = *(y_values.begin()); max_v = *(--y_values.end());
-    }
-    ROS_INFO("===========X_VALUES============");
-    std::set<int>::iterator it = x_values.begin();
-    while(it != x_values.end()){
-        ROS_INFO("%d",*it);
-        it++;
     }
     ROS_INFO("min_u: %d, max_u: %d", min_u, max_u);
     ROS_INFO("min_v: %d, max_v: %d", min_v, max_v);
@@ -297,10 +306,10 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
         pixel_pos[0][0] = object_center[0]; 
         pixel_pos[1][0] = object_center[1];
         pixel_pos[2][0] = 1;
-        multiplyP_Inv(result, pixel_pos);
-        robot_state.angle_c = (result[0][0]/result[3][0]); 
+        image2sensor(result);
+        robot_state.angle_c = result[0][0] * robot_state.distance_c; 
         //It should be -0.12, but as we don't see the entire object we have to modify it
-        robot_state.height_c = (result[1][0]/result[3][0]);
+        robot_state.height_c = result[1][0] * robot_state.distance_c;
         ROS_INFO("\n\nDistance, Angle, height: \n\t(%.10f, %.10f, %.10f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
     }
 }
@@ -356,6 +365,20 @@ void sensor2Gripper(double result[4][1], double obj_pos[4][1]){
             result[i][0] += T[i][k] * obj_pos[k][0];
         }
     }
+}
+
+/*------------------------------------
+ Get the position of the object in the sensor frame
+-----------------------------------*/
+void image2sensor(double result[4][1]){
+    double homogeneus_object_pos[3][1] = {object_center[0], object_center[1], 1};
+    double P2[3][1] = {0,0,1};
+    for (int i  = 0; i < 4; i++){
+        for (int k  = 0; k < 4; k++){
+            P2[i][0] += I2P[i][k] * homogeneus_object_pos[k][0];
+        }
+    }
+    multiplyP_Inv(result, P2);
 }
 
 /*------------------------------------

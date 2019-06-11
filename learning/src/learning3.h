@@ -95,6 +95,7 @@ int discr_level = 11;    // Discretization level
 
 double T05[4][4];       // Direct kinematic model
 double TSB[4][4];       // Transformation matrix from sensor to arm base
+double I2P[3][3];       // Tranformation from Image frame to P2
 
 ros::master::V_TopicInfo topic_info;
 bool is_simulation;
@@ -184,6 +185,10 @@ int main(int argc, char** argv);
  Initialize transformation matrix from Sensor frame to Widow-X arm frame:
  -----------------------------------*/
  void initializeTSB();
+ /*------------------------------------
+ Initialize transformation matrix from image frame to P2:
+ -----------------------------------*/
+ void initializeI2P();
 /*------------------------------------
  Process messages:
  -----------------------------------*/
@@ -236,6 +241,10 @@ void multiplyP_Inv(double result[4][1], double pixel_pos[3][1]);
  Get the position of the object in the gripper frame
 -----------------------------------*/
 void sensor2Gripper(double result[4][1], double obj_pos[4][1]);
+/*------------------------------------
+ Get the position of the object in the sensor frame
+-----------------------------------*/
+void image2sensor(double result[4][1]);
 /*------------------------------------
  Multiply 2 transformation matrices
 -----------------------------------*/
