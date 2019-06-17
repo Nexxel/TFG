@@ -88,16 +88,19 @@ int main(int argc, char** argv){
     initializeI2P();
     vec4 hom_obj_pos;
     hom_obj_pos << robot_state.angle_c << robot_state.height_c << robot_state.distance_c << 1;
-    vec4 next_position = T05 * (TSB * (hom_obj_pos/norm(hom_obj_pos) * d))/1000;
+    vec4 next_position = (TSB * (hom_obj_pos));
+    ROS_INFO("Next: %.10f %.10f %.10f %.10f", next_position(0), next_position(1), next_position(2), next_position(3));
     next_position /= next_position(3);
     ROS_INFO("Next: %.10f %.10f %.10f", next_position(0), next_position(1), next_position(2));
     mci(next_position.rows(0,2),n);
+    /*
     ROS_INFO("T05");
     for(int i = 0; i < T05.n_rows; i++){
         for(int j = 0; j < T05.n_cols; j++){
             ROS_INFO("%.10f", T05(i,j));
         }
     }
+    */
     openGripper();
     ros::Duration(3).sleep();
     closeGripper();
