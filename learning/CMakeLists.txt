@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(learning)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+# add_compile_options(-std=c++03)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -19,6 +19,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
+find_package(LAPACK REQUIRED)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -203,13 +204,13 @@ include_directories(
 # catkin_add_nosetests(test)
 
 add_executable(normal src/normal.cpp)
-target_link_libraries(normal ${catkin_LIBRARIES})
+target_link_libraries(normal ${catkin_LIBRARIES} ${LAPACK_LIBRARIES})
 
 add_executable(learning src/learning.cpp)
-target_link_libraries(learning ${catkin_LIBRARIES})
+target_link_libraries(learning ${catkin_LIBRARIES} ${LAPACK_LIBRARIES})
 
 add_executable(get_state src/getState.cpp)
-target_link_libraries(get_state ${catkin_LIBRARIES})
+target_link_libraries(get_state ${catkin_LIBRARIES} ${LAPACK_LIBRARIES})
 
-#add_executable(move_arm_to_object src/moveArmToObject.cpp)
-#target_link_libraries(move_arm_to_object ${catkin_LIBRARIES})
+add_executable(move_arm_to_object src/moveArmToObject.cpp)
+target_link_libraries(move_arm_to_object ${catkin_LIBRARIES} ${LAPACK_LIBRARIES})
