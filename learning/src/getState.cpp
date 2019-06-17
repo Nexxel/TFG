@@ -1,4 +1,4 @@
-#include "learning3.h"
+#include "learning4.h"
 
 /*------------------------------------
  Callbacks
@@ -40,21 +40,11 @@ void callbackImage(const ImageConstPtr& image_msg){
     int counter = 0;
     for (int i  = 0; i < 3; i++){
         for (int j = 0; j < 4; j++){
-            P[i][j] = camera_info_msg->P.at(counter);
+            P(i,j) = camera_info_msg->P.at(counter);
             counter++;
         }
     }
-    
-    Mat auxP = Mat(3,4, DataType<double>::type, P);
-    Mat auxP_inv = Mat(4,3, DataType<double>::type, P_inv);
-    invert(auxP,auxP_inv, DECOMP_SVD);
-
-    // Copy the aux Mat
-    for(int i  = 0; i<4; i++){
-        for(int j = 0; j<3; j++){
-            P_inv[i][j] = auxP_inv.at<double>(i,j);
-        }
-    }
+    P(2,3) = 1;
  }
 
  /*------------------------------------
@@ -74,7 +64,7 @@ void callbackImage(const ImageConstPtr& image_msg){
      int counter = 0;
      gripper_effort = 0;
      while(ros::ok() 
-            and (cv_ptr == NULL or P_inv == NULL or gripper_effort == 0 or counter == 0))
+            and (cv_ptr == NULL or gripper_effort == 0 or counter == 0))
     {
         ros::Rate rate(ROS_RATE);
         ros::spinOnce();
@@ -110,32 +100,22 @@ int main(int argc, char** argv){
 }
 
 /*------------------------------------
- Initialize transformation matrix from Sensor frame to Widow-X arm frame:
+ Initialize transformation matrix from Sensor frame to Widow-X arm base frame:
  -----------------------------------*/
  void initializeTSB(){
-     for(int i = 0; i < 4; i++){
-         for(int j = 0; j < 4; j++){
-             TSB[i][j] = 0;
-         }
-     }
-    TSB[0][0] = -1; TSB[0][3] = 0.03;
-    TSB[1][2] = 1; TSB[1][3] = 0.14;
-    TSB[2][1] = 1; TSB[2][3] = 0.11;
-    TSB[3][3] = 1;
+    TSB(0,0) = -1; TSB(0,3) = 30;
+    TSB(1,2) = 1; TSB(1,3) = 140;
+    TSB(2,1) = 1; TSB(2,3) = 110;
+    TSB(3,3) = 1;
  }
 
   /*------------------------------------
  Initialize transformation matrix from image frame to P2:
  -----------------------------------*/
  void initializeI2P(){
-    for(int i = 0; i < 4; i++){
-         for(int j = 0; j < 4; j++){
-             I2P[i][j] = 0;
-         }
-    }
-    I2P[0][0] = 1; I2P[1][1] = -1;
-    I2P[0][2] = -320.5; I2P[1][2] = 240.5;
-    I2P[2][2] = 1; 
+    I2P(0,0) = 1; I2P(1,1) = -1;
+    I2P(0,2) = -320.5; I2P(1,2) = 240.5;
+    I2P(2,2) = 1; 
  }
 
 /*------------------------------------
@@ -171,11 +151,11 @@ void getLocation(){
         y_values.insert(pixel.y);
     }
     if (pixel_locations.total() != 0){
-        object_center[0] = round(sum_x/pixel_locations.total());
-        object_center[1] = round(sum_y/pixel_locations.total());
+        object_center(0) = round(sum_x/pixel_locations.total());
+        object_center(1) = round(sum_y/pixel_locations.total());
     }else{
-        object_center[0] = -INFINITY;
-        object_center[1] = -INFINITY;
+        object_center(0) = -INFINITY;
+        object_center(1) = -INFINITY;
     }   
 }
 
@@ -186,17 +166,6 @@ void calculateRealPos(){
     int max_u = INFINITY; int max_v = INFINITY;
     int min_u = -INFINITY; int min_v = -INFINITY;
     if(!x_values.empty() && !y_values.empty()){
-        /*
-        int x_avg = round(sum_x/y_values.size()); int y_avg = round(sum_y/x_values.size());
-        x_avg = round(x_avg/x_values.size()); y_avg = round(y_avg/y_values.size());
-        int x_diff = x_avg - *(x_values.begin()); int y_diff = y_avg - *(y_values.begin());
-        ROS_INFO("y_values.size: %lu", y_values.size());
-        ROS_INFO("x_avg: %d", x_avg);
-        ROS_INFO("y_avg: %d", y_avg);
-
-        min_u = object_center[0] - x_diff;  max_u = object_center[0] + x_diff;
-        min_v = object_center[1] - y_diff;  max_v = object_center[1] + y_diff;
-        */
        min_u = *(x_values.begin()); max_u = *(--x_values.end());
        min_v = *(y_values.begin()); max_v = *(--y_values.end());
     }
@@ -216,7 +185,7 @@ void discretizeValues(){
     // Discretize values in distance
     discretizeValuesAux(2, depth_step);
     // Discretize values in angle
-    discretizeValuesAux(0,angle_step);
+    discretizeValuesAux(0, angle_step);
     // Discretize values in height
     discretizeValuesAux(1, height_step);
 }
@@ -234,22 +203,22 @@ void discretizeValuesAux(int selector, double step){
     // Continuos and discretized value
     double *state_c; int *state_d;
     if (selector == 0){
-        state_c = &object_center[0];
+        state_c = &object_center(0);
         state_d = &robot_state.angle_d;
     }else if(selector == 1){
-        state_c = &object_center[1];
+        state_c = &object_center(1);
         state_d = &robot_state.height_d;
     }else{
-        state_c = &robot_state.distance_c;
+        state_c = &d;
         state_d = &robot_state.distance_d;
     }
     int quadrant = 0;
     bool inside_quadrant = false;
     while (quadrant < discr_level and !inside_quadrant){
-        double ranges[2] = {step*double(quadrant),
-                         step*double(quadrant+1)};
-        if(*state_c >= ranges[0]
-            and *state_c < ranges[1])
+        vec2 ranges;
+        ranges << step*double(quadrant) << step*double(quadrant+1);
+        if(*state_c >= ranges(0)
+            and *state_c < ranges(1))
         {
             inside_quadrant = true;
             *state_d = quadrant + 1;
@@ -277,108 +246,55 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
         robot_state.angle_c = -INFINITY;
         robot_state.distance_c = -INFINITY;
         robot_state.height_c = -INFINITY;
-        object_center[0] = -INFINITY; 
-        object_center[1] = -INFINITY; 
+        object_center(0) = -INFINITY; 
+        object_center(1) = -INFINITY; 
         ROS_INFO("angle, distance, height: %.10f, %.10f, %.10f",
          robot_state.angle_c, robot_state.distance_c, robot_state.height_c);
     }else{
         // Get the distance of the object
-        double f = P[0][0];
-        double cx = P[0][2];
-        double cy = P[1][2]; 
-        double real_pos_max[2][1];
-        real_pos_max[0][0] = ((max_u - cx));// * WIDTH_PX_2_M;
-        real_pos_max[1][0] = ((max_v - cy));// * HEIGHT_PX_2_M;
+        double f = P(0,0);
+        double cx = P(0,2);
+        double cy = P(1,2); 
+        vec2 real_pos_max;
+        real_pos_max(0) = ((max_u - cx));// * WIDTH_PX_2_M;
+        real_pos_max(1) = ((max_v - cy));// * HEIGHT_PX_2_M;
 
-        double real_pos_min[2][1];
-        real_pos_min[0][0] = ((min_u - cx));// * WIDTH_PX_2_M;
-        real_pos_min[1][0] = ((min_v - cy));// * HEIGHT_PX_2_M;
+        vec2 real_pos_min;
+        real_pos_min(0) = ((min_u - cx));// * WIDTH_PX_2_M;
+        real_pos_min(1) = ((min_v - cy));// * HEIGHT_PX_2_M;
 
-        double width = real_pos_max[0][0] - real_pos_min[0][0];
+        double width = real_pos_max(0) - real_pos_min(0);
         ROS_INFO("Width: %.10f", width);
         ROS_INFO("f: %.10f", f);
         ROS_INFO("(f * OBJECT_WIDTH): %.10f", (f * OBJECT_WIDTH));
-        robot_state.distance_c = (f * OBJECT_WIDTH) / width;
+        d = (f * OBJECT_WIDTH) / width;
 
         // Get the pixel position in x,y
-        double pixel_pos[3][1]; // 3 x 1
-        double result[4][1];    // 4 x 1
-        pixel_pos[0][0] = object_center[0]; 
-        pixel_pos[1][0] = object_center[1];
-        pixel_pos[2][0] = 1;
-        image2sensor(result);
-        robot_state.angle_c = result[0][0] * robot_state.distance_c; 
+        vec3 pixel_pos; // 3 x 1
+        vec4 result;    // 4 x 1
+        pixel_pos(0) = object_center(0); 
+        pixel_pos(1) = object_center(1);
+        pixel_pos(2) = 1;
+        result = image2sensor(pixel_pos);
+        robot_state.angle_c = result(0); 
         //It should be -0.12, but as we don't see the entire object we have to modify it
-        robot_state.height_c = result[1][0] * robot_state.distance_c;
+        robot_state.height_c = result(1);
+        robot_state.distance_c = result(2);
         ROS_INFO("\n\nDistance, Angle, height: \n\t(%.10f, %.10f, %.10f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
     }
 }
 
 /*------------------------------------
- Multiply P_inv and pixel_pos
+Transform a point in the image to the sensor frame
 -----------------------------------*/
-void multiplyP_Inv(double result[4][1], double pixel_pos[3][1]){
-    for (int i = 0; i < 3; i++){
-        result[i][0] = 0;
-    }
-    result[3][0] = 1;
-    
-    for (int i  = 0; i < 4; i++){
-        for (int k  = 0; k < 3; k++){
-            result[i][0] += P_inv[i][k] * pixel_pos[k][0];
-        }
-    }
-}
-
-/*------------------------------------
- Multiply 2 transformation matrices
------------------------------------*/
-void multiplyTransformations(double result[4][4], double first[4][4], double second[4][4]){
-    for (int i = 0; i < 4; i++){
-        for (int j = 0; j < 4; j++){
-            result[i][j] = 0;
-        }
-    }
-    
-    for (int i  = 0; i < 4; i++){
-		for (int j = 0;j < 4; j++){
-            for (int k = 0; k < 3; k++){
-                result[i][j] += first[i][k] * second[k][j];
-            }
-		}
-	}
-}
-
-/*------------------------------------
- Get the position of the object in the gripper frame
------------------------------------*/
-void sensor2Gripper(double result[4][1], double obj_pos[4][1]){
-    double T[4][4];
-    multiplyTransformations(T, T05, TSB);
-    for (int i = 0; i < 3; i++){
-        result[i][0] = 0;
-    }
-    result[3][0] = 1;
-    
-    for (int i  = 0; i < 4; i++){
-        for (int k  = 0; k < 4; k++){
-            result[i][0] += T[i][k] * obj_pos[k][0];
-        }
-    }
-}
-
-/*------------------------------------
- Get the position of the object in the sensor frame
------------------------------------*/
-void image2sensor(double result[4][1]){
-    double homogeneus_object_pos[3][1] = {object_center[0], object_center[1], 1};
-    double P2[3][1] = {0,0,1};
-    for (int i  = 0; i < 4; i++){
-        for (int k  = 0; k < 4; k++){
-            P2[i][0] += I2P[i][k] * homogeneus_object_pos[k][0];
-        }
-    }
-    multiplyP_Inv(result, P2);
+vec4 image2sensor(vec3 pixel_pos){
+    vec4 result;
+    vec e = I2P * pixel_pos;
+    result(3) = 1;
+    result(2) = e(2) - P(2,3);
+    result(1) = (e(1) - P(1,2)*e(2) + P(2,3)*P(1,2))/P(1,1);
+    result(0) = (e(0) - P(0,2)*e(2) + P(2,3)*P(0,2))/P(0,0);
+    return result;
 }
 
 /*------------------------------------
