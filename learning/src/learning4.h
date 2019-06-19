@@ -221,6 +221,16 @@ void getLocation();
 -----------------------------------*/
 void calculateRealPos();
 /*------------------------------------
+ Get object real position with respect to the robot:
+    [X Y Z 1] = P^(-1) * [u v 1]
+    Inputs:
+        top_u: X coordinate of the top center of the object (Pixels)
+        top_v: Y coordinate of the top center of the object (Pixels)
+        bottom_u: X coordinate of the bottom center of the object (Pixels)
+        bottom_v: Y coordinate of the bottom center of the object (Pixels)
+-----------------------------------*/
+void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v);
+/*------------------------------------
  Discretize values:
 -----------------------------------*/
 void discretizeValues();
@@ -267,16 +277,6 @@ void openGripper();
  Detect picked object:
 -----------------------------------*/
 void isObjectPicked();
-/*------------------------------------
- Get object real position with respect to the robot:
-    [X Y Z 1] = P^(-1) * [u v 1]
-    Inputs:
-        top_u: X coordinate of the top center of the object (Pixels)
-        top_v: Y coordinate of the top center of the object (Pixels)
-        bottom_u: X coordinate of the bottom center of the object (Pixels)
-        bottom_v: Y coordinate of the bottom center of the object (Pixels)
------------------------------------*/
-void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v);
 /*------------------------------------
 Transform a point in the image to the sensor frame
 -----------------------------------*/
