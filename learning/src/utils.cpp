@@ -104,6 +104,8 @@ void updateState(){
     getLocation();
     calculateRealPos();
     discretizeValues();
+    mcd();
+    getGripperPosition();
     isObjectPicked();
 }
 
@@ -372,6 +374,10 @@ void mci(vec3 next_position, vec3 n){
 	double py = next_position(1) - L45*ang_or(1);
 	double pz = next_position(2) - L45*ang_or(2);
 
+    ROS_INFO("px: %.10f, py: %.10f, pz: %.10f", px, py, pz);
+    ROS_INFO("ang_or: [%.10f %.10f %.10f]", ang_or(0), ang_or(1), ang_or(2));
+    cout << T05;
+
 	double q1 = atan2(py, px);
             
 	double k = pow(pz, 2) + pow(d2, 2) + pow(((px * cos(q1)) + (py * sin(q1))), 2) - pow(L3, 2);
@@ -468,7 +474,7 @@ vec3 setNextPosition(double x, double y, double z){
 -----------------------------------*/
 void foldArm(){
     vec3 n;
-    n << 0 << 0 << 1; 
+    n << 1 << 0 << 0; 
     vec3 next_position;
     // Turn the arm to the position (0.3125,0,0.1450)
     next_position = setNextPosition(
