@@ -96,7 +96,7 @@ double d;
 
 bool inside_learning = false; // Boolean to control the callbacks
 
-vec3 a;            // Orientation of gripper //3x1
+vec3 ang_or;            // Angle orientation of gripper //3x1
 int discr_level = 11;    // Discretization level
 
 mat44 T05;       // Direct kinematic model

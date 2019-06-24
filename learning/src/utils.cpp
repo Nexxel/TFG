@@ -355,9 +355,9 @@ void getGripperPosition(){
 	gripper_position(1) = py + L45*ay;
 	gripper_position(2) = pz + L45*az;
 
-    a(0) = ax;
-    a(1) = ay;
-    a(2) = az;
+    ang_or(0) = ax;
+    ang_or(1) = ay;
+    ang_or(2) = az;
 }
 
 /*------------------------------------
@@ -365,13 +365,12 @@ void getGripperPosition(){
  by means of the inverse kinematic model:
     Inputs:
         - next_position: Desired position
-        - a: Desired angle orientation of the wrisp
         - n: Desired orientation of the wrisp 
  -----------------------------------*/
 void mci(vec3 next_position, vec3 n){
-	double px = next_position(0) - L45*a(0);
-	double py = next_position(1) - L45*a(1);
-	double pz = next_position(2) - L45*a(2);
+	double px = next_position(0) - L45*ang_or(0);
+	double py = next_position(1) - L45*ang_or(1);
+	double pz = next_position(2) - L45*ang_or(2);
 
 	double q1 = atan2(py, px);
             
@@ -385,7 +384,7 @@ void mci(vec3 next_position, vec3 n){
 	double theta23 = asin((-pz - d2*sin(theta2b))/L3);
 	double q3 = q2 - theta23;
 
-	double L = a(2)*cos(q2-q3) + a(0)*sin(q2-q3)*cos(q1) + a(1)*sin(q2-q3)*sin(q1);
+	double L = ang_or(2)*cos(q2-q3) + ang_or(0)*sin(q2-q3)*cos(q1) + ang_or(1)*sin(q2-q3)*sin(q1);
 	double q4 = acos(-L) - (M_PI/2);
 
 	double q5 = asin(n(0)*sin(q1) - n(1)*cos(q1));
@@ -393,35 +392,29 @@ void mci(vec3 next_position, vec3 n){
     ROS_INFO("\n\nk: %.2f, k1: %.2f, k2: %.2f, theta2b: %.2f, theta23: %.2f, L: %.2f\n", k, k1, k2, theta2b, theta23, L);
     ROS_INFO("\n\nq1: %.2f\nq2: %.2f\nq3: %.2f\nq4: %.2f\nq5: %.2f\n", q1,q2,q3,q4,q5);
 
-	Float64 angle;
-    angle.data = q5;
-    joints[4].publish(angle);
-    angle.data = q4;
-    joints[3].publish(angle);
-    angle.data = q3;
-    joints[2].publish(angle);
-    angle.data = q2;
-    joints[1].publish(angle);
-    angle.data = q1;
-    joints[0].publish(angle);
-
-    robot_state.folded = (next_position(0) == 0
-                        and next_position(1) == 0
-                        and next_position(2) == 0);
-    if(!isnan(q1))
-    joint_angles(0) = q1;
-
-    if(!isnan(q2))
-    joint_angles(1) = q2;
-
-    if(!isnan(q3))
-    joint_angles(2) = q3;
-
-    if(!isnan(q4))
-    joint_angles(3) = q4;
-
-    if(!isnan(q5))
-    joint_angles(4) = q5;
+    if(!(isnan(q1) || isnan(q2) || isnan(q3) || isnan(q4) || isnan(q5))){
+        Float64 angle;
+        angle.data = q5;
+        joints[4].publish(angle);
+        angle.data = q4;
+        joints[3].publish(angle);
+        angle.data = q3;
+        joints[2].publish(angle);
+        angle.data = q2;
+        joints[1].publish(angle);
+        angle.data = q1;
+        joints[0].publish(angle);
+        joint_angles(0) = q1;
+        joint_angles(1) = q2;
+        joint_angles(2) = q3;
+        joint_angles(3) = q4;
+        joint_angles(4) = q5;
+        robot_state.folded = (next_position(0) == 0
+                            and next_position(1) == 0
+                            and next_position(2) == 0);
+    }else{
+        ROS_INFO("Object not reachable.");
+    }
 
     processMessages();
     mcd();
