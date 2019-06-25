@@ -105,7 +105,6 @@ void updateState(){
     calculateRealPos();
     discretizeValues();
     mcd();
-    getGripperPosition();
     isObjectPicked();
 }
 
@@ -340,6 +339,7 @@ void mcd(){
 		<< 0 << 0 << 0 << 1 << endr;
     
 	T05 = T01 * T12 * T23 * T34 * T45;
+    getGripperPosition();
 }
 
 /*------------------------------------
@@ -424,7 +424,6 @@ void mci(vec3 next_position, vec3 n){
 
     processMessages();
     mcd();
-    getGripperPosition();
 }
 
 /*------------------------------------

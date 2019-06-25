@@ -36,13 +36,14 @@ int main(int argc, char** argv){
     ROS_INFO("Hom_obj_pos: %.10f %.10f %.10f %.10f", hom_obj_pos(0), hom_obj_pos(1), hom_obj_pos(2), hom_obj_pos(3));
     vec4 next_position = (TSB * (hom_obj_pos));
     ROS_INFO("Next: %.10f %.10f %.10f %.10f", next_position(0), next_position(1), next_position(2), next_position(3));
+    
+    next_position(0) -= 0.1; // 1 is angle
+    mci(next_position.rows(0,2),n);
     /*
-    next_position(0) -= 0.1;
-    mci(next_position.rows(0,2),n);
     ros::Duration(2).sleep();
-    */
-    next_position(0) += 0.1;
+    next_position(0) += 0.05;
     mci(next_position.rows(0,2),n);
+    */
 
     openGripper();
     ros::Duration(3).sleep();
