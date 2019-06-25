@@ -1,10 +1,7 @@
 #include "utils.cpp"
 
-/*------------------------------------
- Methods
- -----------------------------------*/
 int main(int argc, char** argv){
-    ros::init(argc, argv, "move_arm_to_object");
+    ros::init(argc, argv, "fold_arm");
     vec3 n;
     n << 0 << 0 << 1;
 
@@ -31,24 +28,8 @@ int main(int argc, char** argv){
     initializeI2P();
     processMessages();
     updateState();
-    vec4 hom_obj_pos;
-    hom_obj_pos << robot_state.angle_c << robot_state.height_c << robot_state.distance_c << 1;
-    ROS_INFO("Hom_obj_pos: %.10f %.10f %.10f %.10f", hom_obj_pos(0), hom_obj_pos(1), hom_obj_pos(2), hom_obj_pos(3));
-    vec4 next_position = (TSB * (hom_obj_pos));
-    ROS_INFO("Next: %.10f %.10f %.10f %.10f", next_position(0), next_position(1), next_position(2), next_position(3));
-    /*
-    next_position(0) -= 0.1;
-    mci(next_position.rows(0,2),n);
-    ros::Duration(2).sleep();
-    */
-    next_position(0) += 0.1;
-    mci(next_position.rows(0,2),n);
 
-    openGripper();
-    ros::Duration(3).sleep();
-    closeGripper();
-    ros::Duration(9).sleep();
-    //foldArm();
+    foldArm();
     processMessages();
     updateState();
     ROS_INFO("Effort: %.10f", gripper_effort);

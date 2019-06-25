@@ -474,7 +474,7 @@ vec3 setNextPosition(double x, double y, double z){
 -----------------------------------*/
 void foldArm(){
     vec3 n;
-    n << 1 << 0 << 0; 
+    n << 0 << 0 << 1; 
     vec3 next_position;
     // Turn the arm to the position (0.3125,0,0.1450)
     next_position = setNextPosition(
