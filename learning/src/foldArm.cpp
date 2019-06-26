@@ -2,8 +2,6 @@
 
 int main(int argc, char** argv){
     ros::init(argc, argv, "fold_arm");
-    vec3 n;
-    n << 0 << 0 << 1;
 
     // We check if it is a gazebo simulation
     
@@ -24,8 +22,7 @@ int main(int argc, char** argv){
 
     gripper = handlers.getNH().advertise<Float64>("/gripper_1_joint/command", 1);
 
-    initializeTSB();
-    initializeI2P();
+    initializeVecMat();
     processMessages();
     updateState();
 

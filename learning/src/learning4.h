@@ -97,6 +97,8 @@ double d;
 bool inside_learning = false; // Boolean to control the callbacks
 
 vec3 ang_or;            // Angle orientation of gripper //3x1
+vec3 home_pos;          // Home position
+vec3 n;                 // Direction of gripper
 int discr_level = 11;    // Discretization level
 
 mat44 T05;       // Direct kinematic model
@@ -186,6 +188,10 @@ ros::Publisher base;
  Methods
  -----------------------------------*/
 int main(int argc, char** argv);
+/*------------------------------------
+ Initialize vectors and matrices
+ -----------------------------------*/
+ void initializeVecMat();
 /*------------------------------------
  Initialize transformation matrix from Sensor frame to Widow-X arm base frame:
  -----------------------------------*/

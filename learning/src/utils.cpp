@@ -62,6 +62,16 @@ void callbackImage(const ImageConstPtr& image_msg){
  }
 
 /*------------------------------------
+ Initialize vectors and matrices
+ -----------------------------------*/
+ void initializeVecMat(){
+    home_pos << 0.3125 << 0 << 0.1450;
+    n << 0 << 0 << 1;
+    initializeI2P();
+    initializeTSB();
+ }
+
+/*------------------------------------
  Process messages:
  -----------------------------------*/
  void processMessages(){
@@ -471,16 +481,9 @@ vec3 setNextPosition(double x, double y, double z){
 /*------------------------------------
  Fold arm:
 -----------------------------------*/
-void foldArm(){
-    vec3 n;
-    n << 0 << 0 << 1; 
-    vec3 next_position;
+void foldArm(){ 
     // Turn the arm to the position (0.3125,0,0.1450)
-    next_position = setNextPosition(
-                     0.3125,
-                     0, 
-                     0.1450);
-    mci(next_position,n);
+    mci(home_pos,n);
 
     robot_state.folded = true;
 }

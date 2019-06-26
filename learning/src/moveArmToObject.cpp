@@ -27,17 +27,26 @@ int main(int argc, char** argv){
 
     gripper = handlers.getNH().advertise<Float64>("/gripper_1_joint/command", 1);
 
-    initializeTSB();
-    initializeI2P();
+    initializeVecMat();
     processMessages();
     updateState();
     vec4 hom_obj_pos;
     hom_obj_pos << robot_state.angle_c << robot_state.height_c << robot_state.distance_c << 1;
     ROS_INFO("Hom_obj_pos: %.10f %.10f %.10f %.10f", hom_obj_pos(0), hom_obj_pos(1), hom_obj_pos(2), hom_obj_pos(3));
-    vec4 next_position = (TSB * (hom_obj_pos));
+    vec3 intermediate_position = home_pos;
+    vec4 next_position;
+    next_position = (TSB * (hom_obj_pos));
+    intermediate_position.row(1) = next_position.row(1);    
+
     ROS_INFO("Next: %.10f %.10f %.10f %.10f", next_position(0), next_position(1), next_position(2), next_position(3));
-    
-    next_position(0) -= 0.1; // 1 is angle
+
+    mci(intermediate_position, n);
+    openGripper();
+    ros::Duration(4).sleep();
+    intermediate_position.row(2) = next_position.row(2) + 0.03;
+    mci(intermediate_position, n);
+    ros::Duration(4).sleep();
+    next_position(2) += 0.03;
     mci(next_position.rows(0,2),n);
     /*
     ros::Duration(2).sleep();
@@ -45,7 +54,6 @@ int main(int argc, char** argv){
     mci(next_position.rows(0,2),n);
     */
 
-    openGripper();
     ros::Duration(3).sleep();
     closeGripper();
     ros::Duration(9).sleep();
