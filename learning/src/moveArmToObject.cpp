@@ -28,6 +28,7 @@ int main(int argc, char** argv){
     gripper = handlers.getNH().advertise<Float64>("/gripper_1_joint/command", 1);
 
     initializeVecMat();
+    foldArm();
     processMessages();
     updateState();
     vec4 hom_obj_pos;
