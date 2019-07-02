@@ -55,7 +55,8 @@ void learning(Handlers handlers){
         gripper = handlers.getNH().advertise<Float64>("/gripper_1_joint/command", 1);
         base = handlers.getNH().advertise<Twist>("/mobile_base/commands/velocity", 1);
         int sa; int sp;
-        while(ros::ok() && (!robot_state.object_picked || !robot_state.folded)){
+        bool end_simulation = false;
+        while(ros::ok() && !end_simulation){
             // Set random seed by the time of the cpu
             srand( (unsigned)time(NULL) );
             robot_state.angle_d = 0;
@@ -92,6 +93,10 @@ void learning(Handlers handlers){
             if(action == 4){
                 ROS_INFO("Moving arm...");
                 moveArmToObject();
+                isObjectReachable();
+                if(object_reachable){
+                    end_simulation = true;
+                }
             }
             // 3.2 Move base if not reachable
             else{
