@@ -36,7 +36,8 @@ int main(int argc, char** argv){
     vec3 intermediate_position = home_pos;
     vec4 next_position;
     next_position = (TSB * (hom_obj_pos));
-    intermediate_position.row(1) = next_position.row(1);    
+    intermediate_position(0) = next_position(0) - 0.1;
+    intermediate_position(1) = next_position(1);    
 
     ROS_INFO("Next: %.10f %.10f %.10f %.10f", next_position(0), next_position(1), next_position(2), next_position(3));
 
