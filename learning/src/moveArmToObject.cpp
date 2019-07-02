@@ -34,6 +34,7 @@ int main(int argc, char** argv){
     ros::Duration(3).sleep();
     processMessages();
     updateState();
+    /*
     vec3 test_pos1;
     test_pos1 << 0.4 << 0 << 0;
     vec3 test_pos2;
@@ -41,29 +42,31 @@ int main(int argc, char** argv){
     mci(test_pos1, n);
     ros::Duration(4).sleep();
     mci(test_pos2, n);
-    /* 
+    */ 
     vec4 hom_obj_pos;
     hom_obj_pos << robot_state.angle_c << robot_state.height_c << robot_state.distance_c << 1;
     ROS_INFO("Hom_obj_pos: %.10f %.10f %.10f %.10f", hom_obj_pos(0), hom_obj_pos(1), hom_obj_pos(2), hom_obj_pos(3));
     vec3 intermediate_position = home_pos;
     vec4 next_position;
     next_position = (TSB * (hom_obj_pos));
-    intermediate_position(0) = next_position(0) - 0.04;
-    intermediate_position(1) = next_position(1);    
+    intermediate_position(0) = next_position(0) - 0.08;
 
     ROS_INFO("Next: %.10f %.10f %.10f %.10f", next_position(0), next_position(1), next_position(2), next_position(3));
     cout << "intermediate position 1: " << intermediate_position;
     mci(intermediate_position, n);
     openGripper();
     ros::Duration(4).sleep();
-    intermediate_position.row(2) = next_position.row(2) + 0.06;
+    intermediate_position(1) = next_position(1);    
+    mci(intermediate_position, n);
+    ros::Duration(4).sleep();
+    intermediate_position(2) = next_position(2) + 0.06;
     cout << "Intermediate position 2: " << intermediate_position;
     mci(intermediate_position, n);
     ros::Duration(4).sleep();
-    next_position(2) += 0.03;
+    next_position(2) += 0.06;
     cout << "Next position: \t" << next_position; 
     mci(next_position.rows(0,2),n);
-    */
+    
     /*
     ros::Duration(2).sleep();
     next_position(0) += 0.05;

@@ -437,6 +437,41 @@ void mci(vec3 next_position, vec3 n){
 }
 
 /*------------------------------------
+ Move Widow-X arm to object:
+ -----------------------------------*/
+void moveArmToObject(){
+    vec4 hom_obj_pos;
+    hom_obj_pos << robot_state.angle_c << robot_state.height_c << robot_state.distance_c << 1;
+    vec3 intermediate_position = home_pos;
+    vec4 next_position;
+    next_position = (TSB * (hom_obj_pos));
+    intermediate_position(0) = next_position(0) - 0.08;
+
+    mci(intermediate_position, n);
+    openGripper();
+    ros::Duration(4).sleep();
+
+    intermediate_position(1) = next_position(1);    
+    mci(intermediate_position, n);
+    ros::Duration(4).sleep();
+
+    intermediate_position(2) = next_position(2) + 0.06;
+    mci(intermediate_position, n);
+    ros::Duration(4).sleep();
+
+    next_position(2) += 0.06;
+    cout << "Next position: \t" << next_position; 
+    mci(next_position.rows(0,2),n);
+    ros::Duration(3).sleep();
+
+    closeGripper();
+    ros::Duration(9).sleep();
+
+    processMessages();
+    updateState();
+}
+
+/*------------------------------------
  Open gripper:
  -----------------------------------*/
 void openGripper(){
@@ -466,6 +501,17 @@ void isObjectPicked(){
 }
 
 /*------------------------------------
+ Detect if object is reachable:
+    Object is centered in x, near and up
+-----------------------------------*/
+void isObjectReachable(){
+    object_reachable = robot_state.angle_d >= (1 + discr_level)/3
+                        and robot_state.angle_d <= 2*(1 + discr_level)/3
+                        and robot_state.distance_d <= (1 + discr_level)/4
+                        and robot_state.height_d <= discr_level/6;
+}
+
+/*------------------------------------
  Set next position:
    Inputs:
       x, y, z: The coordinates of the next position
@@ -486,4 +532,271 @@ void foldArm(){
     mci(home_pos,n);
 
     robot_state.folded = true;
+}
+
+/*------------------------------------
+ Start a new random simulation:
+-----------------------------------*/
+void startRandomSimulation(){
+    int status;
+        // Open an empty world in gazebo
+        if (gui){
+            status = system("xterm -hold -e \"roslaunch gazebo_ros empty_world.launch paused:=true\" &");
+        }else{
+            status = system("xterm -hold -e \"roslaunch gazebo_ros empty_world.launch paused:=true gui:=false\" &");
+        }
+        if (status == 0){
+            sleep(6);
+            double x = MIN_X + ((double)rand()/double(RAND_MAX))* (MAX_X-MIN_X);
+            double y = MIN_Y + ((double)rand()/double(RAND_MAX))* (MAX_Y-MIN_Y);
+            int box = MIN_BOX + ((double)rand()/double(RAND_MAX))* (MAX_BOX-MIN_BOX);
+            double z = 0.05*(double)box;
+            stringstream xterm_box; stringstream xterm_object;
+            xterm_box << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/box_" << box << ".urdf -urdf -x " << x
+                    << " -z " << z << " -y " << y << " -model box\" &";
+            xterm_object << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/cylinder.urdf -urdf -x " 
+                        << (x - 0.45) << " -z " << (z*2+0.05) << " -y " << y << " -model red_object\" &";
+            string str(xterm_box.str());
+            const char* xterm_box_str = str.c_str();
+            system(xterm_box_str);
+            sleep(3);
+            str = xterm_object.str();
+            const char* xterm_object_str = str.c_str();
+            system(xterm_object_str);
+            sleep(3);
+            stringstream xterm_wall;
+            xterm_wall << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/wall.urdf -urdf -x " 
+                        << (x - 0.5) << " -y " << (y+3) << " -model wall\" &";
+            str = xterm_wall.str();
+            const char* xterm_wall_str = str.c_str(); 
+            system(xterm_wall_str);
+            sleep(3);
+            stringstream xterm_wall1;
+            xterm_wall1 << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/wall.urdf -urdf -x " 
+                        << (x - 0.5) << " -y " << (y-3) << " -model wall1\" &";
+            str = xterm_wall1.str();
+            xterm_wall_str = str.c_str(); 
+            system(xterm_wall_str);
+            sleep(3);
+            stringstream xterm_wall2;
+            xterm_wall2 << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/wall2.urdf -urdf -x " 
+                        << (- 0.5) << " -y " << y << " -model wall2\" &";
+            str = xterm_wall2.str();
+            xterm_wall_str = str.c_str(); 
+            system(xterm_wall_str);
+            sleep(3);
+            stringstream xterm_wall3;
+            xterm_wall3 << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/wall2.urdf -urdf -x " 
+                        << (x/2- 0.5) << " -y " << y+5.55 << " -Y " << M_PI/2 << " -model wall3\" &";
+            str = xterm_wall3.str();
+            xterm_wall_str = str.c_str(); 
+            system(xterm_wall_str);
+            sleep(3);
+            stringstream xterm_wall4;
+            xterm_wall4 << "xterm +hold -e \"rosrun gazebo_ros spawn_model -file $(rospack find learning)/urdf/wall2.urdf -urdf -x " 
+                        << (x/2- 0.5) << " -y " << y-5.55 << " -Y " << M_PI/2 << " -model wall4\" &";
+            str = xterm_wall4.str();
+            xterm_wall_str = str.c_str(); 
+            system(xterm_wall_str);
+            sleep(3);
+            // Instantiate a turtlebot in that empty world
+            system("xterm -hold -e \"roslaunch crumb_gazebo test.launch\" &");
+            sleep(10);
+            // Unpause simulation
+            system("rosservice call /gazebo/unpause_physics");
+            sleep(5);
+            simulations++;   
+        }else{
+            system("killall -9 xterm gzserver");
+            ros::shutdown();
+        }
+}
+/*------------------------------------
+ Kill the current simulation:
+-----------------------------------*/
+void killSimulation(){
+    ROS_INFO("Killing actual simulation...");
+    sleep(2);
+    // Pause simulation
+    system("rosservice call /gazebo/pause_physics");
+    sleep(1);
+    // Kill process
+    system("killall -9 xterm gzserver");
+    sleep(3); 
+}
+/*------------------------------------
+ Get the matrix column index from the robot state:
+-----------------------------------*/
+int getIndexFromState(){
+    int num_elems = discr_level + 1;
+    return  (robot_state.distance_d) * pow(num_elems,2) * pow(2,2) +
+            (robot_state.angle_d) * num_elems * pow(2,2) +
+            (robot_state.height_d) * pow(2,2) +
+            robot_state.object_picked * 2 +
+            robot_state.folded;
+}
+/*------------------------------------
+ Modify the state of the robot from the column index:
+-----------------------------------*/
+void getStateFromIndex(int index){
+    int num_elems = discr_level + 1;
+    robot_state.distance_d = ((int)index / (int)(pow(num_elems,2) * pow(2,2)));
+    robot_state.angle_d = ((index % (int)(pow(num_elems,2) * pow(2,2))) / (int)(num_elems * pow(2,2)));
+    robot_state.height_d = ((index % (int)(pow(num_elems,2) * pow(2,2)) % (int)(num_elems * pow(2,2))) / (int)pow(2,2));
+    robot_state.object_picked = (index % (int)(pow(num_elems,2) * pow(2,2)) % (int)(num_elems * pow(2,2)) % (int)pow(2,2)) / 2;
+    robot_state.folded = (index % (int)(pow(num_elems,2) * pow(2,2)) % (int)(num_elems * pow(2,2)) % (int)pow(2,2) % 2);
+}
+/*------------------------------------
+ Select action:
+-----------------------------------*/
+void selectAction(int sa){
+    float not_visited = 0;
+    double prev_expl_rate = exploration_rate;
+    for (int i = 0; i<N_ACTIONS; i++){
+        not_visited += (visit_matrix(sa,i) == 0);
+    }
+    if (((float)not_visited/(float)N_ACTIONS) >= 0.25) { 
+        exploration_rate = 100;
+    }
+    if (floor(unifRnd(0, 100)) <= exploration_rate){
+        action = floor(unifRnd(0,N_ACTIONS-1));
+    }else{
+        action = policy_matrix(sa);
+    }
+    counter++;
+    exploration_rate = prev_expl_rate;
+    exploration_rate = MIN_EXPLORATION + (MAX_EXPLORATION - MIN_EXPLORATION) * exp(-DECAY * counter);
+    ROS_INFO("\n\n\nStep %d exploration_rate: %.2f\n\n\n", counter, exploration_rate);
+}
+/*------------------------------------
+ Update V and policy matrix:
+-----------------------------------*/
+void updateVPolicy(int s){
+    V(s) = q_matrix(s,0);
+    policy_matrix(s) = 0;
+    for(int i = 1; i < N_ACTIONS; i++){
+        if(q_matrix(s,i) > V(s)){
+            V[s] = q_matrix(s,i);
+            policy_matrix(s) = i;
+        }
+    }
+}
+/*------------------------------------
+ Calculate reward:
+-----------------------------------*/
+double calculateReward(int sa, int sp){
+    int prev_dist; int prev_ang; int prev_height;
+    int act_dist; int act_ang; int act_height;
+    getStateFromIndex(sa);
+    prev_dist = robot_state.distance_d;
+    prev_ang = robot_state.angle_d;
+    prev_height = robot_state.height_d;
+    getStateFromIndex(sp);
+    act_dist = robot_state.distance_d;
+    act_ang = robot_state.angle_d;
+    act_height = robot_state.height_d;
+    int reward = 0;
+    if((prev_dist == 0 || prev_ang == 0 || prev_height == 0) &&
+        (act_dist > 0 && act_ang > 0 && act_height >0)){
+            reward += 2;
+    }
+    else if(act_dist > 0 && act_dist < prev_dist){
+        reward += 3;
+    }
+    reward += 100 * robot_state.object_picked * robot_state.folded;
+    return reward;
+}
+
+/*------------------------------------
+ Actualize log:
+-----------------------------------*/
+void actualizeLog(int sa, int sp, double reward){
+    if (steps == 1 && simulations == 1){
+        log_file.open("$(rospack find learning)/logs/log_test_turning.txt");
+    }else{
+        log_file.open("$(rospack find learning)/logs/log_test_turning.txt", ios::app | ios::out);
+    }
+    log_file << "=======================================\n";
+    log_file << "Simulation: " << simulations << "\n";
+    log_file << "Iteration: " << steps << "\n";
+    log_file << "----------\n";
+    log_file << "State: " << sa << "\n";
+    getStateFromIndex(sa);
+    log_file << "\tDistance: " << robot_state.distance_d << "\n";
+    log_file << "\tAngle: " << robot_state.angle_d << "\n";
+    log_file << "\tHeight: " << robot_state.height_d << "\n";
+    log_file << "\tObject picked: " << robot_state.object_picked << "\n";
+    log_file << "\tArm folded: " << robot_state.folded << "\n";
+    getStateFromIndex(sp);
+    log_file << "State': " << sp << "\n";
+    log_file << "\tDistance: " << robot_state.distance_d << "\n";
+    log_file << "\tAngle: " << robot_state.angle_d << "\n";
+    log_file << "\tHeight: " << robot_state.height_d << "\n";
+    log_file << "\tObject picked: " << robot_state.object_picked << "\n";
+    log_file << "\tArm folded: " << robot_state.folded << "\n";
+    log_file << "Action: " << action << "\n";
+    log_file << "\t" << ((action == 2) ? "Move front" :
+                                ((action == 3) ? "Move back" :
+                                (action == 0) ? "Turn left" :
+                                (action == 1) ? "Turn right" : "Move arm")) << "\n";
+    log_file << "Reward: " << reward << "\n";
+    log_file << "New value of Visit matrix: " << visit_matrix(sa,action) << "\n";
+    log_file << "New value of Q matrix: " << q_matrix(sa,action) << "\n";
+    log_file << "New value of Value function: " << V(sa) << "\n";
+    log_file << "New value of Policy matrix: " << policy_matrix(sa) << "\n\n";
+    log_file.close();
+}
+
+/*------------------------------------
+ Actualize simplified log:
+-----------------------------------*/
+void actualizeSimplifiedLog(int sa, int sp, double reward){
+    if (steps == 1 && simulations == 1){
+        log_file.open("$(rospack find learning)/simplified_logs/simplified_log_test_turning.txt");
+    }else{
+        log_file.open("$(rospack find learning)/simplified_logs/simplified_log_test_turning.txt", ios::app | ios::out);
+    }
+    log_file << simulations << ",";
+    log_file << steps << ",";
+    log_file << sa << ",";
+    getStateFromIndex(sa);
+    log_file << robot_state.distance_d << ",";
+    log_file << robot_state.angle_d << ",";
+    log_file << robot_state.height_d << ",";
+    log_file << robot_state.object_picked << ",";
+    log_file << robot_state.folded << ",";
+    getStateFromIndex(sp);
+    log_file << sp << ",";
+    log_file << robot_state.distance_d << ",";
+    log_file << robot_state.angle_d << ",";
+    log_file << robot_state.height_d << ",";
+    log_file << robot_state.object_picked << ",";
+    log_file << robot_state.folded << ",";
+    log_file << action << ",";
+    log_file << ((action == 2) ? "\"Move front\"" :
+                                ((action == 3) ? "\"Move back\"" :
+                                (action == 0) ? "\"Turn left\"" :
+                                (action == 1) ? "\"Turn right\"" : "\"Move arm\"")) << ",";
+    log_file << reward << ",";
+    log_file << visit_matrix(sa,action) << ",";
+    log_file << q_matrix(sa,action) << ",";
+    log_file << V(sa) << ",";
+    log_file << policy_matrix(sa) << "\n";
+    log_file.close();
+}
+
+/*------------------------------------
+ Print debug:
+-----------------------------------*/
+void printDebug(string function, int line){
+    ROS_INFO("\033[1;31m\nMethod %s:\n\tLine %u\n", function.c_str(), line);
+}
+/*------------------------------------
+ Get uniform random:
+    Inputs:
+        - min
+        - max
+-----------------------------------*/
+double unifRnd(double min, double max){
+    return min + ((double)rand()/(double)RAND_MAX) * ((max+1) - min);
 }

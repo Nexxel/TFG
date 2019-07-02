@@ -272,6 +272,10 @@ void getGripperPosition();
  -----------------------------------*/
 void mci(vec3 next_position, vec3 n);
 /*------------------------------------
+ Move Widow-X arm to object:
+ -----------------------------------*/
+void moveArmToObject();
+/*------------------------------------
  Open gripper:
  -----------------------------------*/
 void openGripper();
