@@ -31,8 +31,17 @@ int main(int argc, char** argv){
     processMessages();
     updateState();
     foldArm();
+    ros::Duration(3).sleep();
     processMessages();
     updateState();
+    vec3 test_pos1;
+    test_pos1 << 0.4 << 0 << 0;
+    vec3 test_pos2;
+    test_pos2 << 0.3 << 0.2 << 0.1;
+    mci(test_pos1, n);
+    ros::Duration(4).sleep();
+    mci(test_pos2, n);
+    /* 
     vec4 hom_obj_pos;
     hom_obj_pos << robot_state.angle_c << robot_state.height_c << robot_state.distance_c << 1;
     ROS_INFO("Hom_obj_pos: %.10f %.10f %.10f %.10f", hom_obj_pos(0), hom_obj_pos(1), hom_obj_pos(2), hom_obj_pos(3));
@@ -54,6 +63,7 @@ int main(int argc, char** argv){
     next_position(2) += 0.03;
     cout << "Next position: \t" << next_position; 
     mci(next_position.rows(0,2),n);
+    */
     /*
     ros::Duration(2).sleep();
     next_position(0) += 0.05;
