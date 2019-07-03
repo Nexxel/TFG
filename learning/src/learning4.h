@@ -132,8 +132,16 @@ int counter = 0;            // Total number of steps
 double exploration_rate = MAX_EXPLORATION;
 int steps = 0;
 int simulations = 0;
-bool gui = false;
+bool gui = true;
+
+// Logs
 ofstream log_file;              // Log file
+string input_log_name;
+string output_log_name;
+stringstream complete_input_log_name;
+stringstream complete_output_log_name;
+stringstream complete_simplified_input_log_name;
+stringstream complete_simplified_output_log_name;
 
 // Elements useful for object detection
 cv_bridge::CvImagePtr cv_ptr; // Pointer to the cv image

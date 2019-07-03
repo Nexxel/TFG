@@ -80,34 +80,38 @@ void callbackImage(const ImageConstPtr& image_msg){
     getline(cin, response);
     if(response == "y"){
         ifstream input_log;
-        string input_log_name;
-        cout << "Specify the log to read qithout extension: ";
+        input_log_name.clear();
+        cout << "Specify the log to read without extension: ";
         getline(cin, input_log_name);
-        stringstream complete_input_log_name;
-        complete_input_log_name << "$(rospack find learning)/simplified_logs/simplified_log_" << input_log_name << ".txt";
-        string str(complete_input_log_name.str());
+        complete_input_log_name << "$(rospack find learning)/logs/log_" << input_log_name << ".txt";
+        complete_simplified_input_log_name << "$(rospack find learning)/simplified_logs/simplified_log_" << input_log_name << ".txt";
+        string str(complete_simplified_input_log_name.str());
         input_log.open(str.c_str(), ios::in);
-        Row<string> row;
+        vec row;
         string line, word, temp;
         while(input_log >> temp){
             row.clear();
             getline(input_log, line);
             stringstream s(line);
+            int counter = 0;
             while(getline(s, word, ',')){
-                row << word;
+                if (counter != 15){
+                    row << atof(word.c_str());
+                }
+                counter++;
             }
 
-            simulations = atoi(row(0).c_str());
-            steps = atoi(row(1).c_str());
-            sa = atoi(row(2).c_str());
-            sp = atoi(row(8).c_str());
+            simulations = row(0);
+            steps = row(1);
+            sa = row(2);
+            sp = row(8);
             getStateFromIndex(sp);
-            action = atoi(row(14).c_str());
-            reward = atof(row(16).c_str());
-            visit_matrix(sa, action) = atoi(row(17).c_str());
-            q_matrix(sa, action) = atof(row(18).c_str());
-            V(sa) = atof(row(19).c_str());
-            policy_matrix(sa) = atoi(row(20).c_str());
+            action = row(14);
+            reward = row(15);
+            visit_matrix(sa, action) = row(16);
+            q_matrix(sa, action) = row(17);
+            V(sa) = row(18);
+            policy_matrix(sa) = row(19);
         }
         input_log.close();
     }else{}
@@ -756,9 +760,23 @@ double calculateReward(){
 -----------------------------------*/
 void actualizeLog(){
     if (steps == 1 && simulations == 1){
-        log_file.open("$(rospack find learning)/logs/log_test_turning.txt");
+        if(complete_input_log_name.rdbuf()->in_avail() > 0){
+            complete_output_log_name << complete_input_log_name.rdbuf();
+            ROS_INFO("\n\n\nHOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n\n\n");
+            cout << complete_output_log_name;
+        }else{
+            cout << "Select the name of your log file without the extension: ";
+            getline(cin, output_log_name);
+            complete_output_log_name << "$(rospack find learning)/logs/log_" << output_log_name << ".txt";
+        }
+        string str(complete_output_log_name.str());
+        log_file.open(str.c_str());
     }else{
-        log_file.open("$(rospack find learning)/logs/log_test_turning.txt", ios::app | ios::out);
+        if(complete_output_log_name.rdbuf()->in_avail() == 0){
+            complete_output_log_name << complete_input_log_name.rdbuf();
+        }
+        string str(complete_output_log_name.str());
+        log_file.open(str.c_str(), ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -796,9 +814,19 @@ void actualizeLog(){
 -----------------------------------*/
 void actualizeSimplifiedLog(){
     if (steps == 1 && simulations == 1){
-        log_file.open("$(rospack find learning)/simplified_logs/simplified_log_test_turning.txt");
+        if(complete_simplified_input_log_name.rdbuf()->in_avail() > 0){
+            complete_simplified_output_log_name << complete_simplified_input_log_name.rdbuf();
+        }else{
+            complete_simplified_output_log_name << "$(rospack find learning)/simplified_logs/simplified_log_" << output_log_name << ".txt";
+        }
+        string str(complete_simplified_output_log_name.str());
+        log_file.open(str.c_str());
     }else{
-        log_file.open("$(rospack find learning)/simplified_logs/simplified_log_test_turning.txt", ios::app | ios::out);
+        if(complete_simplified_output_log_name.rdbuf()->in_avail() == 0){
+            complete_simplified_output_log_name << complete_simplified_input_log_name.rdbuf();
+        }
+        string str(complete_simplified_output_log_name.str());
+        log_file.open(str.c_str(), ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";
