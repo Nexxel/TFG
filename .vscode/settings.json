@@ -14,7 +14,8 @@
         "iosfwd": "cpp",
         "cinttypes": "cpp",
         "cstdint": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "iostream": "cpp"
     },
     "ros.distro": "indigo"
 }

@@ -6,6 +6,7 @@
 #include <math.h>
 // Ros library
 #include <ros/ros.h>
+#include <ros/package.h>
 // Using matrices easily
 #define ARMA_DONT_USE_WRAPPER
 #include <armadillo>
@@ -127,7 +128,7 @@ arma::mat q_matrix = zeros<arma::mat>(num_states, N_ACTIONS);        // Q matrix
 vec V = zeros<vec>(num_states);                  // Value function
 vec policy_matrix = zeros<vec>(num_states);      // Policy matrix
 arma::mat visit_matrix = zeros<arma::mat>(num_states, N_ACTIONS);    // Matrix of visits
-int counter = 0;            // Total number of steps
+int number_steps = 0;            // Total number of steps
 
 double exploration_rate = MAX_EXPLORATION;
 int steps = 0;
@@ -136,12 +137,9 @@ bool gui = true;
 
 // Logs
 ofstream log_file;              // Log file
-string input_log_name;
-string output_log_name;
-stringstream complete_input_log_name;
-stringstream complete_output_log_name;
-stringstream complete_simplified_input_log_name;
-stringstream complete_simplified_output_log_name;
+string log_name;
+stringstream complete_log_name;
+stringstream complete_simplified_log_name;
 
 // Elements useful for object detection
 cv_bridge::CvImagePtr cv_ptr; // Pointer to the cv image
