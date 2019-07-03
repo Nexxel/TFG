@@ -23,8 +23,8 @@ int main(int argc, char** argv){
         5. Check reward
  -----------------------------------*/
 void learning(Handlers handlers){
-    double n[3] = {1,0,0};
-    initializeTSB();
+    initializeVecMat();
+    readLog();
 
     while(ros::ok()){
         // Set random seed by the time of the cpu
@@ -54,7 +54,6 @@ void learning(Handlers handlers){
 
         gripper = handlers.getNH().advertise<Float64>("/gripper_1_joint/command", 1);
         base = handlers.getNH().advertise<Twist>("/mobile_base/commands/velocity", 1);
-        int sa; int sp;
         bool end_simulation = false;
         while(ros::ok() && !end_simulation){
             // Set random seed by the time of the cpu
@@ -66,15 +65,9 @@ void learning(Handlers handlers){
             robot_state.height_c = 0;
             robot_state.distance_c = 0;
             
-            inside_learning = false;
-
             processMessages();
 
-            // While the learning process, we just want to re-read the joints
-            inside_learning = true;
-
-            mcd();
-            getGripperPosition();
+            updateState();
 
             // If it's the first time, set the arm to the initial position
             if (counter == 0){
@@ -87,7 +80,7 @@ void learning(Handlers handlers){
             }
             
             // 2. Select action
-            selectAction(sa);
+            selectAction();
 
             // 3.1 Move arm if reachable
             if(action == 4){
@@ -136,19 +129,19 @@ void learning(Handlers handlers){
 
 
             // 5. Check reward
-            double reward = calculateReward(sa, sp);
+            double reward = calculateReward();
             
             // Update Q-matrix
             q_matrix(sa,action) = (1 - ALPHA) * q_matrix(sa,action) + ALPHA * (reward + GAMMA * V(sp));
 
             // Update visit matrix
-            visit_matrix(sa,action)++;
+            visit_matrix(action)++;
 
             // Update V and policy matrices
-            updateVPolicy(sa);
+            updateVPolicy();
             steps++;
-            actualizeLog(sa, sp, reward);
-            actualizeSimplifiedLog(sa, sp, reward);
+            actualizeLog();
+            actualizeSimplifiedLog();
             sa = sp;
         }
         if (gui){

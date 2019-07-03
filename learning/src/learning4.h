@@ -1,6 +1,7 @@
 /*------------------------------------
  Libraries
 -----------------------------------*/
+#include <cstdlib>
 #include <fstream>
 #include <math.h>
 // Ros library
@@ -92,9 +93,11 @@ using namespace geometry_msgs;
    bool object_picked; // Is the object picked?
  } robot_state;
 
-double d;
+int sa;                 // Actual state
+int sp;                 // Posterior state
+int reward;
 
-bool inside_learning = false; // Boolean to control the callbacks
+double d;
 
 vec3 ang_or;            // Angle orientation of gripper //3x1
 vec3 home_pos;          // Home position
@@ -192,6 +195,10 @@ int main(int argc, char** argv);
  Initialize vectors and matrices
  -----------------------------------*/
  void initializeVecMat();
+/*------------------------------------
+ Initialize learning elements reading from a log file
+ -----------------------------------*/
+ void readLog();
 /*------------------------------------
  Initialize transformation matrix from Sensor frame to Widow-X arm base frame:
  -----------------------------------*/
@@ -327,7 +334,7 @@ void getStateFromIndex(int index);
     Inputs:
         - sa: actual state
 -----------------------------------*/
-void selectAction(int sa);
+void selectAction();
 /*------------------------------------
  Update V and policy matrix:
 -----------------------------------*/
@@ -339,15 +346,15 @@ bool giveReward();
 /*------------------------------------
  Calculate reward:
 -----------------------------------*/
-double calculateReward(int sa, int sp);
+double calculateReward();
 /*------------------------------------
  Actualize log:
 -----------------------------------*/
-void actualizeLog(int sa, int sp, double reward);
+void actualizeLog();
 /*------------------------------------
  Actualize simplified log:
 -----------------------------------*/
-void actualizeSimplifiedLog(int sa, int sp, double reward);
+void actualizeSimplifiedLog();
 /*------------------------------------
  Print debug:
 -----------------------------------*/

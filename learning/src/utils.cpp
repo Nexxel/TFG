@@ -48,11 +48,7 @@ void callbackImage(const ImageConstPtr& image_msg){
     //P(2,3) = 1;
  }
 
- /*------------------------------------
- Methods
- -----------------------------------*/
-
- /*------------------------------------
+/*------------------------------------
  Get gripper effort:
  -----------------------------------*/
  void getGripperEffortCallback(const JointStateConstPtr& joint_states_msg){
@@ -60,6 +56,10 @@ void callbackImage(const ImageConstPtr& image_msg){
         gripper_effort = joint_states_msg->effort[5];
     }
  }
+
+ /*------------------------------------
+ Methods
+ -----------------------------------*/
 
 /*------------------------------------
  Initialize vectors and matrices
@@ -69,6 +69,48 @@ void callbackImage(const ImageConstPtr& image_msg){
     n << 0 << 0 << 1;
     initializeI2P();
     initializeTSB();
+ }
+
+/*------------------------------------
+ Initialize learning elements reading from a log file
+ -----------------------------------*/
+ void readLog(){
+    string response;
+    cout << "Do you want to initialize the matrices from a log?[y|N] ";
+    getline(cin, response);
+    if(response == "y"){
+        ifstream input_log;
+        string input_log_name;
+        cout << "Specify the log to read qithout extension: ";
+        getline(cin, input_log_name);
+        stringstream complete_input_log_name;
+        complete_input_log_name << "$(rospack find learning)/simplified_logs/simplified_log_" << input_log_name << ".txt";
+        string str(complete_input_log_name.str());
+        input_log.open(str.c_str(), ios::in);
+        Row<string> row;
+        string line, word, temp;
+        while(input_log >> temp){
+            row.clear();
+            getline(input_log, line);
+            stringstream s(line);
+            while(getline(s, word, ',')){
+                row << word;
+            }
+
+            simulations = atoi(row(0).c_str());
+            steps = atoi(row(1).c_str());
+            sa = atoi(row(2).c_str());
+            sp = atoi(row(8).c_str());
+            getStateFromIndex(sp);
+            action = atoi(row(14).c_str());
+            reward = atof(row(16).c_str());
+            visit_matrix(sa, action) = atoi(row(17).c_str());
+            q_matrix(sa, action) = atof(row(18).c_str());
+            V(sa) = atof(row(19).c_str());
+            policy_matrix(sa) = atoi(row(20).c_str());
+        }
+        input_log.close();
+    }else{}
  }
 
 /*------------------------------------
@@ -495,8 +537,10 @@ void openGripper(){
  Detect picked object:
 -----------------------------------*/
 void isObjectPicked(){
-    robot_state.object_picked = (!gripper_opened) 
-                and (abs(gripper_effort) > MAX_EFFORT);
+    robot_state.object_picked = ((!gripper_opened) 
+                and (abs(gripper_effort) > MAX_EFFORT)) 
+                || 
+                (is_simulation * (object_reachable && action == 4));
     ROS_INFO("gripper_effort: %.4f", gripper_effort);
 }
 
@@ -649,7 +693,7 @@ void getStateFromIndex(int index){
 /*------------------------------------
  Select action:
 -----------------------------------*/
-void selectAction(int sa){
+void selectAction(){
     float not_visited = 0;
     double prev_expl_rate = exploration_rate;
     for (int i = 0; i<N_ACTIONS; i++){
@@ -671,20 +715,20 @@ void selectAction(int sa){
 /*------------------------------------
  Update V and policy matrix:
 -----------------------------------*/
-void updateVPolicy(int s){
-    V(s) = q_matrix(s,0);
-    policy_matrix(s) = 0;
+void updateVPolicy(){
+    V(sa) = q_matrix(sa,0);
+    policy_matrix(sa) = 0;
     for(int i = 1; i < N_ACTIONS; i++){
-        if(q_matrix(s,i) > V(s)){
-            V[s] = q_matrix(s,i);
-            policy_matrix(s) = i;
+        if(q_matrix(sa,i) > V(sa)){
+            V(sa) = q_matrix(sa,i);
+            policy_matrix(sa) = i;
         }
     }
 }
 /*------------------------------------
  Calculate reward:
 -----------------------------------*/
-double calculateReward(int sa, int sp){
+double calculateReward(){
     int prev_dist; int prev_ang; int prev_height;
     int act_dist; int act_ang; int act_height;
     getStateFromIndex(sa);
@@ -695,7 +739,7 @@ double calculateReward(int sa, int sp){
     act_dist = robot_state.distance_d;
     act_ang = robot_state.angle_d;
     act_height = robot_state.height_d;
-    int reward = 0;
+    reward = 0;
     if((prev_dist == 0 || prev_ang == 0 || prev_height == 0) &&
         (act_dist > 0 && act_ang > 0 && act_height >0)){
             reward += 2;
@@ -710,7 +754,7 @@ double calculateReward(int sa, int sp){
 /*------------------------------------
  Actualize log:
 -----------------------------------*/
-void actualizeLog(int sa, int sp, double reward){
+void actualizeLog(){
     if (steps == 1 && simulations == 1){
         log_file.open("$(rospack find learning)/logs/log_test_turning.txt");
     }else{
@@ -750,7 +794,7 @@ void actualizeLog(int sa, int sp, double reward){
 /*------------------------------------
  Actualize simplified log:
 -----------------------------------*/
-void actualizeSimplifiedLog(int sa, int sp, double reward){
+void actualizeSimplifiedLog(){
     if (steps == 1 && simulations == 1){
         log_file.open("$(rospack find learning)/simplified_logs/simplified_log_test_turning.txt");
     }else{
