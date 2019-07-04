@@ -89,7 +89,7 @@ void learning(Handlers handlers){
                 ROS_INFO("Moving arm...");
                 moveArmToObject();
                 isObjectReachable();
-                if(object_reachable){
+                if(object_reachable && exploit != "y"){
                     end_simulation = true;
                 }
             }
@@ -137,7 +137,7 @@ void learning(Handlers handlers){
                 q_matrix(sa,action) = (1 - ALPHA) * q_matrix(sa,action) + ALPHA * (reward + GAMMA * V(sp));
 
                 // Update visit matrix
-                visit_matrix(action)++;
+                visit_matrix(sa, action)++;
 
                 // Update V and policy matrices
                 updateVPolicy();

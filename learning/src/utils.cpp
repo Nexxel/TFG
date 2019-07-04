@@ -77,7 +77,7 @@ void callbackImage(const ImageConstPtr& image_msg){
  void readLog(){
     ifstream input_log;
     log_name.clear();
-    cout << "Specify the log to read without extension: ";
+    cout << "Specify the log to read/write without extension: ";
     getline(cin, log_name);
     complete_log_name << ros::package::getPath("learning") << "/logs/log_" << log_name << ".txt";
     complete_simplified_log_name << ros::package::getPath("learning") << "/simplified_logs/simplified_log_" << log_name << ".txt";
