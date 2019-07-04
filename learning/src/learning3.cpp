@@ -25,6 +25,8 @@ int main(int argc, char** argv){
 void learning(Handlers handlers){
     initializeVecMat();
     readLog();
+    cout << "Do you want just to exploit?[y|N] ";
+    getline(cin, exploit);
 
     while(ros::ok()){
         // Set random seed by the time of the cpu
@@ -78,7 +80,7 @@ void learning(Handlers handlers){
                 sa = getIndexFromState();
                 counter++;
             }
-            
+
             // 2. Select action
             selectAction();
 
@@ -127,21 +129,22 @@ void learning(Handlers handlers){
             updateState();
             sp = getIndexFromState();
 
+            if (exploit != "y"){
+                // 5. Check reward
+                double reward = calculateReward();
+                
+                // Update Q-matrix
+                q_matrix(sa,action) = (1 - ALPHA) * q_matrix(sa,action) + ALPHA * (reward + GAMMA * V(sp));
 
-            // 5. Check reward
-            double reward = calculateReward();
-            
-            // Update Q-matrix
-            q_matrix(sa,action) = (1 - ALPHA) * q_matrix(sa,action) + ALPHA * (reward + GAMMA * V(sp));
+                // Update visit matrix
+                visit_matrix(action)++;
 
-            // Update visit matrix
-            visit_matrix(action)++;
-
-            // Update V and policy matrices
-            updateVPolicy();
-            steps++;
-            actualizeLog();
-            actualizeSimplifiedLog();
+                // Update V and policy matrices
+                updateVPolicy();
+                steps++;
+                actualizeLog();
+                actualizeSimplifiedLog();
+            }
             sa = sp;
         }
         if (gui){

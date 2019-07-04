@@ -97,6 +97,7 @@ using namespace geometry_msgs;
 int sa;                 // Actual state
 int sp;                 // Posterior state
 int reward;
+string exploit;         // If you want just to exploit
 
 double d;
 
@@ -123,7 +124,7 @@ vec2 object_center;    // Object center in pixels
 vec5 joint_angles;
 
 int action;                 // Learning action
-int num_states = discr_level+2 * pow(discr_level+1, 2) * pow(2,2); // Really 6³*2² = 864 
+int num_states = (discr_level+2) * pow(discr_level+1, 2) * pow(2,2); // Really 13 * 12² * 2² = 7488 
 arma::mat q_matrix = zeros<arma::mat>(num_states, N_ACTIONS);        // Q matrix
 vec V = zeros<vec>(num_states);                  // Value function
 vec policy_matrix = zeros<vec>(num_states);      // Policy matrix

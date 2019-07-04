@@ -84,16 +84,15 @@ void callbackImage(const ImageConstPtr& image_msg){
     string str(complete_simplified_log_name.str());
     input_log.open(str.c_str(), ios::in);
     string line, word, temp;
-    while(input_log >> temp){
+    line.resize(100);
+    while(getline(input_log, line)){
         vec row = zeros<vec>(20);
-        getline(input_log, line);
         stringstream s(line);
-        cout << "Line: " << line; 
+        cout << "Line: " << line << '\n'; 
         int counter = 0;
         while(getline(s, word, ',')){
             if (counter != 15){
                 if(counter < 15){
-                    cout << "Hola: " << word.c_str();
                     row(counter) = atof(word.c_str());
                 }else{
                     row(counter-1) = atof(word.c_str());
@@ -103,7 +102,7 @@ void callbackImage(const ImageConstPtr& image_msg){
         }
 
         simulations = row(0);
-        steps = row(1);
+        //steps = row(1);
         sa = row(2);
         sp = row(8);
         getStateFromIndex(sp);
@@ -496,23 +495,23 @@ void moveArmToObject(){
 
     mci(intermediate_position, n);
     openGripper();
-    ros::Duration(4).sleep();
+    ros::Duration(2).sleep();
 
     intermediate_position(1) = next_position(1);    
     mci(intermediate_position, n);
-    ros::Duration(4).sleep();
+    ros::Duration(2).sleep();
 
     intermediate_position(2) = next_position(2) + 0.06;
     mci(intermediate_position, n);
-    ros::Duration(4).sleep();
+    ros::Duration(2).sleep();
 
     next_position(2) += 0.06;
     cout << "Next position: \t" << next_position; 
     mci(next_position.rows(0,2),n);
-    ros::Duration(3).sleep();
+    ros::Duration(2).sleep();
 
     closeGripper();
-    ros::Duration(9).sleep();
+    ros::Duration(7).sleep();
 
     processMessages();
     updateState();
@@ -699,23 +698,27 @@ void getStateFromIndex(int index){
  Select action:
 -----------------------------------*/
 void selectAction(){
-    float not_visited = 0;
-    double prev_expl_rate = exploration_rate;
-    for (int i = 0; i<N_ACTIONS; i++){
-        not_visited += (visit_matrix(sa,i) == 0);
-    }
-    if (((float)not_visited/(float)N_ACTIONS) >= 0.25) { 
-        exploration_rate = 100;
-    }
-    if (floor(unifRnd(0, 100)) <= exploration_rate){
-        action = floor(unifRnd(0,N_ACTIONS-1));
-    }else{
+    if(exploit == "y"){
         action = policy_matrix(sa);
+    }else{
+        float not_visited = 0;
+        double prev_expl_rate = exploration_rate;
+        for (int i = 0; i<N_ACTIONS; i++){
+            not_visited += (visit_matrix(sa,i) == 0);
+        }
+        if (((float)not_visited/(float)N_ACTIONS) >= 0.25) { 
+            exploration_rate = 100;
+        }
+        if (floor(unifRnd(0, 100)) <= exploration_rate){
+            action = floor(unifRnd(0,N_ACTIONS-1));
+        }else{
+            action = policy_matrix(sa);
+        }
+        number_steps++;
+        exploration_rate = prev_expl_rate;
+        exploration_rate = MIN_EXPLORATION + (MAX_EXPLORATION - MIN_EXPLORATION) * exp(-DECAY * number_steps);
+        ROS_INFO("\n\n\nStep %d exploration_rate: %.2f\n\n\n", number_steps, exploration_rate);
     }
-    number_steps++;
-    exploration_rate = prev_expl_rate;
-    exploration_rate = MIN_EXPLORATION + (MAX_EXPLORATION - MIN_EXPLORATION) * exp(-DECAY * number_steps);
-    ROS_INFO("\n\n\nStep %d exploration_rate: %.2f\n\n\n", number_steps, exploration_rate);
 }
 /*------------------------------------
  Update V and policy matrix:
