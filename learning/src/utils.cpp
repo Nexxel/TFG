@@ -556,8 +556,7 @@ void isObjectPicked(){
 void isObjectReachable(){
     object_reachable = robot_state.angle_d >= (1 + discr_level)/3
                         and robot_state.angle_d <= 2*(1 + discr_level)/3
-                        and robot_state.distance_d <= (1 + discr_level)/4
-                        and robot_state.height_d <= discr_level/6;
+                        and robot_state.distance_d < (1 + discr_level)/4;
 }
 
 /*------------------------------------
