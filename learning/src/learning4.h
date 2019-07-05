@@ -54,7 +54,7 @@
 #define WIDTH_PX_2_M (SENSOR_WIDTH/CAMERA_WIDTH)
 
 // Min and max positions of the objects
-#define MAX_X 2.5
+#define MAX_X 3.0
 #define MIN_X 2.0
 #define MAX_Y 2.0
 #define MIN_Y -2.0

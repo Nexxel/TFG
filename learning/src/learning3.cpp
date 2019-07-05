@@ -86,11 +86,14 @@ void learning(Handlers handlers){
 
             // 3.1 Move arm if reachable
             if(action == 4){
-                ROS_INFO("Moving arm...");
-                moveArmToObject();
-                isObjectReachable();
-                if(object_reachable && exploit != "y"){
-                    end_simulation = true;
+                if(object_reachable){
+                    ROS_INFO("Moving arm...");
+                    moveArmToObject();
+                    if(exploit != "y"){
+                        end_simulation = true;
+                    }
+                }else{
+                    ROS_INFO("Trying to move arm but object is not reachable...");
                 }
             }
             // 3.2 Move base if not reachable
@@ -122,7 +125,7 @@ void learning(Handlers handlers){
                 }
                 base.publish(base_movement);
             }
-            ros::Duration(6).sleep();
+            ros::Duration(3).sleep();
 
             // Update state
             processMessages();

@@ -162,6 +162,7 @@ void updateState(){
     discretizeValues();
     mcd();
     isObjectPicked();
+    isObjectReachable();
 }
 
 /*------------------------------------
