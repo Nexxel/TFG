@@ -63,7 +63,7 @@
 #define MAX_BOX 5
 
 #define ALPHA 0.02
-#define GAMMA 0.9
+#define GAMMA 0.2
 
 #define N_ACTIONS 5 // Number of actions
 

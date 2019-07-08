@@ -81,40 +81,45 @@ void callbackImage(const ImageConstPtr& image_msg){
     getline(cin, log_name);
     complete_log_name << ros::package::getPath("learning") << "/logs/log_" << log_name << ".txt";
     complete_simplified_log_name << ros::package::getPath("learning") << "/simplified_logs/simplified_log_" << log_name << ".txt";
-    string str(complete_simplified_log_name.str());
-    input_log.open(str.c_str(), ios::in);
-    string line, word, temp;
-    line.resize(100);
-    while(getline(input_log, line)){
-        vec row = zeros<vec>(20);
-        stringstream s(line);
-        cout << "Line: " << line << '\n'; 
-        int counter = 0;
-        while(getline(s, word, ',')){
-            if (counter != 15){
-                if(counter < 15){
-                    row(counter) = atof(word.c_str());
-                }else{
-                    row(counter-1) = atof(word.c_str());
+    cout << "Want to overwrite it?[y/N] ";
+    string response;
+    getline(cin, response);
+    if(response != "y"){
+        string str(complete_simplified_log_name.str());
+        input_log.open(str.c_str(), ios::in);
+        string line, word, temp;
+        line.resize(100);
+        while(getline(input_log, line)){
+            vec row = zeros<vec>(20);
+            stringstream s(line);
+            cout << "Line: " << line << '\n'; 
+            int counter = 0;
+            while(getline(s, word, ',')){
+                if (counter != 15){
+                    if(counter < 15){
+                        row(counter) = atof(word.c_str());
+                    }else{
+                        row(counter-1) = atof(word.c_str());
+                    }
                 }
+                counter++;
             }
-            counter++;
-        }
 
-        simulations = row(0);
-        //steps = row(1);
-        sa = row(2);
-        sp = row(8);
-        getStateFromIndex(sp);
-        action = row(14);
-        reward = row(15);
-        visit_matrix(sa, action) = row(16);
-        q_matrix(sa, action) = row(17);
-        V(sa) = row(18);
-        policy_matrix(sa) = row(19);
-        number_steps++;
-    }
-    input_log.close();
+            simulations = row(0);
+            //steps = row(1);
+            sa = row(2);
+            sp = row(8);
+            getStateFromIndex(sp);
+            action = row(14);
+            reward = row(15);
+            visit_matrix(sa, action) = row(16);
+            q_matrix(sa, action) = row(17);
+            V(sa) = row(18);
+            policy_matrix(sa) = row(19);
+            number_steps++;
+        }
+        input_log.close();
+    } 
  }
 
 /*------------------------------------
