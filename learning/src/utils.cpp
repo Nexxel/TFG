@@ -81,6 +81,7 @@ void callbackImage(const ImageConstPtr& image_msg){
     getline(cin, log_name);
     complete_log_name << ros::package::getPath("learning") << "/logs/log_" << log_name << ".txt";
     complete_simplified_log_name << ros::package::getPath("learning") << "/simplified_logs/simplified_log_" << log_name << ".txt";
+    complete_reward_log_name << ros::package::getPath("learning") << "/reward_logs/reward_log_" << log_name << ".txt";
     cout << "Want to overwrite it?[y/N] ";
     string response;
     getline(cin, response);
@@ -729,6 +730,7 @@ void selectAction(){
  Update V and policy matrix:
 -----------------------------------*/
 void updateVPolicy(){
+    vec V_prev = V;
     V(sa) = q_matrix(sa,0);
     policy_matrix(sa) = 0;
     for(int i = 1; i < N_ACTIONS; i++){
@@ -737,11 +739,12 @@ void updateVPolicy(){
             policy_matrix(sa) = i;
         }
     }
+    d = norm(V - V_prev);
 }
 /*------------------------------------
  Calculate reward:
 -----------------------------------*/
-double calculateReward(){
+void calculateReward(){
     int prev_dist; int prev_ang; int prev_height;
     int act_dist; int act_ang; int act_height;
     getStateFromIndex(sa);
@@ -760,8 +763,7 @@ double calculateReward(){
     else if(act_dist > 0 && act_dist < prev_dist){
         reward += 3;
     }
-    reward += 100 * robot_state.object_picked * robot_state.folded;
-    return reward;
+    reward += 100 * robot_state.object_picked;
 }
 
 /*------------------------------------
@@ -843,6 +845,21 @@ void actualizeSimplifiedLog(){
     log_file << q_matrix(sa,action) << ",";
     log_file << V(sa) << ",";
     log_file << policy_matrix(sa) << "\n";
+    log_file.close();
+}
+
+/*------------------------------------
+ Actualize log of reward for exploitation:
+-----------------------------------*/
+void actualizeRewardLog(){
+    if (steps == 1 && simulations == 1){
+        string str(complete_reward_log_name.str());
+        log_file.open(str.c_str());
+    }else{
+        string str(complete_reward_log_name.str());
+        log_file.open(str.c_str(), ios::app | ios::out);
+    }
+    log_file << reward << "\n";
     log_file.close();
 }
 

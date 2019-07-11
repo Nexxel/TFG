@@ -63,10 +63,11 @@
 #define MAX_BOX 5
 
 #define ALPHA 0.02
-#define GAMMA 0.2
+#define GAMMA 0.0
 
 #define N_ACTIONS 5 // Number of actions
 
+#define DISTANCE_THRESHOLD 0
 #define MAX_EXPLORATION 100
 #define MIN_EXPLORATION 30
 #define DECAY 1e-3
@@ -99,7 +100,7 @@ int sp;                 // Posterior state
 int reward;
 string exploit;         // If you want just to exploit
 
-double d;
+double d;               // Distance between V and V'
 
 vec3 ang_or;            // Angle orientation of gripper //3x1
 vec3 home_pos;          // Home position
@@ -141,6 +142,7 @@ ofstream log_file;              // Log file
 string log_name;
 stringstream complete_log_name;
 stringstream complete_simplified_log_name;
+stringstream complete_reward_log_name;
 
 // Elements useful for object detection
 cv_bridge::CvImagePtr cv_ptr; // Pointer to the cv image
@@ -353,7 +355,7 @@ bool giveReward();
 /*------------------------------------
  Calculate reward:
 -----------------------------------*/
-double calculateReward();
+void calculateReward();
 /*------------------------------------
  Actualize log:
 -----------------------------------*/
@@ -362,6 +364,10 @@ void actualizeLog();
  Actualize simplified log:
 -----------------------------------*/
 void actualizeSimplifiedLog();
+/*------------------------------------
+ Actualize log of reward for exploitation:
+-----------------------------------*/
+void actualizeRewardLog();
 /*------------------------------------
  Print debug:
 -----------------------------------*/

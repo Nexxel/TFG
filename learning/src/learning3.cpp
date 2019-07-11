@@ -28,7 +28,9 @@ void learning(Handlers handlers){
     cout << "Do you want just to exploit?[y|N] ";
     getline(cin, exploit);
 
-    while(ros::ok()){
+    bool end_learning = false;
+
+    while(ros::ok() && !end_learning){
         // Set random seed by the time of the cpu
         srand( (unsigned)time(NULL) );
         startRandomSimulation();
@@ -132,9 +134,10 @@ void learning(Handlers handlers){
             updateState();
             sp = getIndexFromState();
 
+            // 5. Check reward
+            calculateReward();
+
             if (exploit != "y"){
-                // 5. Check reward
-                double reward = calculateReward();
                 
                 // Update Q-matrix
                 q_matrix(sa,action) = (1 - ALPHA) * q_matrix(sa,action) + ALPHA * (reward + GAMMA * V(sp));
@@ -147,6 +150,12 @@ void learning(Handlers handlers){
                 steps++;
                 actualizeLog();
                 actualizeSimplifiedLog();
+                if(d < DISTANCE_THRESHOLD){
+                    end_simulation = true;
+                    end_learning = true;
+                }
+            }else{
+                actualizeRewardLog();
             }
             sa = sp;
         }
