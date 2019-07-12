@@ -161,7 +161,7 @@ void learning(Handlers handlers){
                     end_episode = true;
                 }
             }else{
-                actualizeRewardLog();
+                actualizeExploitationLog();
             }
             sa = sp;
         }
