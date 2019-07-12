@@ -81,7 +81,8 @@ void callbackImage(const ImageConstPtr& image_msg){
     getline(cin, log_name);
     complete_log_name << ros::package::getPath("learning") << "/logs/log_" << log_name << ".txt";
     complete_simplified_log_name << ros::package::getPath("learning") << "/simplified_logs/simplified_log_" << log_name << ".txt";
-    complete_reward_log_name << ros::package::getPath("learning") << "/reward_logs/reward_log_" << log_name << ".txt";
+    complete_exploitation_log_name << ros::package::getPath("learning") << "/exploitation_logs/exploitation_log_" << log_name << ".txt";
+    complete_distance_log_name << ros::package::getPath("learning") << "/distance_logs/distance_log_" << log_name << ".txt";
     cout << "Want to overwrite it?[y/N] ";
     string response;
     getline(cin, response);
@@ -117,7 +118,7 @@ void callbackImage(const ImageConstPtr& image_msg){
             q_matrix(sa, action) = row(17);
             V(sa) = row(18);
             policy_matrix(sa) = row(19);
-            number_steps++;
+            //number_steps++;
         }
         input_log.close();
     } 
@@ -707,6 +708,7 @@ void selectAction(){
     if(exploit == "y"){
         action = policy_matrix(sa);
     }else{
+       /*
         float not_visited = 0;
         double prev_expl_rate = exploration_rate;
         for (int i = 0; i<N_ACTIONS; i++){
@@ -715,22 +717,24 @@ void selectAction(){
         if (((float)not_visited/(float)N_ACTIONS) >= 0.25) { 
             exploration_rate = 100;
         }
-        if (floor(unifRnd(0, 100)) <= exploration_rate){
+        */
+        if (floor(unifRnd(0, 100)) <= EXPLORATION_RATE){
             action = floor(unifRnd(0,N_ACTIONS-1));
         }else{
             action = policy_matrix(sa);
         }
+        /*
         number_steps++;
         exploration_rate = prev_expl_rate;
         exploration_rate = MIN_EXPLORATION + (MAX_EXPLORATION - MIN_EXPLORATION) * exp(-DECAY * number_steps);
         ROS_INFO("\n\n\nStep %d exploration_rate: %.2f\n\n\n", number_steps, exploration_rate);
+        */
     }
 }
 /*------------------------------------
  Update V and policy matrix:
 -----------------------------------*/
 void updateVPolicy(){
-    vec V_prev = V;
     V(sa) = q_matrix(sa,0);
     policy_matrix(sa) = 0;
     for(int i = 1; i < N_ACTIONS; i++){
@@ -739,12 +743,12 @@ void updateVPolicy(){
             policy_matrix(sa) = i;
         }
     }
-    d = norm(V - V_prev);
 }
 /*------------------------------------
  Calculate reward:
 -----------------------------------*/
 void calculateReward(){
+    /*
     int prev_dist; int prev_ang; int prev_height;
     int act_dist; int act_ang; int act_height;
     getStateFromIndex(sa);
@@ -763,6 +767,7 @@ void calculateReward(){
     else if(act_dist > 0 && act_dist < prev_dist){
         reward += 3;
     }
+    */
     reward += 100 * robot_state.object_picked;
 }
 
@@ -849,17 +854,32 @@ void actualizeSimplifiedLog(){
 }
 
 /*------------------------------------
- Actualize log of reward for exploitation:
+ Actualize log for exploitation:
 -----------------------------------*/
-void actualizeRewardLog(){
+void actualizeExploitationLog(){
     if (steps == 1 && simulations == 1){
-        string str(complete_reward_log_name.str());
+        string str(complete_exploitation_log_name.str());
         log_file.open(str.c_str());
     }else{
-        string str(complete_reward_log_name.str());
+        string str(complete_exploitation_log_name.str());
         log_file.open(str.c_str(), ios::app | ios::out);
     }
-    log_file << reward << "\n";
+    log_file << sa << "," << action << "\n";
+    log_file.close();
+}
+
+/*------------------------------------
+ Actualize log for distances:
+-----------------------------------*/
+void actualizedistanceLog(){
+    if (steps == 1 && simulations == 1){
+        string str(complete_distance_log_name.str());
+        log_file.open(str.c_str());
+    }else{
+        string str(complete_distance_log_name.str());
+        log_file.open(str.c_str(), ios::app | ios::out);
+    }
+    log_file << d << "," << e << "\n";
     log_file.close();
 }
 

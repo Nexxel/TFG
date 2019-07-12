@@ -62,8 +62,10 @@
 #define MIN_BOX 3
 #define MAX_BOX 5
 
-#define ALPHA 0.02
-#define GAMMA 0.0
+#define EXPLORATION_RATE 30
+//#define ALPHA 0.02
+#define GAMMA 0.99
+
 
 #define N_ACTIONS 5 // Number of actions
 
@@ -101,6 +103,7 @@ int reward;
 string exploit;         // If you want just to exploit
 
 double d;               // Distance between V and V'
+double e;               // Min absolute distance between V and V'
 
 vec3 ang_or;            // Angle orientation of gripper //3x1
 vec3 home_pos;          // Home position
@@ -127,12 +130,12 @@ vec5 joint_angles;
 int action;                 // Learning action
 int num_states = (discr_level+2) * pow(discr_level+1, 2) * pow(2,2); // Really 13 * 12² * 2² = 7488 
 arma::mat q_matrix = zeros<arma::mat>(num_states, N_ACTIONS);        // Q matrix
+vec prev_V = zeros<vec>(num_states);             // Prev value function
 vec V = zeros<vec>(num_states);                  // Value function
 vec policy_matrix = zeros<vec>(num_states);      // Policy matrix
 arma::mat visit_matrix = zeros<arma::mat>(num_states, N_ACTIONS);    // Matrix of visits
-int number_steps = 0;            // Total number of steps
 
-double exploration_rate = MAX_EXPLORATION;
+double alpha;
 int steps = 0;
 int simulations = 0;
 bool gui = true;
@@ -142,7 +145,8 @@ ofstream log_file;              // Log file
 string log_name;
 stringstream complete_log_name;
 stringstream complete_simplified_log_name;
-stringstream complete_reward_log_name;
+stringstream complete_exploitation_log_name;
+stringstream complete_distance_log_name;
 
 // Elements useful for object detection
 cv_bridge::CvImagePtr cv_ptr; // Pointer to the cv image
@@ -365,9 +369,13 @@ void actualizeLog();
 -----------------------------------*/
 void actualizeSimplifiedLog();
 /*------------------------------------
- Actualize log of reward for exploitation:
+ Actualize log for exploitation:
 -----------------------------------*/
-void actualizeRewardLog();
+void actualizeExploitationLog();
+/*------------------------------------
+ Actualize log for distances:
+-----------------------------------*/
+void actualizedistanceLog();
 /*------------------------------------
  Print debug:
 -----------------------------------*/

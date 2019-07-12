@@ -28,9 +28,9 @@ void learning(Handlers handlers){
     cout << "Do you want just to exploit?[y|N] ";
     getline(cin, exploit);
 
-    bool end_learning = false;
+    bool end_simulation = false;
 
-    while(ros::ok() && !end_learning){
+    while(ros::ok() && !end_simulation){
         // Set random seed by the time of the cpu
         srand( (unsigned)time(NULL) );
         startRandomSimulation();
@@ -58,8 +58,13 @@ void learning(Handlers handlers){
 
         gripper = handlers.getNH().advertise<Float64>("/gripper_1_joint/command", 1);
         base = handlers.getNH().advertise<Twist>("/mobile_base/commands/velocity", 1);
-        bool end_simulation = false;
-        while(ros::ok() && !end_simulation){
+
+        steps = 0;
+        visit_matrix.clear();
+        prev_V = V;
+
+        bool end_episode = false;
+        while(ros::ok() && !end_episode){
             // Set random seed by the time of the cpu
             srand( (unsigned)time(NULL) );
             robot_state.angle_d = 0;
@@ -92,7 +97,7 @@ void learning(Handlers handlers){
                     ROS_INFO("Moving arm...");
                     moveArmToObject();
                     if(exploit != "y"){
-                        end_simulation = true;
+                        end_episode = true;
                     }
                 }else{
                     ROS_INFO("Trying to move arm but object is not reachable...");
@@ -139,20 +144,21 @@ void learning(Handlers handlers){
 
             if (exploit != "y"){
                 
-                // Update Q-matrix
-                q_matrix(sa,action) = (1 - ALPHA) * q_matrix(sa,action) + ALPHA * (reward + GAMMA * V(sp));
-
                 // Update visit matrix
                 visit_matrix(sa, action)++;
+                
+                // Update Q-matrix
+                alpha = 1/visit_matrix(sa, action);
+                q_matrix(sa,action) = (1 - alpha) * q_matrix(sa,action) + alpha * (reward + GAMMA * V(sp));
+
 
                 // Update V and policy matrices
                 updateVPolicy();
                 steps++;
                 actualizeLog();
                 actualizeSimplifiedLog();
-                if(d < DISTANCE_THRESHOLD){
-                    end_simulation = true;
-                    end_learning = true;
+                if(steps > 10,000){
+                    end_episode = true;
                 }
             }else{
                 actualizeRewardLog();
@@ -163,6 +169,11 @@ void learning(Handlers handlers){
             destroyWindow("Red objects image");
         }
         killSimulation();
-        steps = 0;
+        d = norm(V - prev_V);
+        e = min(abs(V - prev_V));
+        actualizedistanceLog(); 
+        if(d < 0.5 || e < 0.1){
+            end_simulation = true;
+        }
     }
 }
