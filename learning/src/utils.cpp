@@ -248,8 +248,8 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
         vec4 sensor_rightmost_pos = f * image2sensor(bitmap_rightmost_pos);
 
         double width = sensor_rightmost_pos(0) - sensor_leftmost_pos(0);
-        d = ((f * OBJECT_WIDTH) / width) / 1000;
-        ROS_INFO("width: %.10f, d: %.10f", width, d);
+        dist = ((f * OBJECT_WIDTH) / width) / 1000;
+        ROS_INFO("width: %.10f, real distance: %.10f", width, dist);
 
         // Get the pixel position in x,y
         vec3 pixel_pos; // 3 x 1
@@ -259,10 +259,10 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
         pixel_pos(2) = 1;
         result = image2sensor(pixel_pos);
         result /= norm(result);
-        robot_state.angle_c = result(0) * d; 
+        robot_state.angle_c = result(0) * dist; 
         //It should be -0.12, but as we don't see the entire object we have to modify it
-        robot_state.height_c = result(1) * d;
-        robot_state.distance_c = result(2) * d;
+        robot_state.height_c = result(1) * dist;
+        robot_state.distance_c = result(2) * dist;
         ROS_INFO("\n\nDistance, Angle, height: \n\t(%.10f, %.10f, %.10f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
     }
 }

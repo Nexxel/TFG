@@ -102,6 +102,7 @@ int sp;                 // Posterior state
 int reward;
 string exploit;         // If you want just to exploit
 
+double dist;        // Real distance
 double d;               // Distance between V and V'
 double e;               // Min absolute distance between V and V'
 

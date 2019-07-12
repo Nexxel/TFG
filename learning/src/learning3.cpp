@@ -60,7 +60,7 @@ void learning(Handlers handlers){
         base = handlers.getNH().advertise<Twist>("/mobile_base/commands/velocity", 1);
 
         steps = 0;
-        visit_matrix.clear();
+        visit_matrix = zeros<arma::mat>(num_states, N_ACTIONS);
         prev_V = V;
 
         bool end_episode = false;
@@ -139,11 +139,11 @@ void learning(Handlers handlers){
             updateState();
             sp = getIndexFromState();
 
-            // 5. Check reward
-            calculateReward();
-
             if (exploit != "y"){
                 
+                // 5. Check reward
+                calculateReward();
+
                 // Update visit matrix
                 visit_matrix(sa, action)++;
                 
