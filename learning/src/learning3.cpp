@@ -157,7 +157,7 @@ void learning(Handlers handlers){
                 steps++;
                 actualizeLog();
                 actualizeSimplifiedLog();
-                if(steps > 10,000){
+                if(steps > 100,000){
                     end_episode = true;
                 }
             }else{
