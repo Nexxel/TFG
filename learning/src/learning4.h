@@ -65,10 +65,7 @@
 #define EXPLORATION_RATE 50
 #define GAMMA 0.99
 
-
 #define N_ACTIONS 5 // Number of actions
-
-#define DISTANCE_THRESHOLD 0
 
 /*------------------------------------
  Some useful namespaces:
