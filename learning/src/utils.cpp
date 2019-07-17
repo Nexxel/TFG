@@ -761,7 +761,10 @@ void calculateReward(){
     reward = 0;
     if((act_dist == 0 || act_ang == 0 || act_height == 0) &&
         (prev_dist > 0 && prev_ang > 0 && prev_height > 0)){
-            reward -= 2;
+            reward -= 5;
+    }else if((prev_dist == 0 || prev_ang == 0 || prev_height == 0) &&
+        (act_dist > 0 && act_ang > 0 && act_height > 0)){
+            reward += 5;
     }
     else if(act_dist > 0 && prev_dist != 0){
         reward -= 0.5 * act_dist;
