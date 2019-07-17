@@ -92,7 +92,7 @@ using namespace geometry_msgs;
 
 int sa;                 // Actual state
 int sp;                 // Posterior state
-int reward;
+double reward;
 string exploit;         // If you want just to exploit
 
 double dist;        // Real distance
