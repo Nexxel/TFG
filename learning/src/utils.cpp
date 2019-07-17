@@ -748,7 +748,6 @@ void updateVPolicy(){
  Calculate reward:
 -----------------------------------*/
 void calculateReward(){
-    /*
     int prev_dist; int prev_ang; int prev_height;
     int act_dist; int act_ang; int act_height;
     getStateFromIndex(sa);
@@ -760,14 +759,13 @@ void calculateReward(){
     act_ang = robot_state.angle_d;
     act_height = robot_state.height_d;
     reward = 0;
-    if((prev_dist == 0 || prev_ang == 0 || prev_height == 0) &&
-        (act_dist > 0 && act_ang > 0 && act_height > 0)){
-            reward += 2;
+    if((act_dist == 0 || act_ang == 0 || act_height == 0) &&
+        (prev_dist > 0 && prev_ang > 0 && prev_height > 0)){
+            reward -= 2;
     }
-    else if(act_dist > 0 && act_dist < prev_dist){
-        reward += 3;
+    else if(act_dist > 0 && prev_dist != 0){
+        reward -= 0.5 * act_dist;
     }
-    */
     reward += 100 * robot_state.object_picked;
 }
 

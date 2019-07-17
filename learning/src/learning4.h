@@ -62,7 +62,7 @@
 #define MIN_BOX 3
 #define MAX_BOX 5
 
-#define EXPLORATION_RATE 50
+#define EXPLORATION_RATE 30
 #define GAMMA 0.99
 
 #define N_ACTIONS 5 // Number of actions
