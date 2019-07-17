@@ -27,8 +27,16 @@ void learning(Handlers handlers){
     readLog();
     cout << "Do you want just to exploit?[y|N] ";
     getline(cin, exploit);
+    string gui_response;
+    cout << "Do you want to watch the simulation?[y|N] ";
+    getline(cin, gui_response);
+    if(gui_response == "y"){
+        gui = true;
+    }
 
-    while(ros::ok()){
+    bool end_simulation = false;
+
+    while(ros::ok() && !end_simulation){
         // Set random seed by the time of the cpu
         srand( (unsigned)time(NULL) );
         startRandomSimulation();
@@ -56,8 +64,13 @@ void learning(Handlers handlers){
 
         gripper = handlers.getNH().advertise<Float64>("/gripper_1_joint/command", 1);
         base = handlers.getNH().advertise<Twist>("/mobile_base/commands/velocity", 1);
-        bool end_simulation = false;
-        while(ros::ok() && !end_simulation){
+
+        steps = 0;
+        visit_matrix = zeros<arma::mat>(num_states, N_ACTIONS);
+        prev_V = V;
+
+        bool end_episode = false;
+        while(ros::ok() && !end_episode){
             // Set random seed by the time of the cpu
             srand( (unsigned)time(NULL) );
             robot_state.angle_d = 0;
@@ -90,7 +103,7 @@ void learning(Handlers handlers){
                     ROS_INFO("Moving arm...");
                     moveArmToObject();
                     if(exploit != "y"){
-                        end_simulation = true;
+                        end_episode = true;
                     }
                 }else{
                     ROS_INFO("Trying to move arm but object is not reachable...");
@@ -133,20 +146,28 @@ void learning(Handlers handlers){
             sp = getIndexFromState();
 
             if (exploit != "y"){
-                // 5. Check reward
-                double reward = calculateReward();
                 
-                // Update Q-matrix
-                q_matrix(sa,action) = (1 - ALPHA) * q_matrix(sa,action) + ALPHA * (reward + GAMMA * V(sp));
+                // 5. Check reward
+                calculateReward();
 
                 // Update visit matrix
                 visit_matrix(sa, action)++;
+                
+                // Update Q-matrix
+                alpha = 1/visit_matrix(sa, action);
+                q_matrix(sa,action) = (1 - alpha) * q_matrix(sa,action) + alpha * (reward + GAMMA * V(sp));
+
 
                 // Update V and policy matrices
                 updateVPolicy();
                 steps++;
                 actualizeLog();
                 actualizeSimplifiedLog();
+                if(steps > 100,000){
+                    end_episode = true;
+                }
+            }else{
+                actualizeExploitationLog();
             }
             sa = sp;
         }
@@ -154,6 +175,11 @@ void learning(Handlers handlers){
             destroyWindow("Red objects image");
         }
         killSimulation();
-        steps = 0;
+        d = norm(V - prev_V);
+        e = min(abs(V - prev_V));
+        actualizedistanceLog(); 
+        if(d < 0 || e < 0){
+            end_simulation = true;
+        }
     }
 }

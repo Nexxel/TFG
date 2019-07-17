@@ -81,6 +81,8 @@ void callbackImage(const ImageConstPtr& image_msg){
     getline(cin, log_name);
     complete_log_name << ros::package::getPath("learning") << "/logs/log_" << log_name << ".txt";
     complete_simplified_log_name << ros::package::getPath("learning") << "/simplified_logs/simplified_log_" << log_name << ".txt";
+    complete_exploitation_log_name << ros::package::getPath("learning") << "/exploitation_logs/exploitation_log_" << log_name << ".txt";
+    complete_distance_log_name << ros::package::getPath("learning") << "/distance_logs/distance_log_" << log_name << ".txt";
     cout << "Want to overwrite it?[y/N] ";
     string response;
     getline(cin, response);
@@ -116,7 +118,7 @@ void callbackImage(const ImageConstPtr& image_msg){
             q_matrix(sa, action) = row(17);
             V(sa) = row(18);
             policy_matrix(sa) = row(19);
-            number_steps++;
+            //number_steps++;
         }
         input_log.close();
     } 
@@ -246,8 +248,8 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
         vec4 sensor_rightmost_pos = f * image2sensor(bitmap_rightmost_pos);
 
         double width = sensor_rightmost_pos(0) - sensor_leftmost_pos(0);
-        d = ((f * OBJECT_WIDTH) / width) / 1000;
-        ROS_INFO("width: %.10f, d: %.10f", width, d);
+        dist = ((f * OBJECT_WIDTH) / width) / 1000;
+        ROS_INFO("width: %.10f, real distance: %.10f", width, dist);
 
         // Get the pixel position in x,y
         vec3 pixel_pos; // 3 x 1
@@ -257,10 +259,10 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
         pixel_pos(2) = 1;
         result = image2sensor(pixel_pos);
         result /= norm(result);
-        robot_state.angle_c = result(0) * d; 
+        robot_state.angle_c = result(0) * dist; 
         //It should be -0.12, but as we don't see the entire object we have to modify it
-        robot_state.height_c = result(1) * d;
-        robot_state.distance_c = result(2) * d;
+        robot_state.height_c = result(1) * dist;
+        robot_state.distance_c = result(2) * dist;
         ROS_INFO("\n\nDistance, Angle, height: \n\t(%.10f, %.10f, %.10f)\n", robot_state.distance_c, robot_state.angle_c, robot_state.height_c);
     }
 }
@@ -706,6 +708,7 @@ void selectAction(){
     if(exploit == "y"){
         action = policy_matrix(sa);
     }else{
+       /*
         float not_visited = 0;
         double prev_expl_rate = exploration_rate;
         for (int i = 0; i<N_ACTIONS; i++){
@@ -714,15 +717,18 @@ void selectAction(){
         if (((float)not_visited/(float)N_ACTIONS) >= 0.25) { 
             exploration_rate = 100;
         }
-        if (floor(unifRnd(0, 100)) <= exploration_rate){
+        */
+        if (floor(unifRnd(0, 100)) <= EXPLORATION_RATE){
             action = floor(unifRnd(0,N_ACTIONS-1));
         }else{
             action = policy_matrix(sa);
         }
+        /*
         number_steps++;
         exploration_rate = prev_expl_rate;
         exploration_rate = MIN_EXPLORATION + (MAX_EXPLORATION - MIN_EXPLORATION) * exp(-DECAY * number_steps);
         ROS_INFO("\n\n\nStep %d exploration_rate: %.2f\n\n\n", number_steps, exploration_rate);
+        */
     }
 }
 /*------------------------------------
@@ -741,7 +747,8 @@ void updateVPolicy(){
 /*------------------------------------
  Calculate reward:
 -----------------------------------*/
-double calculateReward(){
+void calculateReward(){
+    /*
     int prev_dist; int prev_ang; int prev_height;
     int act_dist; int act_ang; int act_height;
     getStateFromIndex(sa);
@@ -754,14 +761,14 @@ double calculateReward(){
     act_height = robot_state.height_d;
     reward = 0;
     if((prev_dist == 0 || prev_ang == 0 || prev_height == 0) &&
-        (act_dist > 0 && act_ang > 0 && act_height >0)){
+        (act_dist > 0 && act_ang > 0 && act_height > 0)){
             reward += 2;
     }
     else if(act_dist > 0 && act_dist < prev_dist){
         reward += 3;
     }
-    reward += 100 * robot_state.object_picked * robot_state.folded;
-    return reward;
+    */
+    reward += 100 * robot_state.object_picked;
 }
 
 /*------------------------------------
@@ -843,6 +850,36 @@ void actualizeSimplifiedLog(){
     log_file << q_matrix(sa,action) << ",";
     log_file << V(sa) << ",";
     log_file << policy_matrix(sa) << "\n";
+    log_file.close();
+}
+
+/*------------------------------------
+ Actualize log for exploitation:
+-----------------------------------*/
+void actualizeExploitationLog(){
+    if (steps == 1 && simulations == 1){
+        string str(complete_exploitation_log_name.str());
+        log_file.open(str.c_str());
+    }else{
+        string str(complete_exploitation_log_name.str());
+        log_file.open(str.c_str(), ios::app | ios::out);
+    }
+    log_file << sa << "," << action << "\n";
+    log_file.close();
+}
+
+/*------------------------------------
+ Actualize log for distances:
+-----------------------------------*/
+void actualizedistanceLog(){
+    if (steps == 1 && simulations == 1){
+        string str(complete_distance_log_name.str());
+        log_file.open(str.c_str());
+    }else{
+        string str(complete_distance_log_name.str());
+        log_file.open(str.c_str(), ios::app | ios::out);
+    }
+    log_file << d << "," << e << "\n";
     log_file.close();
 }
 
