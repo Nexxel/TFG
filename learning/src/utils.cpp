@@ -759,6 +759,7 @@ void calculateReward(){
     act_ang = robot_state.angle_d;
     act_height = robot_state.height_d;
     reward = 0;
+    /*
     if((act_dist == 0 || act_ang == 0 || act_height == 0) &&
         (prev_dist > 0 && prev_ang > 0 && prev_height > 0)){
             reward -= 5;
@@ -766,9 +767,10 @@ void calculateReward(){
         (act_dist > 0 && act_ang > 0 && act_height > 0)){
             reward += 5;
     }
-    else if(act_dist > 0 && prev_dist != 0){
+    if(act_dist > 0 && prev_dist != 0){
         reward -= 0.5 * act_dist;
     }
+    */
     reward += 100 * robot_state.object_picked;
 }
 
