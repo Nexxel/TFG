@@ -15,7 +15,8 @@
         "cinttypes": "cpp",
         "cstdint": "cpp",
         "typeindex": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "armadillo": "cpp"
     },
     "ros.distro": "indigo"
 }

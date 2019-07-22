@@ -123,11 +123,11 @@ vec5 joint_angles;
 
 int action;                 // Learning action
 int num_states = (discr_level+2) * pow(discr_level+1, 2) * pow(2,2); // Really 13 * 12² * 2² = 7488 
-arma::mat q_matrix = zeros<arma::mat>(num_states, N_ACTIONS);        // Q matrix
-vec prev_V = zeros<vec>(num_states);             // Prev value function
-vec V = zeros<vec>(num_states);                  // Value function
-vec policy_matrix = zeros<vec>(num_states);      // Policy matrix
-arma::mat visit_matrix = zeros<arma::mat>(num_states, N_ACTIONS);    // Matrix of visits
+arma::mat q_matrix = arma::zeros<arma::mat>(num_states, N_ACTIONS);        // Q matrix
+vec prev_V = arma::zeros<vec>(num_states);             // Prev value function
+vec V = arma::zeros<vec>(num_states);                  // Value function
+vec policy_matrix = arma::zeros<vec>(num_states);      // Policy matrix
+arma::mat visit_matrix = arma::zeros<arma::mat>(num_states, N_ACTIONS);    // Matrix of visits
 
 double alpha;
 int steps = 0;
@@ -145,7 +145,7 @@ stringstream complete_distance_log_name;
 // Elements useful for object detection
 cv_bridge::CvImagePtr cv_ptr; // Pointer to the cv image
 cv::Mat pixel_locations;          // Location of the pixels of the object
-arma::mat P = zeros<arma::mat>(3,4);               // Projection/camera matrix of 3 x 4
+arma::mat P = arma::zeros<arma::mat>(3,4);               // Projection/camera matrix of 3 x 4
 
 // To get object position
 int sum_x = 0; 

@@ -68,6 +68,8 @@ void learning(Handlers handlers){
         steps = 0;
         visit_matrix = zeros<arma::mat>(num_states, N_ACTIONS);
         prev_V = V;
+        q_matrix = arma::zeros<arma::mat>(num_states, N_ACTIONS);
+        policy_matrix = arma::zeros<vec>(num_states);
 
         bool end_episode = false;
         while(ros::ok() && !end_episode){
@@ -163,7 +165,7 @@ void learning(Handlers handlers){
                 steps++;
                 actualizeLog();
                 actualizeSimplifiedLog();
-                if(steps > 100,000){
+                if(steps == 1000){
                     end_episode = true;
                 }
             }else{

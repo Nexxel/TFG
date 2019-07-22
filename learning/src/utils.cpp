@@ -92,7 +92,7 @@ void callbackImage(const ImageConstPtr& image_msg){
         string line, word, temp;
         line.resize(100);
         while(getline(input_log, line)){
-            vec row = zeros<vec>(20);
+            vec row = arma::zeros<vec>(20);
             stringstream s(line);
             cout << "Line: " << line << '\n'; 
             int counter = 0;
@@ -360,7 +360,7 @@ void mcd(){
     alpha << 0 << -M_PI/2 << M_PI << 0 << M_PI/2;
 	vec5 a;
     a << 0 << 0 << d2 << L3 << 0;
-	vec5 d = zeros<vec>(5);
+	vec5 d = arma::zeros<vec>(5);
 	vec5 q;
     q << joint_angles(0)
       << joint_angles(1)-beta
@@ -719,9 +719,22 @@ void selectAction(){
         }
         */
         if (floor(unifRnd(0, 100)) <= EXPLORATION_RATE){
+            ROS_INFO("Exploring...");
             action = floor(unifRnd(0,N_ACTIONS-1));
         }else{
-            action = policy_matrix(sa);
+            ROS_INFO("Exploting...");
+            uvec pos_visited = (arma::find(visit_matrix.row(sa)));
+            if(pos_visited.n_rows == 0){
+                action = floor(unifRnd(0,N_ACTIONS-1));
+            }else{
+                if(pos_visited.n_rows == 1){
+                    action = pos_visited(0);
+                }else{
+                    double maximum = arma::max(q_matrix(sa));
+                    uvec maximum_values_pos = (arma::find(q_matrix.row(sa) == maximum));
+                    action = maximum_values_pos.at(floor(unifRnd(0,maximum_values_pos.n_rows-1)));
+                }
+            }
         }
         /*
         number_steps++;
@@ -748,6 +761,7 @@ void updateVPolicy(){
  Calculate reward:
 -----------------------------------*/
 void calculateReward(){
+    /*
     int prev_dist; int prev_ang; int prev_height;
     int act_dist; int act_ang; int act_height;
     getStateFromIndex(sa);
@@ -759,7 +773,6 @@ void calculateReward(){
     act_ang = robot_state.angle_d;
     act_height = robot_state.height_d;
     reward = 0;
-    /*
     if((act_dist == 0 || act_ang == 0 || act_height == 0) &&
         (prev_dist > 0 && prev_ang > 0 && prev_height > 0)){
             reward -= 5;
@@ -767,11 +780,11 @@ void calculateReward(){
         (act_dist > 0 && act_ang > 0 && act_height > 0)){
             reward += 5;
     }
-    if(act_dist > 0 && prev_dist != 0){
-        reward -= 0.5 * act_dist;
+    if(act_dist > 0 && prev_dist != 0 && (act_dist < prev_dist)){
+        reward += (double)(discr_level+1)/(double)act_dist;
     }
     */
-    reward += 100 * robot_state.object_picked;
+    reward = 100 * robot_state.object_picked;
 }
 
 /*------------------------------------
