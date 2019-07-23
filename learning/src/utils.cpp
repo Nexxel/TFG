@@ -772,21 +772,17 @@ void calculateReward(){
     act_ang = robot_state.angle_d;
     act_height = robot_state.height_d;
     reward = 0;
-    /*
     if((act_dist == 0 || act_ang == 0 || act_height == 0) &&
         (prev_dist > 0 && prev_ang > 0 && prev_height > 0)){
-            reward -= 5;
+            reward -= 3;
     }else if((prev_dist == 0 || prev_ang == 0 || prev_height == 0) &&
         (act_dist > 0 && act_ang > 0 && act_height > 0)){
-            reward += 5;
+            reward += 3;
+    }else if(act_dist > 0 && prev_dist != 0 && act_dist < prev_dist){
+        reward += 5;
+    }else if(prev_dist > 0 && act_dist != 0 && act_dist > prev_dist){
+        reward -= 5;
     }
-    if(act_dist > 0 && prev_dist != 0 && (act_dist < prev_dist)){
-        reward += (double)(discr_level+1)/(double)act_dist;
-    }
-    */
-   if(act_dist == 0 && act_ang == 0 && act_height == 0){
-       reward -= 3; 
-   }
     reward += 100 * robot_state.object_picked;
 }
 
