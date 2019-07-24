@@ -66,10 +66,7 @@ void learning(Handlers handlers){
         base = handlers.getNH().advertise<Twist>("/mobile_base/commands/velocity", 1);
 
         steps = 0;
-        visit_matrix = zeros<arma::mat>(num_states, N_ACTIONS);
         prev_V = V;
-        q_matrix = arma::zeros<arma::mat>(num_states, N_ACTIONS);
-        policy_matrix = arma::zeros<vec>(num_states);
 
         bool end_episode = false;
         while(ros::ok() && !end_episode){
@@ -180,8 +177,9 @@ void learning(Handlers handlers){
         d = norm(V - prev_V);
         e = min(abs(V - prev_V));
         actualizedistanceLog(); 
-        if(d < 0 || e < 0){
+        if(d <= 3){
             end_simulation = true;
+            ROS_INFO("The robot has already learn. End of simulation...");
         }
     }
 }
