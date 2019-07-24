@@ -177,7 +177,7 @@ void learning(Handlers handlers){
         d = norm(V - prev_V);
         e = min(abs(V - prev_V));
         actualizedistanceLog(); 
-        if(d <= 3){
+        if(d < 0 || e < 0){
             end_simulation = true;
             ROS_INFO("The robot has already learn. End of simulation...");
         }
