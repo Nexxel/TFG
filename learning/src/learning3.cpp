@@ -162,7 +162,7 @@ void learning(Handlers handlers){
                 steps++;
                 actualizeLog();
                 actualizeSimplifiedLog();
-                if(steps == 1000){
+                if(steps == 2000){
                     end_episode = true;
                 }
             }else{
