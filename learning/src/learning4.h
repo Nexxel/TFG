@@ -96,7 +96,7 @@ int sp;                 // Posterior state
 double reward;
 string exploit;         // If you want just to exploit
 
-double dist;        // Real distance
+double dist;            // Real distance
 double d;               // Distance between V and V'
 double e;               // Min absolute distance between V and V'
 
@@ -104,6 +104,8 @@ vec3 ang_or;            // Angle orientation of gripper //3x1
 vec3 home_pos;          // Home position
 vec3 n;                 // Direction of gripper
 int discr_level = 11;    // Discretization level
+double distance_per_level = (double)MAX_DISTANCE/(double)discr_level;   // Distance per discretization level
+double angle_per_level = ((double)48.6/(double)discr_level) * (M_PI/180); // Angle (rad) per discretization level
 
 mat44 T05;       // Direct kinematic model
 mat44 TSB;       // Transformation matrix from sensor to arm base

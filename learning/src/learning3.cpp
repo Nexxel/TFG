@@ -46,6 +46,12 @@ void learning(Handlers handlers){
         }
         int counter = 0;
 
+        // Create timers
+        double time0 = ros::Time::now().toSec();
+        while(time0 == 0){
+            time0 = ros::Time::now().toSec();
+        }
+
         robot_state.object_picked = false;
         robot_state.folded = false;
 
@@ -135,7 +141,22 @@ void learning(Handlers handlers){
                     ROS_INFO("Turning right...");
                     base_movement.angular.z = -0.1;
                 }
-                base.publish(base_movement);
+                double necessary_time;
+                if(action == 0 || action == 1){
+                    necessary_time = (double)angle_per_level/(double)abs(base_movement.angular.z);
+                }else{
+                    necessary_time = (double)distance_per_level/(double)abs(base_movement.linear.x);
+                }
+                double diff_time = 0;
+                bool first_loop = true;
+                while((diff_time < necessary_time) && ros::ok()){
+                    if(first_loop){
+                        time0 = ros::Time::now().toSec();
+                        first_loop = false;
+                    }
+                    base.publish(base_movement);
+                    diff_time = ros::Time::now().toSec() - time0;
+                }
             }
             ros::Duration(5).sleep();
 
