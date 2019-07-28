@@ -217,3 +217,9 @@ target_link_libraries(move_arm_to_object ${catkin_LIBRARIES} ${LAPACK_LIBRARIES}
 
 add_executable(fold_arm src/foldArm.cpp)
 target_link_libraries(fold_arm ${catkin_LIBRARIES} ${LAPACK_LIBRARIES})
+
+add_executable(move_robot src/moveRobot.cpp)
+target_link_libraries(move_robot ${catkin_LIBRARIES} ${LAPACK_LIBRARIES})
+
+add_executable(turn_robot src/turnRobot.cpp)
+target_link_libraries(turn_robot ${catkin_LIBRARIES} ${LAPACK_LIBRARIES})

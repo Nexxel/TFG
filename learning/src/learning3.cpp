@@ -137,7 +137,7 @@ void learning(Handlers handlers){
                 }
                 base.publish(base_movement);
             }
-            ros::Duration(3).sleep();
+            ros::Duration(5).sleep();
 
             // Update state
             processMessages();
@@ -162,7 +162,7 @@ void learning(Handlers handlers){
                 steps++;
                 actualizeLog();
                 actualizeSimplifiedLog();
-                if(steps == 150){
+                if(steps == 200){
                     end_episode = true;
                 }
             }else{

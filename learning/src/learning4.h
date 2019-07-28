@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <math.h>
+#include <time.h>
 // Ros library
 #include <ros/ros.h>
 #include <ros/package.h>
