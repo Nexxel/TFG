@@ -110,6 +110,9 @@ void learning(Handlers handlers){
                     if(exploit != "y"){
                         end_episode = true;
                     }
+                    // Update state
+                    processMessages();
+                    updateState();
                 }else{
                     ROS_INFO("Trying to move arm but object is not reachable...");
                 }
@@ -157,12 +160,12 @@ void learning(Handlers handlers){
                     base.publish(base_movement);
                     diff_time = ros::Time::now().toSec() - time0;
                 }
+                // Update state
+                processMessages();
+                updateState();
             }
             ros::Duration(5).sleep();
 
-            // Update state
-            processMessages();
-            updateState();
             sp = getIndexFromState();
 
             if (exploit != "y"){

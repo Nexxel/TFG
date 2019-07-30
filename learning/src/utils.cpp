@@ -131,6 +131,7 @@ void callbackImage(const ImageConstPtr& image_msg){
      // The counter if for ashuring that at least it is executed 1 time
      int counter = 0;
      gripper_effort = 0;
+     cv_ptr.reset();
      while(ros::ok() 
             and (cv_ptr == NULL or gripper_effort == 0 or counter == 0))
     {
@@ -887,7 +888,7 @@ void actualizeExploitationLog(){
  Actualize log for distances:
 -----------------------------------*/
 void actualizedistanceLog(){
-    if (steps == 1 && simulations == 1){
+    if (simulations == 1){
         string str(complete_distance_log_name.str());
         log_file.open(str.c_str());
     }else{
