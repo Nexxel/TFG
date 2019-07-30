@@ -110,6 +110,7 @@ void learning(Handlers handlers){
                     if(exploit != "y"){
                         end_episode = true;
                     }
+                    ros::Duration(5).sleep();
                     // Update state
                     processMessages();
                     updateState();
@@ -160,11 +161,11 @@ void learning(Handlers handlers){
                     base.publish(base_movement);
                     diff_time = ros::Time::now().toSec() - time0;
                 }
+                ros::Duration(5).sleep();
                 // Update state
                 processMessages();
                 updateState();
             }
-            ros::Duration(5).sleep();
 
             sp = getIndexFromState();
 
