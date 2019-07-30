@@ -308,7 +308,8 @@ void discretizeValuesAux(int selector, double step){
     }
     int quadrant = 0;
     bool inside_quadrant = false;
-    while (quadrant < discr_level and !inside_quadrant){
+    *state_d = 0;
+    while (quadrant < discr_level and !inside_quadrant and *state_c >= 0){
         vec2 ranges;
         ranges << step*double(quadrant) << step*double(quadrant+1);
         if(*state_c >= ranges(0)
