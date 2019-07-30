@@ -73,17 +73,15 @@ void learning(Handlers handlers){
 
         steps = 0;
         prev_V = V;
+        robot_state.angle_d = 0;
+        robot_state.height_d = 0;
+        robot_state.distance_d = 0;
+        robot_state.angle_c = 0;
+        robot_state.height_c = 0;
+        robot_state.distance_c = 0;
 
         bool end_episode = false;
         while(ros::ok() && !end_episode){
-            // Set random seed by the time of the cpu
-            srand( (unsigned)time(NULL) );
-            robot_state.angle_d = 0;
-            robot_state.height_d = 0;
-            robot_state.distance_d = 0;
-            robot_state.angle_c = 0;
-            robot_state.height_c = 0;
-            robot_state.distance_c = 0;
 
             // If it's the first time, set the arm to the initial position
             if (counter == 0){
