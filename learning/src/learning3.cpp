@@ -84,13 +84,11 @@ void learning(Handlers handlers){
             robot_state.angle_c = 0;
             robot_state.height_c = 0;
             robot_state.distance_c = 0;
-            
-            processMessages();
-
-            updateState();
 
             // If it's the first time, set the arm to the initial position
             if (counter == 0){
+                processMessages();
+                updateState();
                 openGripper();
                 foldArm();
                 // 1. Get state
