@@ -83,10 +83,12 @@ void learning(Handlers handlers){
         bool end_episode = false;
         while(ros::ok() && !end_episode){
 
+            // Update state
+            processMessages();
+            updateState();
+
             // If it's the first time, set the arm to the initial position
             if (counter == 0){
-                processMessages();
-                updateState();
                 openGripper();
                 foldArm();
                 // 1. Get state
@@ -170,7 +172,7 @@ void learning(Handlers handlers){
                 visit_matrix(sa, action)++;
                 
                 // Update Q-matrix
-                alpha = 1/sum(visit_matrix.row(sa));
+                alpha = 1/(pow(arma::sum(visit_matrix.row(sa)),0.25));
                 q_matrix(sa,action) = (1 - alpha) * q_matrix(sa,action) + alpha * (reward + GAMMA * V(sp));
 
 
