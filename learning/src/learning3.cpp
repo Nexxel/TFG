@@ -106,10 +106,6 @@ void learning(Handlers handlers){
                     if(exploit != "y"){
                         end_episode = true;
                     }
-                    ros::Duration(5).sleep();
-                    // Update state
-                    processMessages();
-                    updateState();
                 }else{
                     ROS_INFO("Trying to move arm but object is not reachable...");
                 }
@@ -157,11 +153,11 @@ void learning(Handlers handlers){
                     base.publish(base_movement);
                     diff_time = ros::Time::now().toSec() - time0;
                 }
-                ros::Duration(5).sleep();
-                // Update state
-                processMessages();
-                updateState();
             }
+            ros::Duration(3).sleep();
+            // Update state
+            processMessages();
+            updateState();
 
             sp = getIndexFromState();
 
@@ -174,7 +170,7 @@ void learning(Handlers handlers){
                 visit_matrix(sa, action)++;
                 
                 // Update Q-matrix
-                alpha = 1/visit_matrix(sa, action);
+                alpha = 1/sum(visit_matrix.row(sa));
                 q_matrix(sa,action) = (1 - alpha) * q_matrix(sa,action) + alpha * (reward + GAMMA * V(sp));
 
 
