@@ -707,43 +707,19 @@ void getStateFromIndex(int index){
  Select action:
 -----------------------------------*/
 void selectAction(){
-    if(exploit == "y"){
-        action = policy_matrix(sa);
-    }else{
-       /*
-        float not_visited = 0;
-        double prev_expl_rate = exploration_rate;
-        for (int i = 0; i<N_ACTIONS; i++){
-            not_visited += (visit_matrix(sa,i) == 0);
-        }
-        if (((float)not_visited/(float)N_ACTIONS) >= 0.25) { 
-            exploration_rate = 100;
-        }
-        */
-        if (floor(unifRnd(0, 100)) <= EXPLORATION_RATE){
-            ROS_INFO("Exploring...");
-            action = floor(unifRnd(0,N_ACTIONS-1));
+    if (exploit == "y" || floor(unifRnd(0, 100)) > EXPLORATION_RATE){
+        ROS_INFO("Exploting...");
+        double maximum = arma::max(q_matrix(sa));
+        uvec maximum_values_pos_visited = (arma::find(q_matrix.row(sa) == maximum and visit_matrix.row(sa)));
+        uvec maximum_values_pos = (arma::find(q_matrix.row(sa) == maximum));
+        if(maximum_values_pos_visited.n_rows == 0){
+            action = maximum_values_pos.at(floor(unifRnd(0,maximum_values_pos.n_rows-1)));
         }else{
-            ROS_INFO("Exploting...");
-            uvec pos_visited = (arma::find(visit_matrix.row(sa)));
-            if(pos_visited.n_rows == 0){
-                action = floor(unifRnd(0,N_ACTIONS-1));
-            }else{
-                if(pos_visited.n_rows == 1){
-                    action = pos_visited(0);
-                }else{
-                    double maximum = arma::max(q_matrix(sa));
-                    uvec maximum_values_pos = (arma::find(q_matrix.row(sa) == maximum));
-                    action = maximum_values_pos.at(floor(unifRnd(0,maximum_values_pos.n_rows-1)));
-                }
-            }
+            action = maximum_values_pos_visited.at(floor(unifRnd(0,maximum_values_pos_visited.n_rows-1)));
         }
-        /*
-        number_steps++;
-        exploration_rate = prev_expl_rate;
-        exploration_rate = MIN_EXPLORATION + (MAX_EXPLORATION - MIN_EXPLORATION) * exp(-DECAY * number_steps);
-        ROS_INFO("\n\n\nStep %d exploration_rate: %.2f\n\n\n", number_steps, exploration_rate);
-        */
+    }else{
+        ROS_INFO("Exploring...");
+        action = floor(unifRnd(0,N_ACTIONS-1));
     }
 }
 /*------------------------------------

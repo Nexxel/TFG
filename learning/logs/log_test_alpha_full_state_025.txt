@@ -79966,3 +79966,123 @@ New value of Q matrix: 5.59595
 New value of Value function: 5.68207
 New value of Policy matrix: 3
 
+=======================================
+Simulation: 23
+Iteration: 33
+----------
+State: 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+State': 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 0
+New value of Visit matrix: 1714
+New value of Q matrix: 5.53321
+New value of Value function: 5.68207
+New value of Policy matrix: 3
+
+=======================================
+Simulation: 23
+Iteration: 34
+----------
+State: 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+State': 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 0
+New value of Visit matrix: 1715
+New value of Q matrix: 5.54652
+New value of Value function: 5.68207
+New value of Policy matrix: 3
+
+=======================================
+Simulation: 23
+Iteration: 35
+----------
+State: 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+State': 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+Action: 3
+	Move back
+Reward: 0
+New value of Visit matrix: 155
+New value of Q matrix: 5.67385
+New value of Value function: 5.67385
+New value of Policy matrix: 3
+
+=======================================
+Simulation: 23
+Iteration: 36
+----------
+State: 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+State': 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 131
+New value of Q matrix: 5.57208
+New value of Value function: 5.67385
+New value of Policy matrix: 3
+
+=======================================
+Simulation: 23
+Iteration: 37
+----------
+State: 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+State': 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: 0
+New value of Visit matrix: 142
+New value of Q matrix: 5.59901
+New value of Value function: 5.67385
+New value of Policy matrix: 3
+
