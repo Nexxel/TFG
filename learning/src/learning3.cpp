@@ -143,14 +143,17 @@ void learning(Handlers handlers){
                 if(robot_state.distance_d != 0 && robot_state.angle_d != 0 && robot_state.height_d != 0){
                     int prev_dist = robot_state.distance_d;
                     int prev_ang = robot_state.angle_d;
-                    int prev_height = robot_state.height_d;
-                    while(prev_dist == robot_state.distance_d
-                            && prev_ang == robot_state.angle_d
-                            && prev_height == robot_state.height_d){
+                    bool changed_state = false;
+                    while(!changed_state){
                         base.publish(base_movement);
-                        ros::Duration(1).sleep();
+                        ros::Duration(3).sleep();
                         processMessages();
                         updateState();
+                        if(action == 0 || action == 1){
+                            changed_state = (prev_ang != robot_state.angle_d);
+                        }else{
+                            changed_state = (prev_dist != robot_state.distance_d);
+                        }
                     }
                 }else{
                     double necessary_time;
