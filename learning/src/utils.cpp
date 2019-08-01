@@ -709,12 +709,18 @@ void getStateFromIndex(int index){
 void selectAction(){
     if (exploit == "y" || floor(unifRnd(0, 100)) > EXPLORATION_RATE){
         ROS_INFO("Exploting...");
-        double maximum = arma::max(q_matrix(sa));
-        uvec maximum_values_pos_visited = (arma::find(q_matrix.row(sa) == maximum and visit_matrix.row(sa)));
-        uvec maximum_values_pos = (arma::find(q_matrix.row(sa) == maximum));
+        double maximum = arma::max(q_matrix.row(sa));
+        cout << "\n\nMaximum: " << maximum << "\n\n"; 
+        cout << "\n\nq_matrix_max:\n" << arma::find((q_matrix.row(sa) == maximum))
+             << "\nvisit_matrix > 0:\n" << arma::find((visit_matrix.row(sa) > 0))
+             << "\nBoth:\n" << (arma::find((q_matrix.row(sa) == maximum) and (visit_matrix.row(sa) > 0)));
+        uvec maximum_values_pos_visited = (arma::find((q_matrix.row(sa) == maximum) and (visit_matrix.row(sa) > 0)));
+        uvec maximum_values_pos = (arma::find((q_matrix.row(sa) == maximum)));
         if(maximum_values_pos_visited.n_rows == 0){
+            cout << "\n\nMaximum non visited: " << maximum_values_pos << "\n\n";  
             action = maximum_values_pos.at(floor(unifRnd(0,maximum_values_pos.n_rows-1)));
         }else{
+            cout << "\n\nMaximum visited: " << maximum_values_pos_visited << "\n\n";
             action = maximum_values_pos_visited.at(floor(unifRnd(0,maximum_values_pos_visited.n_rows-1)));
         }
     }else{
