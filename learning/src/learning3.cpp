@@ -81,6 +81,7 @@ void learning(Handlers handlers){
         robot_state.distance_c = 0;
 
         bool end_episode = false;
+        visit_matrix = arma::zeros<arma::mat>(num_states, N_ACTIONS);
         while(ros::ok() && !end_episode){
 
             // Update state
@@ -139,22 +140,36 @@ void learning(Handlers handlers){
                     ROS_INFO("Turning right...");
                     base_movement.angular.z = -0.1;
                 }
-                double necessary_time;
-                if(action == 0 || action == 1){
-                    necessary_time = (double)angle_per_level/(double)abs(base_movement.angular.z);
-                }else{
-                    necessary_time = (double)distance_per_level/(double)abs(base_movement.linear.x);
-                }
-                double diff_time = 0;
-                bool first_loop = true;
-                while((diff_time < necessary_time) && ros::ok()){
-                    if(first_loop){
-                        time0 = ros::Time::now().toSec();
-                        first_loop = false;
+                if(robot_state.distance_d != 0 && robot_state.angle_d != 0 && robot_state.height_d != 0){
+                    int prev_dist = robot_state.distance_d;
+                    int prev_ang = robot_state.angle_d;
+                    int prev_height = robot_state.height_d;
+                    while(prev_dist == robot_state.distance_d
+                            && prev_ang == robot_state.angle_d
+                            && prev_height == robot_state.height_d){
+                        base.publish(base_movement);
+                        ros::Duration(1).sleep();
+                        processMessages();
+                        updateState();
                     }
-                    base.publish(base_movement);
-                    diff_time = ros::Time::now().toSec() - time0;
-                }
+                }else{
+                    double necessary_time;
+                    if(action == 0 || action == 1){
+                        necessary_time = (double)angle_per_level/(double)abs(base_movement.angular.z);
+                    }else{
+                        necessary_time = (double)distance_per_level/(double)abs(base_movement.linear.x);
+                    }
+                    double diff_time = 0;
+                    bool first_loop = true;
+                    while((diff_time < necessary_time) && ros::ok()){
+                        if(first_loop){
+                            time0 = ros::Time::now().toSec();
+                            first_loop = false;
+                        }
+                        base.publish(base_movement);
+                        diff_time = ros::Time::now().toSec() - time0;
+                    }
+                }      
             }
             ros::Duration(3).sleep();
             // Update state
@@ -181,7 +196,7 @@ void learning(Handlers handlers){
                 steps++;
                 actualizeLog();
                 actualizeSimplifiedLog();
-                if(steps == 500){
+                if(steps == 150){
                     end_episode = true;
                 }
             }else{
