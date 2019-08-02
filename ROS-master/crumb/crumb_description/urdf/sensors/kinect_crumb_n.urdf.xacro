@@ -3,7 +3,7 @@
   <xacro:include filename="$(find crumb_description)/urdf/turtlebot_gazebo_crumb_n.urdf.xacro"/>
   <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_properties.urdf.xacro"/>
   
-  <xacro:property name="kinect_cam_py" value="-0.0125"/>
+  <xacro:property name="kinect_cam_py" value="0.0"/>
   <!-- Parameterised in part by the values in turtlebot_properties.urdf.xacro -->
   <xacro:macro name="sensor_kinect_crumb_n" params="parent">
     <joint name="camera_rgb_joint" type="fixed">
@@ -51,7 +51,7 @@
          files. However, for Gazebo simulation we need them, so we add them here.
          (Hence, don't publish them additionally!) -->
 	<joint name="camera_depth_joint" type="fixed">
-	  <origin xyz="0 ${2 * -kinect_cam_py} 0" rpy="0 0 0" />
+	  <origin xyz="0 ${2 * 0.0125} 0" rpy="0 0 0" />
 	  <parent link="camera_rgb_frame" />
 	  <child link="camera_depth_frame" />
 	</joint>

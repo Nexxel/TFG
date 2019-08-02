@@ -144,7 +144,8 @@ void learning(Handlers handlers){
                     int prev_dist = robot_state.distance_d;
                     int prev_ang = robot_state.angle_d;
                     bool changed_state = false;
-                    while(!changed_state){
+                    int counter = 0;
+                    while(!changed_state && counter < 7){
                         base.publish(base_movement);
                         ros::Duration(3).sleep();
                         processMessages();
@@ -154,6 +155,7 @@ void learning(Handlers handlers){
                         }else{
                             changed_state = (prev_dist != robot_state.distance_d);
                         }
+                        counter++;
                     }
                 }else{
                     double necessary_time;
@@ -190,7 +192,7 @@ void learning(Handlers handlers){
                 visit_matrix(sa, action)++;
                 
                 // Update Q-matrix
-                alpha = 1/(pow(arma::sum(visit_matrix.row(sa)),0.25));
+                alpha = 1/(pow(visit_matrix(sa,action),0.5));
                 q_matrix(sa,action) = (1 - alpha) * q_matrix(sa,action) + alpha * (reward + GAMMA * V(sp));
 
 

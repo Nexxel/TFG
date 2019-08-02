@@ -55,10 +55,10 @@
 #define WIDTH_PX_2_M (SENSOR_WIDTH/CAMERA_WIDTH)
 
 // Min and max positions of the objects
-#define MAX_X 3.0
-#define MIN_X 1.0
-#define MAX_Y 2.0
-#define MIN_Y -2.0
+#define MAX_X 2.0
+#define MIN_X 2.0
+#define MAX_Y 0.0
+#define MIN_Y 0.0
 // Number of box.urdf to use (box_1 z-size=0.1, box_2 z-size=0.2...)
 #define MIN_BOX 3
 #define MAX_BOX 5
