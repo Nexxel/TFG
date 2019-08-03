@@ -81,7 +81,6 @@ void learning(Handlers handlers){
         robot_state.distance_c = 0;
 
         bool end_episode = false;
-        visit_matrix = arma::zeros<arma::mat>(num_states, N_ACTIONS);
         while(ros::ok() && !end_episode){
 
             // Update state
@@ -109,6 +108,7 @@ void learning(Handlers handlers){
                     if(exploit != "y"){
                         end_episode = true;
                     }
+                    robot_state.object_picked = true;
                 }else{
                     ROS_INFO("Trying to move arm but object is not reachable...");
                 }
