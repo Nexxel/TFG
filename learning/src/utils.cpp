@@ -57,6 +57,15 @@ void callbackImage(const ImageConstPtr& image_msg){
     }
  }
 
+  /*------------------------------------
+ Get simulation pose and actualize it:
+ -----------------------------------*/
+ void getSimulationPoseCallback(const Vector3ConstPtr& sim_pose_msg){
+     if(update_pose){
+        actualizePositionLog(sim_pose_msg->x, sim_pose_msg->y, sim_pose_msg->z);
+     }
+ }
+
  /*------------------------------------
  Methods
  -----------------------------------*/
@@ -83,6 +92,9 @@ void callbackImage(const ImageConstPtr& image_msg){
     complete_simplified_log_name << ros::package::getPath("learning") << "/simplified_logs/simplified_log_" << log_name << ".txt";
     complete_exploitation_log_name << ros::package::getPath("learning") << "/exploitation_logs/exploitation_log_" << log_name << ".txt";
     complete_distance_log_name << ros::package::getPath("learning") << "/distance_logs/distance_log_" << log_name << ".txt";
+    complete_iteration_distance_log_name << ros::package::getPath("learning") << "/iteration_distance_logs/iteration_distance_log_" << log_name << ".txt";
+    complete_position_log_name << ros::package::getPath("learning") << "/position_logs/position_log_" << log_name << ".txt";
+
     cout << "Want to overwrite it?[y/N] ";
     string response;
     getline(cin, response);
@@ -563,8 +575,8 @@ void isObjectPicked(){
     Object is centered in x, near and up
 -----------------------------------*/
 void isObjectReachable(){
-    object_reachable = robot_state.angle_d >= ceil((1 + discr_level)/3) + 1
-                        and robot_state.angle_d <= 2*floor((1 + discr_level)/3) -1
+    object_reachable = robot_state.angle_d >= round((1 + discr_level)/3)
+                        and robot_state.angle_d <= 2*round((1 + discr_level)/3)
                         and robot_state.distance_d < (1 + discr_level)/4;
 }
 
@@ -891,6 +903,36 @@ void actualizedistanceLog(){
         log_file.open(str.c_str(), ios::app | ios::out);
     }
     log_file << d << "," << e << "\n";
+    log_file.close();
+}
+
+/*------------------------------------
+ Actualize log for distances each iteration:
+-----------------------------------*/
+void actualizeIterationDistanceLog(){
+    if (steps == 1 && simulations == 1){
+        string str(complete_iteration_distance_log_name.str());
+        log_file.open(str.c_str());
+    }else{
+        string str(complete_iteration_distance_log_name.str());
+        log_file.open(str.c_str(), ios::app | ios::out);
+    }
+    log_file << simulations << "," << steps << "," << d << "," << e << "\n";
+    log_file.close();
+}
+
+/*------------------------------------
+ Actualize log for position of robot each iteration:
+-----------------------------------*/
+void actualizePositionLog(double x, double y, double z){
+    if (steps == 1 && simulations == 1){
+        string str(complete_position_log_name.str());
+        log_file.open(str.c_str());
+    }else{
+        string str(complete_position_log_name.str());
+        log_file.open(str.c_str(), ios::app | ios::out);
+    }
+    log_file << simulations << "," << steps << "," << x << "," << y << "," << z << "\n";
     log_file.close();
 }
 

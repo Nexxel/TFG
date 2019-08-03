@@ -20,6 +20,7 @@
 // Image visualization
 #include <opencv2/highgui/highgui.hpp>
 // Ros messages
+#include <geometry_msgs/Vector3.h>
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/JointState.h>
 #include <sensor_msgs/Image.h>
@@ -60,7 +61,7 @@
 #define MAX_Y 2.0
 #define MIN_Y -2.0
 // Number of box.urdf to use (box_1 z-size=0.1, box_2 z-size=0.2...)
-#define MIN_BOX 3
+#define MIN_BOX 4
 #define MAX_BOX 5
 
 #define EXPLORATION_RATE 30
@@ -113,6 +114,7 @@ mat33 I2P;       // Tranformation from Image frame to P2
 
 ros::master::V_TopicInfo topic_info;
 bool is_simulation;
+bool update_pose = false;
 
 bool gripper_opened;    // Is the gripper opened?
 vec3 gripper_position;
@@ -144,6 +146,8 @@ stringstream complete_log_name;
 stringstream complete_simplified_log_name;
 stringstream complete_exploitation_log_name;
 stringstream complete_distance_log_name;
+stringstream complete_iteration_distance_log_name;
+stringstream complete_position_log_name;
 
 // Elements useful for object detection
 cv_bridge::CvImagePtr cv_ptr; // Pointer to the cv image
@@ -176,6 +180,7 @@ image_transport::Subscriber color_image_sub;
 ros::Subscriber camera_info_sub;
 ros::Subscriber joint_states_sub;
 ros::Subscriber discr_level_sub;
+ros::Subscriber sim_pose_sub;
 
 // Publishers
 ros::Publisher joints[5];
@@ -197,6 +202,10 @@ ros::Publisher base;
  Get gripper effort:
  -----------------------------------*/
  void getGripperEffortCallback(const JointStateConstPtr& joint_states_msg);
+ /*------------------------------------
+ Get simulation pose and actualize it:
+ -----------------------------------*/
+ void getSimulationPoseCallback(const Vector3ConstPtr& sim_pose_msg);
 /*------------------------------------
  Methods
  -----------------------------------*/
@@ -373,6 +382,14 @@ void actualizeExploitationLog();
  Actualize log for distances:
 -----------------------------------*/
 void actualizedistanceLog();
+/*------------------------------------
+ Actualize log for distances each iteration:
+-----------------------------------*/
+void actualizeIterationDistanceLog();
+/*------------------------------------
+ Actualize log for position of robot each iteration:
+-----------------------------------*/
+void actualizePositionLog();
 /*------------------------------------
  Print debug:
 -----------------------------------*/

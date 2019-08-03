@@ -61,6 +61,7 @@ void learning(Handlers handlers){
         color_image_sub = handlers.getIT().subscribe("/camera/rgb/image_color", 1, &callbackImage);
         camera_info_sub = handlers.getNH().subscribe("/camera/rgb/camera_info", 1, &callbackCameraInfo);
         joint_states_sub = handlers.getNH().subscribe("/joint_states", 1, &getGripperEffortCallback);
+        sim_pose_sub = handlers.getNH().subscribe("/simulation/pose", 1 , &getSimulationPoseCallback);
 
         joints[0] = handlers.getNH().advertise<Float64>("/arm_1_joint/command", 1);
         joints[1] = handlers.getNH().advertise<Float64>("/arm_2_joint/command", 1);
@@ -82,10 +83,11 @@ void learning(Handlers handlers){
 
         bool end_episode = false;
         while(ros::ok() && !end_episode){
-
+            update_pose = true;
             // Update state
             processMessages();
             updateState();
+            update_pose = false;
 
             // If it's the first time, set the arm to the initial position
             if (counter == 0){
@@ -197,7 +199,12 @@ void learning(Handlers handlers){
 
 
                 // Update V and policy matrices
+                vec prev_V_it = V;      // Prev V function on each iteration
                 updateVPolicy();
+                d = norm(V - prev_V_it);
+                e = arma::min(arma::abs(V - prev_V_it));
+                actualizeIterationDistanceLog(); 
+
                 steps++;
                 actualizeLog();
                 actualizeSimplifiedLog();
@@ -214,7 +221,7 @@ void learning(Handlers handlers){
         }
         killSimulation();
         d = norm(V - prev_V);
-        e = min(abs(V - prev_V));
+        e = arma::min(arma::abs(V - prev_V));
         actualizedistanceLog(); 
         if(d < 0 || e < 0){
             end_simulation = true;
