@@ -389,7 +389,7 @@ void actualizeIterationDistanceLog();
 /*------------------------------------
  Actualize log for position of robot each iteration:
 -----------------------------------*/
-void actualizePositionLog();
+void actualizePositionLog(double x, double y, double z);
 /*------------------------------------
  Print debug:
 -----------------------------------*/
