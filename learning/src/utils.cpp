@@ -63,6 +63,7 @@ void callbackImage(const ImageConstPtr& image_msg){
  void getSimulationPoseCallback(const Vector3ConstPtr& sim_pose_msg){
      if(update_pose){
         actualizePositionLog(sim_pose_msg->x, sim_pose_msg->y, sim_pose_msg->z);
+        update_pose = false;
      }
  }
 
@@ -94,6 +95,7 @@ void callbackImage(const ImageConstPtr& image_msg){
     complete_distance_log_name << ros::package::getPath("learning") << "/distance_logs/distance_log_" << log_name << ".txt";
     complete_iteration_distance_log_name << ros::package::getPath("learning") << "/iteration_distance_logs/iteration_distance_log_" << log_name << ".txt";
     complete_position_log_name << ros::package::getPath("learning") << "/position_logs/position_log_" << log_name << ".txt";
+    complete_object_position_log_name << ros::package::getPath("learning") << "/object_position_logs/object_position_log_" << log_name << ".txt";
 
     cout << "Want to overwrite it?[y/N] ";
     string response;
@@ -674,7 +676,8 @@ void startRandomSimulation(){
             // Unpause simulation
             system("rosservice call /gazebo/unpause_physics");
             sleep(5);
-            simulations++;   
+            simulations++;
+            actualizeObjectPositionLog((x - 0.45), y, (z*2+0.05));
         }else{
             system("killall -9 xterm gzserver");
             ros::shutdown();
@@ -933,6 +936,21 @@ void actualizePositionLog(double x, double y, double z){
         log_file.open(str.c_str(), ios::app | ios::out);
     }
     log_file << simulations << "," << steps << "," << x << "," << y << "," << z << "\n";
+    log_file.close();
+}
+
+/*------------------------------------
+ Actualize log for position of object on each simulation:
+-----------------------------------*/
+void actualizeObjectPositionLog(double x, double y, double z){
+    if (steps == 1 && simulations == 1){
+        string str(complete_object_position_log_name.str());
+        log_file.open(str.c_str());
+    }else{
+        string str(complete_object_position_log_name.str());
+        log_file.open(str.c_str(), ios::app | ios::out);
+    }
+    log_file << simulations << "," << x << "," << y << "," << z << "\n";
     log_file.close();
 }
 

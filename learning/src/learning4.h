@@ -115,6 +115,7 @@ mat33 I2P;       // Tranformation from Image frame to P2
 ros::master::V_TopicInfo topic_info;
 bool is_simulation;
 bool update_pose = false;
+int counter_continuous_low_distance = 0;   // Counter of continuous times the distance is really low
 
 bool gripper_opened;    // Is the gripper opened?
 vec3 gripper_position;
@@ -148,6 +149,8 @@ stringstream complete_exploitation_log_name;
 stringstream complete_distance_log_name;
 stringstream complete_iteration_distance_log_name;
 stringstream complete_position_log_name;
+stringstream complete_object_position_log_name;
+
 
 // Elements useful for object detection
 cv_bridge::CvImagePtr cv_ptr; // Pointer to the cv image
@@ -390,6 +393,10 @@ void actualizeIterationDistanceLog();
  Actualize log for position of robot each iteration:
 -----------------------------------*/
 void actualizePositionLog(double x, double y, double z);
+/*------------------------------------
+ Actualize log for position of object on each simulation:
+-----------------------------------*/
+void actualizeObjectPositionLog(double x, double y, double z);
 /*------------------------------------
  Print debug:
 -----------------------------------*/

@@ -44,7 +44,6 @@ void learning(Handlers handlers){
         if (gui){
             namedWindow("Red objects image",CV_WINDOW_AUTOSIZE);
         }
-        int counter = 0;
 
         // Create timers
         double time0 = ros::Time::now().toSec();
@@ -80,6 +79,8 @@ void learning(Handlers handlers){
         robot_state.angle_c = 0;
         robot_state.height_c = 0;
         robot_state.distance_c = 0;
+        bool first_step = true;
+
 
         bool end_episode = false;
         while(ros::ok() && !end_episode){
@@ -87,16 +88,15 @@ void learning(Handlers handlers){
             // Update state
             processMessages();
             updateState();
-            update_pose = false;
 
             // If it's the first time, set the arm to the initial position
-            if (counter == 0){
+            if (first_step){
                 openGripper();
                 foldArm();
                 // 1. Get state
                 updateState();
                 sa = getIndexFromState();
-                counter++;
+                first_step = false;
             }
 
             // 2. Select action
@@ -223,7 +223,12 @@ void learning(Handlers handlers){
         d = norm(V - prev_V);
         e = arma::min(arma::abs(V - prev_V));
         actualizedistanceLog(); 
-        if(d < 0 || e < 0){
+        if(d < 1){
+            counter_continuous_low_distance++;
+        }else{
+            counter_continuous_low_distance = 0;
+        }
+        if(d < 0 || e < 0 || counter_continuous_low_distance == 10){
             end_simulation = true;
             ROS_INFO("The robot has already learn. End of simulation...");
         }
