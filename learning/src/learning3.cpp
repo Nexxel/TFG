@@ -219,10 +219,10 @@ void learning(Handlers handlers){
         if (gui){
             destroyWindow("Red objects image");
         }
-        killSimulation();
         d = norm(V - prev_V);
         e = arma::min(arma::abs(V - prev_V));
         actualizedistanceLog(); 
+        killSimulation();
         if(d < 1){
             counter_continuous_low_distance++;
         }else{
