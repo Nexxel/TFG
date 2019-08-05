@@ -61,7 +61,7 @@
 #define MAX_Y 2.0
 #define MIN_Y -2.0
 // Number of box.urdf to use (box_1 z-size=0.1, box_2 z-size=0.2...)
-#define MIN_BOX 4
+#define MIN_BOX 3
 #define MAX_BOX 5
 
 #define EXPLORATION_RATE 30
@@ -104,7 +104,7 @@ double e;               // Min absolute distance between V and V'
 vec3 ang_or;            // Angle orientation of gripper //3x1
 vec3 home_pos;          // Home position
 vec3 n;                 // Direction of gripper
-int discr_level = 11;    // Discretization level
+int discr_level = 15;    // Discretization level
 double distance_per_level = (double)MAX_DISTANCE/(double)discr_level;   // Distance per discretization level
 double angle_per_level = ((double)48.6/(double)discr_level) * (M_PI/180); // Angle (rad) per discretization level
 
