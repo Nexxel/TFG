@@ -517,13 +517,13 @@ void moveArmToObject(){
     next_position = (TSB * (hom_obj_pos));
     intermediate_position(0) = next_position(0) - 0.08;
 
-    mci(intermediate_position, n);
+    //mci(intermediate_position, n);
     openGripper();
     ros::Duration(2).sleep();
 
     intermediate_position(1) = next_position(1);    
-    mci(intermediate_position, n);
-    ros::Duration(2).sleep();
+    //mci(intermediate_position, n);
+    //ros::Duration(2).sleep();
 
     intermediate_position(2) = next_position(2) + 0.06;
     mci(intermediate_position, n);
