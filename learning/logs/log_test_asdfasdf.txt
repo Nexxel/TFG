@@ -1,0 +1,24 @@
+=======================================
+Simulation: 1
+Iteration: 1
+----------
+State: 9829
+	Distance: 12
+	Angle: 7
+	Height: 7
+	Object picked: 0
+	Arm folded: 1
+State': 11341
+	Distance: 14
+	Angle: 6
+	Height: 7
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: -4
+New value of Visit matrix: 1
+New value of Q matrix: -4
+New value of Value function: 0
+New value of Policy matrix: 0
+

@@ -42,9 +42,9 @@
 
 #define MAX_DISTANCE 2.5   //Max distance to perceive the object
 
-#define OBJECT_HEIGHT 80  // Height of the object in mm
-#define OBJECT_WIDTH 28 // Width of the object in mm
-#define OBJECT_AREA (OBJECT_HEIGHT * OBJECT_WEIGHT)
+#define OBJECT_HEIGHT 100.0  // Height of the object in mm
+#define OBJECT_WIDTH 37.967718 // Width of the object in mm
+#define OBJECT_AREA (OBJECT_HEIGHT * OBJECT_WIDTH)
 
 #define SENSOR_WIDTH 2.30 // Width of the sensor in mm
 #define SENSOR_HEIGHT 1.73 // Height of the sensor in mm
@@ -57,9 +57,9 @@
 
 // Min and max positions of the objects
 #define MAX_X 6.0
-#define MIN_X 1.0
-#define MAX_Y 2.0
-#define MIN_Y -2.0
+#define MIN_X 6.0
+#define MAX_Y 0.0
+#define MIN_Y 0.0
 // Number of box.urdf to use (box_1 z-size=0.1, box_2 z-size=0.2...)
 #define MIN_BOX 3
 #define MAX_BOX 5
