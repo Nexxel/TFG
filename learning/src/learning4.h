@@ -43,7 +43,7 @@
 #define MAX_DISTANCE 2.5   //Max distance to perceive the object
 
 #define OBJECT_HEIGHT 100.0  // Height of the object in mm
-#define OBJECT_WIDTH 37.967718 // Width of the object in mm
+#define OBJECT_WIDTH 24.0 // Width of the object in mm
 #define OBJECT_AREA (OBJECT_HEIGHT * OBJECT_WIDTH)
 
 #define SENSOR_WIDTH 2.30 // Width of the sensor in mm
@@ -160,6 +160,10 @@ arma::mat P = arma::zeros<arma::mat>(3,4);               // Projection/camera ma
 // To get object position
 int sum_x = 0; 
 int sum_y = 0; 
+double max_u = INFINITY; 
+double max_v = INFINITY;
+double min_u = -INFINITY;
+double min_v = -INFINITY;
 set<int> x_values = set<int>();
 set<int> y_values = set<int>();
 
@@ -258,13 +262,8 @@ void calculateRealPos();
 /*------------------------------------
  Get object real position with respect to the robot:
     [X Y Z 1] = P^(-1) * [u v 1]
-    Inputs:
-        top_u: X coordinate of the top center of the object (Pixels)
-        top_v: Y coordinate of the top center of the object (Pixels)
-        bottom_u: X coordinate of the bottom center of the object (Pixels)
-        bottom_v: Y coordinate of the bottom center of the object (Pixels)
 -----------------------------------*/
-void getObjectPosition(int top_u, int top_v, int bottom_u, int bottom_v);
+void getObjectPosition();
 /*------------------------------------
  Discretize values:
 -----------------------------------*/

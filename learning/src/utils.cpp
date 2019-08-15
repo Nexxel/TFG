@@ -202,14 +202,30 @@ void getLocation(){
 
     // Calculate pixel mean in x and y
     sum_x = 0; sum_y = 0; x_values.clear(); y_values.clear();
+    int prev_y = -INFINITY; int prev_x = -INFINITY;
+    max_u = INFINITY; max_v = INFINITY;
+    min_u = -INFINITY; min_v = -INFINITY;
     for(int i = 0; i<pixel_locations.total(); i++){
         Point pixel = pixel_locations.at<Point>(i);
         sum_x += pixel.x;
         sum_y += pixel.y;
         x_values.insert(pixel.x);
         y_values.insert(pixel.y);
+        if(prev_y != pixel.y){
+            min_u += pixel.x;
+            if(prev_x != -INFINITY){
+                max_u += prev_x;
+            }
+        }
+        if(i == (pixel_locations.total() -1)){
+            max_u += pixel.x;
+        }
+        prev_y = pixel.y;
+        prev_x = pixel.x;
     }
     if (pixel_locations.total() != 0){
+        min_u /= y_values.size();
+        max_u /= y_values.size();
         object_center(0) = round(sum_x/pixel_locations.total());
         object_center(1) = round(sum_y/pixel_locations.total());
     }else{
@@ -222,13 +238,11 @@ void getLocation(){
  Calculate the real position of the object with respect to the robot:
 -----------------------------------*/
 void calculateRealPos(){
-    int max_u = INFINITY; int max_v = INFINITY;
-    int min_u = -INFINITY; int min_v = -INFINITY;
     if(!x_values.empty() && !y_values.empty()){
-       min_u = *(x_values.begin()); max_u = *(--x_values.end());
        min_v = *(y_values.begin()); max_v = *(--y_values.end());
+       ROS_INFO("width in pixels = %d", abs(max_u-min_u));
     }
-    getObjectPosition(max_u,max_v,min_u, min_v);
+    getObjectPosition();
 }
 
 /*------------------------------------
@@ -240,7 +254,7 @@ void calculateRealPos(){
         min_u: Min X coordinate of the center of the object (Pixels)
         min_v: Min Y coordinate of the center of the object (Pixels)
 -----------------------------------*/
-void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
+void getObjectPosition(){
     if ((max_u >= (cv_ptr->image.cols - 42)) || (min_u <= 42)){
         robot_state.angle_c = -INFINITY;
         robot_state.distance_c = -INFINITY;
