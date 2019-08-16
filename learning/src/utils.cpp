@@ -31,7 +31,7 @@ void callbackImage(const ImageConstPtr& image_msg){
     cvtColor(cv_ptr->image, imageHSV, COLOR_BGR2HSV);
     inRange(imageHSV, Scalar(90 - 10, 100, 100), Scalar(90 + 10, 255, 255), cv_ptr->image);
     // Apply filter for avoiding false positives
-    GaussianBlur(cv_ptr->image, cv_ptr->image, Size(7,7), 5, 5);
+    GaussianBlur(cv_ptr->image, cv_ptr->image, Size(3,3), 3, 3);
 }
 
  /*------------------------------------
@@ -202,18 +202,19 @@ void getLocation(){
 
     // Calculate pixel mean in x and y
     sum_x = 0; sum_y = 0; x_values.clear(); y_values.clear();
-    int prev_y = -INFINITY; int prev_x = -INFINITY;
-    max_u = INFINITY; max_v = INFINITY;
-    min_u = -INFINITY; min_v = -INFINITY;
+    int prev_y = -1; int prev_x = -1;
+    max_u = 0; max_v = 0;
+    min_u = 0; min_v = 0;
     for(int i = 0; i<pixel_locations.total(); i++){
         Point pixel = pixel_locations.at<Point>(i);
         sum_x += pixel.x;
         sum_y += pixel.y;
+        //cout << "\npixel.x: " << pixel.x << "\tpixel.y: " << pixel.y;
         x_values.insert(pixel.x);
         y_values.insert(pixel.y);
         if(prev_y != pixel.y){
             min_u += pixel.x;
-            if(prev_x != -INFINITY){
+            if(prev_y != -1){
                 max_u += prev_x;
             }
         }
@@ -224,6 +225,7 @@ void getLocation(){
         prev_x = pixel.x;
     }
     if (pixel_locations.total() != 0){
+        cout << "\n\n\nmin_u: " << min_u << "\tmax_u: " << max_u << "\n\n";
         min_u /= y_values.size();
         max_u /= y_values.size();
         object_center(0) = round(sum_x/pixel_locations.total());
@@ -240,7 +242,10 @@ void getLocation(){
 void calculateRealPos(){
     if(!x_values.empty() && !y_values.empty()){
        min_v = *(y_values.begin()); max_v = *(--y_values.end());
-       ROS_INFO("width in pixels = %d", abs(max_u-min_u));
+       ROS_INFO("width in pixels = %.2f", abs(max_u-min_u));
+    }else{
+        max_u = INFINITY; max_v = INFINITY;
+        min_u = -INFINITY; min_v = -INFINITY;
     }
     getObjectPosition();
 }
@@ -593,7 +598,7 @@ void isObjectPicked(){
 void isObjectReachable(){
     object_reachable = robot_state.angle_d >= round((1 + discr_level)/3)
                         and robot_state.angle_d <= round(2 * (1 + discr_level)/3)
-                        and robot_state.distance_d < 3; //(1 + discr_level)/4;
+                        and robot_state.distance_d <= 3; //(1 + discr_level)/4;
 }
 
 /*------------------------------------

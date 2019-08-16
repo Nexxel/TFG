@@ -40,7 +40,7 @@
 
 #define ROS_RATE 8
 
-#define MAX_DISTANCE 2.5   //Max distance to perceive the object
+#define MAX_DISTANCE 1.0   //Max distance to perceive the object
 
 #define OBJECT_HEIGHT 100.0  // Height of the object in mm
 #define OBJECT_WIDTH 24.0 // Width of the object in mm
@@ -56,10 +56,10 @@
 #define WIDTH_PX_2_M (SENSOR_WIDTH/CAMERA_WIDTH)
 
 // Min and max positions of the objects
-#define MAX_X 6.0
-#define MIN_X 6.0
-#define MAX_Y 0.0
-#define MIN_Y 0.0
+#define MAX_X 1.5
+#define MIN_X 0.85
+#define MAX_Y 0.8
+#define MIN_Y -0.8
 // Number of box.urdf to use (box_1 z-size=0.1, box_2 z-size=0.2...)
 #define MIN_BOX 3
 #define MAX_BOX 5
@@ -104,7 +104,7 @@ double e;               // Min absolute distance between V and V'
 vec3 ang_or;            // Angle orientation of gripper //3x1
 vec3 home_pos;          // Home position
 vec3 n;                 // Direction of gripper
-int discr_level = 13;    // Discretization level
+int discr_level = 9;    // Discretization level
 double distance_per_level = (double)MAX_DISTANCE/(double)discr_level;   // Distance per discretization level
 double angle_per_level = ((double)48.6/(double)discr_level) * (M_PI/180); // Angle (rad) per discretization level
 
