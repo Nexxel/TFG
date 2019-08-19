@@ -331,11 +331,11 @@ void discretizeValues(){
 /*------------------------------------
  Discretize values auxiliar:
     Inputs:
-        - selector:
+        selector:
             0: angle
             1: height
-            2: distance
-        - step
+            2: depth
+        step: difference between each level of discretization
 -----------------------------------*/
 void discretizeValuesAux(int selector, double step){
     // Continuos and discretized value
@@ -522,9 +522,8 @@ void getGripperPosition(){
  Get the angle of each joint in order to reach the desired position
  by means of the inverse kinematic model:
     Inputs:
-        - next_position: Desired position
-        - a: Desired angle orientation of the wrisp
-        - n: Desired orientation of the wrisp 
+        next_position: Desired position
+        n: Desired orientation of the wrisp 
  -----------------------------------*/
 void mci(double next_position[3], double n[3]){
 	double px = next_position[0] - L45*a[0];
@@ -691,6 +690,9 @@ bool giveReward(){
 
 /*------------------------------------
  Print debug:
+    Inputs:
+        function: Function where you are
+        line: Line in which you are
 -----------------------------------*/
 void printDebug(string function, int line){
     ROS_INFO("\033[1;31m\nMethod %s:\n\tLine %u\n", function.c_str(), line);

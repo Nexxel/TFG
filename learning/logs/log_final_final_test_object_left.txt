@@ -30046,3 +30046,3171 @@ New value of Q matrix: 4.08649
 New value of Value function: 11.9418
 New value of Policy matrix: 0
 
+=======================================
+Simulation: 10
+Iteration: 16
+----------
+State: 2853
+	Distance: 7
+	Angle: 1
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: -3
+New value of Visit matrix: 1
+New value of Q matrix: 9.41275
+New value of Value function: 9.41275
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 10
+Iteration: 17
+----------
+State: 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+State': 2893
+	Distance: 7
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 3
+New value of Visit matrix: 109
+New value of Q matrix: 12.7569
+New value of Value function: 12.7569
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 18
+----------
+State: 2893
+	Distance: 7
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 3333
+	Distance: 8
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -2
+New value of Visit matrix: 2
+New value of Q matrix: 8.62839
+New value of Value function: 8.74092
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 19
+----------
+State: 3333
+	Distance: 8
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 3293
+	Distance: 8
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: -3
+New value of Visit matrix: 8
+New value of Q matrix: 10.3231
+New value of Value function: 10.3231
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 10
+Iteration: 20
+----------
+State: 3293
+	Distance: 8
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 2893
+	Distance: 7
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 6
+New value of Q matrix: 14.6018
+New value of Value function: 14.6018
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 21
+----------
+State: 2893
+	Distance: 7
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 2493
+	Distance: 6
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 39
+New value of Q matrix: 9.29223
+New value of Value function: 9.29223
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 22
+----------
+State: 2493
+	Distance: 6
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 2933
+	Distance: 7
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -2
+New value of Visit matrix: 10
+New value of Q matrix: 7.2512
+New value of Value function: 7.2512
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 23
+----------
+State: 2933
+	Distance: 7
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 2533
+	Distance: 6
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 9
+New value of Q matrix: 11.3974
+New value of Value function: 11.3974
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 24
+----------
+State: 2533
+	Distance: 6
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 2089
+	Distance: 5
+	Angle: 2
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 2
+New value of Visit matrix: 6
+New value of Q matrix: 17.4647
+New value of Value function: 17.4647
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 25
+----------
+State: 2089
+	Distance: 5
+	Angle: 2
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+State': 2529
+	Distance: 6
+	Angle: 3
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -2
+New value of Visit matrix: 3
+New value of Q matrix: 12.6902
+New value of Value function: 12.6902
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 26
+----------
+State: 2529
+	Distance: 6
+	Angle: 3
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+State': 2129
+	Distance: 5
+	Angle: 3
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 5
+New value of Q matrix: 17.3999
+New value of Value function: 17.3999
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 27
+----------
+State: 2129
+	Distance: 5
+	Angle: 3
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+State': 2089
+	Distance: 5
+	Angle: 2
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: -3
+New value of Visit matrix: 3
+New value of Q matrix: 4.98896
+New value of Value function: 27.6648
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 28
+----------
+State: 2089
+	Distance: 5
+	Angle: 2
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+State': 2129
+	Distance: 5
+	Angle: 3
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 3
+New value of Visit matrix: 4
+New value of Q matrix: 21.5392
+New value of Value function: 21.5392
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 29
+----------
+State: 2129
+	Distance: 5
+	Angle: 3
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+State': 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: -3
+New value of Visit matrix: 12
+New value of Q matrix: 22.4584
+New value of Value function: 22.4584
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 30
+----------
+State: 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+State': 1689
+	Distance: 4
+	Angle: 2
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 3
+New value of Visit matrix: 110
+New value of Q matrix: 11.8266
+New value of Value function: 11.8266
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 31
+----------
+State: 1689
+	Distance: 4
+	Angle: 2
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+State': 2129
+	Distance: 5
+	Angle: 3
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -2
+New value of Visit matrix: 1
+New value of Q matrix: 20.2339
+New value of Value function: 20.2339
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 32
+----------
+State: 2129
+	Distance: 5
+	Angle: 3
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+State': 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 2
+New value of Visit matrix: 13
+New value of Q matrix: 26.3074
+New value of Value function: 26.3074
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 33
+----------
+State: 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 2129
+	Distance: 5
+	Angle: 3
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -2
+New value of Visit matrix: 22
+New value of Q matrix: 32.4148
+New value of Value function: 32.4148
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 34
+----------
+State: 2129
+	Distance: 5
+	Angle: 3
+	Height: 2
+	Object picked: 0
+	Arm folded: 1
+State': 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 2
+New value of Visit matrix: 14
+New value of Q matrix: 28.3876
+New value of Value function: 28.3876
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 35
+----------
+State: 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 2125
+	Distance: 5
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -2
+New value of Visit matrix: 23
+New value of Q matrix: 26.5832
+New value of Value function: 31.5848
+New value of Policy matrix: 4
+
+=======================================
+Simulation: 10
+Iteration: 36
+----------
+State: 2125
+	Distance: 5
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 2
+New value of Visit matrix: 3
+New value of Q matrix: 21.9602
+New value of Value function: 21.9602
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 37
+----------
+State: 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 2
+New value of Q matrix: 31.3614
+New value of Value function: 31.3614
+New value of Policy matrix: 4
+
+=======================================
+Simulation: 10
+Iteration: 38
+----------
+State: 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 3
+New value of Q matrix: 31.1804
+New value of Value function: 31.1804
+New value of Policy matrix: 4
+
+=======================================
+Simulation: 10
+Iteration: 39
+----------
+State: 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 4
+New value of Q matrix: 31.0245
+New value of Value function: 31.0245
+New value of Policy matrix: 4
+
+=======================================
+Simulation: 10
+Iteration: 40
+----------
+State: 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 5
+New value of Q matrix: 30.8857
+New value of Value function: 30.8857
+New value of Policy matrix: 4
+
+=======================================
+Simulation: 10
+Iteration: 41
+----------
+State: 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 6
+New value of Q matrix: 30.7596
+New value of Value function: 30.7596
+New value of Policy matrix: 4
+
+=======================================
+Simulation: 10
+Iteration: 42
+----------
+State: 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 7
+New value of Q matrix: 30.6434
+New value of Value function: 30.6434
+New value of Policy matrix: 4
+
+=======================================
+Simulation: 10
+Iteration: 43
+----------
+State: 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 8
+New value of Q matrix: 30.535
+New value of Value function: 30.535
+New value of Policy matrix: 4
+
+=======================================
+Simulation: 10
+Iteration: 44
+----------
+State: 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: -3
+New value of Visit matrix: 3
+New value of Q matrix: 6.54847
+New value of Value function: 30.535
+New value of Policy matrix: 4
+
+=======================================
+Simulation: 10
+Iteration: 45
+----------
+State: 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+State': 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 3
+New value of Visit matrix: 111
+New value of Q matrix: 13.8581
+New value of Value function: 13.8581
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 46
+----------
+State: 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1725
+	Distance: 4
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 3
+New value of Visit matrix: 24
+New value of Q matrix: 31.0665
+New value of Value function: 31.0665
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 47
+----------
+State: 1725
+	Distance: 4
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: -3
+New value of Visit matrix: 23
+New value of Q matrix: 38.6492
+New value of Value function: 38.6492
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 48
+----------
+State: 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+State': 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 3
+New value of Visit matrix: 112
+New value of Q matrix: 15.7383
+New value of Value function: 15.7383
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 49
+----------
+State: 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1725
+	Distance: 4
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 3
+New value of Visit matrix: 25
+New value of Q matrix: 33.1058
+New value of Value function: 33.1058
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 50
+----------
+State: 1725
+	Distance: 4
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1285
+	Distance: 3
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 2
+New value of Visit matrix: 24
+New value of Q matrix: 36.1902
+New value of Value function: 36.1902
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 51
+----------
+State: 1285
+	Distance: 3
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 3
+	Move back
+Reward: -5
+New value of Visit matrix: 6
+New value of Q matrix: 21.8016
+New value of Value function: 24.8513
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 52
+----------
+State: 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1725
+	Distance: 4
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 3
+New value of Visit matrix: 26
+New value of Q matrix: 34.2281
+New value of Value function: 34.2281
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 53
+----------
+State: 1725
+	Distance: 4
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1285
+	Distance: 3
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 2
+New value of Visit matrix: 25
+New value of Q matrix: 34.2727
+New value of Value function: 34.2727
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 54
+----------
+State: 1285
+	Distance: 3
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 3
+	Move back
+Reward: -5
+New value of Visit matrix: 7
+New value of Q matrix: 24.4792
+New value of Value function: 24.8513
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 55
+----------
+State: 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 9
+New value of Q matrix: 31.6519
+New value of Value function: 34.2281
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 56
+----------
+State: 1685
+	Distance: 4
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1725
+	Distance: 4
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 3
+New value of Visit matrix: 27
+New value of Q matrix: 34.748
+New value of Value function: 34.748
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 57
+----------
+State: 1725
+	Distance: 4
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1725
+	Distance: 4
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 26
+New value of Q matrix: 6.65422
+New value of Value function: 34.2727
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 58
+----------
+State: 1725
+	Distance: 4
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1725
+	Distance: 4
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 27
+New value of Q matrix: 11.9034
+New value of Value function: 34.2727
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 59
+----------
+State: 1725
+	Distance: 4
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1285
+	Distance: 3
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 2
+New value of Visit matrix: 26
+New value of Q matrix: 32.7685
+New value of Value function: 32.7685
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 10
+Iteration: 60
+----------
+State: 1285
+	Distance: 3
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1285
+	Distance: 3
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 0
+New value of Visit matrix: 4
+New value of Q matrix: 11.1467
+New value of Value function: 24.8513
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 61
+----------
+State: 1285
+	Distance: 3
+	Angle: 2
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1325
+	Distance: 3
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 3
+New value of Visit matrix: 10
+New value of Q matrix: 49.2478
+New value of Value function: 49.2478
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 10
+Iteration: 62
+----------
+State: 1325
+	Distance: 3
+	Angle: 3
+	Height: 1
+	Object picked: 0
+	Arm folded: 1
+State': 1326
+	Distance: 3
+	Angle: 3
+	Height: 1
+	Object picked: 1
+	Arm folded: 0
+Action: 4
+	Move arm
+Reward: 100
+New value of Visit matrix: 6
+New value of Q matrix: 100
+New value of Value function: 100
+New value of Policy matrix: 4
+
+=======================================
+Simulation: 11
+Iteration: 1
+----------
+State: 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+State': 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 0
+New value of Visit matrix: 113
+New value of Q matrix: 15.7235
+New value of Value function: 15.7235
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 2
+----------
+State: 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+State': 4101
+	Distance: 10
+	Angle: 2
+	Height: 5
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 3
+New value of Visit matrix: 114
+New value of Q matrix: 14.751
+New value of Value function: 14.751
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 3
+----------
+State: 4101
+	Distance: 10
+	Angle: 2
+	Height: 5
+	Object picked: 0
+	Arm folded: 1
+State': 3701
+	Distance: 9
+	Angle: 2
+	Height: 5
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 3
+New value of Q matrix: 4.2639
+New value of Value function: 4.2639
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 4
+----------
+State: 3701
+	Distance: 9
+	Angle: 2
+	Height: 5
+	Object picked: 0
+	Arm folded: 1
+State': 3257
+	Distance: 8
+	Angle: 1
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 1
+New value of Visit matrix: 1
+New value of Q matrix: 1.33756
+New value of Value function: 1.33756
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 5
+----------
+State: 3257
+	Distance: 8
+	Angle: 1
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3661
+	Distance: 9
+	Angle: 1
+	Height: 5
+	Object picked: 0
+	Arm folded: 1
+Action: 3
+	Move back
+Reward: -5
+New value of Visit matrix: 1
+New value of Q matrix: -4.72614
+New value of Value function: 0.340966
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 6
+----------
+State: 3661
+	Distance: 9
+	Angle: 1
+	Height: 5
+	Object picked: 0
+	Arm folded: 1
+State': 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: -3
+New value of Visit matrix: 2
+New value of Q matrix: 8.28593
+New value of Value function: 8.28593
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 7
+----------
+State: 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+State': 3701
+	Distance: 9
+	Angle: 2
+	Height: 5
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 3
+New value of Visit matrix: 115
+New value of Q matrix: 13.7787
+New value of Value function: 13.7787
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 8
+----------
+State: 3701
+	Distance: 9
+	Angle: 2
+	Height: 5
+	Object picked: 0
+	Arm folded: 1
+State': 3297
+	Distance: 8
+	Angle: 2
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 2
+New value of Q matrix: 4.65391
+New value of Value function: 4.65391
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 9
+----------
+State: 3297
+	Distance: 8
+	Angle: 2
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: -3
+New value of Visit matrix: 5
+New value of Q matrix: 5.33254
+New value of Value function: 5.33254
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 10
+----------
+State: 1
+	Distance: 0
+	Angle: 0
+	Height: 0
+	Object picked: 0
+	Arm folded: 1
+State': 3697
+	Distance: 9
+	Angle: 2
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 3
+New value of Visit matrix: 116
+New value of Q matrix: 12.9778
+New value of Value function: 12.9778
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 11
+----------
+State: 3697
+	Distance: 9
+	Angle: 2
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 4137
+	Distance: 10
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -2
+New value of Visit matrix: 5
+New value of Q matrix: 4.71179
+New value of Value function: 4.71179
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 12
+----------
+State: 4137
+	Distance: 10
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 4181
+	Distance: 10
+	Angle: 4
+	Height: 5
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 2
+New value of Visit matrix: 17
+New value of Q matrix: 8.59364
+New value of Value function: 8.59364
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 13
+----------
+State: 4181
+	Distance: 10
+	Angle: 4
+	Height: 5
+	Object picked: 0
+	Arm folded: 1
+State': 3777
+	Distance: 9
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 5
+New value of Q matrix: 5.71469
+New value of Value function: 5.71469
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 14
+----------
+State: 3777
+	Distance: 9
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3337
+	Distance: 8
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 3
+New value of Visit matrix: 5
+New value of Q matrix: 6.25085
+New value of Value function: 6.25085
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 15
+----------
+State: 3337
+	Distance: 8
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2937
+	Distance: 7
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 2
+New value of Q matrix: 8.50018
+New value of Value function: 8.50018
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 16
+----------
+State: 2937
+	Distance: 7
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3377
+	Distance: 8
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -3
+New value of Visit matrix: 1
+New value of Q matrix: -3
+New value of Value function: 5
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 17
+----------
+State: 3377
+	Distance: 8
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3417
+	Distance: 8
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 0
+New value of Visit matrix: 3
+New value of Q matrix: 1.52239
+New value of Value function: 1.52239
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 18
+----------
+State: 3417
+	Distance: 8
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3017
+	Distance: 7
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 5
+New value of Q matrix: 7.21371
+New value of Value function: 7.21371
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 19
+----------
+State: 3017
+	Distance: 7
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3417
+	Distance: 8
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 3
+	Move back
+Reward: -5
+New value of Visit matrix: 3
+New value of Q matrix: 1.2153
+New value of Value function: 5
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 20
+----------
+State: 3417
+	Distance: 8
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2977
+	Distance: 7
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: 5
+New value of Visit matrix: 1
+New value of Q matrix: 5
+New value of Value function: 7.21371
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 21
+----------
+State: 2977
+	Distance: 7
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2937
+	Distance: 7
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: -2
+New value of Visit matrix: 1
+New value of Q matrix: 2.95
+New value of Value function: 2.95
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 22
+----------
+State: 2937
+	Distance: 7
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2537
+	Distance: 6
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 2
+New value of Q matrix: 8.86517
+New value of Value function: 8.86517
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 23
+----------
+State: 2537
+	Distance: 6
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2137
+	Distance: 5
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 3
+New value of Q matrix: 7.16377
+New value of Value function: 7.16377
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 24
+----------
+State: 2137
+	Distance: 5
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2537
+	Distance: 6
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 3
+	Move back
+Reward: -5
+New value of Visit matrix: 1
+New value of Q matrix: 2.09213
+New value of Value function: 3.40007
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 25
+----------
+State: 2537
+	Distance: 6
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2137
+	Distance: 5
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 4
+New value of Q matrix: 7.76492
+New value of Value function: 7.76492
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 26
+----------
+State: 2137
+	Distance: 5
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2537
+	Distance: 6
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 3
+	Move back
+Reward: -5
+New value of Visit matrix: 2
+New value of Q matrix: 2.51296
+New value of Value function: 3.40007
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 27
+----------
+State: 2537
+	Distance: 6
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2137
+	Distance: 5
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 5
+New value of Q matrix: 8.03376
+New value of Value function: 8.03376
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 28
+----------
+State: 2137
+	Distance: 5
+	Angle: 3
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2577
+	Distance: 6
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -3
+New value of Visit matrix: 3
+New value of Q matrix: -0.295012
+New value of Value function: 2.51296
+New value of Policy matrix: 3
+
+=======================================
+Simulation: 11
+Iteration: 29
+----------
+State: 2577
+	Distance: 6
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2577
+	Distance: 6
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 1
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 30
+----------
+State: 2577
+	Distance: 6
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2577
+	Distance: 6
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 2
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 31
+----------
+State: 2577
+	Distance: 6
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2577
+	Distance: 6
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 3
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 32
+----------
+State: 2577
+	Distance: 6
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2977
+	Distance: 7
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 3
+	Move back
+Reward: -5
+New value of Visit matrix: 1
+New value of Q matrix: -2.0795
+New value of Value function: 0
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 33
+----------
+State: 2977
+	Distance: 7
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3377
+	Distance: 8
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 3
+	Move back
+Reward: -5
+New value of Visit matrix: 1
+New value of Q matrix: -3.49283
+New value of Value function: 2.95
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 34
+----------
+State: 3377
+	Distance: 8
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3417
+	Distance: 8
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 0
+New value of Visit matrix: 4
+New value of Q matrix: 4.33198
+New value of Value function: 4.33198
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 35
+----------
+State: 3417
+	Distance: 8
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3817
+	Distance: 9
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 3
+	Move back
+Reward: -5
+New value of Visit matrix: 2
+New value of Q matrix: 1.96536
+New value of Value function: 7.21371
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 36
+----------
+State: 3817
+	Distance: 9
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3417
+	Distance: 8
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 2
+New value of Q matrix: 11.4997
+New value of Value function: 11.4997
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 37
+----------
+State: 3417
+	Distance: 8
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3017
+	Distance: 7
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 6
+New value of Q matrix: 8.33079
+New value of Value function: 8.33079
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 38
+----------
+State: 3017
+	Distance: 7
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2577
+	Distance: 6
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 2
+New value of Q matrix: 5
+New value of Value function: 5
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 39
+----------
+State: 2577
+	Distance: 6
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2577
+	Distance: 6
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 4
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 40
+----------
+State: 2577
+	Distance: 6
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2577
+	Distance: 6
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 5
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 41
+----------
+State: 2577
+	Distance: 6
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3017
+	Distance: 7
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 3
+	Move back
+Reward: -5
+New value of Visit matrix: 2
+New value of Q matrix: -0.644427
+New value of Value function: 0
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 42
+----------
+State: 3017
+	Distance: 7
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3017
+	Distance: 7
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 18
+New value of Q matrix: 1.16673
+New value of Value function: 5
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 43
+----------
+State: 3017
+	Distance: 7
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -1
+New value of Visit matrix: 2
+New value of Q matrix: -1
+New value of Value function: 5
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 44
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 1
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 45
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 2
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 46
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 3
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 47
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3097
+	Distance: 7
+	Angle: 7
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -2
+New value of Visit matrix: 2
+New value of Q matrix: -2
+New value of Value function: 0
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 48
+----------
+State: 3097
+	Distance: 7
+	Angle: 7
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: 2
+New value of Visit matrix: 1
+New value of Q matrix: 2
+New value of Value function: 2
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 49
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 4
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 50
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 5
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 51
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3097
+	Distance: 7
+	Angle: 7
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -2
+New value of Visit matrix: 3
+New value of Q matrix: -0.856846
+New value of Value function: 0
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 52
+----------
+State: 3097
+	Distance: 7
+	Angle: 7
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: 2
+New value of Visit matrix: 2
+New value of Q matrix: 2
+New value of Value function: 2
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 53
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 6
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 54
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 7
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 55
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3097
+	Distance: 7
+	Angle: 7
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -2
+New value of Visit matrix: 4
+New value of Q matrix: -0.438423
+New value of Value function: 0
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 56
+----------
+State: 3097
+	Distance: 7
+	Angle: 7
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: 2
+New value of Visit matrix: 3
+New value of Q matrix: 2
+New value of Value function: 2
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 57
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 8
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 58
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 9
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 59
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 10
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 60
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 11
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 61
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 12
+New value of Q matrix: 0
+New value of Value function: 0
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 62
+----------
+State: 3057
+	Distance: 7
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3457
+	Distance: 8
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 3
+	Move back
+Reward: -5
+New value of Visit matrix: 1
+New value of Q matrix: 0.8905
+New value of Value function: 0.8905
+New value of Policy matrix: 3
+
+=======================================
+Simulation: 11
+Iteration: 63
+----------
+State: 3457
+	Distance: 8
+	Angle: 6
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3417
+	Distance: 8
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: 1
+New value of Visit matrix: 2
+New value of Q matrix: 8.28167
+New value of Value function: 8.28167
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 64
+----------
+State: 3417
+	Distance: 8
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 3017
+	Distance: 7
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 7
+New value of Q matrix: 8.9428
+New value of Value function: 8.9428
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 65
+----------
+State: 3017
+	Distance: 7
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2617
+	Distance: 6
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 3
+New value of Q matrix: 9.66193
+New value of Value function: 9.66193
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 66
+----------
+State: 2617
+	Distance: 6
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2617
+	Distance: 6
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 4
+	Move arm
+Reward: 0
+New value of Visit matrix: 1
+New value of Q matrix: 8.07471
+New value of Value function: 8.15627
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 67
+----------
+State: 2617
+	Distance: 6
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2217
+	Distance: 5
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 4
+New value of Q matrix: 8.81302
+New value of Value function: 8.81302
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 68
+----------
+State: 2217
+	Distance: 5
+	Angle: 5
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 2177
+	Distance: 5
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: 0
+New value of Visit matrix: 6
+New value of Q matrix: 4.79697
+New value of Value function: 4.79697
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 69
+----------
+State: 2177
+	Distance: 5
+	Angle: 4
+	Height: 4
+	Object picked: 0
+	Arm folded: 1
+State': 1773
+	Distance: 4
+	Angle: 4
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 7
+New value of Q matrix: 6.68303
+New value of Value function: 6.68303
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 70
+----------
+State: 1773
+	Distance: 4
+	Angle: 4
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1733
+	Distance: 4
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: -2
+New value of Visit matrix: 5
+New value of Q matrix: 3.17614
+New value of Value function: 3.17614
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 71
+----------
+State: 1733
+	Distance: 4
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1293
+	Distance: 3
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 2
+New value of Visit matrix: 8
+New value of Q matrix: 4.25413
+New value of Value function: 4.25413
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 72
+----------
+State: 1293
+	Distance: 3
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1733
+	Distance: 4
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -2
+New value of Visit matrix: 6
+New value of Q matrix: 2.40282
+New value of Value function: 2.40282
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 73
+----------
+State: 1733
+	Distance: 4
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1293
+	Distance: 3
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 2
+New value of Visit matrix: 9
+New value of Q matrix: 4.29568
+New value of Value function: 4.29568
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 74
+----------
+State: 1293
+	Distance: 3
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1733
+	Distance: 4
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -2
+New value of Visit matrix: 7
+New value of Q matrix: 2.34609
+New value of Value function: 2.34609
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 75
+----------
+State: 1733
+	Distance: 4
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1333
+	Distance: 3
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 5
+New value of Visit matrix: 10
+New value of Q matrix: 5.0984
+New value of Value function: 5.0984
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 76
+----------
+State: 1333
+	Distance: 3
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1293
+	Distance: 3
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: -3
+New value of Visit matrix: 26
+New value of Q matrix: 1.35646
+New value of Value function: 1.35646
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 77
+----------
+State: 1293
+	Distance: 3
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1733
+	Distance: 4
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 3
+	Move back
+Reward: -2
+New value of Visit matrix: 2
+New value of Q matrix: 1.68866
+New value of Value function: 2.34609
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 78
+----------
+State: 1733
+	Distance: 4
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1293
+	Distance: 3
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 2
+New value of Visit matrix: 11
+New value of Q matrix: 4.8645
+New value of Value function: 4.8645
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 79
+----------
+State: 1293
+	Distance: 3
+	Angle: 2
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1333
+	Distance: 3
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: 3
+New value of Visit matrix: 8
+New value of Q matrix: 3.05207
+New value of Value function: 3.05207
+New value of Policy matrix: 0
+
+=======================================
+Simulation: 11
+Iteration: 80
+----------
+State: 1333
+	Distance: 3
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1333
+	Distance: 3
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 0
+New value of Visit matrix: 27
+New value of Q matrix: 1.35385
+New value of Value function: 1.35385
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 81
+----------
+State: 1333
+	Distance: 3
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1773
+	Distance: 4
+	Angle: 4
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 0
+	Turn left
+Reward: -3
+New value of Visit matrix: 4
+New value of Q matrix: -0.324566
+New value of Value function: 1.35385
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 82
+----------
+State: 1773
+	Distance: 4
+	Angle: 4
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1333
+	Distance: 3
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 1
+	Turn right
+Reward: 3
+New value of Visit matrix: 6
+New value of Q matrix: 3.65141
+New value of Value function: 3.65141
+New value of Policy matrix: 1
+
+=======================================
+Simulation: 11
+Iteration: 83
+----------
+State: 1333
+	Distance: 3
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1333
+	Distance: 3
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 0
+New value of Visit matrix: 28
+New value of Q matrix: 1.35129
+New value of Value function: 1.35129
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 84
+----------
+State: 1333
+	Distance: 3
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1333
+	Distance: 3
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 0
+New value of Visit matrix: 29
+New value of Q matrix: 1.34879
+New value of Value function: 1.34879
+New value of Policy matrix: 2
+
+=======================================
+Simulation: 11
+Iteration: 85
+----------
+State: 1333
+	Distance: 3
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+State': 1333
+	Distance: 3
+	Angle: 3
+	Height: 3
+	Object picked: 0
+	Arm folded: 1
+Action: 2
+	Move front
+Reward: 0
+New value of Visit matrix: 30
+New value of Q matrix: 1.34632
+New value of Value function: 1.34632
+New value of Policy matrix: 2
+

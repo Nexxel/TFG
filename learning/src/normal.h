@@ -188,7 +188,7 @@ int main(int argc, char** argv);
  -----------------------------------*/
  void processMessages();
 /*------------------------------------
- Make all the process of learning:
+ Make all the processes of learning:
     While node is running:
         1. Get state
         2. Detect if it is reachable
@@ -216,11 +216,11 @@ void discretizeValues();
 /*------------------------------------
  Discretize values auxiliar:
     Inputs:
-        - selector:
+        selector:
             0: angle
             1: height
             2: depth
-        - step
+        step: difference between each level of discretization
 -----------------------------------*/
 void discretizeValuesAux(int selector, double step);
 /*------------------------------------
@@ -251,9 +251,8 @@ void getGripperPosition();
  Get the angle of each joint in order to reach the desired position
  by means of the inverse kinematic model:
     Inputs:
-        - next_position: Desired position
-        - a: Desired angle orientation of the wrisp
-        - n: Desired orientation of the wrisp 
+        next_position: Desired position
+        n: Desired orientation of the wrisp 
  -----------------------------------*/
 void mci(double next_position[3], double n[3]);
 /*------------------------------------
@@ -313,11 +312,13 @@ void getStateFromIndex(int index);
 /*------------------------------------
  Select action (Exploitation/exploration strategy):
     Inputs:
-        - sa: actual state
+        sa: actual state
 -----------------------------------*/
 void selectAction(int sa);
 /*------------------------------------
  Update V and policy matrix:
+    Inputs:
+        s: Actual state
 -----------------------------------*/
 void updateVPolicy(int s);
 /*------------------------------------
@@ -326,24 +327,37 @@ void updateVPolicy(int s);
 bool giveReward();
 /*------------------------------------
  Calculate reward:
+    Inputs:
+        sa: Actual state
+        sp: Next state
 -----------------------------------*/
 double calculateReward(int sa, int sp);
 /*------------------------------------
  Actualize log:
+    Inputs:
+        sa: Actual state
+        sp: Next state
+        reward
 -----------------------------------*/
 void actualizeLog(int sa, int sp, double reward);
 /*------------------------------------
  Actualize simplified log:
+    Inputs:
+        sa: Actual state
+        sp: Next state
+        reward
 -----------------------------------*/
 void actualizeSimplifiedLog(int sa, int sp, double reward);
 /*------------------------------------
  Print debug:
+    Inputs:
+        function: Function where you are
+        line: Line in which you are
 -----------------------------------*/
 void printDebug(string function, int line);
 /*------------------------------------
- Get uniform random:
+ Get random number following an uniform distribution:
     Inputs:
-        - min
-        - max
+        min, max: Min and max values
 -----------------------------------*/
 double unifRnd(double min, double max);

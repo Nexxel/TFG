@@ -274,11 +274,11 @@ void discretizeValues();
 /*------------------------------------
  Discretize values auxiliar:
     Inputs:
-        - selector:
+        selector:
             0: angle
             1: height
             2: depth
-        - step
+        step: difference between each level of discretization
 -----------------------------------*/
 void discretizeValuesAux(int selector, double step);
 /*------------------------------------
@@ -297,7 +297,8 @@ void getGripperPosition();
  Get the angle of each joint in order to reach the desired position
  by means of the inverse kinematic model:
     Inputs:
-        next_position: Desired position -----------------------------------*/
+        next_position: Desired position 
+-----------------------------------*/
 void mci(vec3 next_position);
 /*------------------------------------
  Move Widow-X arm to object:
@@ -321,7 +322,7 @@ Transform a point in the image to the sensor frame
 vec4 image2sensor(vec3 pixel_pos);
 /*------------------------------------
  Detect if object is reachable:
-    Object is centered in x, near and up
+    Object is centered in x and near
 -----------------------------------*/
 void isObjectReachable();
 /*------------------------------------
@@ -352,8 +353,6 @@ int getIndexFromState();
 void getStateFromIndex(int index);
 /*------------------------------------
  Select action (Exploitation/exploration strategy):
-    Inputs:
-        - sa: actual state
 -----------------------------------*/
 void selectAction();
 /*------------------------------------
@@ -390,20 +389,26 @@ void actualizedistanceLog();
 void actualizeIterationDistanceLog();
 /*------------------------------------
  Actualize log for position of robot each iteration:
+    Inputs:
+        x, y, z: Position of the robot
 -----------------------------------*/
 void actualizePositionLog(double x, double y, double z);
 /*------------------------------------
  Actualize log for position of object on each simulation:
+    Inputs:
+        x, y, z: Position of the object
 -----------------------------------*/
 void actualizeObjectPositionLog(double x, double y, double z);
 /*------------------------------------
  Print debug:
+    Inputs:
+        function: Function where you are
+        line: Line in which you are
 -----------------------------------*/
 void printDebug(string function, int line);
 /*------------------------------------
- Get uniform random:
+ Get random number following an uniform distribution:
     Inputs:
-        - min
-        - max
+        min, max: Min and max values
 -----------------------------------*/
 double unifRnd(double min, double max);

@@ -324,11 +324,11 @@ void discretizeValues(){
 /*------------------------------------
  Discretize values auxiliar:
     Inputs:
-        - selector:
+        selector:
             0: angle
             1: height
-            2: distance
-        - step
+            2: depth
+        step: difference between each level of discretization
 -----------------------------------*/
 void discretizeValuesAux(int selector, double step){
     // Continuos and discretized value
@@ -594,7 +594,7 @@ void isObjectPicked(){
 
 /*------------------------------------
  Detect if object is reachable:
-    Object is centered in x, near and up
+    Object is centered in x and near
 -----------------------------------*/
 void isObjectReachable(){
     object_reachable = robot_state.angle_d >= round((1 + discr_level)/3)
@@ -976,15 +976,18 @@ void actualizeObjectPositionLog(double x, double y, double z){
 
 /*------------------------------------
  Print debug:
+    Inputs:
+        function: Function where you are
+        line: Line in which you are
 -----------------------------------*/
 void printDebug(string function, int line){
     ROS_INFO("\033[1;31m\nMethod %s:\n\tLine %u\n", function.c_str(), line);
 }
+
 /*------------------------------------
- Get uniform random:
+ Get random number following an uniform distribution:
     Inputs:
-        - min
-        - max
+        min, max: Min and max values
 -----------------------------------*/
 double unifRnd(double min, double max){
     return min + ((double)rand()/(double)RAND_MAX) * ((max+1) - min);
