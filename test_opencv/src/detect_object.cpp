@@ -1,3 +1,9 @@
+/*
+Sergio Gonzalez Muriel
+Degree thesis:  Reinforcement learning for object manipulation by a robotic arm
+Test code for detecting the object
+*/
+
 #include <ros/ros.h>
 #include <image_transport/image_transport.h>
 #include <cv_bridge/cv_bridge.h>
@@ -83,7 +89,7 @@ void isSimulation(){
     cvtColor(cv_ptr->image, imageHSV, COLOR_BGR2HSV);
     inRange(imageHSV, Scalar(90 - 10, 100, 100), Scalar(90 + 10, 255, 255), cv_ptr->image);
     
-    GaussianBlur(cv_ptr->image, cv_ptr->image, Size(7,7), 5, 5);
+    GaussianBlur(cv_ptr->image, cv_ptr->image, Size(3,3), 3, 3);
    	
     // Actualizar ventana
     imshow(OPENCV_WINDOW, cv_ptr->image);
