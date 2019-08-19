@@ -538,8 +538,7 @@ void moveArmToObject(){
     vec4 next_position;
     next_position = (TSB * (hom_obj_pos));
     intermediate_position(0) = next_position(0) - 0.05;
-
-    //mci(intermediate_position);
+    mci(intermediate_position);
     openGripper();
     ros::Duration(2).sleep();
 
