@@ -1,3 +1,9 @@
+/*
+Sergio Gonzalez Muriel
+Degree thesis:  Reinforcement learning for object manipulation by a robotic arm
+Q-Learning implementation
+*/
+
 #include "utils.cpp"
 /*------------------------------------
  Methods

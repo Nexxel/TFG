@@ -1,3 +1,9 @@
+/*
+Sergio Gonzalez Muriel
+Degree thesis:  Reinforcement learning for object manipulation by a robotic arm
+Test code for getting distance to object from depth image (It does not give it us properly)
+*/
+
 #include "utils.cpp"
 
 cv_bridge::CvImagePtr cv_ptr_depth;

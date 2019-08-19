@@ -1,3 +1,9 @@
+/*
+Sergio Gonzalez Muriel
+Degree thesis:  Reinforcement learning for object manipulation by a robotic arm
+Q-Learning implementation header file
+*/
+
 /*------------------------------------
  Libraries
 -----------------------------------*/
@@ -56,10 +62,10 @@
 #define WIDTH_PX_2_M (SENSOR_WIDTH/CAMERA_WIDTH)
 
 // Min and max positions of the objects
-#define MAX_X 1.5
-#define MIN_X 0.85
-#define MAX_Y 0.8
-#define MIN_Y -0.8
+#define MAX_X 1.5 //1.5
+#define MIN_X 1.5 //0.85
+#define MAX_Y 0.8 //0.8
+#define MIN_Y 0.8 //-0.8
 // Number of box.urdf to use (box_1 z-size=0.1, box_2 z-size=0.2...)
 #define MIN_BOX 3
 #define MAX_BOX 5
@@ -239,12 +245,6 @@ int main(int argc, char** argv);
  void processMessages();
 /*------------------------------------
  Make all the process of learning:
-    While node is running:
-        1. Get state
-        2. Detect if it is reachable
-        3. Move arm if correct, else move base
-        4. Fold arm
-        5. Check reward
  -----------------------------------*/
 void learning(Handlers handlers);
 /*------------------------------------
@@ -260,8 +260,11 @@ void getLocation();
 -----------------------------------*/
 void calculateRealPos();
 /*------------------------------------
- Get object real position with respect to the robot:
-    [X Y Z 1] = P^(-1) * [u v 1]
+Get object real position with respect to the sensor frame where:
+    max_u: Max X coordinate of the center of the object (Pixels)
+    max_v: Max Y coordinate of the center of the object (Pixels)
+    min_u: Min X coordinate of the center of the object (Pixels)
+    min_v: Min Y coordinate of the center of the object (Pixels)
 -----------------------------------*/
 void getObjectPosition();
 /*------------------------------------
@@ -294,11 +297,8 @@ void getGripperPosition();
  Get the angle of each joint in order to reach the desired position
  by means of the inverse kinematic model:
     Inputs:
-        - next_position: Desired position
-        - a: Desired angle orientation of the wrisp
-        - n: Desired orientation of the wrisp 
- -----------------------------------*/
-void mci(vec3 next_position, vec3 n);
+        next_position: Desired position -----------------------------------*/
+void mci(vec3 next_position);
 /*------------------------------------
  Move Widow-X arm to object:
  -----------------------------------*/

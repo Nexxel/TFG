@@ -1,3 +1,9 @@
+/*
+Sergio Gonzalez Muriel
+Degree thesis:  Reinforcement learning for object manipulation by a robotic arm
+Test code for moving arm to the object
+*/
+
 #include "utils.cpp"
 
 /*------------------------------------
@@ -6,7 +12,7 @@
 int main(int argc, char** argv){
     ros::init(argc, argv, "move_arm_to_object");
     vec3 n;
-    n << 0 << 0 << 1;
+    n << 1 << 0 << 0;
 
     // We check if it is a gazebo simulation
     
@@ -49,23 +55,24 @@ int main(int argc, char** argv){
     vec3 intermediate_position = home_pos;
     vec4 next_position;
     next_position = (TSB * (hom_obj_pos));
-    intermediate_position(0) = next_position(0) - 0.08;
 
     ROS_INFO("Next: %.10f %.10f %.10f %.10f", next_position(0), next_position(1), next_position(2), next_position(3));
     cout << "intermediate position 1: " << intermediate_position;
-    mci(intermediate_position, n);
+    //mci(intermediate_position);
     openGripper();
-    ros::Duration(4).sleep();
-    intermediate_position(1) = next_position(1);    
-    mci(intermediate_position, n);
-    ros::Duration(4).sleep();
+    ros::Duration(2).sleep();
+    intermediate_position(0) = next_position(0) - 0.05;
+    mci(intermediate_position);
+    ros::Duration(2).sleep();
+    intermediate_position(0) = next_position(0) - 0.025; 
     intermediate_position(2) = next_position(2) + 0.06;
+    intermediate_position(1) = next_position(1);
     cout << "Intermediate position 2: " << intermediate_position;
-    mci(intermediate_position, n);
-    ros::Duration(4).sleep();
+    mci(intermediate_position);
+    ros::Duration(2).sleep();
     next_position(2) += 0.06;
     cout << "Next position: \t" << next_position; 
-    mci(next_position.rows(0,2),n);
+    mci(next_position.rows(0,2));
     
     /*
     ros::Duration(2).sleep();

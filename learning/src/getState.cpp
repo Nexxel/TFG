@@ -1,3 +1,9 @@
+/*
+Sergio Gonzalez Muriel
+Degree thesis:  Reinforcement learning for object manipulation by a robotic arm
+Test code for getting the state of the robot
+*/
+
 #include "utils.cpp"
 
 /*------------------------------------

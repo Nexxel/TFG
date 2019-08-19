@@ -1,4 +1,10 @@
-#include "learning.h"
+/*
+Sergio Gonzalez Muriel
+Degree thesis:  Reinforcement learning for object manipulation by a robotic arm
+Test code without learning.
+*/
+
+#include "normal.h"
 
 /*------------------------------------
  Callbacks

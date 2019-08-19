@@ -1,3 +1,9 @@
+/*
+Sergio Gonzalez Muriel
+Degree thesis:  Reinforcement learning for object manipulation by a robotic arm
+Implementation of all funtionalities for the Q-Learning implementation
+*/
+
 #include "learning4.h"
 
 /*------------------------------------
@@ -76,7 +82,7 @@ void callbackImage(const ImageConstPtr& image_msg){
  -----------------------------------*/
  void initializeVecMat(){
     home_pos << 0.3125 << 0 << 0.1450;
-    n << 0 << 0 << 1;
+    n << 1 << 0 << 0;
     initializeI2P();
     initializeTSB();
  }
@@ -251,13 +257,11 @@ void calculateRealPos(){
 }
 
 /*------------------------------------
- Get object real position with respect to the robot:
-    [X Y Z 1] = P^(-1) * [u v 1]
-    Inputs:
-        max_u: Max X coordinate of the center of the object (Pixels)
-        max_v: Max Y coordinate of the center of the object (Pixels)
-        min_u: Min X coordinate of the center of the object (Pixels)
-        min_v: Min Y coordinate of the center of the object (Pixels)
+Get object real position with respect to the sensor frame where:
+    max_u: Max X coordinate of the center of the object (Pixels)
+    max_v: Max Y coordinate of the center of the object (Pixels)
+    min_u: Min X coordinate of the center of the object (Pixels)
+    min_v: Min Y coordinate of the center of the object (Pixels)
 -----------------------------------*/
 void getObjectPosition(){
     if ((max_u >= (cv_ptr->image.cols - 42)) || (min_u <= 42)){
@@ -466,9 +470,8 @@ void getGripperPosition(){
  by means of the inverse kinematic model:
     Inputs:
         - next_position: Desired position
-        - n: Desired orientation of the wrisp 
  -----------------------------------*/
-void mci(vec3 next_position, vec3 n){
+void mci(vec3 next_position){
 	double px = next_position(0) - L45*ang_or(0);
 	double py = next_position(1) - L45*ang_or(1);
 	double pz = next_position(2) - L45*ang_or(2);
@@ -534,23 +537,21 @@ void moveArmToObject(){
     vec3 intermediate_position = home_pos;
     vec4 next_position;
     next_position = (TSB * (hom_obj_pos));
-    intermediate_position(0) = next_position(0) - 0.08;
+    intermediate_position(0) = next_position(0) - 0.05;
 
-    //mci(intermediate_position, n);
+    //mci(intermediate_position);
     openGripper();
     ros::Duration(2).sleep();
 
-    intermediate_position(1) = next_position(1);    
-    //mci(intermediate_position, n);
-    //ros::Duration(2).sleep();
-
+    intermediate_position(0) = next_position(0) - 0.025; 
+    intermediate_position(1) = next_position(1);
     intermediate_position(2) = next_position(2) + 0.06;
-    mci(intermediate_position, n);
+    mci(intermediate_position);
     ros::Duration(2).sleep();
 
     next_position(2) += 0.06;
     cout << "Next position: \t" << next_position; 
-    mci(next_position.rows(0,2),n);
+    mci(next_position.rows(0,2));
     ros::Duration(2).sleep();
 
     closeGripper();
@@ -619,7 +620,7 @@ vec3 setNextPosition(double x, double y, double z){
 -----------------------------------*/
 void foldArm(){ 
     // Turn the arm to the position (0.3125,0,0.1450)
-    mci(home_pos,n);
+    mci(home_pos);
 
     robot_state.folded = true;
 }
@@ -807,9 +808,9 @@ void calculateReward(){
     if((prev_dist > 0 && prev_ang > 0 && prev_height > 0)
         && (act_ang != prev_ang && act_ang > 0)){
         if(abs(act_ang - ceil(discr_level/2)) > abs(prev_ang - ceil(discr_level/2))){
-            reward -= abs(act_ang - ceil(discr_level/2));
+            reward -= abs(act_ang - ceil((double)discr_level/2.0));
         }else{
-            reward += abs(prev_ang - ceil(discr_level/2));
+            reward += abs(prev_ang - ceil((double)discr_level/2.0));
         }
     }
     

@@ -1,3 +1,9 @@
+/*
+Sergio Gonzalez Muriel
+Degree thesis:  Reinforcement learning for object manipulation by a robotic arm
+Test code for folding the WidowX arm
+*/
+
 #include "utils.cpp"
 
 int main(int argc, char** argv){
