@@ -4,7 +4,7 @@ Degree thesis:  Reinforcement learning for object manipulation by a robotic arm
 Implementation of all funtionalities for the Q-Learning implementation
 */
 
-#include "learning4.h"
+#include "learning.h"
 
 /*------------------------------------
  Callbacks

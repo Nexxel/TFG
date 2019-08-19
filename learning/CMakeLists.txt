@@ -206,7 +206,7 @@ include_directories(
 add_executable(normal src/normal.cpp)
 target_link_libraries(normal ${catkin_LIBRARIES} ${LAPACK_LIBRARIES})
 
-add_executable(learning src/learning3.cpp)
+add_executable(learning src/learning.cpp)
 target_link_libraries(learning ${catkin_LIBRARIES} ${LAPACK_LIBRARIES})
 
 add_executable(get_state src/getState.cpp)
