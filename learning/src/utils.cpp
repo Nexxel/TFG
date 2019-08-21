@@ -803,7 +803,7 @@ void calculateReward(){
     }else if(prev_dist > 0 && act_dist != 0 && act_dist > prev_dist){
         reward -= 5;
     }
-
+    /*
     if((prev_dist > 0 && prev_ang > 0 && prev_height > 0)
         && (act_ang != prev_ang && act_ang > 0)){
         if(abs(act_ang - ceil(discr_level/2)) > abs(prev_ang - ceil(discr_level/2))){
@@ -812,6 +812,7 @@ void calculateReward(){
             reward += abs(prev_ang - ceil((double)discr_level/2.0));
         }
     }
+    */
     
     reward += 100 * robot_state.object_picked;
 }
