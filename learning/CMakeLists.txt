@@ -227,3 +227,5 @@ target_link_libraries(turn_robot ${catkin_LIBRARIES} ${LAPACK_LIBRARIES})
 add_executable(get_distance src/getDistanceDepthImage.cpp)
 target_link_libraries(get_distance ${catkin_LIBRARIES} ${LAPACK_LIBRARIES})
 
+add_executable(get_error src/getError.cpp)
+target_link_libraries(get_error ${catkin_LIBRARIES} ${LAPACK_LIBRARIES})

@@ -13,7 +13,7 @@ int main(int argc, char** argv)
     while(ros::ok()){
         Handlers handlers;
         base = handlers.getNH().advertise<Twist>("/mobile_base/commands/velocity", 1);
-        ROS_INFO("Moving back...");
+        ROS_INFO("Moving Front...");
         Twist base_movement; 
         double distance = (double)MAX_DISTANCE/(double)discr_level;
         base_movement.linear.x = 0.1;
