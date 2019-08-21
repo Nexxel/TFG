@@ -6,7 +6,6 @@ Test code for getting the distance error.
 
 #include "utils.cpp"
 
-int counter = 0;
 double sim_x;
 double real_distance;
 stringstream complete_distances_error_log_name;
@@ -15,17 +14,11 @@ stringstream complete_distances_error_log_name;
  Actualize log for distance error:
 -----------------------------------*/
 void actualizeDistanceErrorLog(){
-    if (counter == 0){
-        string str(complete_distances_error_log_name.str());
-        log_file.open(str.c_str());
-    }else{
-        string str(complete_distances_error_log_name.str());
-        log_file.open(str.c_str(), ios::app | ios::out);
-    }
+    string str(complete_distances_error_log_name.str());
+    log_file.open(str.c_str(), ios::app | ios::out);
     real_distance = ((3.55 - sim_x) + 0.087);
     log_file << real_distance << "," << abs(robot_state.distance_c - real_distance) << "\n";
     log_file.close();
-    counter++;
 }
 
  /*------------------------------------
@@ -56,23 +49,14 @@ int main(int argc, char** argv){
     complete_distances_error_log_name << ros::package::getPath("learning") 
                                       << "/distances_error_logs/distance_error_log_4m.txt";
 
-
+    update_pose = true;
     initializeTSB();
     initializeI2P();
     processMessages();
     updateState();
     actualizeDistanceErrorLog();
-    while(real_distance > 0.3){
-        Twist base_movement; 
-        base_movement.linear.x = 0.1;
-        base.publish(base_movement);
-        ros::Duration(3).sleep();
-        update_pose = true;
-        processMessages();
-        updateState();
-        actualizeDistanceErrorLog();
-    }
-
+    ROS_INFO("\n============STATE===========\n\tDistance: %d\n\tAngle:%d\n\tHeight:%d\n\tPicked:%d\n\tFolded:%d\n\n",
+    robot_state.distance_d, robot_state.angle_d, robot_state.height_d, robot_state.object_picked, robot_state.folded);
     ros::shutdown();
     return 0;
 }
