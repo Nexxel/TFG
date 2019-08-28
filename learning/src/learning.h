@@ -204,19 +204,19 @@ ros::Publisher base;
  Callbacks
  -----------------------------------*/
  /*------------------------------------
- Get the rgb image and process it:
+ Gets the rgb image and processes it:
  -----------------------------------*/
  void callbackImage(const ImageConstPtr& image_msg);
  /*------------------------------------
- Get the rgb camera info and get the projection matrix:
+ Gets the rgb camera info and the projection matrix:
  -----------------------------------*/
  void callbackCameraInfo(const CameraInfoConstPtr& camera_info_msg);
 /*------------------------------------
- Get gripper effort:
+ Gets gripper effort:
  -----------------------------------*/
  void getGripperEffortCallback(const JointStateConstPtr& joint_states_msg);
  /*------------------------------------
- Get simulation pose and actualize it:
+ Gets simulation pose and actualizes it:
  -----------------------------------*/
  void getSimulationPoseCallback(const Vector3ConstPtr& sim_pose_msg);
 /*------------------------------------
@@ -224,43 +224,43 @@ ros::Publisher base;
  -----------------------------------*/
 int main(int argc, char** argv);
 /*------------------------------------
- Initialize vectors and matrices
+ Initializes vectors and matrices
  -----------------------------------*/
  void initializeVecMat();
 /*------------------------------------
- Initialize learning elements reading from a log file
+ Initializes learning elements reading from a log file
  -----------------------------------*/
  void readLog();
 /*------------------------------------
- Initialize transformation matrix from Sensor frame to Widow-X arm base frame:
+ Initializes transformation matrix from Sensor frame to Widow-X arm base frame:
  -----------------------------------*/
  void initializeTSB();
  /*------------------------------------
- Initialize transformation matrix from image frame to P2:
+ Initializes transformation matrix from image frame to P2:
  -----------------------------------*/
  void initializeI2P();
 /*------------------------------------
- Process messages:
+ Processes messages:
  -----------------------------------*/
  void processMessages();
 /*------------------------------------
- Make all the process of learning:
+ Makes all the processes of learning:
  -----------------------------------*/
 void learning(Handlers handlers);
 /*------------------------------------
- Update state:
+ Updates state:
 -----------------------------------*/
 void updateState();
 /*------------------------------------
- Get the location in pixels of the object:
+ Gets the location in pixels of the object:
 -----------------------------------*/
 void getLocation();
 /*------------------------------------
- Calculate the real position of the object with respect to the robot:
+ Calculates the real position of the object with respect to the robot:
 -----------------------------------*/
 void calculateRealPos();
 /*------------------------------------
-Get object real position with respect to the sensor frame where:
+Gets object real position with respect to the sensor frame where:
     max_u: Max X coordinate of the center of the object (Pixels)
     max_v: Max Y coordinate of the center of the object (Pixels)
     min_u: Min X coordinate of the center of the object (Pixels)
@@ -286,18 +286,19 @@ void discretizeValuesAux(int selector, double step);
 -----------------------------------*/
 void isSimulation();
 /*------------------------------------
- Get the direct kinematic model of the widowX-arm
+ Gets the direct kinematic model of the Widow-X arm
 -----------------------------------*/
 void mcd();
 /*------------------------------------
- Get the position of the gripper by means of the Direct kinematic model:
+ Gets the position of the gripper by means of the Direct kinematic model:
  -----------------------------------*/
 void getGripperPosition();
 /*------------------------------------
- Get the angle of each joint in order to reach the desired position
- by means of the inverse kinematic model:
-    Inputs:
-        next_position: Desired position 
+Gets the angle of each joint in order to reach the desired position
+by means of the inverse kinematic model, sending a message to the servos with the angle to reach
+and updating the mcd and sensor data:
+Inputs:
+    next_position: Desired position
 -----------------------------------*/
 void mci(vec3 next_position);
 /*------------------------------------
@@ -344,7 +345,7 @@ void startRandomSimulation();
 -----------------------------------*/
 void killSimulation();
 /*------------------------------------
- Get the matrix row index from the robot state:
+ Gets the matrix row index from the robot state:
 -----------------------------------*/
 int getIndexFromState();
 /*------------------------------------
@@ -356,7 +357,7 @@ void getStateFromIndex(int index);
 -----------------------------------*/
 void selectAction();
 /*------------------------------------
- Update V and policy matrix:
+ Updates V and policy matrix:
 -----------------------------------*/
 void updateVPolicy(int s);
 /*------------------------------------
@@ -364,50 +365,50 @@ void updateVPolicy(int s);
 -----------------------------------*/
 bool giveReward();
 /*------------------------------------
- Calculate reward:
+ Calculates reward:
 -----------------------------------*/
 void calculateReward();
 /*------------------------------------
- Actualize log:
+ Actualizes log:
 -----------------------------------*/
 void actualizeLog();
 /*------------------------------------
- Actualize simplified log:
+ Actualizes simplified log:
 -----------------------------------*/
 void actualizeSimplifiedLog();
 /*------------------------------------
- Actualize log for exploitation:
+ Actualizes log for exploitation:
 -----------------------------------*/
 void actualizeExploitationLog();
 /*------------------------------------
- Actualize log for distances:
+ Actualizes log for distances:
 -----------------------------------*/
 void actualizedistanceLog();
 /*------------------------------------
- Actualize log for distances each iteration:
+ Actualizes log for distances each iteration:
 -----------------------------------*/
 void actualizeIterationDistanceLog();
 /*------------------------------------
- Actualize log for position of robot each iteration:
+ Actualizes log for position of robot each iteration:
     Inputs:
         x, y, z: Position of the robot
 -----------------------------------*/
 void actualizePositionLog(double x, double y, double z);
 /*------------------------------------
- Actualize log for position of object on each simulation:
+ Actualizes log for position of object on each simulation:
     Inputs:
         x, y, z: Position of the object
 -----------------------------------*/
 void actualizeObjectPositionLog(double x, double y, double z);
 /*------------------------------------
- Print debug:
+ Prints debug:
     Inputs:
         function: Function where you are
         line: Line in which you are
 -----------------------------------*/
 void printDebug(string function, int line);
 /*------------------------------------
- Get random number following an uniform distribution:
+ Gets random number following an uniform distribution:
     Inputs:
         min, max: Min and max values
 -----------------------------------*/

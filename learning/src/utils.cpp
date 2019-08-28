@@ -11,7 +11,7 @@ Implementation of all funtionalities for the Q-Learning implementation
  -----------------------------------*/
 
  /*------------------------------------
- Get the rgb image and process it:
+ Gets the rgb image and processes it:
  -----------------------------------*/
 void callbackImage(const ImageConstPtr& image_msg){
         try
@@ -33,7 +33,7 @@ void callbackImage(const ImageConstPtr& image_msg){
     if(!is_simulation){
         GaussianBlur(cv_ptr->image, cv_ptr->image, Size(15,15), 7, 7); // Size(9,9), 4, 4
     }
-    // Get the red object
+    // Gets the red object
     cvtColor(cv_ptr->image, imageHSV, COLOR_BGR2HSV);
     inRange(imageHSV, Scalar(90 - 10, 100, 100), Scalar(90 + 10, 255, 255), cv_ptr->image);
     // Apply filter for avoiding false positives
@@ -41,7 +41,7 @@ void callbackImage(const ImageConstPtr& image_msg){
 }
 
  /*------------------------------------
- Get the rgb camera info and get the projection matrix:
+ Gets the rgb camera info and gets the projection matrix:
  -----------------------------------*/
  void callbackCameraInfo(const CameraInfoConstPtr& camera_info_msg){
     int counter = 0;
@@ -55,7 +55,7 @@ void callbackImage(const ImageConstPtr& image_msg){
  }
 
 /*------------------------------------
- Get gripper effort:
+ Gets gripper effort:
  -----------------------------------*/
  void getGripperEffortCallback(const JointStateConstPtr& joint_states_msg){
     if (joint_states_msg->header.frame_id.empty()){
@@ -64,7 +64,7 @@ void callbackImage(const ImageConstPtr& image_msg){
  }
 
   /*------------------------------------
- Get simulation pose and actualize it:
+ Gets simulation pose and actualizes it:
  -----------------------------------*/
  void getSimulationPoseCallback(const Vector3ConstPtr& sim_pose_msg){
      if(update_pose){
@@ -78,7 +78,7 @@ void callbackImage(const ImageConstPtr& image_msg){
  -----------------------------------*/
 
 /*------------------------------------
- Initialize vectors and matrices
+ Initializes vectors and matrices
  -----------------------------------*/
  void initializeVecMat(){
     home_pos << 0.3125 << 0 << 0.1450;
@@ -88,7 +88,7 @@ void callbackImage(const ImageConstPtr& image_msg){
  }
 
 /*------------------------------------
- Initialize learning elements reading from a log file
+ Initializes learning elements reading from a log file
  -----------------------------------*/
  void readLog(){
     ifstream input_log;
@@ -108,7 +108,7 @@ void callbackImage(const ImageConstPtr& image_msg){
     getline(cin, response);
     if(response != "y"){
         string str(complete_simplified_log_name.str());
-        input_log.open(str.c_str(), ios::in);
+        input_log.opens(str.c_str(), ios::in);
         string line, word, temp;
         line.resize(100);
         while(getline(input_log, line)){
@@ -140,12 +140,12 @@ void callbackImage(const ImageConstPtr& image_msg){
             policy_matrix(sa) = row(19);
             //number_steps++;
         }
-        input_log.close();
+        input_log.closes();
     } 
  }
 
 /*------------------------------------
- Process messages:
+ Processes messages:
  -----------------------------------*/
  void processMessages(){
      // The counter if for ashuring that at least it is executed 1 time
@@ -163,7 +163,7 @@ void callbackImage(const ImageConstPtr& image_msg){
  }
 
  /*------------------------------------
- Initialize transformation matrix from Sensor frame to Widow-X arm base frame:
+ Initializes transformation matrix from Sensor frame to Widow-X arm base frame:
  -----------------------------------*/
  void initializeTSB(){
     TSB(0,2) = 1; TSB(0,3) = -0.0734;
@@ -173,7 +173,7 @@ void callbackImage(const ImageConstPtr& image_msg){
  }
 
 /*------------------------------------
- Initialize transformation matrix from image frame to P2:
+ Initializes transformation matrix from image frame to P2:
 -----------------------------------*/
  void initializeI2P(){
     I2P(0,0) = 1; 
@@ -182,7 +182,7 @@ void callbackImage(const ImageConstPtr& image_msg){
  }
 
  /*------------------------------------
- Update state:
+ Updates state:
 -----------------------------------*/
 void updateState(){
     getLocation();
@@ -194,19 +194,19 @@ void updateState(){
 }
 
 /*------------------------------------
- Get the location in pixels of the object:
+ Gets the location in pixels of the object:
 -----------------------------------*/
 void getLocation(){
     if (gui){
-        // Show the image
+        // Shows the image
         imshow("Red objects image", cv_ptr->image);
         waitKey(3);
     }
     
-    // Get the coordinates of the object pixels
+    // Gets the coordinates of the object pixels
     findNonZero(cv_ptr->image, pixel_locations);
 
-    // Calculate pixel mean in x and y
+    // Calculates pixel mean in x and y
     sum_x = 0; sum_y = 0; x_values.clear(); y_values.clear();
     int prev_y = -1; int prev_x = -1;
     max_u = 0; max_v = 0;
@@ -243,7 +243,7 @@ void getLocation(){
 }
 
 /*------------------------------------
- Calculate the real position of the object with respect to the robot:
+ Calculates the real position of the object with respect to the robot:
 -----------------------------------*/
 void calculateRealPos(){
     if(!x_values.empty() && !y_values.empty()){
@@ -257,7 +257,7 @@ void calculateRealPos(){
 }
 
 /*------------------------------------
-Get object real position with respect to the sensor frame where:
+Gets object real position with respect to the sensor frame where:
     max_u: Max X coordinate of the center of the object (Pixels)
     max_v: Max Y coordinate of the center of the object (Pixels)
     min_u: Min X coordinate of the center of the object (Pixels)
@@ -273,7 +273,7 @@ void getObjectPosition(){
         ROS_INFO("angle, distance, height: %.10f, %.10f, %.10f",
          robot_state.angle_c, robot_state.distance_c, robot_state.height_c);
     }else{
-        // Get the distance of the object
+        // Gets the distance of the object
         double f = P(0,0);
         double cx = P(0,2);
         double cy = P(1,2); 
@@ -289,7 +289,7 @@ void getObjectPosition(){
         dist = ((f * OBJECT_WIDTH) / width) / 1000;
         ROS_INFO("width: %.10f, real distance: %.10f", width, dist);
 
-        // Get the pixel position in x,y
+        // Gets the pixel position in x,y
         vec3 pixel_pos; // 3 x 1
         vec4 result;    // 4 x 1
         pixel_pos(0) = object_center(0); 
@@ -306,23 +306,23 @@ void getObjectPosition(){
 }
 
 /*------------------------------------
- Discretize values:
+ Discretizes values:
 -----------------------------------*/
 void discretizeValues(){
     double angle_step = double(cv_ptr->image.cols)/double(discr_level);
     double height_step = double(cv_ptr->image.rows)/double(discr_level);
     double depth_step = double(MAX_DISTANCE)/double(discr_level);
     
-    // Discretize values in distance
+    // Discretizes values in distance
     discretizeValuesAux(2, depth_step);
-    // Discretize values in angle
+    // Discretizes values in angle
     discretizeValuesAux(0,angle_step);
-    // Discretize values in height
+    // Discretizes values in height
     discretizeValuesAux(1, height_step);
 }
 
 /*------------------------------------
- Discretize values auxiliar:
+ Discretizes values auxiliar:
     Inputs:
         selector:
             0: angle
@@ -365,7 +365,7 @@ void discretizeValuesAux(int selector, double step){
 }
 
 /*------------------------------------
-Transform a point in the image to the sensor frame
+Transforms a point in the image to the sensor frame
 -----------------------------------*/
 vec4 image2sensor(vec3 pixel_pos){
     vec4 result;
@@ -378,7 +378,7 @@ vec4 image2sensor(vec3 pixel_pos){
 }
 
 /*------------------------------------
- Check if we are executing a gazebo simulation:
+ Checks if we are executing a gazebo simulation:
 -----------------------------------*/
 void isSimulation(){
     int i = 0;
@@ -392,7 +392,7 @@ void isSimulation(){
 }
 
 /*------------------------------------
- Get the direct kinematic model of the widowX-arm
+ Gets the direct kinematic model of the Widow-X arm
 -----------------------------------*/
 void mcd(){
     vec5 alpha;
@@ -446,7 +446,7 @@ void mcd(){
 }
 
 /*------------------------------------
- Get the position of the gripper by means of the Direct kinematic model:
+ Gets the position of the gripper by means of the Direct kinematic model:
  -----------------------------------*/
 void getGripperPosition(){
     double ax = T05(0,2);
@@ -466,10 +466,11 @@ void getGripperPosition(){
 }
 
 /*------------------------------------
- Get the angle of each joint in order to reach the desired position
- by means of the inverse kinematic model:
-    Inputs:
-        - next_position: Desired position
+Gets the angle of each joint in order to reach the desired position
+by means of the inverse kinematic model, sending a message to the servos with the angle to reach
+and updating the mcd and sensor data:
+Inputs:
+    next_position: Desired position
  -----------------------------------*/
 void mci(vec3 next_position){
 	double px = next_position(0) - L45*ang_or(0);
@@ -529,7 +530,7 @@ void mci(vec3 next_position){
 }
 
 /*------------------------------------
- Move Widow-X arm to object:
+ Moves Widow-X arm to object:
  -----------------------------------*/
 void moveArmToObject(){
     vec4 hom_obj_pos;
@@ -561,7 +562,7 @@ void moveArmToObject(){
 }
 
 /*------------------------------------
- Open gripper:
+ Opens gripper:
  -----------------------------------*/
 void openGripper(){
     Float64 gripper_value; gripper_value.data = 2.5;
@@ -571,7 +572,7 @@ void openGripper(){
 }
 
 /*------------------------------------
- Close gripper:
+ Closes gripper:
  -----------------------------------*/
  void closeGripper(){
     Float64 gripper_value; gripper_value.data = 0;
@@ -581,7 +582,7 @@ void openGripper(){
 }
 
 /*------------------------------------
- Detect picked object:
+ Detects picked object:
 -----------------------------------*/
 void isObjectPicked(){
     robot_state.object_picked = ((!gripper_opened) 
@@ -592,7 +593,7 @@ void isObjectPicked(){
 }
 
 /*------------------------------------
- Detect if object is reachable:
+ Detects if object is reachable:
     Object is centered in x and near
 -----------------------------------*/
 void isObjectReachable(){
@@ -602,7 +603,7 @@ void isObjectReachable(){
 }
 
 /*------------------------------------
- Set next position:
+ Sets next position:
    Inputs:
       x, y, z: The coordinates of the next position
 -----------------------------------*/
@@ -615,7 +616,7 @@ vec3 setNextPosition(double x, double y, double z){
 }
 
 /*------------------------------------
- Fold arm:
+ Folds arm:
 -----------------------------------*/
 void foldArm(){ 
     // Turn the arm to the position (0.3125,0,0.1450)
@@ -625,11 +626,11 @@ void foldArm(){
 }
 
 /*------------------------------------
- Start a new random simulation:
+ Starts a new random simulation:
 -----------------------------------*/
 void startRandomSimulation(){
     int status;
-        // Open an empty world in gazebo
+        // Opens an empty world in gazebo
         if (gui){
             status = system("xterm -hold -e \"roslaunch gazebo_ros empty_world.launch paused:=true\" &");
         }else{
@@ -689,10 +690,10 @@ void startRandomSimulation(){
             xterm_wall_str = str.c_str(); 
             system(xterm_wall_str);
             sleep(3);
-            // Instantiate a turtlebot in that empty world
+            // Instantiates a turtlebot in that empty world
             system("xterm -hold -e \"roslaunch crumb_gazebo test.launch\" &");
             sleep(10);
-            // Unpause simulation
+            // Unpauses simulation
             system("rosservice call /gazebo/unpause_physics");
             sleep(5);
             simulations++;
@@ -703,20 +704,20 @@ void startRandomSimulation(){
         }
 }
 /*------------------------------------
- Kill the current simulation:
+ Kills the current simulation:
 -----------------------------------*/
 void killSimulation(){
     ROS_INFO("Killing actual simulation...");
     sleep(2);
-    // Pause simulation
+    // Pauses simulation
     system("rosservice call /gazebo/pause_physics");
     sleep(1);
-    // Kill process
+    // Kills processes
     system("killall -9 xterm gzserver");
     sleep(3); 
 }
 /*------------------------------------
- Get the matrix column index from the robot state:
+ Gets the matrix column index from the robot state:
 -----------------------------------*/
 int getIndexFromState(){
     int num_elems = discr_level + 1;
@@ -727,7 +728,7 @@ int getIndexFromState(){
             robot_state.folded;
 }
 /*------------------------------------
- Modify the state of the robot from the column index:
+ Modifies the state of the robot from the column index:
 -----------------------------------*/
 void getStateFromIndex(int index){
     int num_elems = discr_level + 1;
@@ -738,7 +739,7 @@ void getStateFromIndex(int index){
     robot_state.folded = (index % (int)(pow(num_elems,2) * pow(2,2)) % (int)(num_elems * pow(2,2)) % (int)pow(2,2) % 2);
 }
 /*------------------------------------
- Select action:
+ Selects action:
 -----------------------------------*/
 void selectAction(){
     if (exploit == "y" || floor(unifRnd(0, 100)) > EXPLORATION_RATE){
@@ -763,7 +764,7 @@ void selectAction(){
     }
 }
 /*------------------------------------
- Update V and policy matrix:
+ Updates V and policy matrix:
 -----------------------------------*/
 void updateVPolicy(){
     V(sa) = q_matrix(sa,0);
@@ -776,7 +777,7 @@ void updateVPolicy(){
     }
 }
 /*------------------------------------
- Calculate reward:
+ Calculates reward:
 -----------------------------------*/
 void calculateReward(){
     int prev_dist; int prev_ang; int prev_height;
@@ -818,15 +819,15 @@ void calculateReward(){
 }
 
 /*------------------------------------
- Actualize log:
+ Actualizes log:
 -----------------------------------*/
 void actualizeLog(){
     if (steps == 1 && simulations == 1){
         string str(complete_log_name.str());
-        log_file.open(str.c_str());
+        log_file.opens(str.c_str());
     }else{
         string str(complete_log_name.str());
-        log_file.open(str.c_str(), ios::app | ios::out);
+        log_file.opens(str.c_str(), ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -856,19 +857,19 @@ void actualizeLog(){
     log_file << "New value of Q matrix: " << q_matrix(sa,action) << "\n";
     log_file << "New value of Value function: " << V(sa) << "\n";
     log_file << "New value of Policy matrix: " << policy_matrix(sa) << "\n\n";
-    log_file.close();
+    log_file.closes();
 }
 
 /*------------------------------------
- Actualize simplified log:
+ Actualizes simplified log:
 -----------------------------------*/
 void actualizeSimplifiedLog(){
     if (steps == 1 && simulations == 1){
         string str(complete_simplified_log_name.str());
-        log_file.open(str.c_str());
+        log_file.opens(str.c_str());
     }else{
         string str(complete_simplified_log_name.str());
-        log_file.open(str.c_str(), ios::app | ios::out);
+        log_file.opens(str.c_str(), ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";
@@ -896,86 +897,86 @@ void actualizeSimplifiedLog(){
     log_file << q_matrix(sa,action) << ",";
     log_file << V(sa) << ",";
     log_file << policy_matrix(sa) << "\n";
-    log_file.close();
+    log_file.closes();
 }
 
 /*------------------------------------
- Actualize log for exploitation:
+ Actualizes log for exploitation:
 -----------------------------------*/
 void actualizeExploitationLog(){
     if (steps == 1 && simulations == 1){
         string str(complete_exploitation_log_name.str());
-        log_file.open(str.c_str());
+        log_file.opens(str.c_str());
     }else{
         string str(complete_exploitation_log_name.str());
-        log_file.open(str.c_str(), ios::app | ios::out);
+        log_file.opens(str.c_str(), ios::app | ios::out);
     }
     log_file << sa << "," << action << "\n";
-    log_file.close();
+    log_file.closes();
 }
 
 /*------------------------------------
- Actualize log for distances:
+ Actualizes log for distances:
 -----------------------------------*/
 void actualizedistanceLog(){
     if (simulations == 1){
         string str(complete_distance_log_name.str());
-        log_file.open(str.c_str());
+        log_file.opens(str.c_str());
     }else{
         string str(complete_distance_log_name.str());
-        log_file.open(str.c_str(), ios::app | ios::out);
+        log_file.opens(str.c_str(), ios::app | ios::out);
     }
     log_file << d << "," << e << "\n";
-    log_file.close();
+    log_file.closes();
 }
 
 /*------------------------------------
- Actualize log for distances each iteration:
+ Actualizes log for distances each iteration:
 -----------------------------------*/
 void actualizeIterationDistanceLog(){
     if (steps == 1 && simulations == 1){
         string str(complete_iteration_distance_log_name.str());
-        log_file.open(str.c_str());
+        log_file.opens(str.c_str());
     }else{
         string str(complete_iteration_distance_log_name.str());
-        log_file.open(str.c_str(), ios::app | ios::out);
+        log_file.opens(str.c_str(), ios::app | ios::out);
     }
     log_file << simulations << "," << steps << "," << d << "," << e << "\n";
-    log_file.close();
+    log_file.closes();
 }
 
 /*------------------------------------
- Actualize log for position of robot each iteration:
+ Actualizes log for position of robot each iteration:
 -----------------------------------*/
 void actualizePositionLog(double x, double y, double z){
     if (steps == 1 && simulations == 1){
         string str(complete_position_log_name.str());
-        log_file.open(str.c_str());
+        log_file.opens(str.c_str());
     }else{
         string str(complete_position_log_name.str());
-        log_file.open(str.c_str(), ios::app | ios::out);
+        log_file.opens(str.c_str(), ios::app | ios::out);
     }
     log_file << simulations << "," << steps << "," << x << "," << y << "," << z << "\n";
-    log_file.close();
+    log_file.closes();
 }
 
 /*------------------------------------
- Actualize log for position of object on each simulation:
+ Actualizes log for position of object on each simulation:
 -----------------------------------*/
 void actualizeObjectPositionLog(double x, double y, double z){
     if (steps == 1 && simulations == 1){
         string str(complete_object_position_log_name.str());
-        log_file.open(str.c_str());
+        log_file.opens(str.c_str());
     }else{
         string str(complete_object_position_log_name.str());
-        log_file.open(str.c_str(), ios::app | ios::out);
+        log_file.opens(str.c_str(), ios::app | ios::out);
     }
     log_file << simulations << "," << x << "," << y << "," << z << "\n";
-    log_file.close();
+    log_file.closes();
 }
 
 /*------------------------------------
- Print debug:
+ Prints debug:
     Inputs:
         function: Function where you are
         line: Line in which you are
@@ -985,7 +986,7 @@ void printDebug(string function, int line){
 }
 
 /*------------------------------------
- Get random number following an uniform distribution:
+ Gets random number following an uniform distribution:
     Inputs:
         min, max: Min and max values
 -----------------------------------*/
