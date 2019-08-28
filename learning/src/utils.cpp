@@ -24,19 +24,19 @@ void callbackImage(const ImageConstPtr& image_msg){
     return;
     }
 
-    // Convert image from color to B&W being white the red object
+    // Converts image from color to B&W being white the red object
         
     cv_ptr->image = ~(cv_ptr->image);
         
     Mat3b imageHSV;
-    // If it is not a simulation, apply filter for avoiding reflections
+    // If it is not a simulation, applies filter for avoiding reflections
     if(!is_simulation){
         GaussianBlur(cv_ptr->image, cv_ptr->image, Size(15,15), 7, 7); // Size(9,9), 4, 4
     }
     // Gets the red object
     cvtColor(cv_ptr->image, imageHSV, COLOR_BGR2HSV);
     inRange(imageHSV, Scalar(90 - 10, 100, 100), Scalar(90 + 10, 255, 255), cv_ptr->image);
-    // Apply filter for avoiding false positives
+    // Applies filter for avoiding false positives
     GaussianBlur(cv_ptr->image, cv_ptr->image, Size(3,3), 3, 3);
 }
 
