@@ -15,7 +15,7 @@ int main(int argc, char** argv){
     // We check if it is a gazebo simulation
     
     Handlers handlers;
-    // Initialize all publishers and subscribers
+    // Initializes all publishers and subscribers
     ros::master::getTopics(topic_info);
     isSimulation();
     color_image_sub = handlers.getIT().subscribe("/camera/rgb/image_color", 1, &callbackImage);

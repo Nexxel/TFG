@@ -18,7 +18,7 @@ int main(int argc, char** argv)
         double angle = ((double)48.6/(double)discr_level) * (M_PI/180);
         base_movement.angular.z = 0.1;
 
-        // Create timers
+        // Creates timers
         double time0 = ros::Time::now().toSec();
         while(time0 == 0){
             time0 = ros::Time::now().toSec();

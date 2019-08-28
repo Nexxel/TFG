@@ -18,7 +18,7 @@ int main(int argc, char** argv)
         double distance = (double)MAX_DISTANCE/(double)discr_level;
         base_movement.linear.x = 0.1;
 
-        // Create timers
+        // Creates timers
         double time0 = ros::Time::now().toSec();
         while(time0 == 0){
             time0 = ros::Time::now().toSec();

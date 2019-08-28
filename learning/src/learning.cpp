@@ -20,13 +20,7 @@ int main(int argc, char** argv){
 }
 
 /*------------------------------------
- Make all the process of learning:
-    While node is running:
-        1. Get state
-        2. Detect if it is reachable
-        3. Move arm if correct, else move base
-        4. Fold arm
-        5. Check reward
+ Makes all the processes of learning:
  -----------------------------------*/
 void learning(Handlers handlers){
     initializeVecMat();
@@ -43,7 +37,7 @@ void learning(Handlers handlers){
     bool end_simulation = false;
 
     while(ros::ok() && !end_simulation){
-        // Set random seed by the time of the cpu
+        // Sets random seed by the time of the cpu
         srand( (unsigned)time(NULL) );
         startRandomSimulation();
         sleep(3);
@@ -51,7 +45,7 @@ void learning(Handlers handlers){
             namedWindow("Red objects image",CV_WINDOW_AUTOSIZE);
         }
 
-        // Create timers
+        // Creates timers
         double time0 = ros::Time::now().toSec();
         while(time0 == 0){
             time0 = ros::Time::now().toSec();
@@ -60,7 +54,7 @@ void learning(Handlers handlers){
         robot_state.object_picked = false;
         robot_state.folded = false;
 
-        // Initialize all publishers and subscribers
+        // Initializes all publishers and subscribers
         ros::master::getTopics(topic_info);
         isSimulation();
         color_image_sub = handlers.getIT().subscribe("/camera/rgb/image_color", 1, &callbackImage);
@@ -91,11 +85,11 @@ void learning(Handlers handlers){
         bool end_episode = false;
         while(ros::ok() && !end_episode){
             update_pose = true;
-            // Update state
+            // Updates state
             processMessages();
             updateState();
 
-            // If it's the first time, set the arm to the initial position
+            // If it's the first time, sets the arm to the initial position
             if (first_step){
                 openGripper();
                 foldArm();
@@ -185,7 +179,7 @@ void learning(Handlers handlers){
                 }      
             }
             ros::Duration(3).sleep();
-            // Update state
+            // Updates state
             processMessages();
             updateState();
 
@@ -196,15 +190,15 @@ void learning(Handlers handlers){
                 // 5. Check reward
                 calculateReward();
 
-                // Update visit matrix
+                // Updates visit matrix
                 visit_matrix(sa, action)++;
                 
-                // Update Q-matrix
+                // Updates Q-matrix
                 alpha = 1/(pow(visit_matrix(sa,action),0.5));
                 q_matrix(sa,action) = (1 - alpha) * q_matrix(sa,action) + alpha * (reward + GAMMA * V(sp));
 
 
-                // Update V and policy matrices
+                // Updates V and policy matrices
                 vec prev_V_it = V;      // Prev V function on each iteration
                 updateVPolicy();
                 d = norm(V - prev_V_it);

@@ -108,7 +108,7 @@ void callbackImage(const ImageConstPtr& image_msg){
     getline(cin, response);
     if(response != "y"){
         string str(complete_simplified_log_name.str());
-        input_log.opens(str.c_str(), ios::in);
+        input_log.open(str.c_str(), ios::in);
         string line, word, temp;
         line.resize(100);
         while(getline(input_log, line)){
@@ -140,7 +140,7 @@ void callbackImage(const ImageConstPtr& image_msg){
             policy_matrix(sa) = row(19);
             //number_steps++;
         }
-        input_log.closes();
+        input_log.close();
     } 
  }
 
@@ -824,10 +824,10 @@ void calculateReward(){
 void actualizeLog(){
     if (steps == 1 && simulations == 1){
         string str(complete_log_name.str());
-        log_file.opens(str.c_str());
+        log_file.open(str.c_str());
     }else{
         string str(complete_log_name.str());
-        log_file.opens(str.c_str(), ios::app | ios::out);
+        log_file.open(str.c_str(), ios::app | ios::out);
     }
     log_file << "=======================================\n";
     log_file << "Simulation: " << simulations << "\n";
@@ -857,7 +857,7 @@ void actualizeLog(){
     log_file << "New value of Q matrix: " << q_matrix(sa,action) << "\n";
     log_file << "New value of Value function: " << V(sa) << "\n";
     log_file << "New value of Policy matrix: " << policy_matrix(sa) << "\n\n";
-    log_file.closes();
+    log_file.close();
 }
 
 /*------------------------------------
@@ -866,10 +866,10 @@ void actualizeLog(){
 void actualizeSimplifiedLog(){
     if (steps == 1 && simulations == 1){
         string str(complete_simplified_log_name.str());
-        log_file.opens(str.c_str());
+        log_file.open(str.c_str());
     }else{
         string str(complete_simplified_log_name.str());
-        log_file.opens(str.c_str(), ios::app | ios::out);
+        log_file.open(str.c_str(), ios::app | ios::out);
     }
     log_file << simulations << ",";
     log_file << steps << ",";
@@ -897,7 +897,7 @@ void actualizeSimplifiedLog(){
     log_file << q_matrix(sa,action) << ",";
     log_file << V(sa) << ",";
     log_file << policy_matrix(sa) << "\n";
-    log_file.closes();
+    log_file.close();
 }
 
 /*------------------------------------
@@ -906,13 +906,13 @@ void actualizeSimplifiedLog(){
 void actualizeExploitationLog(){
     if (steps == 1 && simulations == 1){
         string str(complete_exploitation_log_name.str());
-        log_file.opens(str.c_str());
+        log_file.open(str.c_str());
     }else{
         string str(complete_exploitation_log_name.str());
-        log_file.opens(str.c_str(), ios::app | ios::out);
+        log_file.open(str.c_str(), ios::app | ios::out);
     }
     log_file << sa << "," << action << "\n";
-    log_file.closes();
+    log_file.close();
 }
 
 /*------------------------------------
@@ -921,13 +921,13 @@ void actualizeExploitationLog(){
 void actualizedistanceLog(){
     if (simulations == 1){
         string str(complete_distance_log_name.str());
-        log_file.opens(str.c_str());
+        log_file.open(str.c_str());
     }else{
         string str(complete_distance_log_name.str());
-        log_file.opens(str.c_str(), ios::app | ios::out);
+        log_file.open(str.c_str(), ios::app | ios::out);
     }
     log_file << d << "," << e << "\n";
-    log_file.closes();
+    log_file.close();
 }
 
 /*------------------------------------
@@ -936,13 +936,13 @@ void actualizedistanceLog(){
 void actualizeIterationDistanceLog(){
     if (steps == 1 && simulations == 1){
         string str(complete_iteration_distance_log_name.str());
-        log_file.opens(str.c_str());
+        log_file.open(str.c_str());
     }else{
         string str(complete_iteration_distance_log_name.str());
-        log_file.opens(str.c_str(), ios::app | ios::out);
+        log_file.open(str.c_str(), ios::app | ios::out);
     }
     log_file << simulations << "," << steps << "," << d << "," << e << "\n";
-    log_file.closes();
+    log_file.close();
 }
 
 /*------------------------------------
@@ -951,13 +951,13 @@ void actualizeIterationDistanceLog(){
 void actualizePositionLog(double x, double y, double z){
     if (steps == 1 && simulations == 1){
         string str(complete_position_log_name.str());
-        log_file.opens(str.c_str());
+        log_file.open(str.c_str());
     }else{
         string str(complete_position_log_name.str());
-        log_file.opens(str.c_str(), ios::app | ios::out);
+        log_file.open(str.c_str(), ios::app | ios::out);
     }
     log_file << simulations << "," << steps << "," << x << "," << y << "," << z << "\n";
-    log_file.closes();
+    log_file.close();
 }
 
 /*------------------------------------
@@ -966,13 +966,13 @@ void actualizePositionLog(double x, double y, double z){
 void actualizeObjectPositionLog(double x, double y, double z){
     if (steps == 1 && simulations == 1){
         string str(complete_object_position_log_name.str());
-        log_file.opens(str.c_str());
+        log_file.open(str.c_str());
     }else{
         string str(complete_object_position_log_name.str());
-        log_file.opens(str.c_str(), ios::app | ios::out);
+        log_file.open(str.c_str(), ios::app | ios::out);
     }
     log_file << simulations << "," << x << "," << y << "," << z << "\n";
-    log_file.closes();
+    log_file.close();
 }
 
 /*------------------------------------

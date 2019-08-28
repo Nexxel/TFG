@@ -10,7 +10,7 @@ Test code without learning.
  Callbacks
  -----------------------------------*/
  /*------------------------------------
- Get the rgb image and process it:
+ Gets the rgb image and processes it:
  -----------------------------------*/
  void callbackImage(const ImageConstPtr& image_msg){
     if (!inside_learning){
@@ -24,25 +24,25 @@ Test code without learning.
         return;
         }
 
-        // Convert image from color to B&W being white the red object
+        // Converts image from color to B&W being white the red object
             
         cv_ptr->image = ~(cv_ptr->image);
             
         Mat3b imageHSV;
-        // If it is not a simulation, apply filter for avoiding reflections
+        // If it is not a simulation, applies filter for avoiding reflections
         if(!is_simulation){
             GaussianBlur(cv_ptr->image, cv_ptr->image, Size(15,15), 7, 7); // Size(9,9), 4, 4
         }
-        // Get the red object
+        // Gets the red object
         cvtColor(cv_ptr->image, imageHSV, COLOR_BGR2HSV);
         inRange(imageHSV, Scalar(90 - 10, 100, 100), Scalar(90 + 10, 255, 255), cv_ptr->image);
-        // Apply filter for avoiding false positives
+        // Applies filter for avoiding false positives
         GaussianBlur(cv_ptr->image, cv_ptr->image, Size(7,7), 5, 5);
     }
  }
 
  /*------------------------------------
- Get the rgb camera info and get the projection matrix:
+ Gets the rgb camera info and gets the projection matrix:
  -----------------------------------*/
  void callbackCameraInfo(const CameraInfoConstPtr& camera_info_msg){
     if(!inside_learning){
@@ -58,7 +58,7 @@ Test code without learning.
         Mat auxP_inv = Mat(4,3, DataType<double>::type, P_inv);
         invert(auxP,auxP_inv, DECOMP_SVD);
 
-        // Copy the aux Mat
+        // Copies the aux Mat
         for(int i  = 0; i<4; i++){
             for(int j = 0; j<3; j++){
                 P_inv[i][j] = auxP_inv.at<double>(i,j);
@@ -82,7 +82,7 @@ Test code without learning.
  }
 
  /*------------------------------------
- Get gripper effort:
+ Gets gripper effort:
  -----------------------------------*/
  void getGripperEffortCallback(const JointStateConstPtr& joint_states_msg){
     if (joint_states_msg->header.frame_id.empty()){
@@ -91,7 +91,7 @@ Test code without learning.
  }
 
 /*------------------------------------
- Change discretization level:
+ Changes discretization level:
  -----------------------------------*/
  void setDiscretizationLevel(const Int16ConstPtr& new_discr_level){
     if (!inside_learning){
@@ -105,7 +105,7 @@ Test code without learning.
 int main(int argc, char** argv){
     ros::init(argc, argv, "learning_node");
 
-    // We check if it is a gazebo simulation
+    // We checks if it is a gazebo simulation
     ros::master::getTopics(topic_info);
     isSimulation();
 
@@ -136,7 +136,7 @@ int main(int argc, char** argv){
 }
 
 /*------------------------------------
- Process messages:
+ Processes messages:
  -----------------------------------*/
  void processMessages(){
      // The counter if for ashuring that at least it is executed 1 time
@@ -153,13 +153,13 @@ int main(int argc, char** argv){
  }
 
 /*------------------------------------
- Make all the process of learning:
+ Makes all the processes of learning:
     While node is running:
-        1. Get state
-        2. Detect if it is reachable
-        3. Move arm if correct, else move base
-        4. Fold arm
-        5. Check reward
+        1. Gets state
+        2. Detects if it is reachable
+        3. Moves arm if correct, else moves base
+        4. Folds arm
+        5. Checks reward
  -----------------------------------*/
 void learning(Handlers handlers){
     namedWindow("Red objects image",CV_WINDOW_AUTOSIZE);
@@ -174,26 +174,26 @@ void learning(Handlers handlers){
 
         processMessages();
 
-        // While the learning process, we just want to re-read the joints
+        // While the learning processes, we just want to re-read the joints
        inside_learning = true;
 
         mcd();
         getGripperPosition();
 
-        // If it's the first time, set the arm to the initial position
+        // If it's the first time, sets the arm to the initial position
         if (counter == 0){
             openGripper();
             foldArm();
             counter++;
         }
 
-        // 1. Get state
+        // 1. Gets state
         updateState();
 
-        // 2. Detect if object is reachable
+        // 2. Detects if object is reachable
         isObjectReachable();
 
-        // 3.1 Move arm if reachable
+        // 3.1 Moves arm if reachable
         if(object_reachable and !robot_state.object_picked){
             double next_position[3];
            setNextPosition(next_position,
@@ -211,7 +211,7 @@ void learning(Handlers handlers){
             closeGripper();
             ros::Duration(9).sleep();
         }
-        // 3.2 Move base if not reachable
+        // 3.2 Moves base if not reachable
         else{
             Twist base_movement; 
             int middle_quadrant = ceil(discr_level/2.0);
@@ -226,16 +226,16 @@ void learning(Handlers handlers){
             processMessages();
         }
 
-        // 4. Fold arm
+        // 4. Folds arm
         updateState();
         if(robot_state.object_picked){
             foldArm();        
         }
 
-        // 5. Check reward
+        // 5. Checks reward
         if(giveReward()){
             ROS_INFO("Giving reward...");
-            // Give reward
+            // Gives reward
         }
 
         if(robot_state.object_picked){
@@ -247,7 +247,7 @@ void learning(Handlers handlers){
 }
 
 /*------------------------------------
- Update state:
+ Updates state:
 -----------------------------------*/
 void updateState(){
     getLocation();
@@ -257,13 +257,13 @@ void updateState(){
 }
 
 /*------------------------------------
- Get the location in pixels of the object:
+ Gets the location in pixels of the object:
 -----------------------------------*/
 void getLocation(){
     // Show the image
     imshow("Red objects image", cv_ptr->image);
     waitKey(3);
-    // Get the coordinates of the object pixels
+    // Gets the coordinates of the object pixels
     findNonZero(cv_ptr->image, pixel_locations);
 
     // Calculate pixel mean in x and y
@@ -367,7 +367,7 @@ void discretizeValuesAux(int selector, double step){
 }
 
 /*------------------------------------
- Check if we are executing a gazebo simulation:
+ Checks if we are executing a gazebo simulation:
 -----------------------------------*/
 void isSimulation(){
     int i = 0;
@@ -416,7 +416,7 @@ void multiplyTransformations(double result[4][4], double first[4][4], double sec
 }
 
 /*------------------------------------
- Update the matrix T05 of the direct kinematic model copying aux into T05
+ Updates the matrix T05 of the direct kinematic model copying aux into T05
 -----------------------------------*/
 void updateT05(double T05[4][4], double aux[4][4]){
 	for(int i  = 0; i<4; i++){
@@ -427,7 +427,7 @@ void updateT05(double T05[4][4], double aux[4][4]){
 }
 
 /*------------------------------------
- Get the direct kinematic model of the widowX-arm
+ Gets the direct kinematic model of the widowX-arm
 -----------------------------------*/
 void mcd(){
     double alpha[] = {0, -M_PI/2, M_PI, 0, M_PI/2};
@@ -499,7 +499,7 @@ void mcd(){
 }
 
 /*------------------------------------
- Get the position of the gripper by means of the Direct kinematic model:
+ Gets the position of the gripper by means of the Direct kinematic model:
  -----------------------------------*/
 void getGripperPosition(){
     double ax = T05[0][2];
@@ -519,7 +519,7 @@ void getGripperPosition(){
 }
 
 /*------------------------------------
- Get the angle of each joint in order to reach the desired position
+ Gets the angle of each joint in order to reach the desired position
  by means of the inverse kinematic model:
     Inputs:
         next_position: Desired position
@@ -585,7 +585,7 @@ void openGripper(){
 }
 
 /*------------------------------------
- Close gripper:
+ Closes gripper:
  -----------------------------------*/
  void closeGripper(){
     Float64 gripper_value; gripper_value.data = 0;
@@ -595,7 +595,7 @@ void openGripper(){
  }
 
 /*------------------------------------
- Detect picked object:
+ Detects picked object:
 -----------------------------------*/
 void isObjectPicked(){
     robot_state.object_picked = (!gripper_opened) 
@@ -604,7 +604,7 @@ void isObjectPicked(){
 }
 
 /*------------------------------------
- Get object real position with respect to the robot:
+ Gets object real position with respect to the robot:
     [X Y Z 1] = P^(-1) * [u v 1]
     Inputs:
         max_u: Max X coordinate of the center of the object (Pixels)
@@ -613,7 +613,7 @@ void isObjectPicked(){
         min_v: Min Y coordinate of the center of the object (Pixels)
 -----------------------------------*/
 void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
-    // Get the distance of the object
+    // Gets the distance of the object
     double f = P[0][0];
     double cx = P[0][2];
     double cy = P[1][2]; 
@@ -629,7 +629,7 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
     
     robot_state.distance_c = (f * OBJECT_WIDTH) / width;
 
-    // Get the pixel position in x,y
+    // Gets the pixel position in x,y
     double pixel_pos[3][1]; // 3 x 1
     double result[4][1];    // 4 x 1
     pixel_pos[0][0] = object_center[0]; 
@@ -645,7 +645,7 @@ void getObjectPosition(int max_u, int max_v, int min_u, int min_v){
 }
 
 /*------------------------------------
- Detect if object is reachable:
+ Detects if object is reachable:
     Object is centered in x, near and up
 -----------------------------------*/
 void isObjectReachable(){
@@ -655,7 +655,7 @@ void isObjectReachable(){
 }
 
 /*------------------------------------
- Set next position:
+ Sets next position:
    Inputs:
       next_position: The next position to initialize
       x, y, z: The coordinates of the next position
@@ -666,7 +666,7 @@ void setNextPosition(double next_position[3], double x, double y, double z){
     next_position[2] = z;
 }
 /*------------------------------------
- Fold arm:
+ Folds arm:
 -----------------------------------*/
 void foldArm(){
     double n[3] = {0,0,1}; 
@@ -682,14 +682,14 @@ void foldArm(){
 }
 
 /*------------------------------------
- Give reward:
+ Gives reward:
 -----------------------------------*/
 bool giveReward(){
     return robot_state.folded and robot_state.object_picked;
 }
 
 /*------------------------------------
- Print debug:
+ Prints debug:
     Inputs:
         function: Function where you are
         line: Line in which you are

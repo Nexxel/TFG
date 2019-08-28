@@ -11,7 +11,7 @@ double real_distance;
 stringstream complete_distances_error_log_name;
 
 /*------------------------------------
- Actualize log for distance error:
+ Actualizes log for distance error:
 -----------------------------------*/
 void actualizeDistanceErrorLog(){
     string str(complete_distances_error_log_name.str());
@@ -22,7 +22,7 @@ void actualizeDistanceErrorLog(){
 }
 
  /*------------------------------------
- Get simulation pose x:
+ Gets simulation pose x:
  -----------------------------------*/
  void getSimulationPoseCallbackError(const Vector3ConstPtr& sim_pose_msg){
      if(update_pose){
@@ -36,7 +36,7 @@ int main(int argc, char** argv){
     // We check if it is a gazebo simulation
     
     Handlers handlers;
-    // Initialize all publishers and subscribers
+    // Initializes all publishers and subscribers
     ros::master::getTopics(topic_info);
     isSimulation();
     color_image_sub = handlers.getIT().subscribe("/camera/rgb/image_color", 1, &callbackImage);
