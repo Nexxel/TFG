@@ -62,10 +62,10 @@ Q-Learning implementation header file
 #define WIDTH_PX_2_M (SENSOR_WIDTH/CAMERA_WIDTH)
 
 // Min and max positions of the objects
-#define MAX_X 1.5 //1.5
-#define MIN_X 1.5 //0.85
-#define MAX_Y 0.8 //0.8
-#define MIN_Y 0.8 //-0.8
+#define MAX_X 1.5 
+#define MIN_X 0.85
+#define MAX_Y 0.8 
+#define MIN_Y -0.8
 // Number of box.urdf to use (box_1 z-size=0.1, box_2 z-size=0.2...)
 #define MIN_BOX 3
 #define MAX_BOX 5
