@@ -626,7 +626,7 @@ void foldArm(){
 }
 
 /*------------------------------------
- Starts a new random simulation:
+ Starts a new random episode:
 -----------------------------------*/
 void startRandomSimulation(){
     int status;
@@ -704,7 +704,7 @@ void startRandomSimulation(){
         }
 }
 /*------------------------------------
- Kills the current simulation:
+ Kills the current episode:
 -----------------------------------*/
 void killSimulation(){
     ROS_INFO("Killing actual simulation...");

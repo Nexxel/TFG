@@ -337,11 +337,11 @@ vec3 setNextPosition(double x, double y, double z);
 -----------------------------------*/
 void foldArm();
 /*------------------------------------
- Start a new random simulation:
+ Start a new random episode:
 -----------------------------------*/
 void startRandomSimulation();
 /*------------------------------------
- Kill the current simulation:
+ Kill the current episode:
 -----------------------------------*/
 void killSimulation();
 /*------------------------------------
