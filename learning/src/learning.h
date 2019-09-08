@@ -339,11 +339,11 @@ void foldArm();
 /*------------------------------------
  Start a new random episode:
 -----------------------------------*/
-void startRandomSimulation();
+void startRandomEpisode();
 /*------------------------------------
  Kill the current episode:
 -----------------------------------*/
-void killSimulation();
+void killEpisode();
 /*------------------------------------
  Gets the matrix row index from the robot state:
 -----------------------------------*/

@@ -628,7 +628,7 @@ void foldArm(){
 /*------------------------------------
  Starts a new random episode:
 -----------------------------------*/
-void startRandomSimulation(){
+void startRandomEpisode(){
     int status;
         // Opens an empty world in gazebo
         if (gui){
@@ -706,7 +706,7 @@ void startRandomSimulation(){
 /*------------------------------------
  Kills the current episode:
 -----------------------------------*/
-void killSimulation(){
+void killEpisode(){
     ROS_INFO("Killing actual simulation...");
     sleep(2);
     // Pauses simulation

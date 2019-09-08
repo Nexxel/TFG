@@ -39,7 +39,7 @@ void learning(Handlers handlers){
     while(ros::ok() && !end_simulation){
         // Sets random seed by the time of the cpu
         srand( (unsigned)time(NULL) );
-        startRandomSimulation();
+        startRandomEpisode();
         sleep(3);
         if (gui){
             namedWindow("Red objects image",CV_WINDOW_AUTOSIZE);
@@ -222,7 +222,7 @@ void learning(Handlers handlers){
         d = norm(V - prev_V);
         e = arma::min(arma::abs(V - prev_V));
         actualizedistanceLog(); 
-        killSimulation();
+        killEpisode();
         if(d < 1){
             counter_continuous_low_distance++;
         }else{
