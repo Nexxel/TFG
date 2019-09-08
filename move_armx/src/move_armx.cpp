@@ -1,3 +1,9 @@
+/*
+Sergio Gonzalez Muriel
+Degree thesis:  Reinforcement learning for object manipulation by a robotic arm
+Test code for moving the robot Widow-X arm
+*/
+
 #include <ros/ros.h>
 #include <std_msgs/Float64.h>
 #include <std_msgs/String.h>
@@ -27,7 +33,6 @@ void callbackJointState(const sensor_msgs::JointStateConstPtr& msg){
 }
 
 void callbackMoveArm(const std_msgs::StringConstPtr& msg){
-    // Mirar más detenidamente
     if(pr != NULL){
         string order = msg->data;
         if(order == "UP"){

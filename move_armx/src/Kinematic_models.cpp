@@ -1,5 +1,8 @@
 /*
- Calcula el modelo cinemático inverso del robot
+Sergio Gonzalez Muriel
+Degree thesis:  Reinforcement learning for object manipulation by a robotic arm
+Test code for calculating the kinematics models of the robot
+Based on the Matlab code of the TFM of Marina Aguilar Moreno
 */
 #include <math.h>
 #include <stdio.h>
@@ -15,13 +18,13 @@ void multiplyTransformations(double result[4][4], double first[4][4], double sec
 }
 
 /*
-Modelo cinemático directo
-Entradas:
-q1, q2, q3, q4, q5: Ángulo de cada articulación
+Direct kinematic model:
+Inputs:
+q1, q2, q3, q4, q5: Angle of each joint
 
-Salidas:
-T05: Modelo cinemático directo
-pr: Posición del efector final
+Outputs:
+T05: Direct kinematic model
+pr: Gripper position
 */
 void mcd(double T05[4][4], double pr[3], double q1, double q2, double q3, double q4, double q5){
 	double L3 = 0.1423;
@@ -93,12 +96,12 @@ void mcd(double T05[4][4], double pr[3], double q1, double q2, double q3, double
 
 
 /*
-Modelo cinemático inverso
+Inverse kinematic model
 Inputs:
-pr: Posición del efector final
+pr: Gripper position
 
 Outputs:
-q: Ángulo de todas las articulaciones;
+q: Angle of each joint
 */
 void mci(double q[5], double pr[3]){
 
