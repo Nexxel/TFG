@@ -1,5 +1,5 @@
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 1
 ----------
 State: 11397
@@ -23,7 +23,7 @@ New value of Value function: 1
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 2
 ----------
 State: 11341

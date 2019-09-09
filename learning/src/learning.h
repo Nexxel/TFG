@@ -143,7 +143,7 @@ arma::mat visit_matrix = arma::zeros<arma::mat>(num_states, N_ACTIONS);    // Ma
 
 double alpha;
 int steps = 0;
-int simulations = 0;
+int episodes = 0;
 bool gui = false;
 
 // Logs

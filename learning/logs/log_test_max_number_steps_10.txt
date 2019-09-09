@@ -1,5 +1,5 @@
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 1
 ----------
 State: 1
@@ -23,7 +23,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 2
 ----------
 State: 1
@@ -47,7 +47,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 3
 ----------
 State: 1
@@ -71,7 +71,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 4
 ----------
 State: 1
@@ -95,7 +95,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 5
 ----------
 State: 1
@@ -119,7 +119,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 6
 ----------
 State: 1
@@ -143,7 +143,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 7
 ----------
 State: 2373
@@ -167,7 +167,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 8
 ----------
 State: 2997
@@ -191,7 +191,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 9
 ----------
 State: 3045
@@ -215,7 +215,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 10
 ----------
 State: 3045
@@ -239,7 +239,7 @@ New value of Value function: 3
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 11
 ----------
 State: 2421
@@ -263,7 +263,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 12
 ----------
 State: 2997
@@ -287,7 +287,7 @@ New value of Value function: 1.485
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 13
 ----------
 State: 3045
@@ -311,7 +311,7 @@ New value of Value function: 2.23508
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 14
 ----------
 State: 2997
@@ -335,7 +335,7 @@ New value of Value function: 1.72757
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 15
 ----------
 State: 3045
@@ -359,7 +359,7 @@ New value of Value function: 2.06015
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 16
 ----------
 State: 2997
@@ -383,7 +383,7 @@ New value of Value function: 1.80557
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 17
 ----------
 State: 3045
@@ -407,7 +407,7 @@ New value of Value function: 1.99199
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 18
 ----------
 State: 2997
@@ -431,7 +431,7 @@ New value of Value function: 1.83887
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 19
 ----------
 State: 3045
@@ -455,7 +455,7 @@ New value of Value function: 1.95769
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 20
 ----------
 State: 2997
@@ -479,7 +479,7 @@ New value of Value function: 1.85541
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 21
 ----------
 State: 3045
@@ -503,7 +503,7 @@ New value of Value function: 1.93755
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 22
 ----------
 State: 2997
@@ -527,7 +527,7 @@ New value of Value function: 1.86438
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 23
 ----------
 State: 3045
@@ -551,7 +551,7 @@ New value of Value function: 1.93755
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 24
 ----------
 State: 3045
@@ -575,7 +575,7 @@ New value of Value function: 1.93478
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 25
 ----------
 State: 3045
@@ -599,7 +599,7 @@ New value of Value function: 1.93478
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 26
 ----------
 State: 3045
@@ -623,7 +623,7 @@ New value of Value function: 1.93236
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 27
 ----------
 State: 3045
@@ -647,7 +647,7 @@ New value of Value function: 1.92274
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 28
 ----------
 State: 2997
@@ -671,7 +671,7 @@ New value of Value function: 1.86927
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 29
 ----------
 State: 3045
@@ -695,7 +695,7 @@ New value of Value function: 1.9168
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 30
 ----------
 State: 2997
@@ -719,7 +719,7 @@ New value of Value function: 1.87242
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 31
 ----------
 State: 3045
@@ -743,7 +743,7 @@ New value of Value function: 1.9168
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 32
 ----------
 State: 3045
@@ -767,7 +767,7 @@ New value of Value function: 1.91552
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 33
 ----------
 State: 3045
@@ -791,7 +791,7 @@ New value of Value function: 1.91378
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 34
 ----------
 State: 3045
@@ -815,7 +815,7 @@ New value of Value function: 1.91041
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 35
 ----------
 State: 2997
@@ -839,7 +839,7 @@ New value of Value function: 1.87431
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 36
 ----------
 State: 3045
@@ -863,7 +863,7 @@ New value of Value function: 1.90877
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 37
 ----------
 State: 3045
@@ -887,7 +887,7 @@ New value of Value function: 1.90877
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 38
 ----------
 State: 3093
@@ -911,7 +911,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 39
 ----------
 State: 3093
@@ -935,7 +935,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 40
 ----------
 State: 3093
@@ -959,7 +959,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 41
 ----------
 State: 3717
@@ -983,7 +983,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 42
 ----------
 State: 3765
@@ -1007,7 +1007,7 @@ New value of Value function: 2
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 43
 ----------
 State: 3189
@@ -1031,7 +1031,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 44
 ----------
 State: 3237
@@ -1055,7 +1055,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 45
 ----------
 State: 3237
@@ -1079,7 +1079,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 46
 ----------
 State: 3237
@@ -1103,7 +1103,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 47
 ----------
 State: 3285
@@ -1127,7 +1127,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 48
 ----------
 State: 3285
@@ -1151,7 +1151,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 49
 ----------
 State: 3285
@@ -1175,7 +1175,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 50
 ----------
 State: 3285
@@ -1199,7 +1199,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 51
 ----------
 State: 3285
@@ -1223,7 +1223,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 52
 ----------
 State: 3333
@@ -1247,7 +1247,7 @@ New value of Value function: 3
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 53
 ----------
 State: 2757
@@ -1271,7 +1271,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 54
 ----------
 State: 2801
@@ -1295,7 +1295,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 55
 ----------
 State: 2801
@@ -1319,7 +1319,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 56
 ----------
 State: 1
@@ -1343,7 +1343,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 57
 ----------
 State: 1
@@ -1367,7 +1367,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 58
 ----------
 State: 1
@@ -1391,7 +1391,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 59
 ----------
 State: 1
@@ -1415,7 +1415,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 60
 ----------
 State: 1
@@ -1439,7 +1439,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 61
 ----------
 State: 1
@@ -1463,7 +1463,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 62
 ----------
 State: 1
@@ -1487,7 +1487,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 63
 ----------
 State: 1
@@ -1511,7 +1511,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 64
 ----------
 State: 1
@@ -1535,7 +1535,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 65
 ----------
 State: 1
@@ -1559,7 +1559,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 66
 ----------
 State: 1
@@ -1583,7 +1583,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 67
 ----------
 State: 1
@@ -1607,7 +1607,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 68
 ----------
 State: 1
@@ -1631,7 +1631,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 69
 ----------
 State: 1
@@ -1655,7 +1655,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 70
 ----------
 State: 1
@@ -1679,7 +1679,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 71
 ----------
 State: 1
@@ -1703,7 +1703,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 72
 ----------
 State: 1
@@ -1727,7 +1727,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 73
 ----------
 State: 1
@@ -1751,7 +1751,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 74
 ----------
 State: 1
@@ -1775,7 +1775,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 75
 ----------
 State: 1
@@ -1799,7 +1799,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 76
 ----------
 State: 1
@@ -1823,7 +1823,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 77
 ----------
 State: 1
@@ -1847,7 +1847,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 78
 ----------
 State: 1
@@ -1871,7 +1871,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 79
 ----------
 State: 1
@@ -1895,7 +1895,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 80
 ----------
 State: 1
@@ -1919,7 +1919,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 81
 ----------
 State: 1
@@ -1943,7 +1943,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 82
 ----------
 State: 1
@@ -1967,7 +1967,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 83
 ----------
 State: 1
@@ -1991,7 +1991,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 84
 ----------
 State: 1
@@ -2015,7 +2015,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 85
 ----------
 State: 1
@@ -2039,7 +2039,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 86
 ----------
 State: 1
@@ -2063,7 +2063,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 87
 ----------
 State: 1
@@ -2087,7 +2087,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 88
 ----------
 State: 1
@@ -2111,7 +2111,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 89
 ----------
 State: 1
@@ -2135,7 +2135,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 90
 ----------
 State: 1
@@ -2159,7 +2159,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 91
 ----------
 State: 1
@@ -2183,7 +2183,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 92
 ----------
 State: 1
@@ -2207,7 +2207,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 93
 ----------
 State: 1
@@ -2231,7 +2231,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 94
 ----------
 State: 1
@@ -2255,7 +2255,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 95
 ----------
 State: 1
@@ -2279,7 +2279,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 96
 ----------
 State: 1
@@ -2303,7 +2303,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 97
 ----------
 State: 1
@@ -2327,7 +2327,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 98
 ----------
 State: 1
@@ -2351,7 +2351,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 99
 ----------
 State: 1
@@ -2375,7 +2375,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 100
 ----------
 State: 1
@@ -2399,7 +2399,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 101
 ----------
 State: 1
@@ -2423,7 +2423,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 102
 ----------
 State: 1
@@ -2447,7 +2447,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 103
 ----------
 State: 1
@@ -2471,7 +2471,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 104
 ----------
 State: 1
@@ -2495,7 +2495,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 105
 ----------
 State: 1
@@ -2519,7 +2519,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 106
 ----------
 State: 1
@@ -2543,7 +2543,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 107
 ----------
 State: 1
@@ -2567,7 +2567,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 108
 ----------
 State: 1
@@ -2591,7 +2591,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 109
 ----------
 State: 1
@@ -2615,7 +2615,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 110
 ----------
 State: 1
@@ -2639,7 +2639,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 111
 ----------
 State: 1
@@ -2663,7 +2663,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 112
 ----------
 State: 1
@@ -2687,7 +2687,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 113
 ----------
 State: 1
@@ -2711,7 +2711,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 114
 ----------
 State: 1
@@ -2735,7 +2735,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 115
 ----------
 State: 1
@@ -2759,7 +2759,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 116
 ----------
 State: 1
@@ -2783,7 +2783,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 117
 ----------
 State: 1
@@ -2807,7 +2807,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 118
 ----------
 State: 1
@@ -2831,7 +2831,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 119
 ----------
 State: 1
@@ -2855,7 +2855,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 120
 ----------
 State: 1
@@ -2879,7 +2879,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 121
 ----------
 State: 1
@@ -2903,7 +2903,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 122
 ----------
 State: 1
@@ -2927,7 +2927,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 123
 ----------
 State: 1
@@ -2951,7 +2951,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 124
 ----------
 State: 1
@@ -2975,7 +2975,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 125
 ----------
 State: 1
@@ -2999,7 +2999,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 126
 ----------
 State: 1
@@ -3023,7 +3023,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 127
 ----------
 State: 1
@@ -3047,7 +3047,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 128
 ----------
 State: 1
@@ -3071,7 +3071,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 129
 ----------
 State: 1
@@ -3095,7 +3095,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 130
 ----------
 State: 1
@@ -3119,7 +3119,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 131
 ----------
 State: 1
@@ -3143,7 +3143,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 132
 ----------
 State: 1
@@ -3167,7 +3167,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 133
 ----------
 State: 1
@@ -3191,7 +3191,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 134
 ----------
 State: 1
@@ -3215,7 +3215,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 135
 ----------
 State: 1
@@ -3239,7 +3239,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 136
 ----------
 State: 1
@@ -3263,7 +3263,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 137
 ----------
 State: 1
@@ -3287,7 +3287,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 138
 ----------
 State: 1
@@ -3311,7 +3311,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 139
 ----------
 State: 1
@@ -3335,7 +3335,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 140
 ----------
 State: 1
@@ -3359,7 +3359,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 141
 ----------
 State: 1
@@ -3383,7 +3383,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 142
 ----------
 State: 1
@@ -3407,7 +3407,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 143
 ----------
 State: 1
@@ -3431,7 +3431,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 144
 ----------
 State: 1
@@ -3455,7 +3455,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 145
 ----------
 State: 1
@@ -3479,7 +3479,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 146
 ----------
 State: 1
@@ -3503,7 +3503,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 147
 ----------
 State: 1
@@ -3527,7 +3527,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 148
 ----------
 State: 1
@@ -3551,7 +3551,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 149
 ----------
 State: 1
@@ -3575,7 +3575,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 150
 ----------
 State: 1
@@ -3599,7 +3599,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 151
 ----------
 State: 1
@@ -3623,7 +3623,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 152
 ----------
 State: 1
@@ -3647,7 +3647,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 153
 ----------
 State: 1
@@ -3671,7 +3671,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 154
 ----------
 State: 1
@@ -3695,7 +3695,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 155
 ----------
 State: 1
@@ -3719,7 +3719,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 156
 ----------
 State: 1
@@ -3743,7 +3743,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 157
 ----------
 State: 1
@@ -3767,7 +3767,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 158
 ----------
 State: 1
@@ -3791,7 +3791,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 159
 ----------
 State: 1
@@ -3815,7 +3815,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 160
 ----------
 State: 1
@@ -3839,7 +3839,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 161
 ----------
 State: 1
@@ -3863,7 +3863,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 162
 ----------
 State: 1
@@ -3887,7 +3887,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 163
 ----------
 State: 1
@@ -3911,7 +3911,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 164
 ----------
 State: 1
@@ -3935,7 +3935,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 165
 ----------
 State: 1
@@ -3959,7 +3959,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 166
 ----------
 State: 1
@@ -3983,7 +3983,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 167
 ----------
 State: 1
@@ -4007,7 +4007,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 168
 ----------
 State: 1
@@ -4031,7 +4031,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 169
 ----------
 State: 1
@@ -4055,7 +4055,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 170
 ----------
 State: 1
@@ -4079,7 +4079,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 171
 ----------
 State: 1
@@ -4103,7 +4103,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 172
 ----------
 State: 1
@@ -4127,7 +4127,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 173
 ----------
 State: 1
@@ -4151,7 +4151,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 174
 ----------
 State: 1
@@ -4175,7 +4175,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 175
 ----------
 State: 1
@@ -4199,7 +4199,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 176
 ----------
 State: 1
@@ -4223,7 +4223,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 177
 ----------
 State: 1
@@ -4247,7 +4247,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 178
 ----------
 State: 1
@@ -4271,7 +4271,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 179
 ----------
 State: 1
@@ -4295,7 +4295,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 180
 ----------
 State: 1
@@ -4319,7 +4319,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 181
 ----------
 State: 1
@@ -4343,7 +4343,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 182
 ----------
 State: 1
@@ -4367,7 +4367,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 183
 ----------
 State: 1
@@ -4391,7 +4391,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 184
 ----------
 State: 1
@@ -4415,7 +4415,7 @@ New value of Value function: 0.0193288
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 185
 ----------
 State: 2997
@@ -4439,7 +4439,7 @@ New value of Value function: 1.8726
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 186
 ----------
 State: 2997
@@ -4463,7 +4463,7 @@ New value of Value function: 1.87403
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 187
 ----------
 State: 3045
@@ -4487,7 +4487,7 @@ New value of Value function: 1.90466
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 188
 ----------
 State: 2997
@@ -4511,7 +4511,7 @@ New value of Value function: 1.87492
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 189
 ----------
 State: 3045
@@ -4535,7 +4535,7 @@ New value of Value function: 1.90119
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 190
 ----------
 State: 2997
@@ -4559,7 +4559,7 @@ New value of Value function: 1.87544
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 191
 ----------
 State: 3045
@@ -4583,7 +4583,7 @@ New value of Value function: 1.89823
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 192
 ----------
 State: 2997
@@ -4607,7 +4607,7 @@ New value of Value function: 1.87569
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 193
 ----------
 State: 3045
@@ -4631,7 +4631,7 @@ New value of Value function: 1.89823
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 194
 ----------
 State: 3045
@@ -4655,7 +4655,7 @@ New value of Value function: 1.89565
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 195
 ----------
 State: 2997
@@ -4679,7 +4679,7 @@ New value of Value function: 1.87575
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 196
 ----------
 State: 3045
@@ -4703,7 +4703,7 @@ New value of Value function: 1.89565
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 197
 ----------
 State: 3045
@@ -4727,7 +4727,7 @@ New value of Value function: 1.89337
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 198
 ----------
 State: 2997
@@ -4751,7 +4751,7 @@ New value of Value function: 1.87568
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 199
 ----------
 State: 3045
@@ -4775,7 +4775,7 @@ New value of Value function: 1.89135
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 200
 ----------
 State: 2997
@@ -4799,7 +4799,7 @@ New value of Value function: 1.8755
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 201
 ----------
 State: 3045
@@ -4823,7 +4823,7 @@ New value of Value function: 1.88953
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 202
 ----------
 State: 2997
@@ -4847,7 +4847,7 @@ New value of Value function: 1.87524
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 203
 ----------
 State: 3045
@@ -4871,7 +4871,7 @@ New value of Value function: 1.88844
 New value of Policy matrix: 4
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 204
 ----------
 State: 2997
@@ -4895,7 +4895,7 @@ New value of Value function: 1.87524
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 205
 ----------
 State: 2997
@@ -4919,7 +4919,7 @@ New value of Value function: 1.87524
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 206
 ----------
 State: 2997
@@ -4943,7 +4943,7 @@ New value of Value function: 1.87496
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 207
 ----------
 State: 3045
@@ -4967,7 +4967,7 @@ New value of Value function: 1.88787
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 208
 ----------
 State: 3045
@@ -4991,7 +4991,7 @@ New value of Value function: 1.88637
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 209
 ----------
 State: 2997
@@ -5015,7 +5015,7 @@ New value of Value function: 1.8746
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 210
 ----------
 State: 3045
@@ -5039,7 +5039,7 @@ New value of Value function: 1.88498
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 211
 ----------
 State: 2997
@@ -5063,7 +5063,7 @@ New value of Value function: 1.87422
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 212
 ----------
 State: 3045
@@ -5087,7 +5087,7 @@ New value of Value function: 1.88498
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 213
 ----------
 State: 3045
@@ -5111,7 +5111,7 @@ New value of Value function: 1.8837
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 214
 ----------
 State: 2997
@@ -5135,7 +5135,7 @@ New value of Value function: 1.87422
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 215
 ----------
 State: 2997
@@ -5159,7 +5159,7 @@ New value of Value function: 1.87381
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 216
 ----------
 State: 3045
@@ -5183,7 +5183,7 @@ New value of Value function: 1.8837
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 217
 ----------
 State: 3045
@@ -5207,7 +5207,7 @@ New value of Value function: 1.8825
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 218
 ----------
 State: 2997
@@ -5231,7 +5231,7 @@ New value of Value function: 1.87339
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 219
 ----------
 State: 3045
@@ -5255,7 +5255,7 @@ New value of Value function: 1.88139
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 220
 ----------
 State: 2997
@@ -5279,7 +5279,7 @@ New value of Value function: 1.87295
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 221
 ----------
 State: 3045
@@ -5303,7 +5303,7 @@ New value of Value function: 1.88139
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 222
 ----------
 State: 3045
@@ -5327,7 +5327,7 @@ New value of Value function: 1.88139
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 223
 ----------
 State: 3045
@@ -5351,7 +5351,7 @@ New value of Value function: 1.88067
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 224
 ----------
 State: 3045
@@ -5375,7 +5375,7 @@ New value of Value function: 1.87969
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 225
 ----------
 State: 2997
@@ -5399,7 +5399,7 @@ New value of Value function: 1.87249
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 226
 ----------
 State: 3045
@@ -5423,7 +5423,7 @@ New value of Value function: 1.87876
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 227
 ----------
 State: 2997
@@ -5447,7 +5447,7 @@ New value of Value function: 1.87249
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 228
 ----------
 State: 2997
@@ -5471,7 +5471,7 @@ New value of Value function: 1.87203
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 229
 ----------
 State: 3045
@@ -5495,7 +5495,7 @@ New value of Value function: 1.87788
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 230
 ----------
 State: 2997
@@ -5519,7 +5519,7 @@ New value of Value function: 1.87157
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 231
 ----------
 State: 3045
@@ -5543,7 +5543,7 @@ New value of Value function: 1.87782
 New value of Policy matrix: 4
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 232
 ----------
 State: 2997
@@ -5567,7 +5567,7 @@ New value of Value function: 1.87113
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 233
 ----------
 State: 3045
@@ -5591,7 +5591,7 @@ New value of Value function: 1.87782
 New value of Policy matrix: 4
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 234
 ----------
 State: 3045
@@ -5615,7 +5615,7 @@ New value of Value function: 1.87705
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 235
 ----------
 State: 3045
@@ -5639,7 +5639,7 @@ New value of Value function: 1.87625
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 236
 ----------
 State: 2997
@@ -5663,7 +5663,7 @@ New value of Value function: 1.87068
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 237
 ----------
 State: 3045
@@ -5687,7 +5687,7 @@ New value of Value function: 1.87625
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 238
 ----------
 State: 3045
@@ -5711,7 +5711,7 @@ New value of Value function: 1.87625
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 239
 ----------
 State: 3045
@@ -5735,7 +5735,7 @@ New value of Value function: 1.8755
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 240
 ----------
 State: 2997
@@ -5759,7 +5759,7 @@ New value of Value function: 1.87023
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 241
 ----------
 State: 3045
@@ -5783,7 +5783,7 @@ New value of Value function: 1.87477
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 242
 ----------
 State: 2997
@@ -5807,7 +5807,7 @@ New value of Value function: 1.86979
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 243
 ----------
 State: 3045
@@ -5831,7 +5831,7 @@ New value of Value function: 1.87407
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 244
 ----------
 State: 2997
@@ -5855,7 +5855,7 @@ New value of Value function: 1.86935
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 245
 ----------
 State: 3045
@@ -5879,7 +5879,7 @@ New value of Value function: 1.8734
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 246
 ----------
 State: 2997
@@ -5903,7 +5903,7 @@ New value of Value function: 1.86892
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 247
 ----------
 State: 3045
@@ -5927,7 +5927,7 @@ New value of Value function: 1.87276
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 248
 ----------
 State: 2997
@@ -5951,7 +5951,7 @@ New value of Value function: 1.86892
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 249
 ----------
 State: 2997
@@ -5975,7 +5975,7 @@ New value of Value function: 1.86892
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 250
 ----------
 State: 2997
@@ -5999,7 +5999,7 @@ New value of Value function: 1.86838
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 251
 ----------
 State: 2997
@@ -6023,7 +6023,7 @@ New value of Value function: 1.86838
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 252
 ----------
 State: 2997
@@ -6047,7 +6047,7 @@ New value of Value function: 1.86786
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 253
 ----------
 State: 2997
@@ -6071,7 +6071,7 @@ New value of Value function: 1.86749
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 254
 ----------
 State: 3045
@@ -6095,7 +6095,7 @@ New value of Value function: 1.87211
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 255
 ----------
 State: 2997
@@ -6119,7 +6119,7 @@ New value of Value function: 1.86712
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 256
 ----------
 State: 3045
@@ -6143,7 +6143,7 @@ New value of Value function: 1.87149
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 257
 ----------
 State: 2997
@@ -6167,7 +6167,7 @@ New value of Value function: 1.86675
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 258
 ----------
 State: 3045
@@ -6191,7 +6191,7 @@ New value of Value function: 1.87131
 New value of Policy matrix: 4
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 259
 ----------
 State: 2997
@@ -6215,7 +6215,7 @@ New value of Value function: 1.8664
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 260
 ----------
 State: 3045
@@ -6239,7 +6239,7 @@ New value of Value function: 1.87089
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 261
 ----------
 State: 3045
@@ -6263,7 +6263,7 @@ New value of Value function: 1.87031
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 262
 ----------
 State: 2997
@@ -6287,7 +6287,7 @@ New value of Value function: 1.8664
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 263
 ----------
 State: 2997
@@ -6311,7 +6311,7 @@ New value of Value function: 1.86604
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 264
 ----------
 State: 3045
@@ -6335,7 +6335,7 @@ New value of Value function: 1.87031
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 265
 ----------
 State: 3045
@@ -6359,7 +6359,7 @@ New value of Value function: 1.87031
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 266
 ----------
 State: 3093
@@ -6383,7 +6383,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 267
 ----------
 State: 3669
@@ -6407,7 +6407,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 268
 ----------
 State: 3669
@@ -6431,7 +6431,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 269
 ----------
 State: 3717
@@ -6455,7 +6455,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 270
 ----------
 State: 3717
@@ -6479,7 +6479,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 271
 ----------
 State: 3717
@@ -6503,7 +6503,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 272
 ----------
 State: 3717
@@ -6527,7 +6527,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 273
 ----------
 State: 3717
@@ -6551,7 +6551,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 274
 ----------
 State: 3717
@@ -6575,7 +6575,7 @@ New value of Value function: 0.66
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 275
 ----------
 State: 3765
@@ -6599,7 +6599,7 @@ New value of Value function: 1.99
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 276
 ----------
 State: 3765
@@ -6623,7 +6623,7 @@ New value of Value function: 1.99
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 277
 ----------
 State: 3765
@@ -6647,7 +6647,7 @@ New value of Value function: 1.98337
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 278
 ----------
 State: 3765
@@ -6671,7 +6671,7 @@ New value of Value function: 1.98337
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 279
 ----------
 State: 3765
@@ -6695,7 +6695,7 @@ New value of Value function: 1.9701
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 280
 ----------
 State: 3813
@@ -6719,7 +6719,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 281
 ----------
 State: 3813
@@ -6743,7 +6743,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 282
 ----------
 State: 3813
@@ -6767,7 +6767,7 @@ New value of Value function: 2
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 283
 ----------
 State: 3237
@@ -6791,7 +6791,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 284
 ----------
 State: 3285
@@ -6815,7 +6815,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 285
 ----------
 State: 3861
@@ -6839,7 +6839,7 @@ New value of Value function: 4.97
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 286
 ----------
 State: 3333
@@ -6863,7 +6863,7 @@ New value of Value function: 3
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 287
 ----------
 State: 3333
@@ -6887,7 +6887,7 @@ New value of Value function: 2.985
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 288
 ----------
 State: 3333
@@ -6911,7 +6911,7 @@ New value of Value function: 2.985
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 289
 ----------
 State: 3333
@@ -6935,7 +6935,7 @@ New value of Value function: 2.97
 New value of Policy matrix: 4
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 290
 ----------
 State: 3381
@@ -6959,7 +6959,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 291
 ----------
 State: 3429
@@ -6983,7 +6983,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 292
 ----------
 State: 3429
@@ -7007,7 +7007,7 @@ New value of Value function: 0.0191355
 New value of Policy matrix: 4
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 293
 ----------
 State: 1
@@ -7031,7 +7031,7 @@ New value of Value function: 0.0193268
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 294
 ----------
 State: 1
@@ -7055,7 +7055,7 @@ New value of Value function: 0.0193248
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 295
 ----------
 State: 1
@@ -7079,7 +7079,7 @@ New value of Value function: 0.0193248
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 296
 ----------
 State: 1
@@ -7103,7 +7103,7 @@ New value of Value function: 0.0193229
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 297
 ----------
 State: 1
@@ -7127,7 +7127,7 @@ New value of Value function: 0.019321
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 298
 ----------
 State: 1
@@ -7151,7 +7151,7 @@ New value of Value function: 0.019319
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 299
 ----------
 State: 1
@@ -7175,7 +7175,7 @@ New value of Value function: 0.0193171
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 300
 ----------
 State: 1
@@ -7199,7 +7199,7 @@ New value of Value function: 0.0193153
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 301
 ----------
 State: 1
@@ -7223,7 +7223,7 @@ New value of Value function: 0.0193134
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 302
 ----------
 State: 1
@@ -7247,7 +7247,7 @@ New value of Value function: 0.0193116
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 303
 ----------
 State: 1
@@ -7271,7 +7271,7 @@ New value of Value function: 0.0193098
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 304
 ----------
 State: 1
@@ -7295,7 +7295,7 @@ New value of Value function: 0.019308
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 305
 ----------
 State: 1
@@ -7319,7 +7319,7 @@ New value of Value function: 0.0193062
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 306
 ----------
 State: 1
@@ -7343,7 +7343,7 @@ New value of Value function: 0.0193044
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 307
 ----------
 State: 1
@@ -7367,7 +7367,7 @@ New value of Value function: 0.0193026
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 308
 ----------
 State: 1
@@ -7391,7 +7391,7 @@ New value of Value function: 0.0193009
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 309
 ----------
 State: 1
@@ -7415,7 +7415,7 @@ New value of Value function: 0.0192992
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 310
 ----------
 State: 1
@@ -7439,7 +7439,7 @@ New value of Value function: 0.0192992
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 311
 ----------
 State: 1
@@ -7463,7 +7463,7 @@ New value of Value function: 0.0192992
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 312
 ----------
 State: 1
@@ -7487,7 +7487,7 @@ New value of Value function: 0.0192975
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 313
 ----------
 State: 1
@@ -7511,7 +7511,7 @@ New value of Value function: 0.0192975
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 314
 ----------
 State: 1
@@ -7535,7 +7535,7 @@ New value of Value function: 0.0192975
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 315
 ----------
 State: 1
@@ -7559,7 +7559,7 @@ New value of Value function: 0.0192958
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 316
 ----------
 State: 1
@@ -7583,7 +7583,7 @@ New value of Value function: 0.0192941
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 317
 ----------
 State: 1
@@ -7607,7 +7607,7 @@ New value of Value function: 0.0192924
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 318
 ----------
 State: 1
@@ -7631,7 +7631,7 @@ New value of Value function: 0.0192924
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 319
 ----------
 State: 1
@@ -7655,7 +7655,7 @@ New value of Value function: 0.0192908
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 320
 ----------
 State: 1
@@ -7679,7 +7679,7 @@ New value of Value function: 0.0192891
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 321
 ----------
 State: 1
@@ -7703,7 +7703,7 @@ New value of Value function: 0.0192875
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 322
 ----------
 State: 1
@@ -7727,7 +7727,7 @@ New value of Value function: 0.0192859
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 323
 ----------
 State: 1
@@ -7751,7 +7751,7 @@ New value of Value function: 0.0192843
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 324
 ----------
 State: 1
@@ -7775,7 +7775,7 @@ New value of Value function: 0.0192843
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 325
 ----------
 State: 1
@@ -7799,7 +7799,7 @@ New value of Value function: 0.0192827
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 326
 ----------
 State: 1
@@ -7823,7 +7823,7 @@ New value of Value function: 0.0192827
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 327
 ----------
 State: 1
@@ -7847,7 +7847,7 @@ New value of Value function: 0.0192812
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 328
 ----------
 State: 1
@@ -7871,7 +7871,7 @@ New value of Value function: 0.0192812
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 329
 ----------
 State: 1
@@ -7895,7 +7895,7 @@ New value of Value function: 0.0192812
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 330
 ----------
 State: 1
@@ -7919,7 +7919,7 @@ New value of Value function: 0.0192796
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 331
 ----------
 State: 1
@@ -7943,7 +7943,7 @@ New value of Value function: 0.0192781
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 332
 ----------
 State: 1
@@ -7967,7 +7967,7 @@ New value of Value function: 0.0192766
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 333
 ----------
 State: 1
@@ -7991,7 +7991,7 @@ New value of Value function: 0.019275
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 334
 ----------
 State: 1
@@ -8015,7 +8015,7 @@ New value of Value function: 0.019275
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 335
 ----------
 State: 1
@@ -8039,7 +8039,7 @@ New value of Value function: 0.0192735
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 336
 ----------
 State: 1
@@ -8063,7 +8063,7 @@ New value of Value function: 0.019272
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 337
 ----------
 State: 1
@@ -8087,7 +8087,7 @@ New value of Value function: 0.0192706
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 338
 ----------
 State: 1
@@ -8111,7 +8111,7 @@ New value of Value function: 0.0192691
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 339
 ----------
 State: 1
@@ -8135,7 +8135,7 @@ New value of Value function: 0.0192676
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 340
 ----------
 State: 1
@@ -8159,7 +8159,7 @@ New value of Value function: 0.0192662
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 341
 ----------
 State: 1
@@ -8183,7 +8183,7 @@ New value of Value function: 0.0192662
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 342
 ----------
 State: 1
@@ -8207,7 +8207,7 @@ New value of Value function: 0.0192662
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 343
 ----------
 State: 1
@@ -8231,7 +8231,7 @@ New value of Value function: 0.0192647
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 344
 ----------
 State: 1
@@ -8255,7 +8255,7 @@ New value of Value function: 0.0192633
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 345
 ----------
 State: 1
@@ -8279,7 +8279,7 @@ New value of Value function: 0.0192633
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 346
 ----------
 State: 1
@@ -8303,7 +8303,7 @@ New value of Value function: 0.0192619
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 347
 ----------
 State: 1
@@ -8327,7 +8327,7 @@ New value of Value function: 0.0192605
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 348
 ----------
 State: 1
@@ -8351,7 +8351,7 @@ New value of Value function: 0.0192591
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 349
 ----------
 State: 1
@@ -8375,7 +8375,7 @@ New value of Value function: 0.0192577
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 350
 ----------
 State: 1
@@ -8399,7 +8399,7 @@ New value of Value function: 0.0192563
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 351
 ----------
 State: 1
@@ -8423,7 +8423,7 @@ New value of Value function: 0.0192563
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 352
 ----------
 State: 1
@@ -8447,7 +8447,7 @@ New value of Value function: 0.019255
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 353
 ----------
 State: 1
@@ -8471,7 +8471,7 @@ New value of Value function: 0.0192536
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 354
 ----------
 State: 1
@@ -8495,7 +8495,7 @@ New value of Value function: 0.0192523
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 355
 ----------
 State: 1
@@ -8519,7 +8519,7 @@ New value of Value function: 0.0192509
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 356
 ----------
 State: 1
@@ -8543,7 +8543,7 @@ New value of Value function: 0.0192496
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 357
 ----------
 State: 1
@@ -8567,7 +8567,7 @@ New value of Value function: 0.0192483
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 358
 ----------
 State: 1
@@ -8591,7 +8591,7 @@ New value of Value function: 0.019247
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 359
 ----------
 State: 1
@@ -8615,7 +8615,7 @@ New value of Value function: 0.0192457
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 360
 ----------
 State: 1
@@ -8639,7 +8639,7 @@ New value of Value function: 0.0192444
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 361
 ----------
 State: 1
@@ -8663,7 +8663,7 @@ New value of Value function: 0.0192431
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 362
 ----------
 State: 1
@@ -8687,7 +8687,7 @@ New value of Value function: 0.0192418
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 363
 ----------
 State: 1
@@ -8711,7 +8711,7 @@ New value of Value function: 0.0192418
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 364
 ----------
 State: 1
@@ -8735,7 +8735,7 @@ New value of Value function: 0.0192406
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 365
 ----------
 State: 1
@@ -8759,7 +8759,7 @@ New value of Value function: 0.0192406
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 366
 ----------
 State: 1
@@ -8783,7 +8783,7 @@ New value of Value function: 0.0192393
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 367
 ----------
 State: 1
@@ -8807,7 +8807,7 @@ New value of Value function: 0.019238
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 368
 ----------
 State: 1
@@ -8831,7 +8831,7 @@ New value of Value function: 0.0192368
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 369
 ----------
 State: 1
@@ -8855,7 +8855,7 @@ New value of Value function: 0.0192356
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 370
 ----------
 State: 1
@@ -8879,7 +8879,7 @@ New value of Value function: 0.0192343
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 371
 ----------
 State: 1
@@ -8903,7 +8903,7 @@ New value of Value function: 0.0192343
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 372
 ----------
 State: 1
@@ -8927,7 +8927,7 @@ New value of Value function: 0.0192331
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 373
 ----------
 State: 1
@@ -8951,7 +8951,7 @@ New value of Value function: 0.0192319
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 374
 ----------
 State: 1
@@ -8975,7 +8975,7 @@ New value of Value function: 0.0192319
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 375
 ----------
 State: 1
@@ -8999,7 +8999,7 @@ New value of Value function: 0.0192307
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 376
 ----------
 State: 1
@@ -9023,7 +9023,7 @@ New value of Value function: 0.0192307
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 377
 ----------
 State: 1
@@ -9047,7 +9047,7 @@ New value of Value function: 0.0192295
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 378
 ----------
 State: 1
@@ -9071,7 +9071,7 @@ New value of Value function: 0.0192295
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 379
 ----------
 State: 1
@@ -9095,7 +9095,7 @@ New value of Value function: 0.0192283
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 380
 ----------
 State: 1
@@ -9119,7 +9119,7 @@ New value of Value function: 0.0192272
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 381
 ----------
 State: 1
@@ -9143,7 +9143,7 @@ New value of Value function: 0.0192272
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 382
 ----------
 State: 1
@@ -9167,7 +9167,7 @@ New value of Value function: 0.019226
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 383
 ----------
 State: 1
@@ -9191,7 +9191,7 @@ New value of Value function: 0.019226
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 384
 ----------
 State: 1
@@ -9215,7 +9215,7 @@ New value of Value function: 0.0192248
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 385
 ----------
 State: 1
@@ -9239,7 +9239,7 @@ New value of Value function: 0.0192237
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 386
 ----------
 State: 1
@@ -9263,7 +9263,7 @@ New value of Value function: 0.0192225
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 387
 ----------
 State: 1
@@ -9287,7 +9287,7 @@ New value of Value function: 0.0192214
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 388
 ----------
 State: 1
@@ -9311,7 +9311,7 @@ New value of Value function: 0.0192202
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 389
 ----------
 State: 1
@@ -9335,7 +9335,7 @@ New value of Value function: 0.0192191
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 390
 ----------
 State: 1
@@ -9359,7 +9359,7 @@ New value of Value function: 0.0192191
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 391
 ----------
 State: 1
@@ -9383,7 +9383,7 @@ New value of Value function: 0.019218
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 392
 ----------
 State: 1
@@ -9407,7 +9407,7 @@ New value of Value function: 0.0192169
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 393
 ----------
 State: 1
@@ -9431,7 +9431,7 @@ New value of Value function: 0.0192169
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 394
 ----------
 State: 1
@@ -9455,7 +9455,7 @@ New value of Value function: 0.0192157
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 395
 ----------
 State: 1
@@ -9479,7 +9479,7 @@ New value of Value function: 0.0192157
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 396
 ----------
 State: 1
@@ -9503,7 +9503,7 @@ New value of Value function: 0.0192146
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 397
 ----------
 State: 1
@@ -9527,7 +9527,7 @@ New value of Value function: 0.0192135
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 398
 ----------
 State: 1
@@ -9551,7 +9551,7 @@ New value of Value function: 0.0192135
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 399
 ----------
 State: 1
@@ -9575,7 +9575,7 @@ New value of Value function: 0.0192135
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 400
 ----------
 State: 1
@@ -9599,7 +9599,7 @@ New value of Value function: 0.0192135
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 401
 ----------
 State: 1
@@ -9623,7 +9623,7 @@ New value of Value function: 0.0192125
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 402
 ----------
 State: 1
@@ -9647,7 +9647,7 @@ New value of Value function: 0.0192125
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 403
 ----------
 State: 1
@@ -9671,7 +9671,7 @@ New value of Value function: 0.0192114
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 404
 ----------
 State: 1
@@ -9695,7 +9695,7 @@ New value of Value function: 0.0192103
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 405
 ----------
 State: 1
@@ -9719,7 +9719,7 @@ New value of Value function: 0.0192092
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 406
 ----------
 State: 1
@@ -9743,7 +9743,7 @@ New value of Value function: 0.0192081
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 407
 ----------
 State: 1
@@ -9767,7 +9767,7 @@ New value of Value function: 0.0192071
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 408
 ----------
 State: 1
@@ -9791,7 +9791,7 @@ New value of Value function: 0.0192071
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 409
 ----------
 State: 1
@@ -9815,7 +9815,7 @@ New value of Value function: 0.019206
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 410
 ----------
 State: 1
@@ -9839,7 +9839,7 @@ New value of Value function: 0.019205
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 411
 ----------
 State: 1
@@ -9863,7 +9863,7 @@ New value of Value function: 0.0192039
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 412
 ----------
 State: 1
@@ -9887,7 +9887,7 @@ New value of Value function: 0.0192039
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 413
 ----------
 State: 1
@@ -9911,7 +9911,7 @@ New value of Value function: 0.0192029
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 414
 ----------
 State: 1
@@ -9935,7 +9935,7 @@ New value of Value function: 0.0192019
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 415
 ----------
 State: 1
@@ -9959,7 +9959,7 @@ New value of Value function: 0.0192008
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 416
 ----------
 State: 1
@@ -9983,7 +9983,7 @@ New value of Value function: 0.0191998
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 417
 ----------
 State: 1
@@ -10007,7 +10007,7 @@ New value of Value function: 0.0191988
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 418
 ----------
 State: 1
@@ -10031,7 +10031,7 @@ New value of Value function: 0.0191978
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 419
 ----------
 State: 1
@@ -10055,7 +10055,7 @@ New value of Value function: 0.0287694
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 420
 ----------
 State: 2997
@@ -10079,7 +10079,7 @@ New value of Value function: 1.86559
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 421
 ----------
 State: 2997
@@ -10103,7 +10103,7 @@ New value of Value function: 1.86527
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 422
 ----------
 State: 3045
@@ -10127,7 +10127,7 @@ New value of Value function: 1.87031
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 423
 ----------
 State: 3045
@@ -10151,7 +10151,7 @@ New value of Value function: 1.86973
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 424
 ----------
 State: 2997
@@ -10175,7 +10175,7 @@ New value of Value function: 1.86494
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 425
 ----------
 State: 3045
@@ -10199,7 +10199,7 @@ New value of Value function: 1.86973
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 426
 ----------
 State: 3045
@@ -10223,7 +10223,7 @@ New value of Value function: 1.86918
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 427
 ----------
 State: 2997
@@ -10247,7 +10247,7 @@ New value of Value function: 1.86462
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 428
 ----------
 State: 3045
@@ -10271,7 +10271,7 @@ New value of Value function: 1.86864
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 429
 ----------
 State: 2997
@@ -10295,7 +10295,7 @@ New value of Value function: 1.8643
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 430
 ----------
 State: 3045
@@ -10319,7 +10319,7 @@ New value of Value function: 1.86811
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 431
 ----------
 State: 2997
@@ -10343,7 +10343,7 @@ New value of Value function: 1.86399
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 432
 ----------
 State: 3045
@@ -10367,7 +10367,7 @@ New value of Value function: 1.86811
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 433
 ----------
 State: 3045
@@ -10391,7 +10391,7 @@ New value of Value function: 1.86761
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 434
 ----------
 State: 2997
@@ -10415,7 +10415,7 @@ New value of Value function: 1.86367
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 435
 ----------
 State: 3045
@@ -10439,7 +10439,7 @@ New value of Value function: 1.86712
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 436
 ----------
 State: 2997
@@ -10463,7 +10463,7 @@ New value of Value function: 1.86336
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 437
 ----------
 State: 3045
@@ -10487,7 +10487,7 @@ New value of Value function: 1.86712
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 438
 ----------
 State: 3093
@@ -10511,7 +10511,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 439
 ----------
 State: 3093
@@ -10535,7 +10535,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 440
 ----------
 State: 3141
@@ -10559,7 +10559,7 @@ New value of Value function: 0.6534
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 441
 ----------
 State: 3717
@@ -10583,7 +10583,7 @@ New value of Value function: 0.66
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 442
 ----------
 State: 3717
@@ -10607,7 +10607,7 @@ New value of Value function: 0.9826
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 443
 ----------
 State: 3765
@@ -10631,7 +10631,7 @@ New value of Value function: 1.96353
 New value of Policy matrix: 2
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 444
 ----------
 State: 3717
@@ -10655,7 +10655,7 @@ New value of Value function: 0.9826
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 445
 ----------
 State: 3717
@@ -10679,7 +10679,7 @@ New value of Value function: 1.18608
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 446
 ----------
 State: 3189
@@ -10703,7 +10703,7 @@ New value of Value function: 0.971949
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 447
 ----------
 State: 3765
@@ -10727,7 +10727,7 @@ New value of Value function: 1.96837
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 448
 ----------
 State: 3189
@@ -10751,7 +10751,7 @@ New value of Value function: 1.29753
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 449
 ----------
 State: 3765
@@ -10775,7 +10775,7 @@ New value of Value function: 2.29741
 New value of Policy matrix: 1
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 450
 ----------
 State: 3189
@@ -10799,7 +10799,7 @@ New value of Value function: 1.29753
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 451
 ----------
 State: 3717
@@ -10823,7 +10823,7 @@ New value of Value function: 1.18608
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 452
 ----------
 State: 3717
@@ -10847,7 +10847,7 @@ New value of Value function: 1.18608
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 453
 ----------
 State: 3717
@@ -10871,7 +10871,7 @@ New value of Value function: 1.53583
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 454
 ----------
 State: 3189
@@ -10895,7 +10895,7 @@ New value of Value function: 1.54176
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 455
 ----------
 State: 3765
@@ -10919,7 +10919,7 @@ New value of Value function: 2.74494
 New value of Policy matrix: 2
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 456
 ----------
 State: 3189
@@ -10943,7 +10943,7 @@ New value of Value function: 1.2334
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 457
 ----------
 State: 3237
@@ -10967,7 +10967,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 458
 ----------
 State: 3237
@@ -10991,7 +10991,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 459
 ----------
 State: 3285
@@ -11015,7 +11015,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 460
 ----------
 State: 3285
@@ -11039,7 +11039,7 @@ New value of Value function: 0.735075
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 461
 ----------
 State: 3333
@@ -11063,7 +11063,7 @@ New value of Value function: 2.97
 New value of Policy matrix: 4
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 462
 ----------
 State: 3381
@@ -11087,7 +11087,7 @@ New value of Value function: 1.5
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 463
 ----------
 State: 2805
@@ -11111,7 +11111,7 @@ New value of Value function: 0
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 464
 ----------
 State: 2805
@@ -11135,7 +11135,7 @@ New value of Value function: 0.0142409
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 465
 ----------
 State: 1
@@ -11159,7 +11159,7 @@ New value of Value function: 0.0287679
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 466
 ----------
 State: 1
@@ -11183,7 +11183,7 @@ New value of Value function: 0.0287664
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 467
 ----------
 State: 1
@@ -11207,7 +11207,7 @@ New value of Value function: 0.0287664
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 468
 ----------
 State: 1
@@ -11231,7 +11231,7 @@ New value of Value function: 0.0287649
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 469
 ----------
 State: 1
@@ -11255,7 +11255,7 @@ New value of Value function: 0.0287649
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 470
 ----------
 State: 1
@@ -11279,7 +11279,7 @@ New value of Value function: 0.0287635
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 471
 ----------
 State: 1
@@ -11303,7 +11303,7 @@ New value of Value function: 0.028762
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 472
 ----------
 State: 1
@@ -11327,7 +11327,7 @@ New value of Value function: 0.0287605
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 473
 ----------
 State: 1
@@ -11351,7 +11351,7 @@ New value of Value function: 0.0287591
 New value of Policy matrix: 0
 
 =======================================
-Simulation: 1
+Episode: 1
 Iteration: 474
 ----------
 State: 1

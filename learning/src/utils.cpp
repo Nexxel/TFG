@@ -127,7 +127,7 @@ void callbackImage(const ImageConstPtr& image_msg){
                 counter++;
             }
 
-            simulations = row(0);
+            episodes = row(0);
             //steps = row(1);
             sa = row(2);
             sp = row(8);
@@ -696,7 +696,7 @@ void startRandomEpisode(){
             // Unpauses simulation
             system("rosservice call /gazebo/unpause_physics");
             sleep(5);
-            simulations++;
+            episodes++;
             actualizeObjectPositionLog((x - 0.45), y, (z*2+0.05));
         }else{
             system("killall -9 xterm gzserver");
@@ -707,7 +707,7 @@ void startRandomEpisode(){
  Kills the current episode:
 -----------------------------------*/
 void killEpisode(){
-    ROS_INFO("Killing actual simulation...");
+    ROS_INFO("Killing actual episode...");
     sleep(2);
     // Pauses simulation
     system("rosservice call /gazebo/pause_physics");
@@ -820,7 +820,7 @@ void calculateReward(){
  Actualizes log:
 -----------------------------------*/
 void actualizeLog(){
-    if (steps == 1 && simulations == 1){
+    if (steps == 1 && episodes == 1){
         string str(complete_log_name.str());
         log_file.open(str.c_str());
     }else{
@@ -828,7 +828,7 @@ void actualizeLog(){
         log_file.open(str.c_str(), ios::app | ios::out);
     }
     log_file << "=======================================\n";
-    log_file << "Simulation: " << simulations << "\n";
+    log_file << "Episode: " << episodes << "\n";
     log_file << "Iteration: " << steps << "\n";
     log_file << "----------\n";
     log_file << "State: " << sa << "\n";
@@ -862,14 +862,14 @@ void actualizeLog(){
  Actualizes simplified log:
 -----------------------------------*/
 void actualizeSimplifiedLog(){
-    if (steps == 1 && simulations == 1){
+    if (steps == 1 && episodes == 1){
         string str(complete_simplified_log_name.str());
         log_file.open(str.c_str());
     }else{
         string str(complete_simplified_log_name.str());
         log_file.open(str.c_str(), ios::app | ios::out);
     }
-    log_file << simulations << ",";
+    log_file << episodes << ",";
     log_file << steps << ",";
     log_file << sa << ",";
     getStateFromIndex(sa);
@@ -902,7 +902,7 @@ void actualizeSimplifiedLog(){
  Actualizes log for exploitation:
 -----------------------------------*/
 void actualizeExploitationLog(){
-    if (steps == 1 && simulations == 1){
+    if (steps == 1 && episodes == 1){
         string str(complete_exploitation_log_name.str());
         log_file.open(str.c_str());
     }else{
@@ -917,7 +917,7 @@ void actualizeExploitationLog(){
  Actualizes log for distances:
 -----------------------------------*/
 void actualizedistanceLog(){
-    if (simulations == 1){
+    if (episodes == 1){
         string str(complete_distance_log_name.str());
         log_file.open(str.c_str());
     }else{
@@ -932,14 +932,14 @@ void actualizedistanceLog(){
  Actualizes log for distances each iteration:
 -----------------------------------*/
 void actualizeIterationDistanceLog(){
-    if (steps == 1 && simulations == 1){
+    if (steps == 1 && episodes == 1){
         string str(complete_iteration_distance_log_name.str());
         log_file.open(str.c_str());
     }else{
         string str(complete_iteration_distance_log_name.str());
         log_file.open(str.c_str(), ios::app | ios::out);
     }
-    log_file << simulations << "," << steps << "," << d << "," << e << "\n";
+    log_file << episodes << "," << steps << "," << d << "," << e << "\n";
     log_file.close();
 }
 
@@ -947,29 +947,29 @@ void actualizeIterationDistanceLog(){
  Actualizes log for position of robot each iteration:
 -----------------------------------*/
 void actualizePositionLog(double x, double y, double z){
-    if (steps == 1 && simulations == 1){
+    if (steps == 1 && episodes == 1){
         string str(complete_position_log_name.str());
         log_file.open(str.c_str());
     }else{
         string str(complete_position_log_name.str());
         log_file.open(str.c_str(), ios::app | ios::out);
     }
-    log_file << simulations << "," << steps << "," << x << "," << y << "," << z << "\n";
+    log_file << episodes << "," << steps << "," << x << "," << y << "," << z << "\n";
     log_file.close();
 }
 
 /*------------------------------------
- Actualizes log for position of object on each simulation:
+ Actualizes log for position of object on each episode:
 -----------------------------------*/
 void actualizeObjectPositionLog(double x, double y, double z){
-    if (steps == 1 && simulations == 1){
+    if (steps == 1 && episodes == 1){
         string str(complete_object_position_log_name.str());
         log_file.open(str.c_str());
     }else{
         string str(complete_object_position_log_name.str());
         log_file.open(str.c_str(), ios::app | ios::out);
     }
-    log_file << simulations << "," << x << "," << y << "," << z << "\n";
+    log_file << episodes << "," << x << "," << y << "," << z << "\n";
     log_file.close();
 }
 
